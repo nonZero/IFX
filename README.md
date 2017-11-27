@@ -1,12 +1,12 @@
-# IFX
+# 🎥 IFX 🎥
 Israeli film archive
 
-# 🎥 Setup instructions 🎥
+# Setup instructions
 
 * Clone this repo.
 * Create a virtualenv:
 
-        mkvirtualenv cinamatheque
+        mkvirtualenv IFX
 
 * Install requirements:
 
@@ -25,11 +25,13 @@ Israeli film archive
 
         python manage.py runserver
 
-* Enjoy: http://localhost:8000/
+* Enjoy: 
+        
+        http://localhost:8000/
 
 # Tips
 
-* Linux/Mac: add to your `.bashrc` / `.bash_profile`:
+* Linux/Mac: add to your `.bashrc` or `.bash_profile`:
 
-    alias m='python manage.py'
-    alias sp='python manage.py shell_plus'
+        alias m='python manage.py'
+        alias sp='python manage.py shell_plus'
