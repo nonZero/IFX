@@ -1,5 +1,7 @@
 Django==1.11.7
 django-extensions==1.9.7
+inflect==0.2.5
 pytz==2017.3
+silly==1.1.0
 six==1.11.0
 typing==3.6.2
