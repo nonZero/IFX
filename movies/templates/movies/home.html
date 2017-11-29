@@ -1,0 +1,21 @@
+<h1>My Expenses</h1>
+
+<table border="1" width="100%">
+    <tr>
+        <th>#</th>
+        <th>Date</th>
+        <th>Length</th>
+        <th>Title</th>
+    </tr>
+    {% for object in objects %}
+        <tr>
+            <td>#{{ object.id }}</td>
+            <td>{{ object.date }}</td>
+            <td>{{ object.length }} Minutes </td>
+            <td>
+                <a href="{% url "movies:detail" object.id %}">{{ object.title }}</a>
+            </td>
+        </tr>
+    {% endfor %}
+
+</table>

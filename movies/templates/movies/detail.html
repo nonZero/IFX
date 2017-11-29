@@ -1,0 +1,14 @@
+<h1>Movie #{{ object.id }}</h1>
+
+<ul>
+    <li><b>{{ object.title }}</b></li>
+    <li>Date: {{ object.date }}</li>
+    <li>Length: {{ object.length }} min. </li>
+    <li>Description: <br/>
+        {{ object.description|linebreaks }}
+    </li>
+</ul>
+
+<a href="{% url "movies:list" %}">Back To My Movies</a>
+
+
