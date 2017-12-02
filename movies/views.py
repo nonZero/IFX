@@ -17,6 +17,7 @@ def detail(request, id):
     o = Movie.objects.get(id=id)
     d = {
         'object': o,
+        'tags': o.tags.names(),
     }
     return render(request, "movies/detail.html", d)
 
@@ -24,7 +25,14 @@ def create(request):
     if request.method == "POST":
         form = MovieForm(request.POST)
         if form.is_valid():
-            o = form.save()
+            # without tagging:
+            # o = form.save()
+            # for using tagging:
+            o = form.save(commit=False)
+            o.user = request.user
+            o.save()
+            # Without this next line the tags won't be saved.
+            form.save_m2m()
             return redirect("movies:detail", id=o.id)
     else:
         # method = GET

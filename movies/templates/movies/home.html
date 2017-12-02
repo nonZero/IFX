@@ -6,6 +6,7 @@
         <th>Date</th>
         <th>Length</th>
         <th>Title</th>
+        <th>Tags</th>
     </tr>
     {% for object in objects %}
         <tr>
@@ -15,6 +16,7 @@
             <td>
                 <a href="{% url "movies:detail" object.id %}">{{ object.title }}</a>
             </td>
+            <td>{{ object.tags.names }}</td>
         </tr>
     {% endfor %}
 

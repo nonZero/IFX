@@ -7,6 +7,7 @@
     <li>Description: <br/>
         {{ object.description|linebreaks }}
     </li>
+    <li>Tags: {{ tags }}</li>
 </ul>
 
 <a href="{% url "movies:list" %}">Back To My Movies</a>
