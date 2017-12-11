@@ -7,7 +7,8 @@
     <li>Description: <br/>
         {{ object.description|linebreaks }}
     </li>
-    <li>BID: {{object.bid}} </li>
+    <li>bid: {{object.bid}} </li>
+    <li>tags: {{object.tags}} </li>
 </ul>
 
 <a href="{% url "movies:list" %}">Back To My Movies</a>
