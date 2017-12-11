@@ -1,4 +1,4 @@
-<h1>My Expenses</h1>
+<h1>My Movies</h1>
 
 <table border="1" width="100%">
     <tr>
@@ -6,6 +6,7 @@
         <th>Date</th>
         <th>Length</th>
         <th>Title</th>
+        <th>bid</th>
     </tr>
     {% for object in objects %}
         <tr>
@@ -15,6 +16,8 @@
             <td>
                 <a href="{% url "movies:detail" object.id %}">{{ object.title }}</a>
             </td>
+            <td>{{ object.bid }}</td>
+
         </tr>
     {% endfor %}
 
