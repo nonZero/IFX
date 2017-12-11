@@ -1,6 +1,4 @@
 import pandas as pd
-import random
-import silly
 
 from django.core.management.base import BaseCommand
 
