@@ -29,6 +29,12 @@ Israeli film archive
         
         http://localhost:8000/
 
+* Import data (Tab seperate values):
+
+        python manage.py import_movies idea_data/movies.tsv
+        python manage.py import_tags idea_data/tags.tsv
+        python manage.py import_relationship idea_data/book_tags.tsv
+
 # Tips
 
 * Linux/Mac: add to your `.bashrc` or `.bash_profile`:
