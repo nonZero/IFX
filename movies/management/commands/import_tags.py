@@ -18,5 +18,5 @@ class Command(BaseCommand):
             print(row.book_id_s, row.title)
             o = Tag()
             o.title = row.title
-            o.bid = row.book_id_s
+            o.tid = row.book_id_s
             o.save()
