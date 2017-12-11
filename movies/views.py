@@ -6,7 +6,7 @@ from movies.forms import MovieForm
 
 
 def home(request):
-    qs = Movie.objects.order_by('-date')
+    qs = Movie.objects.order_by('?')[:10]
     d = {
         'objects': qs,
     }
