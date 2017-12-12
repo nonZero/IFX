@@ -12,6 +12,25 @@ Israeli film archive
 
         pip install -r requirements.txt
 
+* Connecting to PostgreSQL after installing
+
+    1 - open the SQL shell(plsl)
+        if the installation was with default values - press Enter until the password and enter the one you've logged in the installation.
+    2 - after logging in type with the semicolons:
+
+        create user ifx;
+        \password ifx;
+
+        - type the password :
+
+            'ifx@DB'
+
+        (and re-enter it.)
+
+        create database ifx owner ifx;
+
+    and that's it.
+
 * Create tables:
 
         python manage.py migrate
