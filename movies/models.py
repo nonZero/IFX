@@ -9,6 +9,12 @@ class Tag(models.Model):
     def __str__(self):
         return self.title
 
+class Field(models.Model):
+    fid = models.CharField(unique=True, max_length=300)
+    title = models.CharField(max_length=300)
+
+    def __str__(self):
+        return self.title
 
 class Movie(models.Model):
     bid = models.IntegerField(unique=True)
