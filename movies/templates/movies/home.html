@@ -3,21 +3,20 @@
 <table border="1" width="100%">
     <tr>
         <th>#</th>
-        <th>Date</th>
-        <th>Length</th>
-        <th>Title</th>
         <th>bid</th>
+        <th>Title</th>
+        <th>Year</th>
+        <th>Language</th>
     </tr>
     {% for object in objects %}
         <tr>
             <td>#{{ object.id }}</td>
-            <td>{{ object.date }}</td>
-            <td>{{ object.length }} Minutes </td>
+            <td>{{ object.bid }}</td>
             <td>
                 <a href="{% url "movies:detail" object.id %}">{{ object.title }}</a>
             </td>
-            <td>{{ object.bid }}</td>
-
+            <td>{{ object.year }}</td>
+            <td>{{ object.lang }} </td>
         </tr>
     {% endfor %}
 
