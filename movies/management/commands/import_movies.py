@@ -24,15 +24,12 @@ class Command(BaseCommand):
                 continue
 
             if i % 200 == 0:
-                print(i, c, row.book_id_s, row.title)
+                print(i, c, row.bid, row.title)
 
             o = Movie()
-            o.title = row.title
-            o.length = "{}.{}".format(random.randint(1, 100),
-                                      random.randint(0, 99))
-            o.year = None if np.isnan(row.year) else row.year
-            o.description = "\n".join(
-                [silly.paragraph(), silly.paragraph(), silly.paragraph()])
             o.bid = row.bid
+            o.title = row.title
+            o.year = None if np.isnan(row.year) else row.year
+            o.lang = row.lang
             o.full_clean()
             o.save()
