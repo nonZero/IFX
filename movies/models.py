@@ -22,7 +22,13 @@ class Movie(models.Model):
     year = models.IntegerField(null=True, blank=True)
     lang = models.CharField(max_length=300)
 
-    tags = models.ManyToManyField(Tag, blank=True, related_name="movies")
-
     def __str__(self):
         return self.title
+
+class Movie_Tag_Field(models.Model):
+    tag = models.ForeignKey(Tag)
+    movie = models.ForeignKey(Movie)
+    field = models.ForeignKey(Field)
+
+    def __str__(self):
+        return self.movie, self.field, self.tag
