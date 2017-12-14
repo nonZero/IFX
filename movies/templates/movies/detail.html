@@ -1,16 +1,17 @@
-<h1>Movie #{{ object.id }}</h1>
+<h1>Movie #{{ movie.bid }}</h1>
 
 <ul>
-    <li><b>{{ object.title }}</b></li>
-    <li>Date: {{ object.date }}</li>
-    <li>Length: {{ object.length }} min. </li>
-    <li>Description: <br/>
-        {{ object.description|linebreaks }}
-    </li>
-    <li>bid: {{object.bid}} </li>
-    <li>tags: <ul>
-        {% for tag in object.tags.all %}
-        <li>{{tag.title}}</li>
+    <li><b>{{ movie.title }}</b></li>
+    <li>Year: {{ movie.year }}</li>
+    <li>Language: {{ movie.lang }}  </li>
+
+    <li>bid: {{movie.bid}} </li>
+    <li>Relationships: <ul>
+        {% for r in objects %}
+        <li>
+	        <b>{{r.field.title}}:</b>
+            <p>{{ r.tag.title }}</p>
+        </li>
         {% endfor %}
     </ul>
     </li>
