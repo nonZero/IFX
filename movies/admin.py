@@ -3,3 +3,4 @@ from . import models
 
 admin.site.register(models.Movie)
 admin.site.register(models.Tag)
+admin.site.register(models.Field)
