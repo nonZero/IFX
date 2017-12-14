@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from movies.models import Movie
+from movies.models import Movie, Movie_Tag_Field
 from movies.forms import MovieForm
 
 
@@ -14,9 +14,11 @@ def home(request):
 
 
 def detail(request, id):
-    o = Movie.objects.get(id=id)
+    m = Movie.objects.get(id=id)
+    qs = Movie_Tag_Field.objects.filter(movie=m)
     d = {
-        'object': o,
+        'movie': m,
+        'objects': qs,
     }
     return render(request, "movies/detail.html", d)
 
