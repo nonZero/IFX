@@ -107,5 +107,8 @@ db.sqlite3
 .idea/
 idea_data/
 
+# migrations
+/movies/migrations
+
 # idea tables data path(Pola's PC)
 /IdeaData
