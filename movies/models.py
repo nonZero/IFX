@@ -16,6 +16,7 @@ class Field(models.Model):
     def __str__(self):
         return self.title
 
+
 class Movie(models.Model):
     bid = models.IntegerField(unique=True)
     title = models.CharField(max_length=300)
@@ -32,3 +33,10 @@ class Movie_Tag_Field(models.Model):
 
     def __str__(self):
         return self.movie, self.field, self.tag
+
+class Description(models.Model):
+    movie = models.ForeignKey(Movie)
+    summery = models.TextField()
+    lang = models.CharField(max_length=300)
+    def __str__(self):
+        return self.movie
