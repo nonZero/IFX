@@ -6,11 +6,13 @@
     <li>Language: {{ movie.lang }}  </li>
 
     <li>bid: {{movie.bid}} </li>
-    <li>Relationships: <ul>
-        {% for r in objects %}
+    <li>Additional data:<ul>
+        {% for key,values in movie.get_extra_data.items %}
         <li>
-	        <b>{{r.field.title}}:</b>
-            <p>{{ r.tag.title }}</p>
+            <b>{{key}}:</b>
+            {% for value in values %}
+                <q>{{ value }}</q>
+            {% endfor %}
         </li>
         {% endfor %}
     </ul>

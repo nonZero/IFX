@@ -15,10 +15,8 @@ def home(request):
 
 def detail(request, id):
     m = Movie.objects.get(id=id)
-    qs = Movie_Tag_Field.objects.filter(movie=m)
     d = {
         'movie': m,
-        'objects': qs,
     }
     return render(request, "movies/detail.html", d)
 

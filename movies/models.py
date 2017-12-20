@@ -25,6 +25,17 @@ class Movie(models.Model):
     def __str__(self):
         return self.title
 
+    def get_extra_data(self):
+        mft = Movie_Tag_Field.objects.filter(movie=self.id)
+        fields = {}
+        for item in mft:
+            if item.field.title in fields:
+                fields[item.field.title].append(item.tag.title)
+            else:
+                fields[item.field.title] = [(item.tag.title)]
+
+        return fields
+
 class Movie_Tag_Field(models.Model):
     movie = models.ForeignKey(Movie)
     field = models.ForeignKey(Field)
