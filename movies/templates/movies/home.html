@@ -1,5 +1,9 @@
 <h1>My Movies</h1>
 
+<ul>
+    <a href= {% url "movies:create" %}>Add movie...</a>
+</ul>
+
 <table border="1" width="100%">
     <tr>
         <th>#</th>
@@ -13,7 +17,7 @@
             <td>#{{ object.id }}</td>
             <td>{{ object.bid }}</td>
             <td>
-                <a href="{% url "movies:detail" object.id %}">{{ object.title }}</a>
+                <a href= {% url "movies:detail" object.id %}>{{ object.title }}</a>
             </td>
             <td>{{ object.year }}</td>
             <td>{{ object.lang }} </td>
