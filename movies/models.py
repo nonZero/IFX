@@ -50,6 +50,9 @@ class Collection(models.Model):
     def __str__(self):
         return self.title
 
+    def get_items(self):
+        return Collection_Movie.objects.filter(collection=self.id)
+
 class Collection_Movie(models.Model):
     collection = models.ForeignKey(Collection)
     movie = models.ForeignKey(Movie)

@@ -1,7 +1,15 @@
 <h1>Collection #{{ collection.id }}</h1>
 
 <ul>
-    <li><b>{{ collection.title }}</b></li>
+    <li><b>Title: {{ collection.title }}</b></li>
+    <li>Movies:<ul>
+        {% for object in collection.get_items %}
+        <li>
+            <a href= {% url "movies:movie_detail" object.movie.id %}>{{ object.movie.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+    </li>
 </ul>
 
 <a href="{% url "movies:collections_list" %}">Back To My Collections</a>
