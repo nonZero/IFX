@@ -1,9 +1,24 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
 from movies.models import Movie, Movie_Tag_Field
 from movies.forms import MovieForm
 
+def home_json(request):
+    qs = Movie.objects.all()
+    data = {
+        'movies': [
+            {
+                'id': o.id,
+                'title': o.title,
+                'year': o.year,
+                'lang': o.lang,
+                'bid': o.bid,
+            }
+            for o in qs]
+    }
 
+    return JsonResponse(data)
 
 def home(request):
     qs = Movie.objects.order_by('?')[:10]
