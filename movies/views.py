@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from movies.models import Movie, Collection
 from movies.forms import MovieForm
 
-def home_json(request):
+def movies_json(request):
     qs = Movie.objects.all()
     data = {
         'movies': [
@@ -20,22 +20,22 @@ def home_json(request):
 
     return JsonResponse(data)
 
-def home(request):
+def movies_list(request):
     qs = Movie.objects.order_by('?')[:10]
     d = {
         'objects': qs,
     }
-    return render(request, "movies/home.html", d)
+    return render(request, "movies/movies_list.html", d)
 
 
-def detail(request, id):
+def movie_detail(request, id):
     m = get_object_or_404(Movie, id=id)
     d = {
         'movie': m,
     }
-    return render(request, "movies/detail.html", d)
+    return render(request, "movies/movie_detail.html", d)
 
-def create(request):
+def movie_create(request):
     if request.method == "POST":
         form = MovieForm(request.POST)
         if form.is_valid():
@@ -48,7 +48,7 @@ def create(request):
     d = {
         'form': form,
     }
-    return render(request, "movies/form.html", d)
+    return render(request, "movies/movie_form.html", d)
 
 def collections_list(request):
     qs = Collection.objects.all()
