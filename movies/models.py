@@ -43,3 +43,16 @@ class Movie_Tag_Field(models.Model):
 
     def __str__(self):
         return 'Movie={}, Field={}, Tag={}'.format(self.movie, self.field, self.tag)
+
+class Collection(models.Model):
+    title = models.CharField(max_length=300)
+
+    def __str__(self):
+        return self.title
+
+class Collection_Movie(models.Model):
+    collection = models.ForeignKey(Collection)
+    movie = models.ForeignKey(Movie)
+
+    def __str__(self):
+        return 'Collection={}, Movie={}'.format(self.collection, self.movie)
