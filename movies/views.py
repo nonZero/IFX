@@ -27,7 +27,6 @@ def movies_list(request):
     }
     return render(request, "movies/movies_list.html", d)
 
-
 def movie_detail(request, id):
     m = get_object_or_404(Movie, id=id)
     d = {
@@ -56,3 +55,10 @@ def collections_list(request):
         'objects': qs,
     }
     return render(request, "movies/collections_list.html", d)
+
+def collection_detail(request, id):
+    c = get_object_or_404(Collection, id=id)
+    d = {
+        'collection': c,
+    }
+    return render(request, "movies/collection_detail.html", d)

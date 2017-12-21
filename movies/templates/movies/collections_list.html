@@ -10,7 +10,9 @@
     {% for object in objects %}
         <tr>
             <td>#{{ object.id }}</td>
-            <td>{{ object.title }}</td>
+            <td>
+                <a href={% url "movies:collection_detail" object.id %}>{{ object.title }}</a>
+            </td>
         </tr>
     {% endfor %}
 
