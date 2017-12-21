@@ -1,0 +1,17 @@
+<h1>My Collections</h1>
+
+
+
+<table border="1" width="100%">
+    <tr>
+        <th>#</th>
+        <th>Title</th>
+    </tr>
+    {% for object in objects %}
+        <tr>
+            <td>#{{ object.id }}</td>
+            <td>{{ object.title }}</td>
+        </tr>
+    {% endfor %}
+
+</table>

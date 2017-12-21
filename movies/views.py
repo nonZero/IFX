@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
-from movies.models import Movie, Movie_Tag_Field
+from movies.models import Movie, Collection
 from movies.forms import MovieForm
 
 def home_json(request):
@@ -49,3 +49,10 @@ def create(request):
         'form': form,
     }
     return render(request, "movies/form.html", d)
+
+def collections_list(request):
+    qs = Collection.objects.all()
+    d = {
+        'objects': qs,
+    }
+    return render(request, "movies/collections_list.html", d)
