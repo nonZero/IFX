@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from movies.models import Movie, Movie_Tag_Field
 from movies.forms import MovieForm
@@ -14,7 +14,7 @@ def home(request):
 
 
 def detail(request, id):
-    m = Movie.objects.get(id=id)
+    m = get_object_or_404(Movie, id=id)
     d = {
         'movie': m,
     }
