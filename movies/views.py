@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
 from movies.models import Movie, Collection
-from movies.forms import MovieForm
+from movies.forms import MovieForm, CollectionForm
 
 def movies_json(request):
     qs = Movie.objects.all()
@@ -39,7 +39,7 @@ def movie_create(request):
         form = MovieForm(request.POST)
         if form.is_valid():
             o = form.save()
-            return redirect("movies:detail", id=o.id)
+            return redirect("movies:movie_detail", id=o.id)
     else:
         # method = GET
         form = MovieForm()
@@ -62,3 +62,18 @@ def collection_detail(request, id):
         'collection': c,
     }
     return render(request, "movies/collection_detail.html", d)
+
+def collection_create(request):
+    if request.method == "POST":
+        form = CollectionForm(request.POST)
+        if form.is_valid():
+            o = form.save()
+            return redirect("movies:collection_detail", id=o.id)
+    else:
+        # method = GET
+        form = CollectionForm()
+
+    d = {
+        'form': form,
+    }
+    return render(request, "movies/collection_form.html", d)
