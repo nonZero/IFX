@@ -1,0 +1,7 @@
+{% load humanize %}
+<li>
+    <b>[#{{ c.id }}]
+        <span title="{{ c.created_at }}">{{ c.created_at|naturaltime }}</span>
+    </b>:
+    {{ c.content|linebreaks }}
+</li>

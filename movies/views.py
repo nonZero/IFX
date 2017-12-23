@@ -1,4 +1,4 @@
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseForbidden
 from django.shortcuts import render, redirect, get_object_or_404
 
 from movies.models import Movie, Collection
@@ -29,8 +29,23 @@ def movies_list(request):
 
 def movie_detail(request, id):
     m = get_object_or_404(Movie, id=id)
+
+    if request.method == "POST":
+        import time
+        time.sleep(3)
+        form = CommentForm(request.POST)
+        form.instance.movie = m
+        if form.is_valid():
+            c = form.save()
+            return render(request, "movies/_comment.html", {
+                'c': c,
+            })
+        return HttpResponseForbidden(
+            form.errors.as_json(),
+            content_type='application/json')
     d = {
         'movie': m,
+        'form': CommentForm(),
     }
     return render(request, "movies/movie_detail.html", d)
 

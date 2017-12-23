@@ -1,3 +1,4 @@
+{% load humanize staticfiles %}
 <h1>Movie #{{ movie.id }}</h1>
 
 <ul>
@@ -19,22 +20,28 @@
     </li>
 
     <h2>Comments</h2>
-    <li>
-        <a href="{% url "movies:create_comment" movie.id %}">Add Comment...</a>
-    </li>
-    <ul>
-        {% for c in movie.comments.all %}
-            <li>
-                <b>[#{{ c.id }}]
-                    <span title="{{ c.created_at }}">{{ c.created_at }}</span>
-                </b>:
-                {{ c.content|linebreaks }}
-            </li>
-        {% endfor %}
 
+    <ul id="comments">
+        <li>
+            <form id="comment-form" method="post">
+                {% csrf_token %}
+
+                {{ form.as_ul }}
+
+                <button id="send-form">Add Comment</button>
+            </form>
+        </li>
+
+        {% for c in movie.comments_by_date %}
+            {% include "movies/_comment.html" %}
+        {% endfor %}
     </ul>
+
 </ul>
 
 <a href="{% url "movies:movies_list" %}">Back To My Movies</a>
 
+<script src="{% static "vendor/jquery-3.2.1.js" %}"></script>
+<script src="{% static "js/csrf.js" %}"></script>
+<script src="{% static "js/comment.js" %}"></script>
 

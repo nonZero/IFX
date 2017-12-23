@@ -39,6 +39,10 @@ class Movie(models.Model):
 
         return fields
 
+    def comments_by_date(self):
+        return self.comments.order_by('-created_at')
+
+
 class Movie_Tag_Field(models.Model):
     movie = models.ForeignKey(Movie)
     field = models.ForeignKey(Field)
@@ -67,3 +71,8 @@ class Comment(models.Model):
     movie = models.ForeignKey(Movie, related_name="comments")
     created_at = models.DateTimeField(auto_now_add=True)
     content = models.TextField()
+
+    class Meta:  # holds some advanced setting for this model
+        ordering = (
+            '-created_at',
+        )
