@@ -8,6 +8,7 @@ urlpatterns = [
     url(r"^movies/as-json/$", views.movies_json, name='movies_list_json'),
     url(r"^movies/add/$", views.movie_create, name='movie_create'),
     url(r"^movies/(?P<id>[0-9]+)/$", views.movie_detail, name='movie_detail'),
+    url(r"^movies/(?P<id>[0-9]+)/comment/$", views.create_comment, name='create_comment'),
     url(r"^collections/$", views.collections_list, name='collections_list'),
     url(r"^collections/add/$", views.collection_create, name='collection_create'),
     url(r"^collections/(?P<id>[0-9]+)/$", views.collection_detail, name='collection_detail'),
