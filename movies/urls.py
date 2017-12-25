@@ -11,4 +11,5 @@ urlpatterns = [
     url(r"^collections/$", views.collections_list, name='collections_list'),
     url(r"^collections/add/$", views.collection_create, name='collection_create'),
     url(r"^collections/(?P<id>[0-9]+)/$", views.collection_detail, name='collection_detail'),
+    url(r"^homepage/$", views.homePage, name='homePage'),
 ]

@@ -4,6 +4,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from movies.models import Movie, Collection
 from movies.forms import MovieForm, CollectionForm
 
+def homePage(request):
+     return render(request, "movies/homePage.html")
+
 def movies_json(request):
     qs = Movie.objects.all()
     data = {
