@@ -59,3 +59,12 @@ class Collection_Movie(models.Model):
 
     def __str__(self):
         return 'Collection={}, Movie={}'.format(self.collection, self.movie)
+
+
+class Description(models.Model):
+    movie = models.ForeignKey(Movie)
+    summery = models.TextField()
+    lang = models.CharField(max_length=300)
+
+    def __str__(self):
+        return self.movie
