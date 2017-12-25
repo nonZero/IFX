@@ -35,6 +35,18 @@ Israeli film archive
 
         python manage.py migrate
 
+* Import data from tsv files:
+
+        m import_movies "<folder name>\movies.tsv"
+
+        m import_fields "<folder name>\Idea_dbo_field_list.tsv"
+
+        m import_description "<folder name>\book_sum.tsv"
+
+        m import_tags "<folder name>\tags.tsv"
+
+        m import_relationship "<folder name>\book_tags.tsv"
+
 * Create some sample data:
 
         python manage.py create_movies 100
