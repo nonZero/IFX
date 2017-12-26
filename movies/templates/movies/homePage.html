@@ -1,4 +1,4 @@
-{load i18n}
+{% load i18n %}
 
 <!DOCTYPE html>
 <html lang="he">
@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     {% load static %}
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{% static "style.css" %}" rel="stylesheet">
+    <link href="{% static 'style.css' %}" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -22,15 +22,15 @@
                 <button class="btnMenu"><img src="/static/images/Menu.svg"/></button>
                 <div class="logo">
                     <a href="#"><img src="/static/images/Jerusalem_Cinematheque_Logo.png"></a>
-                    <span>ירשלים</span>
+                    <span>{% trans "Jerusalem" %}</span>
                 </div>
-                <a class="langHebEng" href="#">Eng</a>
+                <a class="langHebEng" href="#">{% trans "עבר'" %}</a>
                 <a class="btnBag" href="#"><img src="/static/images/Shopping-bag.svg"/></a>
             </div>
             <div class="jumbotron">
-                <h1>הארכיון הישראלי לסרטים</h1>
-                <div class="row">
-                    <div>
+                <h1>{% trans "The Israeli film archive" %}</h1>
+                <div class="row searchRow">
+                    <div id="searchGroup">
                         <div class="col-xs-2">
                             <span class="input-group-btn">
                                     <button class="btn btn-default btnSearch glyphicon glyphicon-search" type="button"></button>
@@ -38,26 +38,22 @@
                         </div>
                         <div class="col-xs-6">
                             <div class="searchContainer">
-                                <input type="text" class="btnSearchIdex" placeholder="חיפוש..."/>
+                                <input type="text" class="btnSearchIdex" placeholder={% trans 'Search...' %}>
                             </div>
                         </div>
                         <div class="col col-xs-2">
                             <div class="dropdown">
-                              <button class="dropdown-toggle dropBtnSearch" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                חיפוש חופשי
-                                  <span class="caret"></span>
-                              </button>
-                              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li><a href="#">חיפוש חופשי</a></li>
-                                  <li role="separator" class="divider"></li>
-                                <li><a href="#">שם סרט</a></li>
-                                  <li role="separator" class="divider"></li>
-                                <li><a href="#">שם במאי</a></li>
-                              </ul>
+                              <select id="idselect" class="dropBtnSearch" aria-labelledby="dropdownMenu1">
+                                <option value="1"><a href="#">{% trans "Search All" %}</a></option>
+                                  <span role="separator" class="divider"></span>
+                                <option value="2"><a href="#">{% trans "Movie's Name" %}</a></option>
+                                  <span role="separator" class="divider"></span>
+                                <option value="3"><a href="#">{% trans "Director's Name" %}</a></option>
+                              </select>
                             </div>
                         </div>
                     </div>
-
+                    <div id="boxContainer"></div>
 
                 </div>
 
@@ -66,4 +62,9 @@
 
     </div>
 </body>
+<script>
+    $(function() {
+        $('#idselect').val('1');
+    });
+</script>
 </html>
