@@ -78,7 +78,7 @@ button#dropdownMenu1 {
     height: 32px;
     width: auto;
     position: absolute;
-    right: 70px;
+    left: 70px;
     top: 8px;
 }
 
@@ -90,7 +90,7 @@ button#dropdownMenu1 {
     color: #7b7b7b;
     font-size: x-large;
     position: absolute;
-    right: 0;
+    left: 0;
     top: 0;
     border: none;
 }
@@ -105,13 +105,13 @@ button#dropdownMenu1 {
 
 .logo span {
     position: absolute;
-    right: 189px;
+    left: 189px;
     top: 15px;
 }
 
 a.langHebEng {
     position: absolute;
-    left: 18px;
+    right: 18px;
     font-size: 16pt;
     top: 6px;
     color: white;
@@ -120,7 +120,7 @@ a.langHebEng {
 
 a.btnBag {
     position: absolute;
-    left: 75px;
+    right: 75px;
     top: 9px;
     height: 23px;
     width: 17.7px;
@@ -145,4 +145,24 @@ div#boxContainer {
 
 div#searchGroup {
     margin-left: 76px;
+}
+
+footer{
+    height: 163px;
+    margin: 0 auto;
+    background-color: #D8D8D8;
+    direction: ltr;
+}
+
+footer div .col-xs-3 {
+    width: 25%;
+    margin: 36px auto;
+}
+
+img#cinemathequeLogoFooter {
+    width: 80%;
+    max-width: 200px;
+    /* margin: 0 auto; */
+    margin: auto 17%;
+    margin-top: 11px;
 }

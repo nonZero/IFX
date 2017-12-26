@@ -21,7 +21,7 @@
             <div class="App-header">
                 <button class="btnMenu"><img src="/static/images/Menu.svg"/></button>
                 <div class="logo">
-                    <a href="#"><img src="/static/images/Jerusalem_Cinematheque_Logo.png"></a>
+                    <a href="#"><img src="/static/images/Jerusalem_Cinematheque_Logo.png" alt="Jerusalem Cinematheque Logo"></a>
                     <span>{% trans "Jerusalem" %}</span>
                 </div>
                 <a class="langHebEng" href="#">{% trans "עבר'" %}</a>
@@ -61,6 +61,26 @@
         </header>
 
     </div>
+    <footer>
+        <div class="row">
+            <div class="col col-xs-3">
+                <img id="cinemathequeLogoFooter" src="/static/images/Jerusalem_Cinematheque_LogoBlack.png" alt="Jerusalem Cinematheque Logo" />
+            </div>
+            <section class="col col-xs-3">
+                <h4>{% trans "Contact" %}</h4>
+                <span>{% trans "Phone number: 02-5654332" %}</span>
+                <span>{% trans "E-mail: rusom@jer-cin.org.il" %}</span>
+            </section>
+            <section class="col col-xs-3">
+                <h4>{% trans "Address" %}</h4>
+                <span>{% trans "11 Hebron rd. POB 8651 Jerusalem, 9108402" %}</span>
+            </section>
+            <section class="col col-xs-3">
+                <h4>{% trans "Enter Site" %}</h4>
+                <a href="https://www.jer-cin.org.il/en">{% trans "Jerusalem Cinematheque" %}</a>
+            </section>
+        </div>
+    </footer>
 </body>
 <script>
     $(function() {
