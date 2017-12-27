@@ -2,7 +2,7 @@
 {% load l10n %}
 
 <!DOCTYPE html>
-<html lang="he">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     {% load static %}
@@ -30,31 +30,34 @@
             </div>
             <div class="jumbotron">
                 <h1>{% trans "The Israeli Film Archive" %}</h1>
-                <div class="row searchRow">
-                    <div id="searchGroup">
+                <div class="row">
+                    <div id="flex-item">
                         <div class="col-xs-2">
-                            <span class="input-group-btn">
-                                    <button class="btn btn-default btnSearch glyphicon glyphicon-search" type="button"></button>
-                            </span>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="searchContainer">
-                                <input type="text" class="btnSearchIdex" placeholder={% trans 'Search...' %}>
-                            </div>
-                        </div>
-                        <div class="col col-xs-2">
                             <div class="dropdown">
-                              <select id="idselect" class="dropBtnSearch" aria-labelledby="dropdownMenu1">
+                              <select id="idselect" class="dropdown dropBtnSearch" aria-labelledby="dropdownMenu1">
                                 <option value="1"><a href="#">{% trans "Search All" %}</a></option>
                                   <span role="separator" class="divider"></span>
                                 <option value="2"><a href="#">{% trans "Movie's Name" %}</a></option>
                                   <span role="separator" class="divider"></span>
-                                <option value="3"><a href="#">{% trans "Director's Name" %}</a></option>
+                                <option value="3"><a href="#">{% trans "Year/s" %}</a></option>
+                                  <span role="separator" class="divider"></span>
+                                <option value="4"><a href="#">{% trans "Director's Name" %}</a></option>
                               </select>
                             </div>
                         </div>
+                        <div class="col-xs-5 searchContainer">
+                            <div>
+                                <input type="text" class="btnSearchIdex" placeholder={% trans 'Search...' %}>
+                            </div>
+                        </div>
+                        <div class="col-xs-1">
+                            <span class="input-group-btn">
+                                    <button class="btn btn-default btnSearch glyphicon glyphicon-search" type="button"></button>
+                            </span>
+                        </div>
+                        <div id="boxContainer" class="col-xs-8"></div>
                     </div>
-                    <div id="boxContainer"></div>
+
 
                 </div>
 

@@ -34,12 +34,16 @@ body{
 
 button.btn.btn-default.glyphicon.glyphicon-search {
     margin-top: -1px;
-    margin-right: -26px;
+    margin-left: -12px;
+    z-index: 2;
 }
 
 .searchContainer {
     direction: initial;
+    z-index: 2;
+
 }
+
 
 .btnSearchIdex{
     height: 50px;
@@ -48,7 +52,8 @@ button.btn.btn-default.glyphicon.glyphicon-search {
     color: #3e372f;
     direction: ltr;
     padding-left: 10px;
-    /*margin-left: 10px;*/
+    margin-left: 12px;
+    z-index: 2;
 }
 
 .btnSearch{
@@ -131,16 +136,17 @@ select#idselect {
     height: 50px;
     color: #7a7a7a;
     direction: ltr;
-    margin-right: 26px;
+    margin-left: 37px;
     padding-left: 8px;
+    z-index: 2;
 }
 
 div#boxContainer {
     background-color: #d8d8d88c;
     height: 72px;
-    width: 65%;
-    margin: 0 auto;
-    margin-top: -11px;
+    position: absolute;
+    z-index: 1;
+    margin-top: -10px;
 }
 
 div#searchGroup {
@@ -165,4 +171,27 @@ img#cinemathequeLogoFooter {
     /* margin: 0 auto; */
     margin: auto 17%;
     margin-top: 11px;
+}
+
+option:hover {
+    color: white !important;
+    background-color: #4A4A4A !important;
+}
+
+option:active {
+    color: white !important;
+    background-color: #4A4A4A !important;
+}
+/*
+.changePos{
+    float: left !important;
+}
+*/
+div#flex-item {
+    width: 100%;
+    display: -webkit-flex;
+    -webkit-justify-content: space-around;
+    display: flex;
+    justify-content: center;
+    direction: ltr !important;
 }
