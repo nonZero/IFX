@@ -88,7 +88,7 @@ button#dropdownMenu1 {
 }
 
 .btnMenu{
-    height: 45px;
+    height: 42px;
     width: 50px;
     background-color: #d8d8d8;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
@@ -96,7 +96,7 @@ button#dropdownMenu1 {
     font-size: x-large;
     position: absolute;
     left: 0;
-    top: 0;
+    top: -43px;
     border: none;
 }
 
@@ -194,4 +194,64 @@ div#flex-item {
     display: flex;
     justify-content: center;
     direction: ltr !important;
+}
+
+select {
+    color: black;
+}
+
+form#lang-form {
+    position: absolute;
+    right: 10px;
+    top: 7px;
+    font-size: 16pt;
+    color: white;
+}
+
+input#lang-switcher {
+    background-color: black;
+    border: none;
+}
+
+ul {
+    direction: ltr;
+    text-decoration: none;
+}
+
+ul li button {
+    direction: ltr;
+    text-decoration: none;
+    color: white;
+    background-color: black;
+    border: none;
+    width: 50%;
+}
+
+/*------------------------------------------*/
+
+.pos-f-t {
+    width: 323px;
+    direction: ltr;
+    position: absolute;
+    left: 0px;
+    top: 45px;
+    padding-top: 0px;
+    background-color: #4A4A4A;
+    z-index: 4;
+}
+
+div.bg-inverse > button {
+        display: block;
+    height: 50px;
+    padding-left: 20px;
+    background-color: #4A4A4A;
+    border: none;
+    z-index: 4;
+}
+
+div.bg-inverse > button:hover {
+    background-color: #FFFFFF;
+    color: #4A4A4A;
+    width: -webkit-fill-available;
+    text-align: left;
 }

@@ -1,16 +1,14 @@
-{% load i18n %}
-{% load l10n %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    {% load i18n %}
     {% load static %}
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{% static 'style.css' %}" rel="stylesheet">
+    <link href= "{% static 'style.css' %}" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
@@ -20,12 +18,49 @@
     <div>
         <header>
             <div class="App-header">
-                <button class="btnMenu"><img src="/static/images/Menu.svg"/></button>
+                <!--button class="btnMenu"><img src="/static/images/Menu.svg"/></button-->
+                <div class="pos-f-t">
+                  <div class="collapse" id="navbarToggleExternalContent">
+                    <div class="bg-inverse p-4">
+                       <button>{% trans "Search Archive" %}</button>
+                        <button>{% trans "Collections" %}</button>
+                        <button>{% trans "About Archive" %}</button>
+                        <button>{% trans "Conservation and Restoration" %}</button>
+                        <button>{% trans "Depositing Materials" %}</button>
+                        <button>{% trans "Contact" %}</button>
+                        <button>{% trans "Jerusalem Cinematheque Site" %}</button>
+
+                    </div>
+                  </div>
+                  <nav class="navbar-inverse bg-inverse">
+                    <button class="navbar-toggler btnMenu" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <img src="/static/images/Menu.svg"/>
+                    </button>
+                  </nav>
+                </div>
                 <div class="logo">
                     <a href="#"><img src="/static/images/Jerusalem_Cinematheque_Logo.png" alt="Jerusalem Cinematheque Logo"></a>
                     <span>{% trans "Jerusalem" %}</span>
                 </div>
-                <a class="langHebEng" href="#">{% trans "עבר" %}</a>
+
+                <form id="lang-form" action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                    <input id="redirectLang" name="next" type="hidden" value="{{ redirect_to }}" />
+                        {% get_current_language as LANGUAGE_CODE %}
+                        {% get_available_languages as LANGUAGES %}
+                        {% get_language_info_list for LANGUAGES as languages %}
+
+                    <!--select name="language">
+                        {% get_current_language as LANGUAGE_CODE %}
+                        {% get_available_languages as LANGUAGES %}
+                        {% get_language_info_list for LANGUAGES as languages %}
+                        {% for language in languages %}
+                            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                                {{ language.name_local }} ({{ language.code }})
+                            </option>
+                        {% endfor %}
+                    </select-->
+                    <input id="lang-switcher" type="submit" class="langHebEng" value= {% trans "Heb" %} />
+                </form>
                 <a class="btnBag" href="#"><img src="/static/images/Shopping-bag.svg"/></a>
             </div>
             <div class="jumbotron">
@@ -89,6 +124,13 @@
 <script>
     $(function() {
         $('#idselect').val('1');
+    });
+    // Switch languages
+    $('#lang-switcher').click(function (e) {
+        e.preventDefault();
+        $('#lang-switcher').val("Heb")? $('#redirectLang').val("Hebrew:he") : $('#redirectLang').val("English:en-us") ;
+        $('#lang-form').submit();
+        //e.preventDefault();
     });
 </script>
 </html>
