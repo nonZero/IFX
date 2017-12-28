@@ -1,0 +1,84 @@
+{% load i18n static %}
+
+<header>
+            <div class="App-header">
+                <!--button class="btnMenu"><img src="/static/images/Menu.svg"/></button-->
+                <div class="pos-f-t">
+                  <div class="collapse" id="navbarToggleExternalContent">
+                    <div class="bg-inverse p-4">
+                       <button>{% trans "Search Archive" %}</button>
+                        <button>{% trans "Collections" %}</button>
+                        <button>{% trans "About Archive" %}</button>
+                        <button>{% trans "Conservation and Restoration" %}</button>
+                        <button>{% trans "Depositing Materials" %}</button>
+                        <button>{% trans "Contact" %}</button>
+                        <button>{% trans "Jerusalem Cinematheque Site" %}</button>
+
+                    </div>
+                  </div>
+                  <nav class="navbar-inverse bg-inverse">
+                    <button class="navbar-toggler btnMenu" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <img src="/static/images/Menu.svg"/>
+                    </button>
+                  </nav>
+                </div>
+                <div class="logo">
+                    <a href="#"><img src="/static/images/Jerusalem_Cinematheque_Logo.png" alt="Jerusalem Cinematheque Logo"></a>
+                    <span>{% trans "Jerusalem" %}</span>
+                </div>
+
+                <form id="lang-form" action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                    <input id="redirectLang" name="next" type="hidden" value="{{ redirect_to }}" />
+                        {% get_current_language as LANGUAGE_CODE %}
+                        {% get_available_languages as LANGUAGES %}
+                        {% get_language_info_list for LANGUAGES as languages %}
+
+                    <!--select name="language">
+                        {% get_current_language as LANGUAGE_CODE %}
+                        {% get_available_languages as LANGUAGES %}
+                        {% get_language_info_list for LANGUAGES as languages %}
+                        {% for language in languages %}
+                            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                                {{ language.name_local }} ({{ language.code }})
+                            </option>
+                        {% endfor %}
+                    </select-->
+                    <input id="lang-switcher" type="submit" class="langHebEng" value= {% trans "Heb" %} />
+                </form>
+                <a class="btnBag" href="#"><img src="/static/images/Shopping-bag.svg"/></a>
+            </div>
+            <div class="jumbotron">
+                <h1>{% trans "The Israeli Film Archive" %}</h1>
+                <div class="row">
+                    <div id="flex-item">
+                        <div class="col-xs-2">
+                            <div class="dropdown">
+                              <select id="idselect" class="dropdown dropBtnSearch" aria-labelledby="dropdownMenu1">
+                                <option value="1"><a href="#">{% trans "Search All" %}</a></option>
+                                  <span role="separator" class="divider"></span>
+                                <option value="2"><a href="#">{% trans "Movie's Name" %}</a></option>
+                                  <span role="separator" class="divider"></span>
+                                <option value="3"><a href="#">{% trans "Year/s" %}</a></option>
+                                  <span role="separator" class="divider"></span>
+                                <option value="4"><a href="#">{% trans "Director's Name" %}</a></option>
+                              </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-5 searchContainer">
+                            <div>
+                                <input type="text" class="btnSearchIdex" placeholder={% trans 'Search...' %}>
+                            </div>
+                        </div>
+                        <div class="col-xs-1">
+                            <span class="input-group-btn">
+                                    <button class="btn btn-default btnSearch glyphicon glyphicon-search" type="button"></button>
+                            </span>
+                        </div>
+                        <div id="boxContainer" class="col-xs-8"></div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </header>

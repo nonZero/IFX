@@ -2,13 +2,13 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-28 08:32+0200\n"
-"PO-Revision-Date: 2017-12-28 08:11+0200\n"
+"POT-Creation-Date: 2017-12-28 11:43+0200\n"
+"PO-Revision-Date: 2017-12-28 11:47+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -26,65 +26,90 @@ msgstr "אנגלית"
 msgid "Hebrew"
 msgstr "עברית"
 
-#: .\movies\templates\movies\homePage.html:24
-msgid "Jerusalem"
-msgstr "ירושלים"
+#: .\movies\templates\movies\homePage.html:25
+msgid "Search Archive"
+msgstr "חיפוש בארכיון"
 
-#: .\movies\templates\movies\homePage.html:39
-msgid "Heb"
-msgstr "Eng"
+#: .\movies\templates\movies\homePage.html:26
+msgid "Collections"
+msgstr "אוספים"
 
-#: .\movies\templates\movies\homePage.html:44
-msgid "The Israeli Film Archive"
-msgstr "הארכיון הישראלי לסרטים"
+#: .\movies\templates\movies\homePage.html:27
+msgid "About Archive"
+msgstr "אודות הארכיון"
 
-#: .\movies\templates\movies\homePage.html:50
-msgid "Search All"
-msgstr "חיפוש חופשי"
+#: .\movies\templates\movies\homePage.html:28
+msgid "Conservation and Restoration"
+msgstr "שימור ורסטורציה"
 
-#: .\movies\templates\movies\homePage.html:52
-msgid "Movie's Name"
-msgstr "שם סרט"
+#: .\movies\templates\movies\homePage.html:29
+msgid "Depositing Materials"
+msgstr "הפקדת חומרים"
 
-#: .\movies\templates\movies\homePage.html:54
-msgid "Year/s"
-msgstr "שנה/ים"
-
-#: .\movies\templates\movies\homePage.html:56
-msgid "Director's Name"
-msgstr "במאי/ת"
-
-#: .\movies\templates\movies\homePage.html:62
-msgid "Search..."
-msgstr "חיפוש..."
-
-#: .\movies\templates\movies\homePage.html:86
+#: .\movies\templates\movies\homePage.html:30
+#: .\movies\templates\movies\homePage.html:109
 msgid "Contact"
 msgstr "צרו קשר"
 
-#: .\movies\templates\movies\homePage.html:87
+#: .\movies\templates\movies\homePage.html:31
+msgid "Jerusalem Cinematheque Site"
+msgstr "לאתר סינמטק ירושלים"
+
+#: .\movies\templates\movies\homePage.html:43
+msgid "Jerusalem"
+msgstr "ירושלים"
+
+#: .\movies\templates\movies\homePage.html:62
+msgid "Heb"
+msgstr "Eng"
+
+#: .\movies\templates\movies\homePage.html:67
+msgid "The Israeli Film Archive"
+msgstr "הארכיון הישראלי לסרטים"
+
+#: .\movies\templates\movies\homePage.html:73
+msgid "Search All"
+msgstr "חיפוש חופשי"
+
+#: .\movies\templates\movies\homePage.html:75
+msgid "Movie's Name"
+msgstr "שם סרט"
+
+#: .\movies\templates\movies\homePage.html:77
+msgid "Year/s"
+msgstr "שנה/ים"
+
+#: .\movies\templates\movies\homePage.html:79
+msgid "Director's Name"
+msgstr "במאי/ת"
+
+#: .\movies\templates\movies\homePage.html:85
+msgid "Search..."
+msgstr "חיפוש..."
+
+#: .\movies\templates\movies\homePage.html:110
 msgid "Pel: 02-5654332"
 msgstr "טלפון : 02-5654332"
 
-#: .\movies\templates\movies\homePage.html:88
+#: .\movies\templates\movies\homePage.html:111
 msgid "Email: rusom@jer-cin.org.il"
 msgstr "דוא\"ל : rusom@jer-cin.org.il"
 
-#: .\movies\templates\movies\homePage.html:91
+#: .\movies\templates\movies\homePage.html:114
 msgid "Address"
 msgstr "מיקום"
 
-#: .\movies\templates\movies\homePage.html:92
+#: .\movies\templates\movies\homePage.html:115
 msgid "11 Hebron rd. POB 8651 <br> Jerusalem, 9108402"
 msgstr ""
 "דרך חברון 11, ת.ד. 8561\n"
 "ירושלים, 9108402"
 
-#: .\movies\templates\movies\homePage.html:95
+#: .\movies\templates\movies\homePage.html:118
 msgid "Enter Site"
 msgstr "לאתר"
 
-#: .\movies\templates\movies\homePage.html:96
+#: .\movies\templates\movies\homePage.html:119
 msgid "Jerusalem Cinematheque"
 msgstr "סינמטק ירושלים"
 

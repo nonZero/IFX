@@ -17,9 +17,8 @@
     </head>
     <body>
         <div>
-            {% block header %}{% include 'movies/_header1.html' %}{% endblock %}
+            {% block header %}{% include 'movies/_header2.html' %}{% endblock %}
         </div>
-
         {% block footer %}
             {% include 'movies/_footer.html' %}
         {% endblock %}
@@ -28,7 +27,6 @@
     <script>
         $(function() {
             $('#idselect').val('1');
-
         });
         // Switch languages
         $('#lang-switcher').click(function (e) {
@@ -36,9 +34,6 @@
             $('#lang-switcher').val("Heb")? $('#redirectLang').val("Hebrew:he") : $('#redirectLang').val("English:en-us") ;
             $('#lang-form').submit();
             //e.preventDefault();
-        });
-        $("#searchShowHide").click(function () {
-            $("#searchBarUp").toggleClass('hideSearchBar showSearchBar');
         });
     </script>
 </html>

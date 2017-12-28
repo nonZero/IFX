@@ -7,6 +7,9 @@ from movies.forms import MovieForm, CollectionForm
 def homePage(request):
      return render(request, "movies/homePage.html")
 
+def searchresult(request):
+    return render(request, "movies/searchresult.html")
+
 def movies_json(request):
     qs = Movie.objects.all()
     data = {

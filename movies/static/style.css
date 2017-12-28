@@ -36,6 +36,11 @@ button.btn.btn-default.glyphicon.glyphicon-search {
     margin-top: -1px;
     margin-left: -12px;
     z-index: 2;
+    color: #5a5e61;
+    font-size: 21pt;
+    padding-left: 10px;
+    border: none;
+    background-color: white;
 }
 
 .searchContainer {
@@ -88,15 +93,14 @@ button#dropdownMenu1 {
 }
 
 .btnMenu{
-    height: 42px;
+    height: 45px;
     width: 50px;
     background-color: #d8d8d8;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
     color: #7b7b7b;
     font-size: x-large;
     position: absolute;
     left: 0;
-    top: -43px;
+    top: -45px;
     border: none;
 }
 
@@ -227,8 +231,6 @@ ul li button {
     width: 50%;
 }
 
-/*------------------------------------------*/
-
 .pos-f-t {
     width: 323px;
     direction: ltr;
@@ -254,4 +256,57 @@ div.bg-inverse > button:hover {
     color: #4A4A4A;
     width: -webkit-fill-available;
     text-align: left;
+}
+
+/*------------------------------------------*/
+
+a.btnSearchIcon.glyphicon.glyphicon-search {
+    position: absolute;
+    font-size: 16pt;
+    color: white;
+    top: 10px;
+    right: 111px;
+    text-decoration: none;
+}
+
+select.dropdown.dropBtnSearchUp {
+    position: absolute;
+    right: 151px;
+    top: 5px;
+    height: 35px;
+    color: #595d60;
+    direction: ltr;
+    padding-left: 10px;
+}
+
+input.upperSearchInput {
+    position: absolute;
+    right: 298px;
+    top: 5px;
+    height: 35px;
+    width: 230px;
+    direction: ltr;
+    padding-left: 10px;
+    color: #3e372f;
+}
+
+button.searchIcon.glyphicon.glyphicon-search {
+    position: absolute;
+    height: 35px;
+    width: 35px;
+    color: #5a5e61;
+    font-size: 16pt;
+    border: none;
+    top: 5px;
+    right: 532px;
+    background-color: white;
+    text-decoration: none;
+}
+
+div.hideSearchBar {
+    display: none;
+}
+
+div.showSearchBar {
+    display: block;
 }
