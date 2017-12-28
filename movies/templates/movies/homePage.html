@@ -19,7 +19,23 @@
         <div>
             {% block header %}{% include 'movies/_header1.html' %}{% endblock %}
         </div>
+        <div class="container">
 
+              <div class="media row">
+
+                  <iframe class="d-flex col-xs-7" width="1897" height="884" src="https://www.youtube.com/embed/c0v98E0m9qA" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+                      <!--img class="d-flex mr-3 col-xs-7" src="/static/images/axelroddeclaration.jpg" alt="Generic placeholder image"-->
+                  <div class="col-xs-5">
+                        <h5 class="mt-0 mb-1">{% trans "The Nathan Axelrod Newsreel Collection" %}</h5>
+                        <p>The Axelrod Newsreel Collection is a unique collection of newsreels filmed by pioneer of Israeli film Nathan Axelrod between the years 1927 and 1958.  Axelrod enthusiastically documented, in approximately 450 newsreels, with an average length of 10 minutes per newsreel, the establishment and development of Jewish settlements throughout Eretz Israel, the British mandatory presence in Palestine, famous figures from politics, culture and arts, holidays and leisure events, as well as countless and priceless scenes from everyday life.
+    Each week, we have between ten and twenty requests from users too see footage. These include researchers, filmmakers, students, museums, organizations, as well as private individuals looking for family members (or even themselves!) whom they remember seeing on the big screen decades ago.
+    The State has bought this collection and has deposited it in the Israeli Film Archive to preserve and facilitate public access to this collection.</p>
+                        </br>
+                        </br>
+                        <button type="button" class="btn btn-secondary btn-lg">{% trans "Watch more" %}</button>
+                    </div>
+              </div>
+        </div>
         {% block footer %}
             {% include 'movies/_footer.html' %}
         {% endblock %}

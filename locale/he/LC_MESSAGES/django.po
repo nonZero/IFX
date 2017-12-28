@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-28 11:43+0200\n"
-"PO-Revision-Date: 2017-12-28 11:47+0200\n"
+"POT-Creation-Date: 2017-12-28 15:55+0200\n"
+"PO-Revision-Date: 2017-12-28 15:56+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -26,92 +26,120 @@ msgstr "אנגלית"
 msgid "Hebrew"
 msgstr "עברית"
 
-#: .\movies\templates\movies\homePage.html:25
-msgid "Search Archive"
-msgstr "חיפוש בארכיון"
-
-#: .\movies\templates\movies\homePage.html:26
-msgid "Collections"
-msgstr "אוספים"
-
-#: .\movies\templates\movies\homePage.html:27
-msgid "About Archive"
-msgstr "אודות הארכיון"
-
-#: .\movies\templates\movies\homePage.html:28
-msgid "Conservation and Restoration"
-msgstr "שימור ורסטורציה"
-
-#: .\movies\templates\movies\homePage.html:29
-msgid "Depositing Materials"
-msgstr "הפקדת חומרים"
-
-#: .\movies\templates\movies\homePage.html:30
-#: .\movies\templates\movies\homePage.html:109
+#: .\movies\templates\movies\_footer.html:9
+#: .\movies\templates\movies\_header1.html:14
+#: .\movies\templates\movies\_header2.html:14
 msgid "Contact"
 msgstr "צרו קשר"
 
-#: .\movies\templates\movies\homePage.html:31
-msgid "Jerusalem Cinematheque Site"
-msgstr "לאתר סינמטק ירושלים"
-
-#: .\movies\templates\movies\homePage.html:43
-msgid "Jerusalem"
-msgstr "ירושלים"
-
-#: .\movies\templates\movies\homePage.html:62
-msgid "Heb"
-msgstr "Eng"
-
-#: .\movies\templates\movies\homePage.html:67
-msgid "The Israeli Film Archive"
-msgstr "הארכיון הישראלי לסרטים"
-
-#: .\movies\templates\movies\homePage.html:73
-msgid "Search All"
-msgstr "חיפוש חופשי"
-
-#: .\movies\templates\movies\homePage.html:75
-msgid "Movie's Name"
-msgstr "שם סרט"
-
-#: .\movies\templates\movies\homePage.html:77
-msgid "Year/s"
-msgstr "שנה/ים"
-
-#: .\movies\templates\movies\homePage.html:79
-msgid "Director's Name"
-msgstr "במאי/ת"
-
-#: .\movies\templates\movies\homePage.html:85
-msgid "Search..."
-msgstr "חיפוש..."
-
-#: .\movies\templates\movies\homePage.html:110
+#: .\movies\templates\movies\_footer.html:10
 msgid "Pel: 02-5654332"
 msgstr "טלפון : 02-5654332"
 
-#: .\movies\templates\movies\homePage.html:111
+#: .\movies\templates\movies\_footer.html:11
 msgid "Email: rusom@jer-cin.org.il"
 msgstr "דוא\"ל : rusom@jer-cin.org.il"
 
-#: .\movies\templates\movies\homePage.html:114
+#: .\movies\templates\movies\_footer.html:14
 msgid "Address"
 msgstr "מיקום"
 
-#: .\movies\templates\movies\homePage.html:115
+#: .\movies\templates\movies\_footer.html:15
 msgid "11 Hebron rd. POB 8651 <br> Jerusalem, 9108402"
 msgstr ""
 "דרך חברון 11, ת.ד. 8561\n"
 "ירושלים, 9108402"
 
-#: .\movies\templates\movies\homePage.html:118
+#: .\movies\templates\movies\_footer.html:18
 msgid "Enter Site"
 msgstr "לאתר"
 
-#: .\movies\templates\movies\homePage.html:119
+#: .\movies\templates\movies\_footer.html:19
 msgid "Jerusalem Cinematheque"
 msgstr "סינמטק ירושלים"
+
+#: .\movies\templates\movies\_header1.html:9
+#: .\movies\templates\movies\_header2.html:9
+msgid "Search Archive"
+msgstr "חיפוש בארכיון"
+
+#: .\movies\templates\movies\_header1.html:10
+#: .\movies\templates\movies\_header2.html:10
+msgid "Collections"
+msgstr "אוספים"
+
+#: .\movies\templates\movies\_header1.html:11
+#: .\movies\templates\movies\_header2.html:11
+msgid "About Archive"
+msgstr "אודות הארכיון"
+
+#: .\movies\templates\movies\_header1.html:12
+#: .\movies\templates\movies\_header2.html:12
+msgid "Conservation and Restoration"
+msgstr "שימור ורסטורציה"
+
+#: .\movies\templates\movies\_header1.html:13
+#: .\movies\templates\movies\_header2.html:13
+msgid "Depositing Materials"
+msgstr "הפקדת חומרים"
+
+#: .\movies\templates\movies\_header1.html:15
+#: .\movies\templates\movies\_header2.html:15
+msgid "Jerusalem Cinematheque Site"
+msgstr "לאתר סינמטק ירושלים"
+
+#: .\movies\templates\movies\_header1.html:27
+#: .\movies\templates\movies\_header2.html:27
+msgid "Jerusalem"
+msgstr "ירושלים"
+
+#: .\movies\templates\movies\_header1.html:46
+#: .\movies\templates\movies\_header2.html:46
+msgid "Heb"
+msgstr "Eng"
+
+#: .\movies\templates\movies\_header1.html:54
+#: .\movies\templates\movies\_header1.html:79
+#: .\movies\templates\movies\_header2.html:57
+msgid "Search All"
+msgstr "חיפוש חופשי"
+
+#: .\movies\templates\movies\_header1.html:56
+#: .\movies\templates\movies\_header1.html:81
+#: .\movies\templates\movies\_header2.html:59
+msgid "Movie's Name"
+msgstr "שם סרט"
+
+#: .\movies\templates\movies\_header1.html:58
+#: .\movies\templates\movies\_header1.html:83
+#: .\movies\templates\movies\_header2.html:61
+msgid "Year/s"
+msgstr "שנה/ים"
+
+#: .\movies\templates\movies\_header1.html:60
+#: .\movies\templates\movies\_header1.html:85
+#: .\movies\templates\movies\_header2.html:63
+msgid "Director's Name"
+msgstr "במאי/ת"
+
+#: .\movies\templates\movies\_header1.html:64
+#: .\movies\templates\movies\_header1.html:91
+#: .\movies\templates\movies\_header2.html:69
+msgid "Search..."
+msgstr "חיפוש..."
+
+#: .\movies\templates\movies\_header1.html:73
+#: .\movies\templates\movies\_header2.html:51
+msgid "The Israeli Film Archive"
+msgstr "הארכיון הישראלי לסרטים"
+
+#: .\movies\templates\movies\homePage.html:28
+msgid "The Nathan Axelrod Newsreel Collection"
+msgstr "אוסף יומני נתן אקסלר"
+
+#: .\movies\templates\movies\homePage.html:34
+msgid "Watch more"
+msgstr "לעיון באוסף"
 
 # Eng
 #~ msgid "עבר"

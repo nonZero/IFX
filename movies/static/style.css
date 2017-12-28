@@ -271,7 +271,7 @@ a.btnSearchIcon.glyphicon.glyphicon-search {
 
 select.dropdown.dropBtnSearchUp {
     position: absolute;
-    right: 151px;
+    right: 432px;
     top: 5px;
     height: 35px;
     color: #595d60;
@@ -281,7 +281,7 @@ select.dropdown.dropBtnSearchUp {
 
 input.upperSearchInput {
     position: absolute;
-    right: 298px;
+    right: 197px;
     top: 5px;
     height: 35px;
     width: 230px;
@@ -298,7 +298,7 @@ button.searchIcon.glyphicon.glyphicon-search {
     font-size: 16pt;
     border: none;
     top: 5px;
-    right: 532px;
+    right: 158px;
     background-color: white;
     text-decoration: none;
 }
@@ -309,4 +309,49 @@ div.hideSearchBar {
 
 div.showSearchBar {
     display: block;
+}
+
+h5.mt-0.mb-1 {
+    font-size: 1.5em;
+    font-weight: 800;
+}
+
+iframe.d-flex.col-xs-7 {
+    height: auto;
+    min-height: 300px;
+}
+
+button.btn.btn-secondary.btn-lg:hover {
+    background-color: #f0f0f0;
+    color: #8d7e56;
+}
+
+.media.row {
+    direction: ltr;
+    margin-bottom: 30px;
+}
+
+a.list-group-item.active {
+    color: #fff;
+    background-color: #aa9361 !important;
+    border-color: #5c5544;
+}
+
+a.list-group-item.list-group-item-action {
+    background-color: #4a4a4a;
+    color: white;
+}
+
+a.list-group-item.list-group-item-action:hover {
+    background-color: #ffffff;
+    color: #4a4a4a;
+}
+
+a.list-group-item.list-group-item-action.disabled {
+    color: black;
+    background-color: #393939;
+}
+
+.list-group-item{
+    border: none;
 }
