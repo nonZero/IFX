@@ -23,6 +23,7 @@
             <title>Cinematheque Home page</title>
     </head>
     <body>
+        <div class="baseC container">
             <div>
                 {% block header %}{% include 'movies/_header1.html' %}{% endblock %}
             </div>
@@ -37,11 +38,22 @@
                     </div>
                 </div>
             {% endblock %}
+
+            <div class="container">
+                <div class="container-image">
+                  <img src="/static/images/axelroddeclaration.jpg" alt="Avatar" class="image">
+                  <div class="overlay">
+                    <div class="text">Hello World</div>
+                  </div>
+                </div>
+            </div>
+
             {% block footer %}
                 {% include 'movies/_footer.html' %}
             {% endblock %}
+        </div>
 
-        </body>
+    </body>
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
