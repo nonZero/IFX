@@ -33,8 +33,7 @@ body{
 
 
 button.btn.btn-default.glyphicon.glyphicon-search {
-    margin-top: -1px;
-    margin-left: -12px;
+    height: 48px;
     z-index: 2;
     color: #5a5e61;
     font-size: 21pt;
@@ -49,6 +48,17 @@ button.btn.btn-default.glyphicon.glyphicon-search {
 
 }
 
+.row.justify-content-center {
+    direction: ltr;
+}
+
+.noPadding{
+    padding:0 !important;
+}
+
+.padding6{
+    padding-left: 6px !important;
+}
 
 .btnSearchIdex{
     height: 50px;
@@ -57,7 +67,6 @@ button.btn.btn-default.glyphicon.glyphicon-search {
     color: #3e372f;
     direction: ltr;
     padding-left: 10px;
-    margin-left: 12px;
     z-index: 2;
 }
 
@@ -95,7 +104,7 @@ button#dropdownMenu1 {
 .btnMenu{
     height: 45px;
     width: 50px;
-    background-color: #d8d8d8;
+    background-color: #d8d8d8  !important;
     color: #7b7b7b;
     font-size: x-large;
     position: absolute;
@@ -105,7 +114,7 @@ button#dropdownMenu1 {
 }
 
 .btnMenu:hover {
-    background-color: #FFFFFF;
+    background-color: #FFFFFF !important;
 }
 
 .btnMenu img {
@@ -140,7 +149,7 @@ select#idselect {
     height: 50px;
     color: #7a7a7a;
     direction: ltr;
-    margin-left: 37px;
+    margin-left: 10px;
     padding-left: 8px;
     z-index: 2;
 }
@@ -191,14 +200,14 @@ option:active {
     float: left !important;
 }
 */
-div#flex-item {
+/*div#flex-item {
     width: 100%;
     display: -webkit-flex;
     -webkit-justify-content: space-around;
     display: flex;
     justify-content: center;
     direction: ltr !important;
-}
+}*/
 
 select {
     color: black;
@@ -354,4 +363,23 @@ a.list-group-item.list-group-item-action.disabled {
 
 .list-group-item{
     border: none;
+}
+
+@media screen and (max-width: 844px){
+    div#boxContainer {
+        width: 100%;
+        position: absolute;
+        right: 0;
+    }
+
+    .jumbotron {
+        height: 266px;
+    }
+
+    h1 {
+        font-size: 3em !important;
+    }
+    .row.justify-content-center {
+        margin-left: -66px;
+    }
 }
