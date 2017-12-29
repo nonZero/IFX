@@ -18,22 +18,15 @@
     <body>
         <div>
             {% block header %}{% include 'movies/_header2.html' %}{% endblock %}
+            {% for movie in movies %}
+                {{ movie }}
+            {% empty %}
+                type something
+            {% endfor %}
         </div>
         {% block footer %}
             {% include 'movies/_footer.html' %}
         {% endblock %}
 
     </body>
-    <script>
-        $(function() {
-            $('#idselect').val('1');
-        });
-        // Switch languages
-        $('#lang-switcher').click(function (e) {
-            e.preventDefault();
-            $('#lang-switcher').val("Heb")? $('#redirectLang').val("Hebrew:he") : $('#redirectLang').val("English:en-us") ;
-            $('#lang-form').submit();
-            //e.preventDefault();
-        });
-    </script>
 </html>

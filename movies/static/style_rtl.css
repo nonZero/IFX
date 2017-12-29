@@ -1,0 +1,357 @@
+/*------------כללי לכולם-----------*/
+@import url(//fonts.googleapis.com/earlyaccess/opensanshebrew.css);
+
+body{
+    direction: ltr;
+    font-family: 'Open Sans Hebrew', sans-serif !important;
+}
+
+.App-header {
+  height: 45px;
+  padding: 20px;
+  color: white;
+  background-color: black;
+}
+
+.jumbotron {
+  height: 400px;
+  background-image: url(../static/images/film-movie-motion-picture-darker.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+}
+
+.jumbotron h1 {
+    color: #FFFFFF;
+    font-family: "Open Sans Hebrew";
+    font-size: 60px;
+    font-weight: 300;
+    line-height: 65px;
+    text-align: center !important;
+    margin-bottom: 55px;
+}
+
+
+button.btn.btn-default.glyphicon.glyphicon-search {
+    margin-top: -1px;
+    margin-right: -12px;
+    z-index: 2;
+    color: #5a5e61;
+    font-size: 21pt;
+    padding-right: 10px;
+    border: none;
+    background-color: white;
+}
+
+.searchContainer {
+    direction: initial;
+    z-index: 2;
+
+}
+
+
+.btnSearchIdex{
+    height: 50px;
+    width: 100%;
+    background-color: #FFFFFF;
+    color: #3e372f;
+    direction: rtl;
+    padding-right: 10px;
+    margin-right: 12px;
+    z-index: 2;
+}
+
+.btnSearch{
+    height: 50px;
+    width: 50px;
+    background-color: #FFFFFF;}
+}
+
+.dropBtnSearch{
+    width: -webkit-fill-available;
+    height: 50px;
+    color: black;
+    background-color: #FFFFFF;
+}
+
+button#dropdownMenu1 {
+    height: 50px;
+    width: 160px;
+    background-color: #FFFFFF;
+    color: #7b7b7b;
+    position: absolute;
+    right: -25px;
+    /* margin-right: 20px; */
+}
+
+.logo a img {
+    height: 32px;
+    width: auto;
+    position: absolute;
+    right: 70px;
+    top: 8px;
+}
+
+.btnMenu{
+    height: 45px;
+    width: 50px;
+    background-color: #d8d8d8;
+    color: #7b7b7b;
+    font-size: x-large;
+    position: absolute;
+    right: 0;
+    top: -45px;
+    border: none;
+}
+
+.btnMenu:hover {
+    background-color: #FFFFFF;
+}
+
+.btnMenu img {
+    margin-top: -4px;
+}
+
+.logo span {
+    position: absolute;
+    right: 189px;
+    top: 15px;
+}
+
+a.langHebEng {
+    position: absolute;
+    left: 18px;
+    font-size: 16pt;
+    top: 6px;
+    color: white;
+    line-height: 27px;
+}
+
+a.btnBag {
+    position: absolute;
+    left: 75px;
+    top: 9px;
+    height: 23px;
+    width: 17.7px;
+}
+
+select#idselect {
+    width: 100%;
+    height: 50px;
+    color: #7a7a7a;
+    direction: rtl;
+    margin-right: 37px;
+    padding-right: 8px;
+    z-index: 2;
+}
+
+div#boxContainer {
+    background-color: #d8d8d88c;
+    height: 72px;
+    position: absolute;
+    z-index: 1;
+    margin-top: -10px;
+}
+
+div#searchGroup {
+    margin-right: 76px;
+}
+
+footer{
+    height: 163px;
+    margin: 0 auto;
+    background-color: #D8D8D8;
+    direction: rtl;
+}
+
+footer div .col-xs-3 {
+    width: 25%;
+    margin: 36px auto;
+}
+
+img#cinemathequeLogoFooter {
+    width: 80%;
+    max-width: 200px;
+    /* margin: 0 auto; */
+    margin: auto 17%;
+    margin-top: 11px;
+}
+
+option:hover {
+    color: white !important;
+    background-color: #4A4A4A !important;
+}
+
+option:active {
+    color: white !important;
+    background-color: #4A4A4A !important;
+}
+/*
+.changePos{
+    float: left !important;
+}
+*/
+div#flex-item {
+    width: 100%;
+    display: -webkit-flex;
+    -webkit-justify-content: space-around;
+    display: flex;
+    justify-content: center;
+    direction: rtl !important;
+}
+
+select {
+    color: black;
+}
+
+form#lang-form {
+    position: absolute;
+    left: 10px;
+    top: 7px;
+    font-size: 16pt;
+    color: white;
+}
+
+input#lang-switcher {
+    background-color: black;
+    border: none;
+}
+
+ul {
+    direction: rtl;
+    text-decoration: none;
+}
+
+ul li button {
+    direction: rtl;
+    text-decoration: none;
+    color: white;
+    background-color: black;
+    border: none;
+    width: 50%;
+}
+
+.pos-f-t {
+    width: 323px;
+    direction: rtl;
+    position: absolute;
+    right: 0px;
+    top: 45px;
+    padding-top: 0px;
+    background-color: #4A4A4A;
+    z-index: 4;
+}
+
+div.bg-inverse > button {
+        display: block;
+    height: 50px;
+    padding-right: 20px;
+    background-color: #4A4A4A;
+    border: none;
+    z-index: 4;
+}
+
+div.bg-inverse > button:hover {
+    background-color: #FFFFFF;
+    color: #4A4A4A;
+    width: -webkit-fill-available;
+    text-align: right;
+}
+
+/*------------------------------------------*/
+
+a.btnSearchIcon.glyphicon.glyphicon-search {
+    position: absolute;
+    font-size: 16pt;
+    color: white;
+    top: 10px;
+    left: 111px;
+    text-decoration: none;
+}
+
+select.dropdown.dropBtnSearchUp {
+    position: absolute;
+    left: 432px;
+    top: 5px;
+    height: 35px;
+    color: #595d60;
+    direction: rtl;
+    padding-right: 10px;
+}
+
+input.upperSearchInput {
+    position: absolute;
+    left: 197px;
+    top: 5px;
+    height: 35px;
+    width: 230px;
+    direction: rtl;
+    padding-right: 10px;
+    color: #3e372f;
+}
+
+button.searchIcon.glyphicon.glyphicon-search {
+    position: absolute;
+    height: 35px;
+    width: 35px;
+    color: #5a5e61;
+    font-size: 16pt;
+    border: none;
+    top: 5px;
+    left: 158px;
+    background-color: white;
+    text-decoration: none;
+}
+
+div.hideSearchBar {
+    display: none;
+}
+
+div.showSearchBar {
+    display: block;
+}
+
+h5.mt-0.mb-1 {
+    font-size: 1.5em;
+    font-weight: 800;
+}
+
+iframe.d-flex.col-xs-7 {
+    height: auto;
+    min-height: 300px;
+}
+
+button.btn.btn-secondary.btn-lg:hover {
+    background-color: #f0f0f0;
+    color: #8d7e56;
+}
+
+.media.row {
+    direction: rtl;
+    margin-bottom: 30px;
+}
+
+a.list-group-item.active {
+    color: #fff;
+    background-color: #aa9361 !important;
+    border-color: #5c5544;
+}
+
+a.list-group-item.list-group-item-action {
+    background-color: #4a4a4a;
+    color: white;
+}
+
+a.list-group-item.list-group-item-action:hover {
+    background-color: #ffffff;
+    color: #4a4a4a;
+}
+
+a.list-group-item.list-group-item-action.disabled {
+    color: black;
+    background-color: #393939;
+}
+
+.list-group-item{
+    border: none;
+}

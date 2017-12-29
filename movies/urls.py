@@ -12,5 +12,5 @@ urlpatterns = [
     url(r"^collections/add/$", views.collection_create, name='collection_create'),
     url(r"^collections/(?P<id>[0-9]+)/$", views.collection_detail, name='collection_detail'),
     url(r"^homepage/$", views.homePage, name='homePage'),
-    url(r"^searchresult/$", views.searchresult, name='searchresult'),
+    url(r"^searchresult/$", views.MoviesSearchListView.as_view(), name='searchresult'),
 ]

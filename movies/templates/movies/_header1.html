@@ -38,7 +38,8 @@
                         {% get_available_languages as LANGUAGES %}
                         {% get_language_info_list for LANGUAGES as languages %}
 
-                    <!--select name="language">
+                    {% comment %}
+                    <select name="language">
                         {% get_current_language as LANGUAGE_CODE %}
                         {% get_available_languages as LANGUAGES %}
                         {% get_language_info_list for LANGUAGES as languages %}
@@ -47,8 +48,10 @@
                                 {{ language.name_local }} ({{ language.code }})
                             </option>
                         {% endfor %}
-                    </select-->
-                    <input id="lang-switcher" type="submit" class="langHebEng" value= {% trans "Heb" %} />
+                    </select>
+                    {% endcomment %}
+                    <input type="hidden" name="language" value="{% if LANGUAGE_CODE == 'he' %}en-us{% else %}he{% endif %}">
+                    <input id="lang-switcher" type="submit" class="langHebEng" value="{% if LANGUAGE_CODE == 'he' %}{% trans 'Eng' %}{% else %}{% trans 'Heb' %}{% endif %}" />
                 </form>
                 <a class="btnBag" href="#"><img src="/static/images/Shopping-bag.svg"/></a>
                 <a id="searchShowHide" class="btnSearchIcon glyphicon glyphicon-search" href="#"></a>

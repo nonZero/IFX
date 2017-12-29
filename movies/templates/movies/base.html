@@ -1,0 +1,59 @@
+<!doctype html>
+{% load i18n static %}
+
+<html lang="{{LANGUAGE_CODE}}" class="lang-{{LANGUAGE_CODE}}">
+    <head>
+            <meta charset="UTF-8">
+            <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+            {% if LANGUAGE_CODE == 'he' %}
+                <link href="{% static 'style_rtl.css' %}" rel="stylesheet">
+            {% else %}
+                <link href="{% static 'style.css' %}" rel="stylesheet">
+            {% endif %}
+
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+
+        {% comment %}
+            <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.js" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+        {% endcomment %}
+            <title>Cinematheque Home page</title>
+    </head>
+    <body>
+            <div>
+                {% block header %}{% include 'movies/_header1.html' %}{% endblock %}
+            </div>
+            {% block main %}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <main>
+                                {% block content %}BASE CONTENT{% endblock %}
+                            </main>
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
+            {% block footer %}
+                {% include 'movies/_footer.html' %}
+            {% endblock %}
+
+        </body>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+
+        <script>
+            $(function() {
+                $('#idselect').val('1');
+            });
+
+            $("#searchShowHide").click(function () {
+                $("#searchBarUp").toggleClass('hideSearchBar showSearchBar');
+            });
+        </script>
+</html>
