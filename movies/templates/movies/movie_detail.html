@@ -4,7 +4,16 @@
     <li><b>Title: {{ movie.title }}</b></li>
     <li>Year: {{ movie.year }}</li>
     <li>Language: {{ movie.lang }}  </li>
-
+    <li>Description:<ul>
+        {% for key,value in movie.get_description.items %}
+        <li>
+            <b>Summary:</b><p>{{value}}</p>
+            <b>Language:</b><q>{{key}}</q>
+            <ul></ul>
+        </li>
+        {% endfor %}
+    </ul>
+    </li>
     <li>bid: {{movie.bid}} </li>
     <li>Additional data:<ul>
         {% for key,values in movie.get_extra_data.items %}

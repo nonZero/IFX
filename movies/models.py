@@ -25,6 +25,15 @@ class Movie(models.Model):
     def __str__(self):
         return self.title
 
+    def get_description(self):
+        ds = Description.objects.filter(movie=self.id)
+        result = {}
+        for d in ds:
+            result[d.lang] = d.summery
+        print(result)
+        return result
+
+
     def get_extra_data(self):
         mft = Movie_Tag_Field.objects.filter(movie=self.id)
         fields = {}
@@ -67,4 +76,4 @@ class Description(models.Model):
     lang = models.CharField(max_length=300)
 
     def __str__(self):
-        return self.movie
+        return 'Movie={}, MovieId={}, Summary={}, Lang={}'.format(self.movie,self.movie.bid ,self.summery, self.lang)
