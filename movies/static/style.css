@@ -403,8 +403,10 @@ a.btn.btn-secondary.btn-lg {
 
 /*------------------------------------------------*/
 .container-image {
-  position: relative;
-  width: 50%;
+    position: relative;
+    width: 300px;
+    /*margin-bottom: 30px;*/
+    margin: 10px;
 }
 
 .image {
@@ -442,6 +444,24 @@ a.btn.btn-secondary.btn-lg {
   -ms-transform: translate(-50%, -50%);
 }
 
+.collection-class {
+    background-color: #3e3e3ea8;
+    width: -webkit-fill-available;
+    height: 46px;
+    position: absolute;
+    bottom: 0px;
+}
+
+button.btnRegular {
+    padding: 21px;
+    color: black;
+    font-weight: 700;
+    border: none;
+}
+
+.container {
+    direction: ltr;
+}
 /*------------------------------------------------*/
 
 
