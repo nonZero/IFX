@@ -1,0 +1,140 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-01-01 18:14+0200\n"
+"PO-Revision-Date: 2018-01-01 18:14+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.0.5\n"
+
+#: .\templates\movies\_footer.html:9 .\templates\movies\_header1.html:15
+msgid "Contact"
+msgstr "צרו קשר"
+
+#: .\templates\movies\_footer.html:10
+msgid "Pel: 02-5654332"
+msgstr "טלפון : 02-5654332"
+
+#: .\templates\movies\_footer.html:11
+msgid "Email: rusom@jer-cin.org.il"
+msgstr "דוא\"ל : rusom@jer-cin.org.il"
+
+#: .\templates\movies\_footer.html:14
+msgid "Address"
+msgstr "מיקום"
+
+#: .\templates\movies\_footer.html:15
+msgid "11 Hebron rd. POB 8651 <br> Jerusalem, 9108402"
+msgstr ""
+"דרך חברון 11, ת.ד. 8561\n"
+"ירושלים, 9108402"
+
+#: .\templates\movies\_footer.html:18
+msgid "Enter Site"
+msgstr "לאתר"
+
+#: .\templates\movies\_footer.html:19
+msgid "Jerusalem Cinematheque"
+msgstr "סינמטק ירושלים"
+
+#: .\templates\movies\_header1.html:10
+msgid "Search Archive"
+msgstr "חיפוש בארכיון"
+
+#: .\templates\movies\_header1.html:11
+msgid "Collections"
+msgstr "אוספים"
+
+#: .\templates\movies\_header1.html:12
+msgid "About Archive"
+msgstr "אודות הארכיון"
+
+#: .\templates\movies\_header1.html:13
+msgid "Conservation and Restoration"
+msgstr "שימור ורסטורציה"
+
+#: .\templates\movies\_header1.html:14
+msgid "Depositing Materials"
+msgstr "הפקדת חומרים"
+
+#: .\templates\movies\_header1.html:16
+msgid "Jerusalem Cinematheque Site"
+msgstr "לאתר סינמטק ירושלים"
+
+#: .\templates\movies\_header1.html:29
+msgid "Israeli Film <br> Arcive"
+msgstr "הארכיון הישראלי<br>לסרטים"
+
+#: .\templates\movies\_header1.html:52
+msgid "Eng"
+msgstr "Eng"
+
+# Eng
+#: .\templates\movies\_header1.html:52
+msgid "עבר"
+msgstr "Eng"
+
+#: .\templates\movies\_header1.html:60
+#: .\templates\movies\main_jumbotron.html:10
+msgid "Search All"
+msgstr "חיפוש חופשי"
+
+#: .\templates\movies\_header1.html:62
+#: .\templates\movies\main_jumbotron.html:12
+msgid "Movie's Name"
+msgstr "שם סרט"
+
+#: .\templates\movies\_header1.html:64
+#: .\templates\movies\main_jumbotron.html:14
+msgid "Year/s"
+msgstr "שנה/ים"
+
+#: .\templates\movies\_header1.html:66
+#: .\templates\movies\main_jumbotron.html:16
+msgid "Director's Name"
+msgstr "במאי/ת"
+
+#: .\templates\movies\_header1.html:70
+#: .\templates\movies\main_jumbotron.html:22
+msgid "Search..."
+msgstr "חיפוש..."
+
+#: .\templates\movies\about_jambotron.html:4
+msgid "About The Israeli Film Archive"
+msgstr "אודות הארכיון הישראלי לסרטים"
+
+#: .\templates\movies\homePage.html:10
+msgid "The Nathan Axelrod Newsreel Collection"
+msgstr "אוסף יומני נתן אקסלר"
+
+#: .\templates\movies\homePage.html:21
+msgid "Watch more"
+msgstr "לעיון באוסף"
+
+#: .\templates\movies\homePage.html:31
+msgid "Watch Collection"
+msgstr "לעיון באוסף"
+
+#: .\templates\movies\main_jumbotron.html:4
+msgid "The Israeli Film Archive"
+msgstr "הארכיון הישראלי לסרטים"
+
+#~ msgid "Heb"
+#~ msgstr "Eng"
+
+#~ msgid "Hebrew"
+#~ msgstr "עברית"
+
+#~ msgid "Jerusalem"
+#~ msgstr "ירושלים"

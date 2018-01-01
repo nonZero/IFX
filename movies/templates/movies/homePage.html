@@ -1,90 +1,36 @@
-{% load i18n %}
+{% extends 'movies/base.html' %}
+{% load static i18n %}
 
-<!DOCTYPE html>
-<html lang="he">
-<head>
-    <meta charset="UTF-8">
-    {% load static %}
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{% static 'style.css' %}" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+{% block content %}
+    <div class="media row">
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+        <iframe class="d-flex col-xs-7" width="1897" height="884" src="https://www.youtube.com/embed/c0v98E0m9qA" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+          <!--img class="d-flex mr-3 col-xs-7" src="/static/images/defaultImg.jpg" alt="Generic placeholder image"-->
+        <div id="contentHeb" class="col-xs-5">
+            <h5 class="mt-0 mb-1">{% trans "The Nathan Axelrod Newsreel Collection" %}</h5>
+            {% if LANGUAGE_CODE == 'en-us' %}
+            <p>"The Axelrod Newsreel Collection is a unique collection of newsreels filmed by pioneer of Israeli film Nathan Axelrod between the years 1927 and 1958. Axelrod enthusiastically documented, in approximately 450 newsreels, with an average length of 10 minutes per newsreel, the establishment and development of Jewish settlements throughout Eretz Israel, the British mandatory presence in Palestine, famous figures from politics, culture and arts, holidays and leisure events, as well as countless and priceless scenes from everyday life."</p>
 
-    <title>Cinematheque Home page</title>
-</head>
-<body>
-    <div>
-        <header>
-            <div class="App-header">
-                <button class="btnMenu"><img src="/static/images/Menu.svg"/></button>
-                <div class="logo">
-                    <a href="#"><img src="/static/images/Jerusalem_Cinematheque_Logo.png" alt="Jerusalem Cinematheque Logo"></a>
-                    <span>{% trans "Jerusalem" %}</span>
-                </div>
-                <a class="langHebEng" href="#">{% trans "עבר" %}</a>
-                <a class="btnBag" href="#"><img src="/static/images/Shopping-bag.svg"/></a>
-            </div>
-            <div class="jumbotron">
-                <h1>{% trans "The Israeli Film Archive" %}</h1>
-                <div class="row searchRow">
-                    <div id="searchGroup">
-                        <div class="col-xs-2">
-                            <span class="input-group-btn">
-                                    <button class="btn btn-default btnSearch glyphicon glyphicon-search" type="button"></button>
-                            </span>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="searchContainer">
-                                <input type="text" class="btnSearchIdex" placeholder={% trans 'Search...' %}>
-                            </div>
-                        </div>
-                        <div class="col col-xs-2">
-                            <div class="dropdown">
-                              <select id="idselect" class="dropBtnSearch" aria-labelledby="dropdownMenu1">
-                                <option value="1"><a href="#">{% trans "Search All" %}</a></option>
-                                  <span role="separator" class="divider"></span>
-                                <option value="2"><a href="#">{% trans "Movie's Name" %}</a></option>
-                                  <span role="separator" class="divider"></span>
-                                <option value="3"><a href="#">{% trans "Director's Name" %}</a></option>
-                              </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="boxContainer"></div>
+            {% else %}
+            <p>
+              אוסף יומני-החדשות הנדיר, שצילם חלוץ הקולנוע הישראלי נתן אקסלרוד בין השנים 1927-1958, מתעד את הקמת היישוב היהודי בארץ ישראל ואת התפתחותו.
+450 יומני חדשות - יומני "מולדת" ויומני "כרמל" ( באורך של כ-10 דקות כל אחד) - מציירים תמונה רחבה של ההתיישבות היהודית בארץ, מימי המנדט והנוכחות הבריטית בפלשתינה ועד שנת העשור למדינה.
+            </p>
+            {% endif %}
+            </br>
+            <a href="https://www.youtube.com/channel/UCOH_oW31tWhVFHwreAxhIgA" type="button" class="btn btn-secondary btn-lg">{% trans "Watch more" %}</a>
 
-                </div>
-
-            </div>
-        </header>
-
-    </div>
-    <footer>
-        <div class="row">
-            <div class="col col-xs-3">
-                <img id="cinemathequeLogoFooter" src="/static/images/Jerusalem_Cinematheque_LogoBlack.png" alt="Jerusalem Cinematheque Logo" />
-            </div>
-            <section class="col col-xs-3">
-                <h4>{% trans "Contact" %}</h4>
-                <span>{% trans "Pel: 02-5654332" %}</span><br>
-                <span>{% trans "Email: rusom@jer-cin.org.il" %}</span>
-            </section>
-            <section class="col col-xs-3">
-                <h4>{% trans "Address" %}</h4>
-                <span>{% trans "11 Hebron rd. POB 8651 <br> Jerusalem, 9108402" %}</span>
-            </section>
-            <section class="col col-xs-3">
-                <h4>{% trans "Enter Site" %}</h4>
-                <a href="https://www.jer-cin.org.il/en">{% trans "Jerusalem Cinematheque" %}</a>
-            </section>
         </div>
-    </footer>
-</body>
-<script>
-    $(function() {
-        $('#idselect').val('1');
-    });
-</script>
-</html>
+        <div class="container row">
+                <div class="container-image">
+                    <div class="collection-class">
+                        <h4 class="text">Collection Name</h4>
+                    </div>
+                  <img src="{% static 'images/defaultImg.jpg' %}" alt="Avatar" class="image">
+                  <div class="overlay">
+                    <div class="text"><button class="btnRegular">{% trans "Watch Collection" %}</button></div>
+                  </div>
+                </div>
+            </div>
+     </div>
+{% endblock %}

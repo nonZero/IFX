@@ -2,9 +2,9 @@
 @import url(//fonts.googleapis.com/earlyaccess/opensanshebrew.css);
 
 body{
-    background-color: #cecece !important;
-    direction: rtl;
+    direction: ltr;
     font-family: 'Open Sans Hebrew', sans-serif !important;
+    background-color: #cecece !important;
 }
 
 .App-header {
@@ -44,9 +44,10 @@ button.btn.btn-default.glyphicon.glyphicon-search {
     z-index: 2;
     color: #5a5e61;
     font-size: 21pt;
-    padding-left: 10px;
+    padding-right: 10px;
     border: none;
     background-color: white;
+    margin-left: 29px;
 }
 
 .searchContainer {
@@ -55,8 +56,17 @@ button.btn.btn-default.glyphicon.glyphicon-search {
 
 }
 
-.row.justify-content-center {
-    direction: ltr;
+
+.btnSearchIdex{
+    height: 50px;
+    width: 100%;
+    background-color: #FFFFFF;
+    color: #3e372f;
+    direction: rtl;
+    padding-right: 10px;
+    /*margin-right: 12px;*/
+    z-index: 2;
+    font-size: 14pt;
 }
 
 .noPadding{
@@ -64,18 +74,7 @@ button.btn.btn-default.glyphicon.glyphicon-search {
 }
 
 .padding6{
-    padding-left: 6px !important;
-}
-
-.btnSearchIdex{
-    height: 50px;
-    width: 100%;
-    background-color: #FFFFFF;
-    color: #3e372f;
-    direction: ltr;
-    padding-left: 10px;
-    z-index: 2;
-    font-size: 14pt;
+    padding-right: 6px !important;
 }
 
 .btnSearch{
@@ -97,7 +96,7 @@ button#dropdownMenu1 {
     background-color: #FFFFFF;
     color: #7b7b7b;
     position: absolute;
-    left: -25px;
+    right: -25px;
     /* margin-right: 20px; */
 }
 
@@ -105,18 +104,18 @@ button#dropdownMenu1 {
     height: 32px;
     width: auto;
     position: absolute;
-    left: 70px;
+    right: 70px;
     top: 8px;
 }
 
 .btnMenu{
     height: 45px;
     width: 50px;
-    background-color: #d8d8d8  !important;
+    background-color: #d8d8d8 !important;
     color: #7b7b7b;
     font-size: x-large;
     position: absolute;
-    left: 0;
+    right: 0;
     top: -45px;
     border: none;
 }
@@ -131,14 +130,15 @@ button#dropdownMenu1 {
 
 .logo span {
     position: absolute;
-    left: 189px;
+    right: 189px;
     top: 3px;
     font-size: 10pt;
+    text-align: right;
 }
 
 a.langHebEng {
     position: absolute;
-    right: 18px;
+    left: 18px;
     font-size: 16pt;
     top: 6px;
     color: white;
@@ -147,7 +147,7 @@ a.langHebEng {
 
 a.btnBag {
     position: absolute;
-    right: 75px;
+    left: 75px;
     top: 9px;
     height: 23px;
     width: 17.7px;
@@ -157,9 +157,9 @@ select#idselect {
     width: 100%;
     height: 50px;
     color: #7a7a7a;
-    direction: ltr;
-    margin-left: 10px;
-    padding-left: 8px;
+    direction: rtl;
+    margin-right: 11px;
+    padding-right: 8px;
     z-index: 2;
     font-size: 14pt;
 }
@@ -179,19 +179,21 @@ div#boxContainer {
 }
 
 div#searchGroup {
-    margin-left: 76px;
+    margin-right: 76px;
 }
 
 footer{
     height: 163px;
     margin: 0 auto;
     background-color: #D8D8D8;
-    direction: ltr;
+    direction: rtl;
 }
 
 footer div .col-xs-3 {
     width: 25%;
     margin: 36px auto;
+    padding-right: 31px;
+    text-align: right;
 }
 
 img#cinemathequeLogoFooter {
@@ -222,8 +224,12 @@ option:active {
     -webkit-justify-content: space-around;
     display: flex;
     justify-content: center;
-    direction: ltr !important;
+    direction: rtl !important;
 }*/
+
+.row.justify-content-center {
+    direction: rtl;
+}
 
 select {
     color: black;
@@ -231,7 +237,7 @@ select {
 
 form#lang-form {
     position: absolute;
-    right: 10px;
+    left: 10px;
     top: 7px;
     font-size: 16pt;
     color: white;
@@ -243,12 +249,12 @@ input#lang-switcher {
 }
 
 ul {
-    direction: ltr;
+    direction: rtl;
     text-decoration: none;
 }
 
 ul li button {
-    direction: ltr;
+    direction: rtl;
     text-decoration: none;
     color: white;
     background-color: black;
@@ -258,9 +264,9 @@ ul li button {
 
 .pos-f-t {
     width: 338px;
-    direction: ltr;
+    direction: rtl;
     position: absolute;
-    left: 0px;
+    right: 0px;
     top: 45px;
     padding-top: 0px;
     background-color: #4a4a4a;
@@ -270,7 +276,7 @@ ul li button {
 div.bg-inverse > button {
         display: block;
     height: 50px;
-    padding-left: 20px;
+    padding-right: 20px;
     background-color: #4A4A4A;
     border: none;
     z-index: 4;
@@ -280,36 +286,37 @@ div.bg-inverse > button:hover {
     background-color: #FFFFFF;
     color: #4A4A4A;
     width: -webkit-fill-available;
-    text-align: left;
+    text-align: right;
 }
+
 
 a.btnSearchIcon.glyphicon.glyphicon-search {
     position: absolute;
     font-size: 16pt;
     color: white;
     top: 10px;
-    right: 111px;
+    left: 111px;
     text-decoration: none;
 }
 
 select.dropdown.dropBtnSearchUp {
     position: absolute;
-    right: 432px;
+    left: 432px;
     top: 5px;
     height: 35px;
     color: #595d60;
-    direction: ltr;
-    padding-left: 10px;
+    direction: rtl;
+    padding-right: 10px;
 }
 
 input.upperSearchInput {
     position: absolute;
-    right: 197px;
+    left: 197px;
     top: 5px;
     height: 35px;
     width: 230px;
-    direction: ltr;
-    padding-left: 10px;
+    direction: rtl;
+    padding-right: 10px;
     color: #3e372f;
 }
 
@@ -321,7 +328,7 @@ button.searchIcon.glyphicon.glyphicon-search {
     font-size: 16pt;
     border: none;
     top: 5px;
-    right: 158px;
+    left: 158px;
     background-color: white;
     text-decoration: none;
 }
@@ -353,12 +360,6 @@ button.btn.btn-secondary.btn-lg:hover {
 .media.row {
     direction: ltr;
     margin-bottom: 30px;
-}
-
-.list-group {
-    position: absolute;
-    top: 0;
-    left: 0;
 }
 
 .list-group-item.active {
@@ -395,6 +396,15 @@ a.list-group-item.list-group-item-action.disabled {
     border: none;
 }
 
+.list-group {
+    text-align: right;
+}
+
+#contentHeb{
+    direction: rtl;
+    text-align: right;
+}
+
 #contentHeb > p {
     font-size: 1.5em;
 }
@@ -407,8 +417,12 @@ a.btn.btn-secondary.btn-lg {
     border: none !important;
     color: black;
     font-weight: 600;
+    -webkit-border-radius: 0;
+    border-radius: 0;
 }
-
+.container {
+    direction: rtl;
+}
 /*------------------------------------------------*/
 .container-image {
     position: relative;
@@ -467,14 +481,16 @@ button.btnRegular {
     border: none;
 }
 
-.container {
-    direction: ltr;
+.list-group {
+    position: absolute;
+    top: 0;
+    right: 0;
 }
+
 /*------------------------------------------------*/
 .bg-inverse.p-4 {
     height: 100vh;
 }
-
 
 @media screen and (max-width: 844px){
     div#boxContainer {
@@ -483,7 +499,7 @@ button.btnRegular {
         right: 0;*/
         /*width: 80%;
         margin-left: 25px;*/
-        margin-left: 7px;
+        margin-right: 16px;
     }
 
     div#contentHeb {
@@ -502,7 +518,8 @@ button.btnRegular {
     h1 {
         font-size: 3em !important;
     }
+
     .row.justify-content-center {
-        margin-left: -66px;
+        margin-right: -66px;
     }
 }

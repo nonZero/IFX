@@ -21,7 +21,7 @@
             <td>#{{ object.id }}</td>
             <td>{{ object.bid }}</td>
             <td>
-                <a href= {% url "movies:movie_detail" object.id %}>{{ object.title }}</a>
+                <a href= "{% url 'movies:movie_detail' object.id %}">{{ object.title }}</a>
             </td>
             <td>{{ object.year }}</td>
             <td>{{ object.lang }} </td>
