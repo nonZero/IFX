@@ -259,13 +259,13 @@ ul li button {
 }
 
 .pos-f-t {
-    width: 367px;
+    width: 350px;
     direction: rtl;
     position: absolute;
     right: 0px;
     top: 45px;
     padding-top: 0px;
-    background-color: #393939;
+    background-color: #4a4a4a;
     z-index: 4;
 }
 
@@ -414,6 +414,8 @@ a.btn.btn-secondary.btn-lg {
     border: none !important;
     color: black;
     font-weight: 600;
+    -webkit-border-radius: 0;
+    border-radius: 0;
 }
 .container {
     direction: rtl;
@@ -476,8 +478,16 @@ button.btnRegular {
     border: none;
 }
 
-/*------------------------------------------------*/
+.list-group {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
 
+/*------------------------------------------------*/
+.bg-inverse.p-4 {
+    height: 100vh;
+}
 
 @media screen and (max-width: 844px){
     div#boxContainer {

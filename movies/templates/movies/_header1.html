@@ -7,11 +7,8 @@
           <div class="collapse" id="navbarToggleExternalContent">
             <div class="bg-inverse p-4">
                 <div class="list-group">
-                  <h4 class="list-group-item active">
-                    {% trans "Collections" %}
-                  </h4>
                   <a href="#" class="list-group-item list-group-item-action">{% trans "Search Archive" %}</a>
-                  <a href="#" class="list-group-item list-group-item-action disabled">{% trans "Collections" %}</a>
+                  <a href="#" class="list-group-item list-group-item-action active">{% trans "Collections" %}</a>
                   <a href="#" class="list-group-item list-group-item-action">{% trans "About Archive" %}</a>
                   <a href="#" class="list-group-item list-group-item-action">{% trans "Conservation and Restoration" %}</a>
                     <a href="#" class="list-group-item list-group-item-action">{% trans "Depositing Materials" %}</a>
@@ -78,6 +75,6 @@
 
     </div>
 
-    {% block header %}{% include 'movies/main_jumbotron.html' %}{% endblock %}
+    {% block header %}{% if set_jumbotron == 1 %}{% include 'movies/main_jumbotron.html' %}{% elif set_jumbotron == 2 %}{% include 'movies/about_jumbotron.html' %}{% endif %}{% endblock %}
 
 </header>

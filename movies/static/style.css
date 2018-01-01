@@ -254,13 +254,13 @@ ul li button {
 }
 
 .pos-f-t {
-    width: 367px;
+    width: 350px;
     direction: ltr;
     position: absolute;
     left: 0px;
     top: 45px;
     padding-top: 0px;
-    background-color: #393939;
+    background-color: #4a4a4a;
     z-index: 4;
 }
 
@@ -350,6 +350,12 @@ button.btn.btn-secondary.btn-lg:hover {
 .media.row {
     direction: ltr;
     margin-bottom: 30px;
+}
+
+.list-group {
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .list-group-item.active {
@@ -463,7 +469,9 @@ button.btnRegular {
     direction: ltr;
 }
 /*------------------------------------------------*/
-
+.bg-inverse.p-4 {
+    height: 100vh;
+}
 
 
 @media screen and (max-width: 844px){

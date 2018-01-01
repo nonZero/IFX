@@ -5,7 +5,7 @@
     <div class="media row">
 
         <iframe class="d-flex col-xs-7" width="1897" height="884" src="https://www.youtube.com/embed/c0v98E0m9qA" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
-          <!--img class="d-flex mr-3 col-xs-7" src="/static/images/axelroddeclaration.jpg" alt="Generic placeholder image"-->
+          <!--img class="d-flex mr-3 col-xs-7" src="/static/images/defaultImg.jpg" alt="Generic placeholder image"-->
         <div id="contentHeb" class="col-xs-5">
             <h5 class="mt-0 mb-1">{% trans "The Nathan Axelrod Newsreel Collection" %}</h5>
             {% if LANGUAGE_CODE == 'en-us' %}
@@ -19,6 +19,18 @@
             {% endif %}
             </br>
             <a href="https://www.youtube.com/channel/UCOH_oW31tWhVFHwreAxhIgA" type="button" class="btn btn-secondary btn-lg">{% trans "Watch more" %}</a>
+
         </div>
+        <div class="container row">
+                <div class="container-image">
+                    <div class="collection-class">
+                        <h4 class="text">Collection Name</h4>
+                    </div>
+                  <img src="{% static '/images/defaultImg.jpg' %}" alt="Avatar" class="image">
+                  <div class="overlay">
+                    <div class="text"><button class="btnRegular">Watch Collection</button></div>
+                  </div>
+                </div>
+            </div>
      </div>
 {% endblock %}

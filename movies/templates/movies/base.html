@@ -23,7 +23,7 @@
             <title>Cinematheque Home page</title>
     </head>
     <body>
-        <div class="baseC container">
+        <div class="baseC">
             <div>
                 {% block header %}{% include 'movies/_header1.html' %}{% endblock %}
             </div>
@@ -38,48 +38,6 @@
                     </div>
                 </div>
             {% endblock %}
-
-            <div class="container row">
-                <div class="container-image">
-                    <div class="collection-class">
-                        <h4 class="text">Collection Name</h4>
-                    </div>
-                  <img src="/static/images/axelroddeclaration.jpg" alt="Avatar" class="image">
-                  <div class="overlay">
-                    <div class="text"><button class="btnRegular">Watch Collection</button></div>
-                  </div>
-                </div>
-
-                <div class="container-image">
-                    <div class="collection-class">
-                        <h4 class="text">Collection Name</h4>
-                    </div>
-                  <img src="/static/images/axelroddeclaration.jpg" alt="Avatar" class="image">
-                  <div class="overlay">
-                    <div class="text"><button class="btnRegular">Watch Collection</button></div>
-                  </div>
-                </div>
-
-                <div class="container-image">
-                    <div class="collection-class">
-                        <h4 class="text">Collection Name</h4>
-                    </div>
-                  <img src="/static/images/axelroddeclaration.jpg" alt="Avatar" class="image">
-                  <div class="overlay">
-                    <div class="text"><button class="btnRegular">Watch Collection</button></div>
-                  </div>
-                </div>
-
-                <div class="container-image">
-                    <div class="collection-class">
-                        <h4 class="text">Collection Name</h4>
-                    </div>
-                  <img src="/static/images/axelroddeclaration.jpg" alt="Avatar" class="image">
-                  <div class="overlay">
-                    <div class="text"><button class="btnRegular">Watch Collection</button></div>
-                  </div>
-                </div>
-            </div>
 
             {% block footer %}
                 {% include 'movies/_footer.html' %}

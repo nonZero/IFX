@@ -8,7 +8,11 @@ from movies.models import Movie, Collection
 from movies.forms import MovieForm, CollectionForm
 
 def homePage(request):
-     return render(request, "movies/homePage.html")
+     return render(request, "movies/homePage.html", {'set_jumbotron':1})
+
+
+def about(request):
+    return render(request, "movies/about.html", {'set_jumbotron':2})
 
 def searchresult(request):
     return render(request, "movies/searchresult.html")
