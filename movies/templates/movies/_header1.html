@@ -26,7 +26,7 @@
         </div>
         <div class="logo">
             <a href="#"><img src="/static/images/Jerusalem_Cinematheque_Logo.png" alt="Jerusalem Cinematheque Logo"></a>
-            <span>{% trans "Jerusalem" %}</span>
+            <span>{% trans "Israeli Film <br> Arcive" %}</span>
         </div>
 
         <form id="lang-form" action="{% url 'set_language' %}" method="post">{% csrf_token %}
@@ -48,7 +48,7 @@
             </select>
             {% endcomment %}
             <input type="hidden" name="language" value="{% if LANGUAGE_CODE == 'he' %}en-us{% else %}he{% endif %}">
-            <input id="lang-switcher" type="submit" class="langHebEng" value="{% if LANGUAGE_CODE == 'he' %}{% trans 'Eng' %}{% else %}{% trans 'Heb' %}{% endif %}" />
+            <input id="lang-switcher" type="submit" class="langHebEng" value="{% if LANGUAGE_CODE == 'he' %}{% trans 'Eng' %}{% else %}{% trans 'עבר' %}{% endif %}" />
         </form>
         <a class="btnBag" href="#"><img src="/static/images/Shopping-bag.svg"/></a>
         <a id="searchShowHide" class="btnSearchIcon glyphicon glyphicon-search" href="#"></a>
@@ -66,7 +66,7 @@
           </select>
         </div>
         <div>
-            <input type="text" class="upperSearchInput" placeholder={% trans 'Search...' %}>
+            <input type="text" class="upperSearchInput" placeholder="{% trans 'Search...' %}">
         </div>
         <div>
             <button class="searchIcon glyphicon glyphicon-search" type="button"></button>

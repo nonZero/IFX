@@ -75,6 +75,7 @@ button.btn.btn-default.glyphicon.glyphicon-search {
     direction: ltr;
     padding-left: 10px;
     z-index: 2;
+    font-size: 14pt;
 }
 
 .btnSearch{
@@ -131,7 +132,8 @@ button#dropdownMenu1 {
 .logo span {
     position: absolute;
     left: 189px;
-    top: 15px;
+    top: 3px;
+    font-size: 10pt;
 }
 
 a.langHebEng {
@@ -159,6 +161,7 @@ select#idselect {
     margin-left: 10px;
     padding-left: 8px;
     z-index: 2;
+    font-size: 14pt;
 }
 
 div#boxContainer {
