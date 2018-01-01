@@ -257,7 +257,7 @@ ul li button {
 }
 
 .pos-f-t {
-    width: 350px;
+    width: 338px;
     direction: ltr;
     position: absolute;
     left: 0px;
@@ -363,7 +363,6 @@ button.btn.btn-secondary.btn-lg:hover {
 
 .list-group-item.active {
     color: #fff;
-    background-color: #393939 !important;
     border-color: #5c5544;
     height: 67px;
     width: 338px;
