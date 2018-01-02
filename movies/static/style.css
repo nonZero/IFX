@@ -492,6 +492,65 @@ div#smaller_jum {
     height: 142px;
 }
 
+h1#h1reasult {
+    background-color: #4a4a4a;
+    color: #fcfcfc;
+    font-weight: 100;
+    font-size: 14pt;
+    padding: 10px;
+    position: relative;
+    margin-top: -20px;
+}
+
+div#aboutJumb {
+    background-image: url(../static/images/archivelia.jpg) !important;
+    height: 240px;
+    background-size: cover;
+}
+
+h1#innerTitle {
+    font-weight: 400;
+    text-align: left !important;
+    position: absolute;
+    top: 230px;
+    padding-left: 20px;
+    color: white;
+    font-size: 26pt !important;
+}
+
+.baseC {
+    background-color: white;
+}
+
+article > section > p {
+    font-size: 12pt;
+}
+
+a.col-4 > img {
+    width: 100%;
+    opacity: 0.5;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
+}
+
+a.col-4 > h4 {
+    position: absolute;
+    width: 100%;
+    top: 40%;
+    color: black;
+    font-size: 2vw;
+    font-weight: 700;
+    text-align: center !important;
+    padding-right: 35px;
+    z-index: 3;
+}
+
+article {
+    margin-bottom: 50px;
+}
+
+footer {
+    margin-top: 30px;
+}
 
 @media screen and (max-width: 844px){
     div#boxContainer {

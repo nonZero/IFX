@@ -1,35 +1,10 @@
 {% load i18n static %}
 
-<div id="smaller_jum" class="jumbotron">
-        <div class="row justify-content-center">
-            <div class="col col-2">
-                <div class="dropdown">
-                  <select id="idselect" class="dropdown dropBtnSearch" aria-labelledby="dropdownMenu1">
-                    <option value="1"><a href="#">{% trans "Search All" %}</a></option>
-                      <span role="separator" class="divider"></span>
-                    <option value="2"><a href="#">{% trans "Title" %}</a></option>
-                      <span role="separator" class="divider"></span>
-                    <option value="3"><a href="#">{% trans "Year/s" %}</a></option>
-                      <span role="separator" class="divider"></span>
-                    <option value="4"><a href="#">{% trans "Director" %}</a></option>
-                  </select>
-                </div>
-            </div>
-            <div class="col-5 searchContainer noPadding">
-                <div>
-                    <input type="text" class="btnSearchIdex" placeholder="{% trans 'Search...' %}">
-                </div>
-            </div>
-            <div class="col col-1 padding6">
-                <span class="input-group-btn">
-                        <button class="btn btn-default btnSearch glyphicon glyphicon-search" type="button"></button>
-                </span>
-            </div>
+<div id="aboutJumb" class="jumbotron">
 
-        </div>
-        {% comment %}
-        <div class="row justify-content-center">
-            <div id="boxContainer" class="col"></div>
-        </div>
-        {% endcomment %}
+
 </div>
+
+<div class="container">
+        <h1 id="innerTitle">{% trans "About The Israeli Film Archive" %}</h1>
+    </div>

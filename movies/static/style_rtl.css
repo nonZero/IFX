@@ -498,9 +498,86 @@ button.btnRegular {
     right: 0;
 }
 
-/*------------------------------------------------*/
 .bg-inverse.p-4 {
     height: 100vh;
+}
+
+/*------------------------------------------------*/
+
+
+div#smaller_jum {
+    height: 142px;
+}
+
+h1#h1reasult {
+    background-color: #4a4a4a;
+    color: #fcfcfc;
+    font-weight: 100;
+    font-size: 14pt;
+    padding: 10px;
+    position: relative;
+    margin-top: -20px;
+}
+
+div#aboutJumb {
+    background-image: url(../static/images/archivelia.jpg) !important;
+    height: 240px;
+    background-size: cover;
+}
+
+h1#innerTitle {
+    font-weight: 400;
+    text-align: right !important;
+    position: absolute;
+    top: 230px;
+    padding-right: 20px;
+    color: white;
+    font-size: 26pt !important;
+
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0+0,0.88+75,1+100 */
+    background: -moz-linear-gradient(top, rgba(0,0,0,0) 100%, rgba(0,0,0,0.88) 75%, rgba(0,0,0,1) 100%);
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0) 100%,rgba(0,0,0,0.88) 75%,rgba(0,0,0,1) 100%);
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 100%,rgba(0,0,0,0.88) 75%,rgba(0,0,0,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=0 );
+}
+
+.baseC {
+    background-color: white;
+}
+
+article > section > p {
+    font-size: 12pt;
+    text-align: right;
+}
+
+a.col-4 > img {
+    width: 100%;
+}
+
+a.col-4 > img {
+    width: 100%;
+    opacity: 0.5;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
+}
+
+a.col-4 > h4 {
+    position: absolute;
+    width: 100%;
+    top: 40%;
+    color: black;
+    font-size: 2vw;
+    font-weight: 700;
+    text-align: center !important;
+    padding-left: 35px;
+    z-index: 3;
+}
+
+article {
+    margin-bottom: 50px;
+}
+
+footer {
+    margin-top: 30px;
 }
 
 @media screen and (max-width: 844px){
