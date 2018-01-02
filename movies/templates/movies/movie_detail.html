@@ -1,7 +1,7 @@
 <h1>Movie #{{ movie.id }}</h1>
 
 <ul>
-    <li><b>Title: {{ movie.title }}</b></li>
+    <li><b>Title: {{ movie.get_pretty_title }}</b></li>
     <li>Year: {{ movie.year }}</li>
     <li>Language: {{ movie.lang }}  </li>
     <li>Description:<ul>

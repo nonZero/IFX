@@ -32,7 +32,14 @@ class Movie(models.Model):
         for d in titles:
             result[d.lang] = d.title
         return result
-    
+
+    def get_pretty_title(self):
+        titles = Movie_Title.objects.filter(movie = self.id)
+        title_list = []
+        for d in titles:
+            title_list.append(d.title)
+        return '|'.join(title_list)
+
     def get_description(self):
         ds = Description.objects.filter(movie=self.id)
         result = {}
