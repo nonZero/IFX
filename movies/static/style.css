@@ -40,13 +40,16 @@ body{
 }
 
 button.btn.btn-default.glyphicon.glyphicon-search {
-    height: 48px;
+    height: 50px;
+    margin-top: -1px;
     z-index: 2;
     color: #5a5e61;
     font-size: 21pt;
     padding-left: 10px;
     border: none;
     background-color: white;
+    -webkit-box-shadow: 0 0 1px 10px #B3B3B3;
+    box-shadow: 0 0 0 10px #B3B3B3;
 }
 
 .searchContainer {
@@ -76,6 +79,8 @@ button.btn.btn-default.glyphicon.glyphicon-search {
     padding-left: 10px;
     z-index: 2;
     font-size: 14pt;
+    -webkit-box-shadow: 0 0 1px 10px #B3B3B3;
+    box-shadow: 0 0 0 10px #B3B3B3;
 }
 
 .btnSearch{
@@ -162,6 +167,8 @@ select#idselect {
     padding-left: 8px;
     z-index: 2;
     font-size: 14pt;
+    -webkit-box-shadow: 0 0 0 10px #B3B3B3;
+    box-shadow: 0 0 0 10px #B3B3B3;
 }
 
 div#boxContainer {
@@ -302,6 +309,11 @@ select.dropdown.dropBtnSearchUp {
     padding-left: 10px;
 }
 
+/*.dropdown {
+    -webkit-box-shadow: 0 0 1px 10px #B3B3B3;
+    box-shadow: 0 0 0 10px #B3B3B3;
+}*/
+
 input.upperSearchInput {
     position: absolute;
     right: 197px;
@@ -351,7 +363,7 @@ button.btn.btn-secondary.btn-lg:hover {
 }
 
 .media.row {
-    direction: ltr;
+    direction: rtl;
     margin-bottom: 30px;
 }
 
@@ -470,9 +482,14 @@ button.btnRegular {
 .container {
     direction: ltr;
 }
-/*------------------------------------------------*/
+
 .bg-inverse.p-4 {
     height: 100vh;
+}
+
+/*-------------------- About ----------------------------*/
+div#smaller_jum {
+    height: 142px;
 }
 
 

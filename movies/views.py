@@ -10,12 +10,12 @@ from movies.forms import MovieForm, CollectionForm
 def homePage(request):
      return render(request, "movies/homePage.html", {'set_jumbotron':1})
 
-
 def about(request):
     return render(request, "movies/about.html", {'set_jumbotron':2})
 
 def searchresult(request):
-    return render(request, "movies/searchresult.html")
+    return render(request, "movies/searchresult.html", {'set_jumbotron':3})
+
 
 def movies_json(request):
     qs = Movie.objects.all()
@@ -92,27 +92,28 @@ def collection_create(request):
     return render(request, "movies/collection_form.html", d)
 
 
-class MoviesSearchListView(ListView):
-    template_name = 'movies/searchresult.html'
-    model = Movie
-    context_object_name = 'movies'
+#class MoviesSearchListView(ListView):
+#    template_name = 'movies/searchresult.html'
+#    set_jumbotron = 3
+#    model = Movie
+#    context_object_name = 'movies'
 
-    def get_queryset(self):
-        qs = super(MoviesSearchListView, self).get_queryset()
-        search_type = self.request.GET.get('type')
-        q = self.request.GET.get('q')
-        if q:
-            if search_type == 'name':
-                return qs.filter(title__icontain=q)
-            elif search_type == 'year':
-                q_list = q.split('-')
-                year1 = q[0]
-                year2 = q[1]
-                return qs.filter(year__gte=int(year1)).exclude(year__gt=year2)
-            elif search_type == 'director':
-                pass
-        return []
+#    def get_queryset(self):
+#        qs = super(MoviesSearchListView, self).get_queryset()
+#        search_type = self.request.GET.get('type')
+#        q = self.request.GET.get('q')
+#        if q:
+#            if search_type == 'name':
+#                return qs.filter(title__icontain=q)
+#            elif search_type == 'year':
+#                q_list = q.split('-')
+#                year1 = q[0]
+#                year2 = q[1]
+#                return qs.filter(year__gte=int(year1)).exclude(year__gt=year2)
+#            elif search_type == 'director':
+#                pass
+#        return []
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
+#    def get_context_data(self, **kwargs):
+#        context = super().get_context_data(**kwargs)
+#        return context

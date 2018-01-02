@@ -1,32 +1,8 @@
-<!doctype html>
-{% load i18n static %}
-{% load static %}
+{% extends 'movies/base.html' %}
+{% load static i18n %}
 
-<html lang="{{LANGUAGE_CODE}}" class="lang-{{LANGUAGE_CODE}}">
-    <head>
-        <meta charset="UTF-8">
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-        <link href= "{% static 'style.css' %}" rel="stylesheet">
-        <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+{% block content %}
+    <div>
 
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.js" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-
-        <title>Cinematheque Home page</title>
-    </head>
-    <body>
-        <div>
-            {% block header %}{% include 'movies/_header2.html' %}{% endblock %}
-            {% for movie in movies %}
-                {{ movie }}
-            {% empty %}
-                type something
-            {% endfor %}
-        </div>
-        {% block footer %}
-            {% include 'movies/_footer.html' %}
-        {% endblock %}
-
-    </body>
-</html>
+    </div>
+{% endblock %}

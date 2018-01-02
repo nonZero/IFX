@@ -1,7 +1,6 @@
 {% load i18n static %}
 
-<div class="jumbotron">
-    <h1>{% trans "The Israeli Film Archive" %}</h1>
+<div id="smaller_jum" class="jumbotron">
         <div class="row justify-content-center">
             <div class="col col-2">
                 <div class="dropdown">
@@ -26,5 +25,11 @@
                         <button class="btn btn-default btnSearch glyphicon glyphicon-search" type="button"></button>
                 </span>
             </div>
+
         </div>
+        {% comment %}
+        <div class="row justify-content-center">
+            <div id="boxContainer" class="col"></div>
+        </div>
+        {% endcomment %}
 </div>

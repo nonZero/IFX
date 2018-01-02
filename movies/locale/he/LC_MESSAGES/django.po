@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-01 18:14+0200\n"
-"PO-Revision-Date: 2018-01-01 18:14+0200\n"
+"POT-Creation-Date: 2018-01-02 10:59+0200\n"
+"PO-Revision-Date: 2018-01-02 11:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -86,26 +86,33 @@ msgid "עבר"
 msgstr "Eng"
 
 #: .\templates\movies\_header1.html:60
+#: .\templates\movies\about_jambotron.html:10
 #: .\templates\movies\main_jumbotron.html:10
 msgid "Search All"
 msgstr "חיפוש חופשי"
 
 #: .\templates\movies\_header1.html:62
+#: .\templates\movies\about_jambotron.html:12
 #: .\templates\movies\main_jumbotron.html:12
-msgid "Movie's Name"
-msgstr "שם סרט"
+msgid "Title"
+msgstr "סרט"
 
 #: .\templates\movies\_header1.html:64
+#: .\templates\movies\about_jambotron.html:14
 #: .\templates\movies\main_jumbotron.html:14
 msgid "Year/s"
 msgstr "שנה/ים"
 
 #: .\templates\movies\_header1.html:66
+#: .\templates\movies\about_jambotron.html:16
 #: .\templates\movies\main_jumbotron.html:16
-msgid "Director's Name"
+#, fuzzy
+#| msgid "Director's Name"
+msgid "Director"
 msgstr "במאי/ת"
 
 #: .\templates\movies\_header1.html:70
+#: .\templates\movies\about_jambotron.html:22
 #: .\templates\movies\main_jumbotron.html:22
 msgid "Search..."
 msgstr "חיפוש..."
@@ -129,6 +136,12 @@ msgstr "לעיון באוסף"
 #: .\templates\movies\main_jumbotron.html:4
 msgid "The Israeli Film Archive"
 msgstr "הארכיון הישראלי לסרטים"
+
+#~ msgid "Movie's Name"
+#~ msgstr "שם סרט"
+
+#~ msgid "Director's Name"
+#~ msgstr "במאי/ת"
 
 #~ msgid "Heb"
 #~ msgstr "Eng"

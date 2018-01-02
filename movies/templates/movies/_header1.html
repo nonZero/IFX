@@ -7,8 +7,8 @@
           <div class="collapse" id="navbarToggleExternalContent">
             <div class="bg-inverse p-4">
                 <div class="list-group">
-                  <a href="#" class="list-group-item list-group-item-action">{% trans "Search Archive" %}</a>
-                  <a href="#" class="list-group-item list-group-item-action active">{% trans "Collections" %}</a>
+                  <a href="#" class="list-group-item list-group-item-action active">{% trans "Search Archive" %}</a>
+                  <a href="#" class="list-group-item list-group-item-action">{% trans "Collections" %}</a>
                   <a href="#" class="list-group-item list-group-item-action">{% trans "About Archive" %}</a>
                   <a href="#" class="list-group-item list-group-item-action">{% trans "Conservation and Restoration" %}</a>
                     <a href="#" class="list-group-item list-group-item-action">{% trans "Depositing Materials" %}</a>
@@ -58,11 +58,11 @@
           <select class="dropdown dropBtnSearchUp" aria-labelledby="dropdownMenu1">
             <option value="1"><a href="#">{% trans "Search All" %}</a></option>
               <span role="separator" class="divider"></span>
-            <option value="2"><a href="#">{% trans "Movie's Name" %}</a></option>
+            <option value="2"><a href="#">{% trans "Title" %}</a></option>
               <span role="separator" class="divider"></span>
             <option value="3"><a href="#">{% trans "Year/s" %}</a></option>
               <span role="separator" class="divider"></span>
-            <option value="4"><a href="#">{% trans "Director's Name" %}</a></option>
+            <option value="4"><a href="#">{% trans "Director" %}</a></option>
           </select>
         </div>
         <div>
@@ -75,6 +75,6 @@
 
     </div>
 
-    {% block header %}{% if set_jumbotron == 1 %}{% include 'movies/main_jumbotron.html' %}{% elif set_jumbotron == 2 %}{% include 'movies/about_jumbotron.html' %}{% endif %}{% endblock %}
+    {% block header %}{% if set_jumbotron == 1 %}{% include 'movies/main_jumbotron.html' %}{% elif set_jumbotron == 2 %}{% include 'movies/about_jumbotron.html' %}{% elif set_jumbotron == 3 %}{% include 'movies/searchresult_jumbotron.html' %}{% endif %}{% endblock %}
 
 </header>

@@ -13,5 +13,6 @@ urlpatterns = [
     url(r"^collections/(?P<id>[0-9]+)/$", views.collection_detail, name='collection_detail'),
     url(r"^homepage/$", views.homePage, name='homePage'),
     url(r"^about/$", views.about, name='about'),
-    url(r"^searchresult/$", views.MoviesSearchListView.as_view(), name='searchresult'),
+    #url(r"^searchresult/$", views.MoviesSearchListView.as_view(), name='searchresult'),
+    url(r"^searchresult/$", views.searchresult, name='searchresult'),
 ]
