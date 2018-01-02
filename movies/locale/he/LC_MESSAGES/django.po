@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-02 10:59+0200\n"
-"PO-Revision-Date: 2018-01-02 11:00+0200\n"
+"POT-Creation-Date: 2018-01-02 22:56+0200\n"
+"PO-Revision-Date: 2018-01-02 23:02+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -52,7 +52,7 @@ msgstr "סינמטק ירושלים"
 msgid "Search Archive"
 msgstr "חיפוש בארכיון"
 
-#: .\templates\movies\_header1.html:11
+#: .\templates\movies\_header1.html:11 .\templates\movies\about.html:36
 msgid "Collections"
 msgstr "אוספים"
 
@@ -60,11 +60,11 @@ msgstr "אוספים"
 msgid "About Archive"
 msgstr "אודות הארכיון"
 
-#: .\templates\movies\_header1.html:13
+#: .\templates\movies\_header1.html:13 .\templates\movies\about.html:32
 msgid "Conservation and Restoration"
 msgstr "שימור ורסטורציה"
 
-#: .\templates\movies\_header1.html:14
+#: .\templates\movies\_header1.html:14 .\templates\movies\about.html:40
 msgid "Depositing Materials"
 msgstr "הפקדת חומרים"
 
@@ -85,39 +85,37 @@ msgstr "Eng"
 msgid "עבר"
 msgstr "Eng"
 
-#: .\templates\movies\_header1.html:60
-#: .\templates\movies\about_jambotron.html:10
-#: .\templates\movies\main_jumbotron.html:10
+#: .\templates\movies\_header1.html:60 .\templates\movies\main_jumbotron.html:9
+#: .\templates\movies\searchresult_jumbotron.html:8
 msgid "Search All"
 msgstr "חיפוש חופשי"
 
 #: .\templates\movies\_header1.html:62
-#: .\templates\movies\about_jambotron.html:12
-#: .\templates\movies\main_jumbotron.html:12
+#: .\templates\movies\main_jumbotron.html:11
+#: .\templates\movies\searchresult_jumbotron.html:10
 msgid "Title"
 msgstr "סרט"
 
 #: .\templates\movies\_header1.html:64
-#: .\templates\movies\about_jambotron.html:14
-#: .\templates\movies\main_jumbotron.html:14
+#: .\templates\movies\main_jumbotron.html:13
+#: .\templates\movies\searchresult_jumbotron.html:12
 msgid "Year/s"
 msgstr "שנה/ים"
 
 #: .\templates\movies\_header1.html:66
-#: .\templates\movies\about_jambotron.html:16
-#: .\templates\movies\main_jumbotron.html:16
-#, fuzzy
-#| msgid "Director's Name"
+#: .\templates\movies\main_jumbotron.html:15
+#: .\templates\movies\searchresult.html:34
+#: .\templates\movies\searchresult_jumbotron.html:14
 msgid "Director"
 msgstr "במאי/ת"
 
 #: .\templates\movies\_header1.html:70
-#: .\templates\movies\about_jambotron.html:22
-#: .\templates\movies\main_jumbotron.html:22
+#: .\templates\movies\main_jumbotron.html:21
+#: .\templates\movies\searchresult_jumbotron.html:20
 msgid "Search..."
 msgstr "חיפוש..."
 
-#: .\templates\movies\about_jambotron.html:4
+#: .\templates\movies\about_jumbotron.html:9
 msgid "About The Israeli Film Archive"
 msgstr "אודות הארכיון הישראלי לסרטים"
 
@@ -137,8 +135,51 @@ msgstr "לעיון באוסף"
 msgid "The Israeli Film Archive"
 msgstr "הארכיון הישראלי לסרטים"
 
-#~ msgid "Movie's Name"
-#~ msgstr "שם סרט"
+#: .\templates\movies\searchresult.html:6
+msgid "Search reasults for:"
+msgstr "תוצאות עבור:"
+
+#: .\templates\movies\searchresult.html:9
+msgid "105 Titles were found"
+msgstr "נמצאו 105 סרטים"
+
+#: .\templates\movies\searchresult.html:13
+msgid "Sorted by:"
+msgstr "מיון תוצאות לפי:"
+
+#: .\templates\movies\searchresult.html:15
+msgid "Title A-Z"
+msgstr "אלפביתי א-ת"
+
+#: .\templates\movies\searchresult.html:17
+msgid "Oldest"
+msgstr "שנים - מהישן לחדש"
+
+#: .\templates\movies\searchresult.html:19
+msgid "Newest"
+msgstr "שנים - מהחדש לישן"
+
+#: .\templates\movies\searchresult.html:21
+msgid "Director A-Z"
+msgstr "במאי/ת - א-ת"
+
+#: .\templates\movies\searchresult.html:33
+msgid "Movie name"
+msgstr "שם הסרט"
+
+#: .\templates\movies\searchresult.html:33
+#, fuzzy
+#| msgid "Year/s"
+msgid "(Year)"
+msgstr "שנה/ים"
+
+#: .\templates\movies\searchresult.html:33
+msgid "min"
+msgstr "שניות"
+
+#: .\templates\movies\searchresult.html:35
+msgid "Summery"
+msgstr "תקציר"
 
 #~ msgid "Director's Name"
 #~ msgstr "במאי/ת"

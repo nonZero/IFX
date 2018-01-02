@@ -4,5 +4,41 @@
 {% block content %}
     <div class="container">
         <h1 id="h1reasult">{% trans "Search reasults for:" %}</h1>
+        <div class="row justify-content-between">
+            <div class="col-6">
+                <span>{% trans "105 Titles were found" %}</span>
+            </div>
+
+            <div class="col-6 sortBy">
+                <span>{% trans "Sorted by:" %}</span>
+                  <select class="dropdown dropBtnSearchUp sortDropdown" aria-labelledby="dropdownMenu1">
+                    <option value="1"><a href="#">{% trans "Title A-Z" %}</a></option>
+                      <span role="separator" class="divider"></span>
+                    <option value="2"><a href="#">{% trans "Oldest" %}</a></option>
+                      <span role="separator" class="divider"></span>
+                    <option value="3"><a href="#">{% trans "Newest" %}</a></option>
+                      <span role="separator" class="divider"></span>
+                    <option value="4"><a href="#">{% trans "Director A-Z" %}</a></option>
+                  </select>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div class="row movieResult">
+            <img class="col-3" src="{% static 'images/cinemathequepic.jpg' %}" />
+            <div class="col-9">
+                <section>
+                    <h3><strong>{% trans "Movie name" %}</strong> {% trans "(Year)" %} <span>128 {% trans "min" %}</span></h3>
+                    <p>{% trans "Director" %}: <strong>Efraim Keshon</strong></p>
+                    <p><strong>{% trans "Summery" %}:</strong>
+                        השוטר אזולאי" מתאר את חייו של אברהם אזולאי, שוטר ביפו אשר במשך כל עשרים שנות שרותו במשטרה נותר בתפקיד שוטר מקוף פשוט בדרגת רב-שוטר. הסיבה העיקרית לכך היא כשלונותיו תקציר: "השוטר אזולאי" מתאר את חייו של אברהם אזולאי, שוטר ביפו אשר במשך כל עשרים שנות שרותו במשטרה נותר בתפקיד שוטר מקוף פשוט בדרגת רב-שוטר…
+                    </p>
+                </section>
+
+            </div>
+            <hr>
+        </div>
     </div>
 {% endblock %}

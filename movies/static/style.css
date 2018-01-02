@@ -199,6 +199,15 @@ footer{
 footer div .col-xs-3 {
     width: 25%;
     margin: 36px auto;
+    font-size: 1.8em;
+}
+
+footer h4 {
+    font-size: 1.2em;
+}
+
+.row.container {
+    margin: 0 auto;
 }
 
 img#cinemathequeLogoFooter {
@@ -489,14 +498,14 @@ button.btnRegular {
 
 /*-------------------- About ----------------------------*/
 div#smaller_jum {
-    height: 142px;
+    height: 130px;
 }
 
 h1#h1reasult {
     background-color: #4a4a4a;
     color: #fcfcfc;
     font-weight: 100;
-    font-size: 14pt;
+    font-size: 18pt;
     padding: 10px;
     position: relative;
     margin-top: -20px;
@@ -550,6 +559,45 @@ article {
 
 footer {
     margin-top: 30px;
+}
+
+
+/*----------------------Search Reasulte------------------------------*/
+.row.justify-content-between {
+    font-size: 14pt;
+    margin-top: 14px;
+}
+select.dropdown.dropBtnSearchUp {
+    position: absolute;
+    right: 14px;
+    top: -2px;
+}
+
+.col-6.sortBy > span {
+    position: absolute;
+    right: 175px;
+}
+
+img.col-3 {
+    height: 100%;
+}
+
+.col-9 > section > h3 {
+    font-size: 2em;
+}
+
+.col-9 > section > h3 > span {
+    font-size: 0.8em;
+}
+
+.col-9 > section > p {
+    font-size: 1.5em;
+}
+
+.row.movieResult {
+    background-color: #e9e9e9;
+    padding: 14px 0;
+    margin: 10px auto;
 }
 
 @media screen and (max-width: 844px){
