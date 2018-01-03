@@ -49,8 +49,8 @@ button.btn.btn-default.glyphicon.glyphicon-search {
     margin-left: 1000px;
     border: none;
     background-color: white;
-    -webkit-box-shadow: 0 0 1px 10px #B3B3B3;
-    box-shadow: 0 0 0 10px #B3B3B3;
+    -webkit-box-shadow: 0 0 1px 10px #D8D8D8;
+    box-shadow: 0 0 0 10px #D8D8D8;
 }
 
 .searchContainer {
@@ -69,8 +69,8 @@ button.btn.btn-default.glyphicon.glyphicon-search {
     padding-right: 10px;
     z-index: 2;
     font-size: 14pt;
-    -webkit-box-shadow: 0 0 1px 10px #B3B3B3;
-    box-shadow: 0 0 0 10px #B3B3B3;
+    -webkit-box-shadow: 0 0 1px 10px #D8D8D8;
+    box-shadow: 0 0 0 10px #D8D8D8;
 }
 
 .noPadding{
@@ -166,8 +166,8 @@ select#idselect {
     padding-right: 8px;
     z-index: 2;
     font-size: 14pt;
-    -webkit-box-shadow: 0 0 0px 10px #B3B3B3;
-    box-shadow: 0 0 0 10px #B3B3B3;
+    -webkit-box-shadow: 0 0 0px 10px #D8D8D8;
+    box-shadow: 0 0 0 10px #D8D8D8;
 }
 
 div#boxContainer {
@@ -325,8 +325,8 @@ select.dropdown.dropBtnSearchUp {
 }
 
 /*.dropdown {
-    -webkit-box-shadow: 0 0 1px 10px #B3B3B3;
-    box-shadow: 0 0 0 10px #B3B3B3;
+    -webkit-box-shadow: 0 0 1px 10px #D8D8D8;
+    box-shadow: 0 0 0 10px #D8D8D8;
 }*/
 
 input.upperSearchInput {
@@ -599,7 +599,7 @@ footer {
     direction: rtl;
     height: 34px;
 }
-select.dropdown.dropBtnSearchUp {
+select.dropdown.dropBtnSearchUp.sortDropdown {
     position: absolute;
     left: 14px;
     top: -2px;
@@ -660,6 +660,11 @@ input[type="image"] {
 input[type="image"]:hover {
     background-color: #ffefbe;
     cursor: pointer;
+}
+
+input.addToChart {
+    top: -13px;
+    left: 38px;
 }
 
 

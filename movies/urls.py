@@ -15,4 +15,5 @@ urlpatterns = [
     url(r"^about/$", views.about, name='about'),
     #url(r"^searchresult/$", views.MoviesSearchListView.as_view(), name='searchresult'),
     url(r"^searchresult/$", views.searchresult, name='searchresult'),
+    url(r"^movie_details/$", views.movie_details, name='movie_details'),
 ]

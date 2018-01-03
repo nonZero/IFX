@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-02 23:06+0200\n"
-"PO-Revision-Date: 2018-01-02 23:07+0200\n"
+"POT-Creation-Date: 2018-01-03 12:26+0200\n"
+"PO-Revision-Date: 2018-01-03 12:33+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -17,6 +17,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.5\n"
+
+#: .\templates\movies\_collection.html:10
+msgid "Watch Collection"
+msgstr "לעיון באוסף"
 
 #: .\templates\movies\_footer.html:9 .\templates\movies\_header1.html:15
 msgid "Contact"
@@ -92,6 +96,7 @@ msgstr "חיפוש חופשי"
 
 #: .\templates\movies\_header1.html:62
 #: .\templates\movies\main_jumbotron.html:11
+#: .\templates\movies\movie_details.html:6
 #: .\templates\movies\searchresult_jumbotron.html:10
 msgid "Title"
 msgstr "סרט"
@@ -102,9 +107,9 @@ msgstr "סרט"
 msgid "Year/s"
 msgstr "שנה/ים"
 
-#: .\templates\movies\_header1.html:66
+#: .\templates\movies\_header1.html:66 .\templates\movies\_movie_search.html:11
 #: .\templates\movies\main_jumbotron.html:15
-#: .\templates\movies\searchresult.html:34
+#: .\templates\movies\movie_details.html:15
 #: .\templates\movies\searchresult_jumbotron.html:14
 msgid "Director"
 msgstr "במאי/ת"
@@ -114,6 +119,24 @@ msgstr "במאי/ת"
 #: .\templates\movies\searchresult_jumbotron.html:20
 msgid "Search..."
 msgstr "חיפוש..."
+
+#: .\templates\movies\_movie_search.html:7
+msgid "Movie name"
+msgstr "שם הסרט"
+
+#: .\templates\movies\_movie_search.html:7
+#: .\templates\movies\movie_details.html:6
+msgid "(Year)"
+msgstr "(שנה)"
+
+#: .\templates\movies\_movie_search.html:7
+msgid "min"
+msgstr "שניות"
+
+#: .\templates\movies\_movie_search.html:12
+#: .\templates\movies\movie_details.html:30
+msgid "Summery"
+msgstr "תקציר"
 
 #: .\templates\movies\about_jumbotron.html:9
 msgid "About The Israeli Film Archive"
@@ -127,13 +150,37 @@ msgstr "אוסף יומני נתן אקסלר"
 msgid "Watch more"
 msgstr "לעיון באוסף"
 
-#: .\templates\movies\homePage.html:31
-msgid "Watch Collection"
-msgstr "לעיון באוסף"
-
 #: .\templates\movies\main_jumbotron.html:4
 msgid "The Israeli Film Archive"
 msgstr "הארכיון הישראלי לסרטים"
+
+#: .\templates\movies\movie_details.html:14
+msgid "Runtime"
+msgstr "אורך בדיקות"
+
+#: .\templates\movies\movie_details.html:16
+msgid "Producer"
+msgstr "מפיק/ה"
+
+#: .\templates\movies\movie_details.html:17
+msgid "Screenwriter"
+msgstr "תסריטאי/ת"
+
+#: .\templates\movies\movie_details.html:18
+msgid "Photographer"
+msgstr "צלמ/ת"
+
+#: .\templates\movies\movie_details.html:19
+msgid "Cast"
+msgstr "שחקנים/ות"
+
+#: .\templates\movies\movie_details.html:20
+msgid "Genre/s"
+msgstr "ז'אנר"
+
+#: .\templates\movies\movie_details.html:21
+msgid "Color"
+msgstr "צבעוניות"
 
 #: .\templates\movies\searchresult.html:6
 msgid "Search reasults for:"
@@ -162,22 +209,6 @@ msgstr "שנים - מהחדש לישן"
 #: .\templates\movies\searchresult.html:21
 msgid "Director A-Z"
 msgstr "במאי/ת - א-ת"
-
-#: .\templates\movies\searchresult.html:33
-msgid "Movie name"
-msgstr "שם הסרט"
-
-#: .\templates\movies\searchresult.html:33
-msgid "(Year)"
-msgstr "(שנה)"
-
-#: .\templates\movies\searchresult.html:33
-msgid "min"
-msgstr "שניות"
-
-#: .\templates\movies\searchresult.html:35
-msgid "Summery"
-msgstr "תקציר"
 
 #~ msgid "Director's Name"
 #~ msgstr "במאי/ת"

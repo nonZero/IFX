@@ -16,6 +16,9 @@ def about(request):
 def searchresult(request):
     return render(request, "movies/searchresult.html", {'set_jumbotron':3})
 
+def movie_details(request):
+    return render(request, "movies/movie_details.html", {'set_jumbotron':3})
+
 
 def movies_json(request):
     qs = Movie.objects.all()
