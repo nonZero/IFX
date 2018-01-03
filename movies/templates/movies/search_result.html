@@ -1,0 +1,33 @@
+{% extends 'movies/base.html' %}
+{% load static i18n %}
+
+{% block content %}
+    <div class="container">
+        <h1 id="h1reasult">{% trans "Search results for:" %} {{query}}</h1>
+
+        <ul>Count: {{count}} items</ul>
+        <table border="1" width="100%">
+            <tr>
+                <th>#</th>
+                <th>bid</th>
+                <th>Title</th>
+                <th>Year</th>
+                <th>Language</th>
+            </tr>
+            {% for object in objects %}
+                <tr>
+                    <td>#{{ object.id }}</td>
+                    <td>{{ object.bid }}</td>
+                    <td>
+                        <a href= "{% url 'movies:movie_detail' object.id %}">{{ object.get_pretty_title }}</a>
+                    </td>
+                    <td>{{ object.year }}</td>
+                    <td>{{ object.lang }} </td>
+                </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+{% endblock %}
+
+

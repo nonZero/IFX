@@ -8,7 +8,14 @@ class MovieForm(forms.ModelForm):
         model = Movie
         fields = "__all__"
 
+
 class CollectionForm(forms.ModelForm):
     class Meta:
         model = Collection
         fields = "__all__"
+
+
+class SearchByYearForm(forms.ModelForm):
+    class Meta:
+        model = Movie
+        fields = ['year',]
