@@ -25,20 +25,8 @@
         </div>
 
         <hr>
-
-        <div class="row movieResult">
-            <img class="col-3" src="{% static 'images/cinemathequepic.jpg' %}" />
-            <div class="col-9">
-                <section>
-                    <h3><strong>{% trans "Movie name" %}</strong> {% trans "(Year)" %} <span>128 {% trans "min" %}</span></h3>
-                    <p>{% trans "Director" %}: <strong>Efraim Keshon</strong></p>
-                    <p><strong>{% trans "Summery" %}:</strong>
-                        השוטר אזולאי" מתאר את חייו של אברהם אזולאי, שוטר ביפו אשר במשך כל עשרים שנות שרותו במשטרה נותר בתפקיד שוטר מקוף פשוט בדרגת רב-שוטר. הסיבה העיקרית לכך היא כשלונותיו תקציר: "השוטר אזולאי" מתאר את חייו של אברהם אזולאי, שוטר ביפו אשר במשך כל עשרים שנות שרותו במשטרה נותר בתפקיד שוטר מקוף פשוט בדרגת רב-שוטר…
-                    </p>
-                </section>
-
-            </div>
-            <hr>
+        <div>
+            {% block movie %}{% include 'movies/_movie_search.html' %}{% endblock %}
         </div>
     </div>
 {% endblock %}

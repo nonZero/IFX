@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-02 22:56+0200\n"
-"PO-Revision-Date: 2018-01-02 23:02+0200\n"
+"POT-Creation-Date: 2018-01-02 23:06+0200\n"
+"PO-Revision-Date: 2018-01-02 23:07+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -168,10 +168,8 @@ msgid "Movie name"
 msgstr "שם הסרט"
 
 #: .\templates\movies\searchresult.html:33
-#, fuzzy
-#| msgid "Year/s"
 msgid "(Year)"
-msgstr "שנה/ים"
+msgstr "(שנה)"
 
 #: .\templates\movies\searchresult.html:33
 msgid "min"

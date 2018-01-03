@@ -1,0 +1,13 @@
+{% load i18n static %}
+
+<div class="container row">
+    <div class="container-image">
+        <div class="collection-class">
+            <h4 class="text">Collection Name</h4>
+        </div>
+      <img src="{% static 'images/defaultImg.jpg' %}" alt="Avatar" class="image">
+      <div class="overlay">
+        <div class="text"><button class="btnRegular">{% trans "Watch Collection" %}</button></div>
+      </div>
+    </div>
+</div>

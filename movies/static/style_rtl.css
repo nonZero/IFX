@@ -533,6 +533,7 @@ div#aboutJumb {
     background-image: url(../static/images/archivelia.jpg) !important;
     height: 240px;
     background-size: cover;
+    background-position-y: 25%;
 }
 
 h1#innerTitle {
@@ -606,7 +607,7 @@ select.dropdown.dropBtnSearchUp {
 
 .col-6.sortBy > span {
     position: absolute;
-    left: 175px;
+    left: 200px;
 }
 
 img.col-3 {
@@ -641,6 +642,26 @@ img.col-3 {
     position: absolute;
     right: 15px;
 }
+
+.collection {
+    margin-top: 20px;
+}
+
+/*------------------------------------------------------*/
+
+input[type="image"] {
+    width: 35px;
+    position: absolute;
+    background-color: white;
+    top: 0;
+    left: 20px;
+}
+
+input[type="image"]:hover {
+    background-color: #ffefbe;
+    cursor: pointer;
+}
+
 
 @media screen and (max-width: 844px){
     div#boxContainer {

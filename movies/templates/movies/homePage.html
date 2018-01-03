@@ -21,16 +21,10 @@
             <a href="https://www.youtube.com/channel/UCOH_oW31tWhVFHwreAxhIgA" type="button" class="btn btn-secondary btn-lg">{% trans "Watch more" %}</a>
 
         </div>
-        <div class="container row">
-                <div class="container-image">
-                    <div class="collection-class">
-                        <h4 class="text">Collection Name</h4>
-                    </div>
-                  <img src="{% static 'images/defaultImg.jpg' %}" alt="Avatar" class="image">
-                  <div class="overlay">
-                    <div class="text"><button class="btnRegular">{% trans "Watch Collection" %}</button></div>
-                  </div>
-                </div>
-            </div>
+
+        <div class="collection">
+            {% block collection %}{% include 'movies/_collection.html' %}{% endblock %}
+        </div>
+
      </div>
 {% endblock %}
