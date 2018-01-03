@@ -5,13 +5,16 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView
 
 from movies.models import Movie, Collection
-from movies.forms import MovieForm, CollectionForm
+from movies.forms import MovieForm, CollectionForm, SearchByYearForm
+
 
 def homePage(request):
      return render(request, "movies/homePage.html", {'set_jumbotron':1})
 
+
 def about(request):
     return render(request, "movies/about.html", {'set_jumbotron':2})
+
 
 def searchresult(request):
     return render(request, "movies/searchresult.html", {'set_jumbotron':3})
@@ -33,12 +36,15 @@ def movies_json(request):
 
     return JsonResponse(data)
 
+
 def movies_list(request):
     qs = Movie.objects.order_by('?')[:10]
     d = {
         'objects': qs,
+        'count': len(Movie.objects.all())
     }
     return render(request, "movies/movies_list.html", d)
+
 
 def movie_detail(request, id):
     m = get_object_or_404(Movie, id=id)
@@ -46,6 +52,7 @@ def movie_detail(request, id):
         'movie': m,
     }
     return render(request, "movies/movie_detail.html", d)
+
 
 def movie_create(request):
     if request.method == "POST":
@@ -62,6 +69,7 @@ def movie_create(request):
     }
     return render(request, "movies/movie_form.html", d)
 
+
 def collections_list(request):
     qs = Collection.objects.all()
     d = {
@@ -69,12 +77,14 @@ def collections_list(request):
     }
     return render(request, "movies/collections_list.html", d)
 
+
 def collection_detail(request, id):
     c = get_object_or_404(Collection, id=id)
     d = {
         'collection': c,
     }
     return render(request, "movies/collection_detail.html", d)
+
 
 def collection_create(request):
     if request.method == "POST":
@@ -90,6 +100,27 @@ def collection_create(request):
         'form': form,
     }
     return render(request, "movies/collection_form.html", d)
+
+
+def search_by_year(request):
+    if request.method == "POST":
+        form = SearchByYearForm(request.POST)
+        if form.is_valid():
+            o = form.save(commit=False)
+            qs = Movie.objects.filter(year=o.year)
+            d = {
+                'objects': qs,
+                'count': len(qs),
+                'query': 'year={}'.format(str(o.year)),
+            }
+            return render(request, "movies/search_result.html", d)
+    else:
+        form = SearchByYearForm()
+
+    d = {
+        'form': form,
+    }
+    return render(request, "movies/search_form.html", d)
 
 
 #class MoviesSearchListView(ListView):

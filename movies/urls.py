@@ -15,4 +15,6 @@ urlpatterns = [
     url(r"^about/$", views.about, name='about'),
     #url(r"^searchresult/$", views.MoviesSearchListView.as_view(), name='searchresult'),
     url(r"^searchresult/$", views.searchresult, name='searchresult'),
+    url(r"^search/year/$", views.search_by_year, name='search_by_year'),
+
 ]

@@ -1,0 +1,7 @@
+<form method="post" validate>
+    {% csrf_token %}
+
+    {{ form.as_ul }}
+
+    <button>Search</button>
+</form>

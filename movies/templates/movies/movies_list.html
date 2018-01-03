@@ -8,6 +8,11 @@
     <a href= {% url "movies:movie_create" %}>Add movie...</a>
 </ul>
 
+<ul>
+    <a href= {% url "movies:search_by_year" %}>Search by year...</a>
+</ul>
+
+<ul>Count: {{count}} items</ul>
 <table border="1" width="100%">
     <tr>
         <th>#</th>
