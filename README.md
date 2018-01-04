@@ -35,16 +35,17 @@ Israeli film archive
 
         python manage.py migrate
 
-* Import data from tsv files:
+* Import data from tsv files(Tab seperate values):
 
+    movies:
         m import_movies "<folder name>\movies.tsv"
-
+    fields:
         m import_fields "<folder name>\Idea_dbo_field_list.tsv"
-
+    description:
         m import_description "<folder name>\book_sum.tsv"
-
+    tags:
         m import_tags "<folder name>\tags.tsv"
-
+    movie-tag-field relationship:
         m import_relationship "<folder name>\book_tags.tsv"
 
 * Create some sample data:
@@ -59,12 +60,6 @@ Israeli film archive
 * Enjoy: 
         
         http://localhost:8000/
-
-* Import data (Tab seperate values):
-
-        python manage.py import_movies idea_data/movies.tsv
-        python manage.py import_tags idea_data/tags.tsv
-        python manage.py import_relationship idea_data/book_tags.tsv
 
 # Tips
 
