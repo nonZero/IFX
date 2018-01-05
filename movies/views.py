@@ -126,28 +126,37 @@ def search_by_year(request):
     return render(request, "movies/search_form.html", d)
 
 
-#class MoviesSearchListView(ListView):
-#    template_name = 'movies/searchresult.html'
-#    set_jumbotron = 3
-#    model = Movie
-#    context_object_name = 'movies'
+class MoviesSearchListView(ListView):
+    template_name = 'movies/searchresult.html'
+    model = Movie
+    context_object_name = 'movies'
 
-#    def get_queryset(self):
-#        qs = super(MoviesSearchListView, self).get_queryset()
-#        search_type = self.request.GET.get('type')
-#        q = self.request.GET.get('q')
-#        if q:
-#            if search_type == 'name':
-#                return qs.filter(title__icontain=q)
-#            elif search_type == 'year':
-#                q_list = q.split('-')
-#                year1 = q[0]
-#                year2 = q[1]
-#                return qs.filter(year__gte=int(year1)).exclude(year__gt=year2)
-#            elif search_type == 'director':
-#                pass
-#        return []
+    def get_queryset(self):
+        qs = super(MoviesSearchListView, self).get_queryset()
+        search_type = self.request.GET.get('type')
+        q = self.request.GET.get('q')
 
-#    def get_context_data(self, **kwargs):
-#        context = super().get_context_data(**kwargs)
-#        return context
+        if q:
+            if search_type == 'name':
+                return qs.filter(title__icontain=q)
+            elif search_type == 'year':
+                if q.find('-') != -1:
+                    q_list = q.split('-')
+                    if q_list.isdigit():
+                        year1 = q[0]
+                        year2 = q[1]
+                        if year1<year2:
+                            return qs.filter(year__gte=int(year2)).exclude(year__gt=year1)
+                        elif year1>year2:
+                            return qs.filter(year__gte=int(year1)).exclude(year__gt=year2)
+                else:
+                    if q.isdigit():
+                        return qs.filter(year__gte=int(q))
+
+            elif search_type == 'director':
+                pass
+        return []
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
