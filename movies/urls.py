@@ -4,6 +4,7 @@ from . import views
 
 app_name = "movies"
 urlpatterns = [
+    url(r"^movies/query/(?P<query>[\w]+)", views.query, name='movie_query'),
     url(r"^movies/as-json/$", views.movies_json, name='movies_list_json'),
     url(r"^movies/add/$", views.movie_create, name='movie_create'),
     url(r"^movies/(?P<id>[0-9]+)/$", views.movie_detail, name='movie_detail'),
@@ -16,5 +17,5 @@ urlpatterns = [
     url(r"^movies/movie_details/$", views.movie_details, name='movie_details'),
     url(r"^movies/search/year/$", views.search_by_year, name='search_by_year'),
     url(r"^movies/$", views.movies_list, name='movies_list'),
-    url(r"", views.homePage, name='homePage'),
+    #url(r"", views.homePage, name='homePage'),
 ]

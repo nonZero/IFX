@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView
 
-from movies.models import Movie, Collection
+from movies.models import Movie, Collection, Tag, Field, Movie_Tag_Field, Movie_Title, Description
 from movies.forms import MovieForm, CollectionForm, SearchByYearForm
 
 
@@ -39,6 +39,25 @@ def movies_json(request):
 
     return JsonResponse(data)
 
+
+def query(request, query):
+    movies = []
+    
+    titles = Movie_Title.objects.filter(title__contains=query)
+    if titles:
+        for item in titles:
+            movies.append(item.movie)
+    description = Description.objects.filter(summery__icontains=query)
+    if description:
+        for item in description:
+            movies.append(item.movie)
+    tags = Tag.objects.filter(title__icontains=query)
+    
+    d = {
+        'objects': movies,
+        'count': len(movies)
+    }
+    return render(request, "movies/movies_list.html", d)
 
 def movies_list(request):
     qs = Movie.objects.order_by('?')[:10]
@@ -81,6 +100,7 @@ def collections_list(request):
     return render(request, "movies/collections_list.html", d)
 
 
+
 def collection_detail(request, id):
     c = get_object_or_404(Collection, id=id)
     d = {
@@ -103,7 +123,6 @@ def collection_create(request):
         'form': form,
     }
     return render(request, "movies/collection_form.html", d)
-
 
 def search_by_year(request):
     if request.method == "POST":
