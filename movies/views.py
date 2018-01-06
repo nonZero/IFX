@@ -59,6 +59,7 @@ def query(request, query):
     }
     return render(request, "movies/movies_list.html", d)
 
+
 def movies_list(request):
     qs = Movie.objects.order_by('?')[:10]
     d = {
@@ -100,7 +101,6 @@ def collections_list(request):
     return render(request, "movies/collections_list.html", d)
 
 
-
 def collection_detail(request, id):
     c = get_object_or_404(Collection, id=id)
     d = {
@@ -125,6 +125,12 @@ def collection_create(request):
     return render(request, "movies/collection_form.html", d)
 
 def search_by_year(request):
+    print('search_by_year')
+    print('request={}'.format(request))
+    search_query = request.POST.get('q', None)
+    print('search_query={}'.format(search_query))
+    id_select = request.POST.get('idselect', None)
+    print('id_select={}'.format(id_select))
     if request.method == "POST":
         form = SearchByYearForm(request.POST)
         if form.is_valid():
@@ -179,3 +185,60 @@ class MoviesSearchListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return context
+
+
+def search_query(request):
+    # Remove me
+    print('search_query')
+    print('request={}'.format(request))
+    search_query = request.POST.get('q', None)
+    print('search_query={}'.format(search_query))
+    id_select = request.POST.get('idselect', None)
+    print('id_select={}'.format(id_select))
+
+    if request.method == "POST":
+        q = request.POST.get('q', None)
+        selection = request.POST.get('idselect', None)
+        if q:
+            if selection == 'all':  # Select All
+                pass
+            elif selection == 'title':  # Title
+                pass
+            elif selection == 'year':  # Year/s
+                return search_year(request, q)
+            elif selection == 'director':  # Director
+                pass
+
+
+def search_year(request, q):
+    if q.find('-') != -1:
+        q_list = q.split('-')
+        year1 = q_list[0]
+        year2 = q_list[1]
+        if year1.isdigit() and year2.isdigit():
+            if year1 >= year2:
+                results = Movie.objects.filter(year__gte=int(year2)).exclude(year__gt=year1)
+                query_str = 'years={}-{}'.format(year2, year1)
+                return search_results(request, results, query_str)
+            elif year1 < year2:
+                results = Movie.objects.filter(year__gte=int(year1)).exclude(year__gt=year2)
+                query_str = 'years={}-{}'.format(year1, year2)
+                return search_results(request, results, query_str)
+    elif q.isdigit():
+        results = Movie.objects.filter(year=int(q))
+        query_str = 'year={}'.format(q)
+        return search_results(request, results, query_str)
+
+    # If we are here, error occurred
+    error = '"{}" - Error in format'.format(q)
+    print(error)
+    return search_results(request, [], error)
+
+
+def search_results(request, results, query):
+    d = {
+        'objects': results,
+        'count': len(results),
+        'query': query,
+    }
+    return render(request, "movies/search_result.html", d)

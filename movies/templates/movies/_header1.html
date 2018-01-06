@@ -53,25 +53,28 @@
 		<a class="btnBag" href="#"><img src="/static/images/Shopping-bag.svg"/></a>
 		<a id="searchShowHide" class="btnSearchIcon glyphicon glyphicon-search" href="#"></a>
 
-		<div id="searchBarUp" class="hideSearchBar">
-			<div>
-				<select class="dropdown dropBtnSearchUp" aria-labelledby="dropdownMenu1">
-					<option value="all"><a href="#">{% trans "Search All" %}</a></option>
-					<span role="separator" class="divider"></span>
-					<option value="name"><a href="#">{% trans "Title" %}</a></option>
-					<span role="separator" class="divider"></span>
-					<option value="year"><a href="#">{% trans "Year/s" %}</a></option>
-					<span role="separator" class="divider"></span>
-					<option value="director"><a href="#">{% trans "Director" %}</a></option>
-				</select>
+		<form id="searchform" action="{% url 'movies:search_query' %}" method="POST" accept-charset="utf-8">
+			{% csrf_token %}
+			<div id="searchBarUp" class="hideSearchBar">
+				<div>
+					<select id="idselect" name="idselect" class="dropdown dropBtnSearchUp" aria-labelledby="dropdownMenu1">
+						<option value="all"><a href="#">{% trans "Search All" %}</a></option>
+						<span role="separator" class="divider"></span>
+						<option value="title"><a href="#">{% trans "Title" %}</a></option>
+						<span role="separator" class="divider"></span>
+						<option value="year"><a href="#">{% trans "Year/s" %}</a></option>
+						<span role="separator" class="divider"></span>
+						<option value="director"><a href="#">{% trans "Director" %}</a></option>
+					</select>
+				</div>
+				<div>
+					<input type="text" class="upperSearchInput" name="q" placeholder="{% trans 'Search...' %}">
+				</div>
+				<div>
+					<button class="searchIcon glyphicon glyphicon-search" type="submit"></button>
+				</div>
 			</div>
-			<div>
-				<input type="text" class="upperSearchInput" placeholder="{% trans 'Search...' %}">
-			</div>
-			<div>
-				<button class="searchIcon glyphicon glyphicon-search" type="button"></button>
-			</div>
-		</div>
+		</form>
 
 	</div>
 

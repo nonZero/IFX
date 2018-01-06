@@ -2,29 +2,32 @@
 
 <div class="jumbotron">
     <h1>{% trans "The Israeli Film Archive" %}</h1>
-        <div class="row justify-content-center">
-            <div class="col col-2">
-                <div class="dropdown">
-                  <select id="idselect" class="dropdown dropBtnSearch" aria-labelledby="dropdownMenu1">
-                    <option value="1"><a href="#">{% trans "Search All" %}</a></option>
-                      <span role="separator" class="divider"></span>
-                    <option value="2"><a href="#">{% trans "Title" %}</a></option>
-                      <span role="separator" class="divider"></span>
-                    <option value="3"><a href="#">{% trans "Year/s" %}</a></option>
-                      <span role="separator" class="divider"></span>
-                    <option value="4"><a href="#">{% trans "Director" %}</a></option>
-                  </select>
+        <form id="searchform" action="{% url 'movies:search_query' %}" method="POST" accept-charset="utf-8">
+            {% csrf_token %}
+            <div class="row justify-content-center">
+                <div class="col col-2">
+                    <div class="dropdown">
+                      <select id="idselect" name="idselect" class="dropdown dropBtnSearch" aria-labelledby="dropdownMenu1">
+                        <option value="all"><a href="#">{% trans "Search All" %}</a></option>
+                          <span role="separator" class="divider"></span>
+                        <option value="title"><a href="#">{% trans "Title" %}</a></option>
+                          <span role="separator" class="divider"></span>
+                        <option value="year"><a href="#">{% trans "Year/s" %}</a></option>
+                          <span role="separator" class="divider"></span>
+                        <option value="director"><a href="#">{% trans "Director" %}</a></option>
+                      </select>
+                    </div>
+                </div>
+                <div class="col-5 searchContainer noPadding">
+                    <div>
+                        <input type="text" class="btnSearchIdex" id="searchbox" name="q" placeholder="{% trans 'Search...' %}">
+                    </div>
+                </div>
+                <div class="col col-1 padding6">
+                    <span class="input-group-btn">
+                            <button class="btn btn-default btnSearch glyphicon glyphicon-search" type="submit"></button>
+                    </span>
                 </div>
             </div>
-            <div class="col-5 searchContainer noPadding">
-                <div>
-                    <input type="text" class="btnSearchIdex" placeholder="{% trans 'Search...' %}">
-                </div>
-            </div>
-            <div class="col col-1 padding6">
-                <span class="input-group-btn">
-                        <button class="btn btn-default btnSearch glyphicon glyphicon-search" type="button"></button>
-                </span>
-            </div>
-        </div>
+        </form>
 </div>
