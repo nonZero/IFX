@@ -42,6 +42,9 @@ Israeli film archive
         m import_description "<folder name>\book_sum.tsv"
         m import_tags "<folder name>\tags.tsv"
         m import_relationship "<folder name>\book_tags.tsv"
+        m imoprt_tag_field_trans "IdeaData\book_strans.tsv"
+        m import_movie_titles "IdeaData\book_lang.tsv"
+
 
 * Create some sample data:
 
