@@ -3,6 +3,7 @@ from builtins import super
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView
+from django.db.models import Q
 
 from movies.models import Movie, Collection, Tag, Field, Movie_Tag_Field, Movie_Title, Description
 from movies.forms import MovieForm, CollectionForm, SearchByYearForm
@@ -208,7 +209,7 @@ def search_query(request):
             elif selection == 'year':  # Year/s
                 return search_year(request, q)
             elif selection == 'director':  # Director
-                pass
+                return search_director(request, q)
 
 
 def search_year(request, q):
@@ -219,15 +220,15 @@ def search_year(request, q):
         if year1.isdigit() and year2.isdigit():
             if year1 >= year2:
                 results = Movie.objects.filter(year__gte=int(year2)).exclude(year__gt=year1)
-                query_str = 'years={}-{}'.format(year2, year1)
+                query_str = 'Years={}-{}'.format(year2, year1)
                 return search_results(request, results, query_str)
             elif year1 < year2:
                 results = Movie.objects.filter(year__gte=int(year1)).exclude(year__gt=year2)
-                query_str = 'years={}-{}'.format(year1, year2)
+                query_str = 'Years={}-{}'.format(year1, year2)
                 return search_results(request, results, query_str)
     elif q.isdigit():
         results = Movie.objects.filter(year=int(q))
-        query_str = 'year={}'.format(q)
+        query_str = 'Year={}'.format(q)
         return search_results(request, results, query_str)
 
     # If we are here, error occurred
@@ -251,5 +252,17 @@ def search_title(request, query):
     for item in qs:
         results.append(item.movie)
 
-    query_str = 'title="{}"'.format(query)
+    query_str = 'Title="{}"'.format(query)
+    return search_results(request, results, query_str)
+
+
+def search_director(request, query):
+    fields = Field.objects.filter(Q(title__icontains='במאי') | Q(title__icontains='director'))
+    tags = Tag.objects.filter(title__icontains=query)
+    qs = Movie_Tag_Field.objects.filter(Q(field__in=fields) & Q(tag__in=tags))
+    results = []
+    for item in qs:
+        results.append(item.movie)
+
+    query_str = 'Director="{}"'.format(query)
     return search_results(request, results, query_str)
