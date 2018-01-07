@@ -9,13 +9,13 @@ class Tag(models.Model):
         return self.title
 
 
+
 class Field(models.Model):
     fid = models.CharField(unique=True, max_length=300)
     title = models.CharField(max_length=300)
     
     def __str__(self):
         return self.title
-
 
 class Movie(models.Model):
     bid = models.IntegerField(unique=True)
@@ -60,12 +60,24 @@ class Movie(models.Model):
 
 class Movie_Title(models.Model):
     movie = models.ForeignKey(Movie)
-    title = models.CharField(max_length=300)
+    title = models.CharField(max_length=1000)
     lang = models.CharField(max_length=300)
     
     def __str__(self):
         return self.title
 
+
+class Tag_Field(models.Model):
+    tag = models.ForeignKey(Tag)
+    field = models.ForeignKey(Field)
+    lang = models.CharField(max_length=300)
+    title = models.CharField(max_length=300)
+
+# class Movie_Field(models.Model):
+#     movie = models.ForeignKey(Movie)
+#     field = models.ForeignKey(Field)
+#     lang = models.CharField(max_length=300)
+#     title = models.CharField(max_length=300)
 
 class Movie_Tag_Field(models.Model):
     movie = models.ForeignKey(Movie)
