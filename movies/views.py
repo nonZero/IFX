@@ -203,7 +203,7 @@ def search_query(request):
         selection = request.POST.get('idselect', None)
         if q:
             if selection == 'all':  # Select All
-                pass
+                return search_all(request, q)
             elif selection == 'title':  # Title
                 return search_title(request, q)
             elif selection == 'year':  # Year/s
@@ -265,4 +265,32 @@ def search_director(request, query):
         results.append(item.movie)
 
     query_str = 'Director="{}"'.format(query)
+    return search_results(request, results, query_str)
+
+
+def search_all(request, query):
+    results = []
+
+    titles = Movie_Title.objects.filter(title__contains=query)
+    if titles:
+        for item in titles:
+            results.append(item.movie)
+
+    description = Description.objects.filter(summery__icontains=query)
+    if description:
+        for item in description:
+            results.append(item.movie)
+
+    tags = Tag.objects.filter(title__icontains=query)
+    if tags:
+        qs = Movie_Tag_Field.objects.filter(tag__in=tags)
+        for item in qs:
+            results.append(item.movie)
+
+    if query.isdigit():
+        qs = Movie.objects.filter(year=int(query))
+        for item in qs:
+            results.append(item)
+
+    query_str = 'Search All="{}"'.format(query)
     return search_results(request, results, query_str)
