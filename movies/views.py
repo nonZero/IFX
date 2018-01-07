@@ -124,6 +124,7 @@ def collection_create(request):
     }
     return render(request, "movies/collection_form.html", d)
 
+
 def search_by_year(request):
     print('search_by_year')
     print('request={}'.format(request))
@@ -203,7 +204,7 @@ def search_query(request):
             if selection == 'all':  # Select All
                 pass
             elif selection == 'title':  # Title
-                pass
+                return search_title(request, q)
             elif selection == 'year':  # Year/s
                 return search_year(request, q)
             elif selection == 'director':  # Director
@@ -235,10 +236,20 @@ def search_year(request, q):
     return search_results(request, [], error)
 
 
-def search_results(request, results, query):
+def search_results(request, results, query_str):
     d = {
         'objects': results,
         'count': len(results),
-        'query': query,
+        'query': query_str,
     }
     return render(request, "movies/search_result.html", d)
+
+
+def search_title(request, query):
+    qs = Movie_Title.objects.filter(title__icontains=query)
+    results = []
+    for item in qs:
+        results.append(item.movie)
+
+    query_str = 'title="{}"'.format(query)
+    return search_results(request, results, query_str)
