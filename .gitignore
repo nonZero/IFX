@@ -110,3 +110,11 @@ idea_data/
 
 # migrations
 /movies/migrations
+
+#unknown why
+ifx/Include
+ifx/Scripts
+ifx/pip-selfcheck.json
+ifx/tcl/
+
+local_settings.py
