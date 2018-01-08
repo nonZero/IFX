@@ -1,5 +1,4 @@
 from fabric.api import *
-gi
 env.user = "sysop"
 env.hosts = ["ifx.oglam.hasadna.org.il"]
 
