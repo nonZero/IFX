@@ -68,7 +68,7 @@ def create_postgres_su():
 
 env.project = "IFX"
 env.code_dir = f"/home/sysop/{env.project}"
-env.clone_url = "https:///github.com/myuser/MyProject.git"
+env.clone_url = "https://github.com/IFXGlam/IFX.git"
 
 @task
 def clone_project():
