@@ -17,6 +17,6 @@ urlpatterns = [
     url(r"^movies/movie_details/$", views.movie_details, name='movie_details'),
     url(r"^movies/search/year/$", views.search_by_year, name='search_by_year'),
     url(r"^movies/$", views.movies_list, name='movies_list'),
-    url(r"^$", views.homePage, name='homePage'),
+    url(r"^$", views.HomePage.as_view(), name='homePage'),
     url(r"^movies/search/$", views.search_query, name='search_query'),
 ]

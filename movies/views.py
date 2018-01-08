@@ -1,8 +1,9 @@
+import pdb
 from builtins import super
 
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 from django.db.models import Q
 
 from movies.models import Movie, Collection, Tag, Field, Movie_Tag_Field, Movie_Title, Description
@@ -11,6 +12,15 @@ from movies.forms import MovieForm, CollectionForm, SearchByYearForm
 
 def homePage(request):
      return render(request, "movies/homePage.html", {'set_jumbotron':1})
+
+
+class HomePage(TemplateView):
+    template_name = 'movies/homePage.html'
+
+    def get_context_data(self, **kwargs):
+        d = super().get_context_data(**kwargs)
+        d['set_jumbotron'] = 1
+        return d
 
 
 def about(request):
