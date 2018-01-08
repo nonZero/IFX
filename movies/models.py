@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 
 class Tag(models.Model):
@@ -106,10 +107,17 @@ class Collection_Movie(models.Model):
         return 'Collection={}, Movie={}'.format(self.collection, self.movie)
 
 
+class Languages(object):
+    choices = (
+        ('he', _('Hebrew')),
+        ('en', _('English')),
+    )
+
+
 class Description(models.Model):
     movie = models.ForeignKey(Movie, related_name='description')
     summery = models.TextField()
-    lang = models.CharField(max_length=300)
+    lang = models.CharField(max_length=300, choices=Languages.choices)
     
     def __str__(self):
         return 'Movie={}, MovieId={}, Summary={}, Lang={}'.format(self.movie, self.movie.bid, self.summery, self.lang)
