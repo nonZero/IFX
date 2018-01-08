@@ -108,13 +108,4 @@ db.sqlite3
 idea_data/
 /IdeaData
 
-# migrations
-/movies/migrations
-
-#unknown why
-ifx/Include
-ifx/Scripts
-ifx/pip-selfcheck.json
-ifx/tcl/
-
 local_settings.py

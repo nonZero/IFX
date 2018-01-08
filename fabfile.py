@@ -115,3 +115,13 @@ def check():
 @task
 def send_test_mail():
     m('sendtestemail --admin')
+    
+@task
+def git_pull():
+    with virtualenv():
+        run("git pull", pty=False)
+
+@task
+def create_db():
+    with virtualenv():
+        run("./manage.py sqlcreate | psql", pty=False)
