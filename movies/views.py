@@ -305,3 +305,21 @@ def search_all(request, query):
 
     query_str = 'Search All="{}"'.format(query)
     return search_results(request, results, query_str)
+
+
+def field_list(request):
+    qs = Field.objects.all()
+    d = {
+        'objects': qs,
+        'count': len(qs)
+    }
+    return render(request, "movies/field_list.html", d)
+
+
+def tag_list(request):
+    qs = Tag.objects.all()
+    d = {
+        'objects': qs,
+        'count': len(qs)
+    }
+    return render(request, "movies/tag_list.html", d)

@@ -1,0 +1,24 @@
+{% load static %}
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link href="{% static "style.css" %}" rel="stylesheet">
+
+<h1>My Fields</h1>
+
+<ul>Count: {{count}} items</ul>
+<table border="1" width="100%">
+    <tr>
+        <th>#</th>
+        <th>fid</th>
+        <th>Title</th>
+        <th>Count</th>
+    </tr>
+    {% for object in objects %}
+        <tr>
+            <td>#{{ object.id }}</td>
+            <td>{{ object.fid }}</td>
+            <td>{{ object.title }}</td>
+            <td>{{ object.tag_field_set.count }}</td>
+        </tr>
+    {% endfor %}
+
+</table>
