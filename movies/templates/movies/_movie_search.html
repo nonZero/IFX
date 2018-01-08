@@ -1,4 +1,4 @@
-{% load i18n static %}
+{% load i18n static movies %}
 {% get_current_language as LANGUAGE_CODE %}
 
 <div class="row movieResult">
@@ -21,6 +21,7 @@
             </form>
             <p>{% trans "Director" %}: <strong>Name</strong></p>
             <p><strong>{% trans "Summery" %}:</strong>
+                {{ object|get_description }}
             </p>
         </section>
     </div>
