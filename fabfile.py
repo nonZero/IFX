@@ -73,3 +73,45 @@ env.clone_url = "https://github.com/IFXGlam/IFX.git"
 @task
 def clone_project():
     run(f"git clone {env.clone_url} {env.code_dir}", pty=False)
+
+
+env.venv_name = "IFX"
+env.venvs = f"/home/sysop/.virtualenvs/"
+env.venv_path = f"{env.venvs}{env.venv_name}/"
+env.venv_command = f"source {env.venv_path}/bin/activate"
+
+@task
+def create_venv():
+    run(f"mkdir -p {env.venvs}")
+    run(f"virtualenv -p /usr/bin/python3 --prompt='({env.venv_name}) ' {env.venv_path}")
+
+from contextlib import contextmanager
+
+@contextmanager
+def virtualenv():
+    with cd(env.code_dir):
+        with prefix(env.venv_command):
+            yield
+
+@task
+def upgrade_pip():
+    with virtualenv():
+        run("pip install --upgrade pip", pty=False)
+
+@task
+def pip_install():
+    with virtualenv():
+        run("pip install -r requirements.txt", pty=False)
+
+@task
+def m(cmd):
+    with virtualenv():
+        run(f"./manage.py {cmd}", pty=False)
+
+@task
+def check():
+    m('check')
+
+@task
+def send_test_mail():
+    m('sendtestemail --admin')

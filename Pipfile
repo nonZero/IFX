@@ -16,6 +16,7 @@ silly = "*"
 tqdm = "*"
 numpy = "*"
 pandas = "*"
+pexpect = "*"
 
 
 [dev-packages]
