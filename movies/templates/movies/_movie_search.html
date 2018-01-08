@@ -1,16 +1,26 @@
 {% load i18n static %}
+{% get_current_language as LANGUAGE_CODE %}
 
 <div class="row movieResult">
     <img class="col-3" src="{% static 'images/cinemathequepic.jpg' %}" />
     <div class="col-9">
         <section>
-            <h3><strong>{% trans "Movie name" %}</strong> {% trans "(Year)" %} <span>128 {% trans "min" %}</span></h3>
+            <h3>
+                <strong>
+                    <a href= "{% url 'movies:movie_detail' object.id %}">{{ object.get_pretty_title }}</a>
+                </strong>
+                {% if object.year != none %}
+                    ({{ object.year }})
+                {% endif %}
+                {% if object.duration != none %}
+                    <span>{{ object.duration }} {% trans "min" %}</span>
+		        {% endif %}
+            </h3>
             <form action="">
                 <input type="image" src="{% static 'images/Shopping-bag-black.svg' %}" alt="Submit">
             </form>
-            <p>{% trans "Director" %}: <strong>Efraim Keshon</strong></p>
+            <p>{% trans "Director" %}: <strong>Name</strong></p>
             <p><strong>{% trans "Summery" %}:</strong>
-                השוטר אזולאי" מתאר את חייו של אברהם אזולאי, שוטר ביפו אשר במשך כל עשרים שנות שרותו במשטרה נותר בתפקיד שוטר מקוף פשוט בדרגת רב-שוטר. הסיבה העיקרית לכך היא כשלונותיו תקציר: "השוטר אזולאי" מתאר את חייו של אברהם אזולאי, שוטר ביפו אשר במשך כל עשרים שנות שרותו במשטרה נותר בתפקיד שוטר מקוף פשוט בדרגת רב-שוטר…
             </p>
         </section>
     </div>

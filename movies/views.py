@@ -242,8 +242,9 @@ def search_results(request, results, query_str):
         'objects': results,
         'count': len(results),
         'query': query_str,
+        'set_jumbotron': 3,
     }
-    return render(request, "movies/search_result.html", d)
+    return render(request, "movies/searchresult.html", d)
 
 
 def search_title(request, query):

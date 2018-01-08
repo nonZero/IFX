@@ -78,6 +78,14 @@
 
 	</div>
 
-	{% block header %}{% if set_jumbotron == 1 %}{% include 'movies/main_jumbotron.html' %}{% elif set_jumbotron == 2 %}{% include 'movies/about_jumbotron.html' %}{% elif set_jumbotron == 3 %}{% include 'movies/searchresult_jumbotron.html' %}{% endif %}{% endblock %}
+	{% block header %}
+		{% if set_jumbotron == 1 %}
+			{% include 'movies/main_jumbotron.html' %}
+		{% elif set_jumbotron == 2 %}
+			{% include 'movies/about_jumbotron.html' %}
+		{% elif set_jumbotron == 3 %}
+			{% include 'movies/searchresult_jumbotron.html' %}
+		{% endif %}
+	{% endblock %}
 
 </header>

@@ -107,7 +107,7 @@ class Collection_Movie(models.Model):
 
 
 class Description(models.Model):
-    movie = models.ForeignKey(Movie)
+    movie = models.ForeignKey(Movie, related_name='description')
     summery = models.TextField()
     lang = models.CharField(max_length=300)
     
