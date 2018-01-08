@@ -1,3 +1,5 @@
+from io import StringIO
+
 from fabric.api import *
 env.user = "sysop"
 env.hosts = ["ifx.oglam.hasadna.org.il"]
@@ -41,6 +43,7 @@ APT_PACKAGES = [
 
     'nginx',  # a fast web server
     'uwsgi',  # runs python (django) apps via WSGI
+    'uwsgi-plugin-python3',  # runs python (django) apps via WSGI
 
     'rabbitmq-server',  # for offline tasks via celery
 ]
@@ -129,3 +132,100 @@ def git_pull():
 def create_db():
     with virtualenv():
         run("./manage.py sqlcreate | psql", pty=False)
+
+@task
+def migrate():
+    m('migrate --noinput')
+
+UWSGI_CONF = """
+[uwsgi]
+plugin = python3
+virtualenv = {env.venv_path}
+chdir = {env.code_dir}
+wsgi-file = {env.wsgi_file}
+processes = 4
+threads = 1
+stats = 127.0.0.1:{env.stats_port}
+"""
+
+env.app_name = "ifx"
+env.wsgi_file = "ifx/wsgi.py"
+env.stats_port = 9000
+
+
+@task
+def create_uwsgi_conf():
+    conf = UWSGI_CONF.format(env=env)
+    filename = f"/etc/uwsgi/apps-available/{env.app_name}.ini"
+    enabled = f"/etc/uwsgi/apps-enabled/{env.app_name}.ini"
+    put(StringIO(conf), filename, use_sudo=True, )
+    sudo(f"ln -sf {filename} {enabled}")
+    sudo("service uwsgi stop")
+    sudo("service uwsgi start")
+
+NGINX_CONF = """
+server {{
+    listen      80;
+    server_name {host};
+    charset     utf-8;
+
+    location /static/ {{
+        alias {env.static_path};
+    }}
+
+    location / {{
+        uwsgi_pass  unix://{env.uwsgi_socket};
+        include     uwsgi_params;
+    }}
+}}"""
+
+env.uwsgi_socket = f"/run/uwsgi/app/{env.app_name}/socket"
+env.static_path = f"{env.code_dir}/collected_static/"
+
+
+@task
+def create_nginx_conf():
+    conf = NGINX_CONF.format(
+        host=env.hosts[0],
+        env=env,
+    )
+    filename = f"/etc/nginx/sites-available/{env.app_name}.conf"
+    enabled = f"/etc/nginx/sites-enabled/{env.app_name}.conf"
+    put(StringIO(conf), filename, use_sudo=True, )
+    sudo(f"ln -sf {filename} {enabled}")
+
+    sudo("rm -vf /etc/nginx/sites-enabled/default")
+
+    sudo("nginx -t")
+
+    sudo("service nginx reload")
+
+
+@task
+def nginx_log():
+    sudo("tail /var/log/nginx/error.log")
+
+
+@task
+def uwsgi_log():
+    sudo("tail /var/log/uwsgi/app/ifx.log")
+
+@task
+def git_pull():
+    with virtualenv():
+        run("git pull", pty=False)
+
+@task
+def collect_static():
+    m('collectstatic --noinput')
+
+@task
+def reload_app():
+    sudo('systemctl reload uwsgi.service')
+
+@task
+def upgrade():
+    git_pull()
+    migrate()
+    collect_static()
+    reload_app()
