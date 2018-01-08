@@ -1,5 +1,5 @@
 from fabric.api import *
-
+gi
 env.user = "sysop"
 env.hosts = ["ifx.oglam.hasadna.org.il"]
 
@@ -104,9 +104,9 @@ def pip_install():
         run("pip install -r requirements.txt", pty=False)
 
 @task
-def m(cmd):
+def m(cmd, pty=False):
     with virtualenv():
-        run(f"./manage.py {cmd}", pty=False)
+        run(f"./manage.py {cmd}", pty=pty)
 
 @task
 def check():
@@ -115,7 +115,12 @@ def check():
 @task
 def send_test_mail():
     m('sendtestemail --admin')
-    
+
+@task
+def createsuperuser():
+    m('createsuperuser', True)
+
+
 @task
 def git_pull():
     with virtualenv():
