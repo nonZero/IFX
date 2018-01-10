@@ -5,10 +5,10 @@ from django.utils.translation import ugettext_lazy as _
 class Tag(models.Model):
     tid = models.IntegerField(unique=True)
     title = models.CharField(max_length=300)
-    
+    type_1 = models.CharField(max_length=300, null=True, blank=True)
+
     def __str__(self):
         return self.title
-
 
 
 class Field(models.Model):
@@ -18,39 +18,26 @@ class Field(models.Model):
     def __str__(self):
         return self.title
 
+
 class Movie(models.Model):
     bid = models.IntegerField(unique=True)
     year = models.IntegerField(null=True, blank=True)
     duration = models.IntegerField(null=True, blank=True)
-    title_he = models.CharField(max_length=300)
-    title_en = models.CharField(max_length=300)
-    summary_he = models.CharField(max_length=300)
-    summary_en = models.CharField(max_length=300)
+    title_he = models.CharField(max_length=300, null=True, blank=True)
+    title_en = models.CharField(max_length=300, null=True, blank=True)
+    summary_he = models.TextField(null=True, blank=True)
+    summary_en = models.TextField(null=True, blank=True)
 
     def __str__(self):
-        return str(self.id)
+        return str('{}: "en:{}", "he:{}"'.format(self.id, self.title_en, self.title_he))
     
     def get_title(self):
-        titles = Movie_Title.objects.filter(movie = self.id)
-        result = {}
-        for d in titles:
-            result[d.lang] = d.title
-        return result
+        if self.title_he:
+            return self.title_he
+        elif self.title_en:
+            return self.title_en
+        return '<No Title>'
 
-    def get_pretty_title(self):
-        titles = Movie_Title.objects.filter(movie = self.id)
-        title_list = []
-        for d in titles:
-            title_list.append(d.title)
-        return '|'.join(title_list)
-
-    def get_description(self):
-        ds = Description.objects.filter(movie=self.id)
-        result = {}
-        for d in ds:
-            result[d.lang] = d.summery
-        return result
-    
     def get_extra_data(self):
         mft = Movie_Tag_Field.objects.filter(movie=self.id)
         fields = {}
@@ -61,15 +48,6 @@ class Movie(models.Model):
                 fields[item.field.title] = [(item.tag.title)]
         
         return fields
-
-
-class Movie_Title(models.Model):
-    movie = models.ForeignKey(Movie)
-    title = models.CharField(max_length=1000)
-    lang = models.CharField(max_length=300)
-    
-    def __str__(self):
-        return self.title
 
 
 class Tag_Field(models.Model):
@@ -87,6 +65,7 @@ class Tag_Field(models.Model):
 #     field = models.ForeignKey(Field)
 #     lang = models.CharField(max_length=300)
 #     title = models.CharField(max_length=300)
+
 
 class Movie_Tag_Field(models.Model):
     movie = models.ForeignKey(Movie)
@@ -122,13 +101,13 @@ class Languages(object):
     )
 
 
-class Description(models.Model):
-    movie = models.ForeignKey(Movie, related_name='description')
-    summery = models.TextField()
-    lang = models.CharField(max_length=300, choices=Languages.choices)
-    
-    def __str__(self):
-        return 'Movie={}, MovieId={}, Summary={}, Lang={}'.format(self.movie, self.movie.bid, self.summery, self.lang)
+# class Description(models.Model):
+#     movie = models.ForeignKey(Movie, related_name='description')
+#     summery = models.TextField()
+#     lang = models.CharField(max_length=300, choices=Languages.choices)
+#
+#     def __str__(self):
+#         return 'Movie={}, MovieId={}, Summary={}, Lang={}'.format(self.movie, self.movie.bid, self.summery, self.lang)
 
 
 class Person(models.Model):

@@ -19,17 +19,17 @@
         <th>bid</th>
         <th>Title</th>
         <th>Year</th>
-        <th>Language</th>
+        <th>Duration</th>
     </tr>
     {% for object in objects %}
         <tr>
             <td>#{{ object.id }}</td>
             <td>{{ object.bid }}</td>
             <td>
-                <a href= "{% url 'movies:movie_detail' object.id %}">{{ object.get_pretty_title }}</a>
+                <a href= "{% url 'movies:movie_detail' object.id %}">{{ object.get_title }}</a>
             </td>
             <td>{{ object.year }}</td>
-            <td>{{ object.lang }} </td>
+            <td>{{ object.duration }}</td>
         </tr>
     {% endfor %}
 

@@ -1,18 +1,19 @@
 <h1>Movie #{{ movie.id }}</h1>
 
 <ul>
-    <li><b>Title: {{ movie.get_pretty_title }}</b></li>
+    <li><b>Title: {{ movie.get_title }}</b>
+        <ul>
+            <li><b>Title(he):</b>{{movie.title_he}}</li>
+            <li><b>Title(en):</b>{{movie.title_en}}</li>
+        </ul>
+    </li>
     <li>Year: {{ movie.year }}</li>
     <li>Language: {{ movie.lang }}  </li>
-    <li>Description:<ul>
-        {% for key,value in movie.get_description.items %}
-        <li>
-            <b>Summary:</b><p>{{value}}</p>
-            <b>Language:</b><q>{{key}}</q>
-            <ul></ul>
-        </li>
-        {% endfor %}
-    </ul>
+    <li>Description:
+        <ul>
+            <b>Summary(he):</b><p>{{movie.summary_he}}</p>
+            <b>Summary(en):</b><p>{{movie.summary_en}}</p>
+        </ul>
     </li>
     <li>bid: {{movie.bid}} </li>
     <li>Additional data:<ul>
@@ -28,6 +29,6 @@
     </li>
 </ul>
 
-<a href="{% url "movies:movies_list" %}">Back To My Movies</a>
+<a href='{% url "movies:movies_list" %}'>Back To My Movies</a>
 
 
