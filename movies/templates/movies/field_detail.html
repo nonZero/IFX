@@ -1,0 +1,32 @@
+<h1>Field #{{ o.id }}</h1>
+
+<ul>
+    <li><b>Title: {{ o.title }}</b></li>
+    <li>fid: {{o.tid}} </li>
+    <li>
+        Movie-Field-Tag ({{ o.movie_tag_field_set.count }} item(s)):
+        {% for item in o.movie_tag_field_set.all %}
+            <ul>
+                Movie:
+                <a href= "{% url 'movies:movie_detail' item.movie.id %}">
+                    {{item.movie.get_pretty_title}}</a>,
+                Field:
+                {{ item.field}}
+            </ul>
+        {% endfor %}
+    </li>
+    <li>
+        Field-Tag ({{ o.tag_field_set.count }} item(s)):
+        {% for item in o.tag_field_set.all %}
+            <ul>
+                Field: {{ item.field}},
+                Language: {{ item.lang }},
+                title: {{ item.title }}
+            </ul>
+        {% endfor %}
+    </li>
+</ul>
+
+<a href="{% url "movies:field_list" %}">Back To My Fields</a>
+
+

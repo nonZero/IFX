@@ -22,7 +22,11 @@ class Movie(models.Model):
     bid = models.IntegerField(unique=True)
     year = models.IntegerField(null=True, blank=True)
     duration = models.IntegerField(null=True, blank=True)
-    
+    title_he = models.CharField(max_length=300)
+    title_en = models.CharField(max_length=300)
+    summary_he = models.CharField(max_length=300)
+    summary_en = models.CharField(max_length=300)
+
     def __str__(self):
         return str(self.id)
     
@@ -74,6 +78,10 @@ class Tag_Field(models.Model):
     lang = models.CharField(max_length=300)
     title = models.CharField(max_length=300)
 
+
+    def __str__(self):
+        return 'Tag={}, Field={}, Lang={}, Title={}'.format(
+            self.tag, self.field, self.lang, self.title)
 # class Movie_Field(models.Model):
 #     movie = models.ForeignKey(Movie)
 #     field = models.ForeignKey(Field)
@@ -121,3 +129,12 @@ class Description(models.Model):
     
     def __str__(self):
         return 'Movie={}, MovieId={}, Summary={}, Lang={}'.format(self.movie, self.movie.bid, self.summery, self.lang)
+
+
+class Person(models.Model):
+    name_he = models.CharField(max_length=300)
+    name_en = models.CharField(max_length=300)
+    first_name_he = models.CharField(max_length=300)
+    first_name_en = models.CharField(max_length=300)
+    last_name_he = models.CharField(max_length=300)
+    last_name_en = models.CharField(max_length=300)

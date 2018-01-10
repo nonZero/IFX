@@ -10,14 +10,18 @@
         <th>#</th>
         <th>fid</th>
         <th>Title</th>
-        <th>Count</th>
+        <th>Tag-Field Count</th>
+        <th>Movie-Tag-Field Count</th>
     </tr>
     {% for object in objects %}
         <tr>
             <td>#{{ object.id }}</td>
             <td>{{ object.fid }}</td>
-            <td>{{ object.title }}</td>
+            <td>
+                <a href= "{% url 'movies:field_detail' object.id %}">{{ object.title }}</a>
+            </td>
             <td>{{ object.tag_field_set.count }}</td>
+            <td>{{ object.movie_tag_field_set.count }}</td>
         </tr>
     {% endfor %}
 

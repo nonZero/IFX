@@ -316,10 +316,26 @@ def field_list(request):
     return render(request, "movies/field_list.html", d)
 
 
+def field_detail(request, id):
+    o = get_object_or_404(Field, id=id)
+    d = {
+        'o': o,
+    }
+    return render(request, "movies/field_detail.html", d)
+
+
 def tag_list(request):
-    qs = Tag.objects.all()
+    qs = Tag.objects.order_by('?')[:100]
     d = {
         'objects': qs,
         'count': len(qs)
     }
     return render(request, "movies/tag_list.html", d)
+
+
+def tag_detail(request, id):
+    o = get_object_or_404(Tag, id=id)
+    d = {
+        'o': o,
+    }
+    return render(request, "movies/tag_detail.html", d)
