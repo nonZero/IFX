@@ -4,20 +4,21 @@
         <div class="row justify-content-center">
             <div class="col col-2">
                 <div class="dropdown">
-                  <select id="idselect" class="dropdown dropBtnSearch" aria-labelledby="dropdownMenu1">
-                    <option value="all"><a href="#">{% trans "Search All" %}</a></option>
-                      <span role="separator" class="divider"></span>
-                    <option value="name"><a href="#">{% trans "Title" %}</a></option>
-                      <span role="separator" class="divider"></span>
-                    <option value="year"><a href="#">{% trans "Year/s" %}</a></option>
-                      <span role="separator" class="divider"></span>
-                    <option value="director"><a href="#">{% trans "Director" %}</a></option>
-                  </select>
+                  <select id="idselect" name="idselect" class="dropdown dropBtnSearch searchDD" aria-labelledby="dropdownMenu1"
+                              onchange="{% if LANGUAGE_CODE == 'he' %}onJumboSearchChangeHe(){% else %}onJumboSearchChange(){% endif %}">
+                        <option value="all"><a href="#">{% trans "Search All" %}</a></option>
+                          <span role="separator" class="divider"></span>
+                        <option value="title"><a href="#">{% trans "Title" %}</a></option>
+                          <span role="separator" class="divider"></span>
+                        <option value="year"><a href="#">{% trans "Year/s" %}</a></option>
+                          <span role="separator" class="divider"></span>
+                        <option value="director"><a href="#">{% trans "Director" %}</a></option>
+                      </select>
                 </div>
             </div>
             <div class="col-5 searchContainer noPadding">
                 <div>
-                    <input type="text" class="btnSearchIdex sInput" placeholder="{% trans 'Search...' %}">
+                    <input type="text" id="searchbox" class="btnSearchIdex sInput" placeholder="{% trans 'Search...' %}">
                 </div>
             </div>
             <div class="col col-1 padding6">
