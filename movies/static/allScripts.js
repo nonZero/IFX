@@ -27,3 +27,25 @@ onSearchChange = () => {
     $(".searchDD").val()=="director" ?
     $("div > div input.sInput")[0].placeholder="[Director's name]": none;
 }
+
+onJumboSearchChangeHe = () => {
+    $("#idselect").val()=="all" ?
+    $("#searchbox")[0].placeholder="חפש...":
+    $("#idselect").val()=="title" ?
+    $("#searchbox")[0].placeholder="[שם הסרט]":
+    $("#idselect").val()=="year" ?
+    $("#searchbox")[0].placeholder="[שנה]-[שנה]/[שנה]":
+    $("#idselect").val()=="director" ?
+    $("#searchbox")[0].placeholder="[שם במאי]": $(".sInput")[0].placeholder="erroe";
+}
+
+onJumboSearchChange = () => {
+    $("#idselect").val()=="all" ?
+    $("#searchbox")[0].placeholder="Search...":
+    $("#idselect").val()=="title" ?
+    $("#searchbox")[0].placeholder="[Title]":
+    $("#idselect").val()=="year" ?
+    $("#searchbox")[0].placeholder="[Year]-[Year]/[Year]":
+    $("#idselect").val()=="director" ?
+    $("#searchbox")[0].placeholder="[Director's name]": none;
+}
