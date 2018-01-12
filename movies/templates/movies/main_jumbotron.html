@@ -7,7 +7,8 @@
             <div class="row justify-content-center">
                 <div class="col col-2">
                     <div class="dropdown">
-                      <select id="idselect" name="idselect" class="dropdown dropBtnSearch" aria-labelledby="dropdownMenu1">
+                      <select id="idselect" name="idselect" class="dropdown dropBtnSearch searchDD" aria-labelledby="dropdownMenu1"
+                              onchange="{% if LANGUAGE_CODE == 'he' %}onSearchChangeHe(){% else %}onSearchChange(){% endif %}">
                         <option value="all"><a href="#">{% trans "Search All" %}</a></option>
                           <span role="separator" class="divider"></span>
                         <option value="title"><a href="#">{% trans "Title" %}</a></option>
@@ -19,9 +20,7 @@
                     </div>
                 </div>
                 <div class="col-5 searchContainer noPadding">
-                    <div>
-                        <input type="text" class="btnSearchIdex" id="searchbox" name="q" placeholder="{% trans 'Search...' %}">
-                    </div>
+                    <input type="text" class="btnSearchIdex sInput" id="searchbox" name="q" placeholder="{% trans 'Search...' %}">
                 </div>
                 <div class="col col-1 padding6">
                     <span class="input-group-btn">

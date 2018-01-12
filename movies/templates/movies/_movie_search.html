@@ -20,9 +20,11 @@
                 <input type="image" src="{% static 'images/Shopping-bag-black.svg' %}" alt="Submit">
             </form>
             <p>{% trans "Director" %}: <strong>Name</strong></p>
-            <p><strong>{% trans "Summery" %}:</strong>
-                {{ object|get_description }}
-            </p>
+            {% if object|get_description != none %}
+                <p><strong>{% trans "Summery" %}:</strong>
+                    {{ object|get_description }}
+                </p>
+            {% endif %}
         </section>
     </div>
     <hr>
