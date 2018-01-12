@@ -71,6 +71,7 @@ button.btn.btn-default.glyphicon.glyphicon-search {
     font-size: 14pt;
     -webkit-box-shadow: 0 0 1px 10px #D8D8D8;
     box-shadow: 0 0 0 10px #D8D8D8;
+    border: none;
 }
 
 .noPadding{
@@ -168,6 +169,7 @@ select#idselect {
     font-size: 14pt;
     -webkit-box-shadow: 0 0 0px 10px #D8D8D8;
     box-shadow: 0 0 0 10px #D8D8D8;
+    border: none;
 }
 
 div#boxContainer {
