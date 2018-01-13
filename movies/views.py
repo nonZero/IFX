@@ -325,3 +325,10 @@ def person_list(request):
         'count': len(qs)
     }
     return render(request, "movies/person_list.html", d)
+
+def person_detail(request, id):
+    o = get_object_or_404(Person, id=id)
+    d = {
+        'o': o,
+    }
+    return render(request, "movies/person_detail.html", d)

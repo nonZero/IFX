@@ -23,4 +23,5 @@ urlpatterns = [
     url(r"^$", views.HomePage.as_view(), name='homePage'),
     url(r"^movies/search/$", views.search_query, name='search_query'),
     url(r"^person/$", views.person_list, name='person_list'),
+    url(r"^person/(?P<id>[0-9]+)/$", views.person_detail, name='person_detail'),
 ]
