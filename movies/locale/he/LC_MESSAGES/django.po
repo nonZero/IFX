@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-03 12:26+0200\n"
-"PO-Revision-Date: 2018-01-03 12:33+0200\n"
+"POT-Creation-Date: 2018-01-12 20:19+0200\n"
+"PO-Revision-Date: 2018-01-12 20:20+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -89,56 +89,48 @@ msgstr "Eng"
 msgid "עבר"
 msgstr "Eng"
 
-#: .\templates\movies\_header1.html:60 .\templates\movies\main_jumbotron.html:9
-#: .\templates\movies\searchresult_jumbotron.html:8
+#: .\templates\movies\_header1.html:64
+#: .\templates\movies\main_jumbotron.html:11
+#: .\templates\movies\searchresult_jumbotron.html:9
 msgid "Search All"
 msgstr "חיפוש חופשי"
 
-#: .\templates\movies\_header1.html:62
-#: .\templates\movies\main_jumbotron.html:11
+#: .\templates\movies\_header1.html:66
+#: .\templates\movies\main_jumbotron.html:13
 #: .\templates\movies\movie_details.html:6
-#: .\templates\movies\searchresult_jumbotron.html:10
+#: .\templates\movies\searchresult_jumbotron.html:11
 msgid "Title"
 msgstr "סרט"
 
-#: .\templates\movies\_header1.html:64
-#: .\templates\movies\main_jumbotron.html:13
-#: .\templates\movies\searchresult_jumbotron.html:12
+#: .\templates\movies\_header1.html:68
+#: .\templates\movies\main_jumbotron.html:15
+#: .\templates\movies\searchresult_jumbotron.html:13
 msgid "Year/s"
 msgstr "שנה/ים"
 
-#: .\templates\movies\_header1.html:66 .\templates\movies\_movie_search.html:11
-#: .\templates\movies\main_jumbotron.html:15
+#: .\templates\movies\_header1.html:70 .\templates\movies\_movie_search.html:23
+#: .\templates\movies\main_jumbotron.html:17
 #: .\templates\movies\movie_details.html:15
-#: .\templates\movies\searchresult_jumbotron.html:14
+#: .\templates\movies\searchresult_jumbotron.html:15
 msgid "Director"
 msgstr "במאי/ת"
 
-#: .\templates\movies\_header1.html:70
+#: .\templates\movies\_header1.html:74
 #: .\templates\movies\main_jumbotron.html:21
-#: .\templates\movies\searchresult_jumbotron.html:20
+#: .\templates\movies\searchresult_jumbotron.html:21
 msgid "Search..."
 msgstr "חיפוש..."
 
-#: .\templates\movies\_movie_search.html:7
-msgid "Movie name"
-msgstr "שם הסרט"
-
-#: .\templates\movies\_movie_search.html:7
-#: .\templates\movies\movie_details.html:6
-msgid "(Year)"
-msgstr "(שנה)"
-
-#: .\templates\movies\_movie_search.html:7
+#: .\templates\movies\_movie_search.html:17
 msgid "min"
 msgstr "שניות"
 
-#: .\templates\movies\_movie_search.html:12
+#: .\templates\movies\_movie_search.html:25
 #: .\templates\movies\movie_details.html:30
 msgid "Summery"
 msgstr "תקציר"
 
-#: .\templates\movies\about_jumbotron.html:9
+#: .\templates\movies\about_jumbotron.html:8
 msgid "About The Israeli Film Archive"
 msgstr "אודות הארכיון הישראלי לסרטים"
 
@@ -153,6 +145,10 @@ msgstr "לעיון באוסף"
 #: .\templates\movies\main_jumbotron.html:4
 msgid "The Israeli Film Archive"
 msgstr "הארכיון הישראלי לסרטים"
+
+#: .\templates\movies\movie_details.html:6
+msgid "(Year)"
+msgstr "(שנה)"
 
 #: .\templates\movies\movie_details.html:14
 msgid "Runtime"
@@ -182,33 +178,40 @@ msgstr "ז'אנר"
 msgid "Color"
 msgstr "צבעוניות"
 
-#: .\templates\movies\searchresult.html:6
-msgid "Search reasults for:"
+#: .\templates\movies\search_result.html:7
+msgid "Search results for:"
 msgstr "תוצאות עבור:"
 
-#: .\templates\movies\searchresult.html:9
-msgid "105 Titles were found"
-msgstr "נמצאו 105 סרטים"
+#: .\templates\movies\searchresult.html:7
+msgid "Search reasults for"
+msgstr "תוצאות עבור"
 
-#: .\templates\movies\searchresult.html:13
-msgid "Sorted by:"
-msgstr "מיון תוצאות לפי:"
+#: .\templates\movies\searchresult.html:10
+msgid "Titles were found"
+msgstr "סרטים נמצאו"
 
-#: .\templates\movies\searchresult.html:15
+#: .\templates\movies\searchresult.html:14
+msgid "Sorted by"
+msgstr "מיון תוצאות לפי"
+
+#: .\templates\movies\searchresult.html:16
 msgid "Title A-Z"
 msgstr "אלפביתי א-ת"
 
-#: .\templates\movies\searchresult.html:17
+#: .\templates\movies\searchresult.html:18
 msgid "Oldest"
 msgstr "שנים - מהישן לחדש"
 
-#: .\templates\movies\searchresult.html:19
+#: .\templates\movies\searchresult.html:20
 msgid "Newest"
 msgstr "שנים - מהחדש לישן"
 
-#: .\templates\movies\searchresult.html:21
+#: .\templates\movies\searchresult.html:22
 msgid "Director A-Z"
 msgstr "במאי/ת - א-ת"
+
+#~ msgid "Movie name"
+#~ msgstr "שם הסרט"
 
 #~ msgid "Director's Name"
 #~ msgstr "במאי/ת"
