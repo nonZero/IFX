@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, TemplateView
 from django.db.models import Q
 
-from movies.models import Movie, Collection, Tag, Field, Movie_Tag_Field
+from movies.models import Movie, Collection, Tag, Field, Movie_Tag_Field, Person
 from movies.forms import MovieForm, CollectionForm, SearchByYearForm
 
 
@@ -316,3 +316,12 @@ def tag_detail(request, id):
         'o': o,
     }
     return render(request, "movies/tag_detail.html", d)
+
+
+def person_list(request):
+    qs = Person.objects.order_by('?')[:100]
+    d = {
+        'objects': qs,
+        'count': len(qs)
+    }
+    return render(request, "movies/person_list.html", d)
