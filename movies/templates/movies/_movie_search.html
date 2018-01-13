@@ -1,4 +1,5 @@
-{% load i18n static movies %}
+{% load static i18n %}
+<!--{% load i18n static movies %}-->
 {% get_current_language as LANGUAGE_CODE %}
 
 <div class="row movieResult">
@@ -20,11 +21,15 @@
                 <input type="image" src="{% static 'images/Shopping-bag-black.svg' %}" alt="Submit">
             </form>
             <p>{% trans "Director" %}: <strong>Name</strong></p>
-            {% if object|get_description != none %}
+            {% if object|get_description and object|get_description|length > 400 %}
+                <p><strong>{% trans "Summery" %}:</strong>
+                    {{ object|get_description|slice:":400" }}...
+                </p>
+            {% elif object|get_description and bject|get_description|length > 2 %}
                 <p><strong>{% trans "Summery" %}:</strong>
                     {{ object|get_description }}
                 </p>
-            {% endif %}
+             {% endif %}
         </section>
     </div>
     <hr>

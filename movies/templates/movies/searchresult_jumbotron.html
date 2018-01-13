@@ -1,9 +1,10 @@
-{% load i18n static %}
+{% load i18n %}
 
 <div id="smaller_jum" class="jumbotron">
+    <form id="searchform" action="{% url 'movies:search_query' %}" method="POST" accept-charset="utf-8">
+        {% csrf_token %}
         <div class="row justify-content-center">
-            <div class="col col-2">
-                <div class="dropdown">
+            <div class="col col-2 dropdown">
                   <select id="idselect" name="idselect" class="dropdown dropBtnSearch searchDD" aria-labelledby="dropdownMenu1"
                               onchange="{% if LANGUAGE_CODE == 'he' %}onJumboSearchChangeHe(){% else %}onJumboSearchChange(){% endif %}">
                         <option value="all"><a href="#">{% trans "Search All" %}</a></option>
@@ -13,24 +14,17 @@
                         <option value="year"><a href="#">{% trans "Year/s" %}</a></option>
                           <span role="separator" class="divider"></span>
                         <option value="director"><a href="#">{% trans "Director" %}</a></option>
-                      </select>
-                </div>
+                  </select>
             </div>
             <div class="col-5 searchContainer noPadding">
-                <div>
-                    <input type="text" id="searchbox" class="btnSearchIdex sInput" placeholder="{% trans 'Search...' %}">
-                </div>
+                <input type="text" id="searchbox" name="q" class="btnSearchIdex sInput" placeholder="{% trans 'Search...' %}">
             </div>
             <div class="col col-1 padding6">
                 <span class="input-group-btn">
-                        <button class="btn btn-default btnSearch glyphicon glyphicon-search" type="button"></button>
+                        <button class="btn btn-default btnSearch glyphicon glyphicon-search" type="submit"></button>
                 </span>
             </div>
 
         </div>
-        {% comment %}
-        <div class="row justify-content-center">
-            <div id="boxContainer" class="col"></div>
-        </div>
-        {% endcomment %}
+    </form>
 </div>
