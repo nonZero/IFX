@@ -9,7 +9,7 @@
             <ul>
                 Movie:
                 <a href= "{% url 'movies:movie_detail' item.movie.id %}">
-                    {{item.movie.get_pretty_title}}</a>,
+                    {{item.movie.get_title}}</a>,
                 Field:
                 {{ item.field}}
             </ul>
