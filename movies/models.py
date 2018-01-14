@@ -12,7 +12,8 @@ class Languages(object):
 class Tag(models.Model):
     tid = models.IntegerField(unique=True)
     title = models.CharField(max_length=300)
-    type_1 = models.CharField(max_length=300, null=True, blank=True)
+    type_id = models.CharField(max_length=300, null=True, blank=True)
+    lang = models.CharField(max_length=300, null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -21,7 +22,7 @@ class Tag(models.Model):
 class Field(models.Model):
     fid = models.CharField(unique=True, max_length=300)
     title = models.CharField(max_length=300)
-    
+
     def __str__(self):
         return self.title
 
@@ -63,7 +64,6 @@ class Tag_Field(models.Model):
     lang = models.CharField(max_length=300)
     title = models.CharField(max_length=300)
 
-
     def __str__(self):
         return 'Tag={}, Field={}, Lang={}, Title={}'.format(
             self.tag, self.field, self.lang, self.title)
@@ -97,12 +97,14 @@ class Collection_Movie(models.Model):
 
 
 class Person(models.Model):
+    tid = models.IntegerField(unique=True, null=True, blank=True)
     name_he = models.CharField(max_length=300)
     name_en = models.CharField(max_length=300)
     first_name_he = models.CharField(max_length=300)
     first_name_en = models.CharField(max_length=300)
     last_name_he = models.CharField(max_length=300)
     last_name_en = models.CharField(max_length=300)
+
 
 class MoviePerson(models.Model):
     movie = models.ForeignKey(Movie)

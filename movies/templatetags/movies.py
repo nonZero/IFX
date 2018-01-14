@@ -7,8 +7,8 @@ register = template.Library()
 @register.filter
 def get_description(obj):
     lang = get_language()[:2]
-    if lang=='he':
+    if lang == 'he':
         return obj.summary_he
-    elif lang=='en':
+    elif lang == 'en':
         return obj.summary_en
     return ''
