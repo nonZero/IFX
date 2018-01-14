@@ -1,36 +1,38 @@
-{% load static %}
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-<link href="{% static "style.css" %}" rel="stylesheet">
+{% extends 'movies/../base.html' %}
+{% load static i18n %}
 
-<h1>My Movies</h1>
+{% block content %}
 
-<ul>
-    <a href= {% url "movies:movie_create" %}>Add movie...</a>
-</ul>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static "style.css" %}" rel="stylesheet">
 
-<ul>
-    <a href= {% url "movies:search_by_year" %}>Search by year...</a>
-</ul>
+    <h1>My Movies</h1>
 
-<ul>Count: {{count}} items</ul>
-<table border="1" width="100%">
-    <tr>
-        <th>#</th>
-        <th>bid</th>
-        <th>Title</th>
-        <th>Year</th>
-        <th>Duration</th>
-    </tr>
-    {% for object in objects %}
+    <ul>
+        <a href= {% url "movies:movie_create" %}>Add movie...</a>
+    </ul>
+
+    <ul>Count: {{count}} items</ul>
+    <table border="1" width="100%">
         <tr>
-            <td>#{{ object.id }}</td>
-            <td>{{ object.bid }}</td>
-            <td>
-                <a href= "{% url 'movies:movie_detail' object.id %}">{{ object.get_title }}</a>
-            </td>
-            <td>{{ object.year }}</td>
-            <td>{{ object.duration }}</td>
+            <th>#</th>
+            <th>bid</th>
+            <th>Title</th>
+            <th>Year</th>
+            <th>Duration</th>
         </tr>
-    {% endfor %}
+        {% for object in objects %}
+            <tr>
+                <td>#{{ object.id }}</td>
+                <td>{{ object.bid }}</td>
+                <td>
+                    <a href= "{% url 'movies:movie_detail' object.id %}">{{ object.get_title }}</a>
+                </td>
+                <td>{{ object.year }}</td>
+                <td>{{ object.duration }}</td>
+            </tr>
+        {% endfor %}
 
-</table>
+    </table>
+
+{% endblock %}

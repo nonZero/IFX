@@ -1,32 +1,36 @@
-<h1>Field #{{ o.id }}</h1>
+{% extends 'movies/../base.html' %}
+{% load static i18n %}
 
-<ul>
-    <li><b>Title: {{ o.title }}</b></li>
-    <li>fid: {{o.tid}} </li>
-    <li>
-        Movie-Field-Tag ({{ o.movie_tag_field_set.count }} item(s)):
-        {% for item in o.movie_tag_field_set.all %}
-            <ul>
-                Movie:
-                <a href= "{% url 'movies:movie_detail' item.movie.id %}">
-                    {{item.movie.get_title}}</a>,
-                Field:
-                {{ item.field}}
-            </ul>
-        {% endfor %}
-    </li>
-    <li>
-        Field-Tag ({{ o.tag_field_set.count }} item(s)):
-        {% for item in o.tag_field_set.all %}
-            <ul>
-                Field: {{ item.field}},
-                Language: {{ item.lang }},
-                title: {{ item.title }}
-            </ul>
-        {% endfor %}
-    </li>
-</ul>
+{% block content %}
+    <h1>Field #{{ o.id }}</h1>
 
-<a href="{% url "movies:field_list" %}">Back To My Fields</a>
+    <ul>
+        <li><b>Title: {{ o.title }}</b></li>
+        <li>fid: {{o.tid}} </li>
+        <li>
+            Movie-Field-Tag ({{ o.movie_tag_field_set.count }} item(s)):
+            {% for item in o.movie_tag_field_set.all %}
+                <ul>
+                    Movie:
+                    <a href= "{% url 'movies:movie_detail' item.movie.id %}">
+                        {{item.movie.get_title}}</a>,
+                    Field:
+                    {{ item.field}}
+                </ul>
+            {% endfor %}
+        </li>
+        <li>
+            Field-Tag ({{ o.tag_field_set.count }} item(s)):
+            {% for item in o.tag_field_set.all %}
+                <ul>
+                    Field: {{ item.field}},
+                    Language: {{ item.lang }},
+                    title: {{ item.title }}
+                </ul>
+            {% endfor %}
+        </li>
+    </ul>
 
+    <a href="{% url "movies:field_list" %}">Back To My Fields</a>
 
+{% endblock %}
