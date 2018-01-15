@@ -1,17 +1,17 @@
-import pdb
 from builtins import super
 
+from django.db.models import Q
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, TemplateView
-from django.db.models import Q
 
-from movies.models import Movie, Collection, Tag, Field, Movie_Tag_Field, Person
 from movies.forms import MovieForm, CollectionForm, SearchByYearForm
+from movies.models import Movie, Collection, Tag, Field, Movie_Tag_Field, \
+    Person
 
 
 def homePage(request):
-     return render(request, "movies/homePage.html", {'set_jumbotron':1})
+    return render(request, "movies/homePage.html", {'set_jumbotron': 1})
 
 
 class HomePage(TemplateView):
@@ -24,14 +24,15 @@ class HomePage(TemplateView):
 
 
 def about(request):
-    return render(request, "movies/about.html", {'set_jumbotron':2})
+    return render(request, "movies/about.html", {'set_jumbotron': 2})
 
 
 def searchresult(request):
-    return render(request, "movies/searchresult.html", {'set_jumbotron':3})
+    return render(request, "movies/searchresult.html", {'set_jumbotron': 3})
+
 
 def movie_details(request):
-    return render(request, "movies/movie_details.html", {'set_jumbotron':3})
+    return render(request, "movies/movie_details.html", {'set_jumbotron': 3})
 
 
 def movies_json(request):
@@ -164,10 +165,12 @@ class MoviesSearchListView(ListView):
                     if q_list.isdigit():
                         year1 = q[0]
                         year2 = q[1]
-                        if year1<year2:
-                            return qs.filter(year__gte=int(year2)).exclude(year__gt=year1)
-                        elif year1>year2:
-                            return qs.filter(year__gte=int(year1)).exclude(year__gt=year2)
+                        if year1 < year2:
+                            return qs.filter(year__gte=int(year2)).exclude(
+                                year__gt=year1)
+                        elif year1 > year2:
+                            return qs.filter(year__gte=int(year1)).exclude(
+                                year__gt=year2)
                 else:
                     if q.isdigit():
                         return qs.filter(year__gte=int(q))
@@ -182,26 +185,17 @@ class MoviesSearchListView(ListView):
 
 
 def search_query(request):
-    # Remove me
-    print('search_query')
-    print('request={}'.format(request))
-    search_query = request.POST.get('q', None)
-    print('search_query={}'.format(search_query))
-    id_select = request.POST.get('idselect', None)
-    print('id_select={}'.format(id_select))
+    q = request.GET.get('q', None)
+    selection = request.GET.get('idselect', None)
 
-    if request.method == "POST":
-        q = request.POST.get('q', None)
-        selection = request.POST.get('idselect', None)
-        if q:
-            if selection == 'all':  # Select All
-                return search_all(request, q)
-            elif selection == 'title':  # Title
-                return search_title(request, q)
-            elif selection == 'year':  # Year/s
-                return search_year(request, q)
-            elif selection == 'director':  # Director
-                return search_director(request, q)
+    if selection == 'all':  # Select All
+        return search_all(request, q)
+    elif selection == 'title':  # Title
+        return search_title(request, q)
+    elif selection == 'year':  # Year/s
+        return search_year(request, q)
+    elif selection == 'director':  # Director
+        return search_director(request, q)
 
 
 def search_year(request, q):
@@ -211,11 +205,13 @@ def search_year(request, q):
         year2 = q_list[1]
         if year1.isdigit() and year2.isdigit():
             if year1 >= year2:
-                results = Movie.objects.filter(year__gte=int(year2)).exclude(year__gt=year1)
+                results = Movie.objects.filter(year__gte=int(year2)).exclude(
+                    year__gt=year1)
                 query_str = 'Years={}-{}'.format(year2, year1)
                 return search_results(request, results, query_str)
             elif year1 < year2:
-                results = Movie.objects.filter(year__gte=int(year1)).exclude(year__gt=year2)
+                results = Movie.objects.filter(year__gte=int(year1)).exclude(
+                    year__gt=year2)
                 query_str = 'Years={}-{}'.format(year1, year2)
                 return search_results(request, results, query_str)
     elif q.isdigit():
@@ -240,17 +236,17 @@ def search_results(request, results, query_str):
 
 
 def search_title(request, query):
-    qs = Movie.objects.filter(title_he__icontains=query, title_en__icontains=query)
-    results = []
-    for item in qs:
-        results.append(item.movie)
-
+    qs = Movie.objects.filter(
+        Q(title_he__icontains=query) | Q(title_en__icontains=query)
+    )
     query_str = 'Title="{}"'.format(query)
-    return search_results(request, results, query_str)
+    return search_results(request, qs, query_str)
 
 
 def search_director(request, query):
-    fields = Field.objects.filter(Q(title__icontains='במאי') | Q(title__icontains='director'))
+    fields = Field.objects.filter(
+        Q(title__icontains='במאי') | Q(title__icontains='director')
+    )
     tags = Tag.objects.filter(title__icontains=query)
     qs = Movie_Tag_Field.objects.filter(Q(field__in=fields) & Q(tag__in=tags))
     results = []
@@ -264,11 +260,15 @@ def search_director(request, query):
 def search_all(request, query):
     results = []
 
-    movies = Movie.objects.filter(title_he__contains=query, title_en__contains=query,
-                                  summary_he__contains=query, summary_en__contains=query)
-    if movies:
-        for item in movies:
-            results.append(item.movie)
+    q = (
+            Q(title_he__icontains=query) |
+            Q(title_en__icontains=query) |
+            Q(summary_he__icontains=query) |
+            Q(summary_en__icontains=query)
+    )
+    movies = Movie.objects.filter(q)
+    for item in movies:
+        results.append(item)
 
     tags = Tag.objects.filter(title__icontains=query)
     if tags:
@@ -278,9 +278,8 @@ def search_all(request, query):
 
     if query.isdigit():
         qs = Movie.objects.filter(year=int(query))
-        if qs:
-            for item in qs:
-                results.append(item)
+        for item in qs:
+            results.append(item)
 
     query_str = 'Search All="{}"'.format(query)
     return search_results(request, results, query_str)
@@ -327,6 +326,7 @@ def person_list(request):
         'count': len(qs)
     }
     return render(request, "movies/person_list.html", d)
+
 
 def person_detail(request, id):
     o = get_object_or_404(Person, id=id)

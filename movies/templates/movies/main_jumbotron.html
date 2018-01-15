@@ -2,8 +2,7 @@
 
 <div class="jumbotron">
     <h1>{% trans "The Israeli Film Archive" %}</h1>
-        <form id="searchform" action="{% url 'movies:search_query' %}" method="POST" accept-charset="utf-8">
-            {% csrf_token %}
+        <form id="searchform" action="{% url 'movies:search_query' %}">
             <div class="row justify-content-center">
                 <div class="col col-2 dropdown">
                       <select id="idselect" name="idselect" class="dropdown dropBtnSearch searchDD" aria-labelledby="dropdownMenu1"

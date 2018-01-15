@@ -54,7 +54,7 @@
 		<a class="btnBag" href="#"><img src="/static/images/Shopping-bag.svg"/></a>
 		<a id="searchShowHide" class="btnSearchIcon glyphicon glyphicon-search" href="#"></a>
 
-		<form id="searchform" action="{% url 'movies:search_query' %}" method="POST" accept-charset="utf-8">
+		<form id="searchform" action="{% url 'movies:search_query' %}">
 			{% csrf_token %}
 			<div id="searchBarUp" class="hideSearchBar">
 				<div>
