@@ -541,17 +541,13 @@ div#aboutJumb {
 h1#innerTitle {
     font-weight: 400;
     text-align: right !important;
-    position: absolute;
-    top: 230px;
-    padding-right: 20px;
-    color: white;
-    font-size: 26pt !important;
+    color: black;
+    font-size: 18pt !important;
+    margin-bottom: 15px;
+}
 
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0+0,0.88+75,1+100 */
-    background: -moz-linear-gradient(top, rgba(0,0,0,0) 100%, rgba(0,0,0,0.88) 75%, rgba(0,0,0,1) 100%);
-    background: -webkit-linear-gradient(top, rgba(0,0,0,0) 100%,rgba(0,0,0,0.88) 75%,rgba(0,0,0,1) 100%);
-    background: linear-gradient(to bottom, rgba(0,0,0,0) 100%,rgba(0,0,0,0.88) 75%,rgba(0,0,0,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=0 );
+.innerpages{
+    width: 75%;
 }
 
 .baseC {

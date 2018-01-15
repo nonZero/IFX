@@ -523,11 +523,13 @@ div#aboutJumb {
 h1#innerTitle {
     font-weight: 400;
     text-align: left !important;
-    position: absolute;
-    top: 230px;
-    padding-left: 20px;
-    color: white;
-    font-size: 26pt !important;
+    color: black;
+    font-size: 18pt !important;
+    margin-bottom: 15px;
+}
+
+.innerpages{
+    width: 85%;
 }
 
 .baseC {

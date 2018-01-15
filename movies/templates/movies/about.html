@@ -2,10 +2,11 @@
 {% load static i18n %}
 
 {% block content %}
-    <div class="container">
+    <div class="container innerpages">
 
         <article>
             {% if LANGUAGE_CODE == 'en-us' %}
+            <h1 id="innerTitle">{% trans "About The Israeli Film Archive" %}</h1>
             <section>
                 <p>The Israel Film Archive is the official institute responsible for the collection and preservation of tens of thousands of Israeli and international films. The largest film archive in the Middle East, the place holds over 30,000 screening prints, 20,000 video cassettes, and thousands of negatives of Israeli films.</p>
                 <p>The archive holds treasures that cannot be described such as rare footage by the Lumière brothers depicting vistas of Jerusalem, Jaffa, and Bethlehem. This footage, captured by these cinematic pioneers 120 years ago, is considered to be the first film to be produced in pre-State Israel.</p>
