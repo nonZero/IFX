@@ -4,7 +4,7 @@ from tqdm import tqdm
 
 from django.core.management.base import BaseCommand
 
-from movies.models import Movie, Movie_Title
+from movies.models import Movie
 
 
 class Command(BaseCommand):
@@ -60,8 +60,9 @@ class Command(BaseCommand):
         elif int(lang) == 2:  # ENG
             movie.title_en = title
         else:
-            print('Proper language title not found, lang="{}", title="{}"'.format(lang, title))
-
+            print(
+                'Proper language title not found, lang="{}", title="{}"'.format(
+                    lang, title))
 
     def handle_json(self, f, **options):
         df = pd.read_json(f)
@@ -74,7 +75,8 @@ class Command(BaseCommand):
             o = Movie()
             o.bid = row.fields['bid']
             o.title = row.fields['title']
-            o.year = None if np.isnan(row.fields['year']) else row.fields['year']
+            o.year = None if np.isnan(row.fields['year']) else row.fields[
+                'year']
             o.lang = row.fields['lang']
             o.full_clean()
 
