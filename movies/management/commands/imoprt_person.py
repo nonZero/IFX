@@ -3,7 +3,8 @@ from tqdm import tqdm
 
 from django.core.management.base import BaseCommand
 
-from movies.models import Tag, Field, Tag_Field, models
+from ifx.util import is_hebrew
+from movies.models import Tag, Field, models, Person
 
 
 class Command(BaseCommand):
@@ -23,23 +24,32 @@ class Command(BaseCommand):
     def handle(self, f, **options):
         df = pd.read_csv(f, delimiter='\t')
         progress = tqdm(total=len(df))
+        Person.objects.all().delete()
         for i, row in df.iterrows():
             try:
-                if not str(row.book_id)[0].isdigit():
-                    f = Field.objects.get(fid=row.lif)
-                    t = Tag.objects.get(tid=row.book_id[1:])
-                    tf = Tag_Field(tag = t, field = f, title=row.strans_id, lang=row.lang_id)
+                tid = row.book_id
+                f = row.lif
+                lang = row.lang_id
+                if not str(tid)[0].isdigit() :
+                    p, created = Person.objects.get_or_create(tid=tid[1:])
+                    title = row.strans_id
+                    if f == '#127':
+                        if lang == "HEB":
+                            p.last_name_he = title
+                        elif lang == "ENG":
+                            p.last_name_en = title
+                    elif f == '#128':
+                        if lang == "HEB":
+                            p.first_name_he = title
+                        elif lang == "ENG":
+                            p.first_name_en = title
+                    
                     if not options['readonly']:
-                        tf.save()
-                # else:
-                #     m = Movie.objects.get(bid=row.book_id)
-                #     f = Field.objects.get(fid=row.lif)
-                #     mf = Movie_Field(movie = m, field = f, title=row.strans_id, lang=row.lang_id)
-                #     if not options['readonly']:
-                #         mf.save()
+                        p.save()
+                        
             except models.ObjectDoesNotExist:
                 # log error to server?
-                print("\nTag or Field was not found in DB, line=" + str(i))
+                print("\nPerson was not found in DB, line=" + str(i))
             finally:
                 progress.update(1)
         progress.close()
