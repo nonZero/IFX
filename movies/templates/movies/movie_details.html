@@ -3,7 +3,7 @@
 
 {% block content %}
     <div class="container">
-        <h1 id="h1reasult"><strong>{% trans "Title" %}</strong> {% trans "(Year)" %}</h1>
+        <h1 id="h1reasult"><strong>{% trans "Title" %} {{ movie.get_pretty_title }}</strong> ({{ movie.year }})</h1>
         <form action="">
                 <input class="addToChart" type="image" src="{% static 'images/Shopping-bag-black.svg' %}" alt="Submit">
         </form>
@@ -11,7 +11,7 @@
         <div class="movieDetails">
             <div class="row">
                 <div class="col-6">
-                    <h5>{% trans "Runtime" %}: <span>{}</span></h5>
+                    <h5>{% trans "Runtime" %}: <span>{{ object.duration }} {% trans "min" %}</span></h5>
                     <h5>{% trans "Director" %}: <span>{}</span></h5>
                     <h5>{% trans "Producer" %}: <span>{}</span></h5>
                     <h5>{% trans "Screenwriter" %}: <span>{}</span></h5>
@@ -29,7 +29,7 @@
             <section>
                 <h5>{% trans "Summery" %}:</h5>
                 <p>
-                    {}
+                    {{value}}
                 </p>
             </section>
 

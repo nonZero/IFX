@@ -74,6 +74,7 @@ def movie_detail(request, id):
     m = get_object_or_404(Movie, id=id)
     d = {
         'movie': m,
+        'set_jumbotron': 3
     }
     return render(request, "movies/movie_detail.html", d)
 
@@ -90,6 +91,7 @@ def movie_create(request):
 
     d = {
         'form': form,
+        'set_jumbotron': 3
     }
     return render(request, "movies/movie_form.html", d)
 
