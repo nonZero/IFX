@@ -4,7 +4,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.management.base import BaseCommand
 from tqdm import tqdm
 
-from movies.models import Movie, Description
+from movies.models import Movie
 
 
 class Command(BaseCommand):
