@@ -1,12 +1,13 @@
 {% extends 'movies/../base.html' %}
 {% load static i18n %}
+{% csrf_token %}
 
 {% block content %}
     <div class="container">
-        <h1 id="h1reasult">{% trans "Search reasults for:" %}</h1>
+        <h1 id="h1reasult">{% trans "Search reasults for" %}: {{query}}</h1>
         <div class="row justify-content-between">
             <div class="col-6">
-                <span>{% trans "105 Titles were found" %} {{query}}</span>
+                <span>{{count}} {% trans "Titles were found" %}</span>
             </div>
 
             <div class="col-6 sortBy">
@@ -26,7 +27,10 @@
 
         <hr>
         <div>
-            {% block movie %}{% include 'movies/_movie_search.html' %}{% endblock %}
+            {% for object in objects %}
+               {% block movie %}{% include 'movies/_movie_search.html' %}{% endblock %}
+            {% endfor %}
+
         </div>
     </div>
 {% endblock %}

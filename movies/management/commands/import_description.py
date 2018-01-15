@@ -29,10 +29,6 @@ class Command(BaseCommand):
         count_total = 0
         count_movie_missing = 0
         count_movie_found = 0
-        count_new_decription = 0
-        count_nan = 0
-        count_not_digit = 0
-        count_concatenation = 0
 
         for i, row in df_sorted.iterrows():
             count_total += 1
@@ -41,22 +37,27 @@ class Command(BaseCommand):
                     movie = Movie.objects.get(bid=row.book_id)
                     if movie:
                         count_movie_found += 1
-                        o, created = Description.objects.get_or_create(movie=movie, lang=row.lang_id)
-                        if created:
-                            count_new_decription += 1
-                            o.movie = movie
-                            o.lang = row.lang_id
 
-                        o.summery += str(row.summary)
-                        if pd.isnull(row.counter):
-                            count_nan += 1
-                        elif not str(row.counter).isdigit():
-                            count_not_digit += 1
-                        elif int(row.counter) > 1:
-                            count_concatenation += 1
+                        if pd.isnull(row.counter) or \
+                                not str(row.counter).isdigit():
+                            print('Error - counter field is NaN or not digit')
+                            continue
+
+                        if pd.isnull(row.lang_id):
+                            print('Error - language field is NaN')
+                            continue
+
+                        if (row.lang_id.isdigit() and int(row.lang_id) == 1) or \
+                            row.lang_id == 'HEB':  # he
+                            # movie.summary_he += str(row.summary)
+                            self.update_summary_he(movie, row.summary, row.counter)
+                        elif (row.lang_id.isdigit() and int(row.lang_id) == 2) or \
+                            row.lang_id == 'ENG':  # en
+                            # movie.summary_en += str(row.summary)
+                            self.update_summary_en(movie, row.summary, row.counter)
 
                         if not options['readonly']:
-                            o.save()
+                            movie.save()
 
                 except ObjectDoesNotExist:
                     count_movie_missing += 1
@@ -68,7 +69,17 @@ class Command(BaseCommand):
         print('Total rows={}'.format(count_total))
         print('Movies found={}'.format(count_movie_found))
         print('Movies missing={}'.format(count_movie_missing))
-        print('New description rows={}'.format(count_new_decription))
-        print('Rows with counter NaN={}'.format(count_nan))
-        print('Rows with counter not integer={}'.format(count_not_digit))
-        print('Rows with counter for concatenation={}'.format(count_concatenation))
+
+    @staticmethod
+    def update_summary_he(movie, summary, counter):
+        if int(counter) == 1:
+            movie.summary_he = summary
+        else:
+            movie.summary_he += summary
+
+    @staticmethod
+    def update_summary_en(movie, summary, counter):
+        if int(counter) == 1:
+            movie.summary_en = summary
+        else:
+            movie.summary_en += summary

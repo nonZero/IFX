@@ -1,7 +1,14 @@
-<form method="post" novalidate>
-    {% csrf_token %}
+{% extends 'movies/../base.html' %}
+{% load static i18n %}
 
-    {{ form.as_ul }}
+{% block content %}
 
-    <button>Add</button>
-</form>
+    <form method="post" novalidate>
+        {% csrf_token %}
+
+        {{ form.as_ul }}
+
+        <button>Add</button>
+    </form>
+
+{% endblock %}
