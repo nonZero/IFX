@@ -58,17 +58,6 @@ class Movie(models.Model):
         return fields
 
 
-class Tag_Field(models.Model):
-    tag = models.ForeignKey(Tag)
-    field = models.ForeignKey(Field)
-    lang = models.CharField(max_length=300)
-    title = models.CharField(max_length=300)
-
-    def __str__(self):
-        return 'Tag={}, Field={}, Lang={}, Title={}'.format(
-            self.tag, self.field, self.lang, self.title)
-
-
 class Movie_Tag_Field(models.Model):
     movie = models.ForeignKey(Movie)
     field = models.ForeignKey(Field)
@@ -97,14 +86,16 @@ class Collection_Movie(models.Model):
 
 
 class Person(models.Model):
-    tid = models.IntegerField(unique=True, null=True, blank=True)
-    name_he = models.CharField(max_length=300)
-    name_en = models.CharField(max_length=300)
-    first_name_he = models.CharField(max_length=300)
-    first_name_en = models.CharField(max_length=300)
-    last_name_he = models.CharField(max_length=300)
-    last_name_en = models.CharField(max_length=300)
+    tid = models.IntegerField(unique=True)
+    name_he = models.CharField(max_length=300, null=True, blank=True)
+    name_en = models.CharField(max_length=300, null=True, blank=True)
+    first_name_he = models.CharField(max_length=300, null=True, blank=True)
+    first_name_en = models.CharField(max_length=300, null=True, blank=True)
+    last_name_he = models.CharField(max_length=300, null=True, blank=True)
+    last_name_en = models.CharField(max_length=300, null=True, blank=True)
 
+    def __str__(self):
+        return self.first_name_en + " " + self.last_name_en
 
 class MoviePerson(models.Model):
     movie = models.ForeignKey(Movie)
