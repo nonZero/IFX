@@ -1,0 +1,40 @@
+{% extends 'movies/../base.html' %}
+{% load static i18n %}
+
+{% block content %}
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href='{% static "style.css" %}' rel="stylesheet">
+
+    <h1>My People</h1>
+
+    <ul>Count: {{count}} items</ul>
+    <table border="1" width="100%">
+        <tr>
+            <th>#</th>
+            <th>tid</th>
+            <th>name_he</th>
+            <th>name_en</th>
+            <th>first_name_he</th>
+            <th>first_name_en</th>
+            <th>last_name_he</th>
+            <th>last_name_en</th>
+        </tr>
+        {% for object in objects %}
+            <tr>
+                <td>
+                    <a href= "{% url 'movies:person_detail' object.id %}">#{{ object.id }}</a>
+                </td>
+                <td>{{ object.tid }}</td>
+                <td>{{ object.name_he }}</td>
+                <td>{{ object.name_en }}</td>
+                <td>{{ object.first_name_he }}</td>
+                <td>{{ object.first_name_en }}</td>
+                <td>{{ object.last_name_en }}</td>
+                <td>{{ object.last_name_en }}</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+
+{% endblock %}

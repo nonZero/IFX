@@ -1,51 +1,51 @@
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
+
+
+class Languages(object):
+    choices = (
+        ('he', _('Hebrew')),
+        ('en', _('English')),
+    )
 
 
 class Tag(models.Model):
     tid = models.IntegerField(unique=True)
     title = models.CharField(max_length=300)
-    
+    type_id = models.CharField(max_length=300, null=True, blank=True)
+    lang = models.CharField(max_length=300, null=True, blank=True)
+
     def __str__(self):
         return self.title
-
 
 
 class Field(models.Model):
     fid = models.CharField(unique=True, max_length=300)
     title = models.CharField(max_length=300)
-    
+
     def __str__(self):
         return self.title
+
 
 class Movie(models.Model):
     bid = models.IntegerField(unique=True)
     year = models.IntegerField(null=True, blank=True)
     duration = models.IntegerField(null=True, blank=True)
-    
+    title_he = models.CharField(max_length=300, null=True, blank=True)
+    title_en = models.CharField(max_length=300, null=True, blank=True)
+    summary_he = models.TextField(null=True, blank=True)
+    summary_en = models.TextField(null=True, blank=True)
+
     def __str__(self):
-        return str(self.id)
+        return str('{}: "en:{}", "he:{}"'.format(self.id, self.title_en, self.title_he))
     
     def get_title(self):
-        titles = Movie_Title.objects.filter(movie = self.id)
-        result = {}
-        for d in titles:
-            result[d.lang] = d.title
-        return result
+        if self.title_he:
+            return self.title_he
+        elif self.title_en:
+            return self.title_en
+        return '<No Title>'
 
-    def get_pretty_title(self):
-        titles = Movie_Title.objects.filter(movie = self.id)
-        title_list = []
-        for d in titles:
-            title_list.append(d.title)
-        return '|'.join(title_list)
-
-    def get_description(self):
-        ds = Description.objects.filter(movie=self.id)
-        result = {}
-        for d in ds:
-            result[d.lang] = d.summery
-        return result
-    
     def get_extra_data(self):
         mft = Movie_Tag_Field.objects.filter(movie=self.id)
         fields = {}
@@ -57,27 +57,6 @@ class Movie(models.Model):
         
         return fields
 
-
-class Movie_Title(models.Model):
-    movie = models.ForeignKey(Movie)
-    title = models.CharField(max_length=1000)
-    lang = models.CharField(max_length=300)
-    
-    def __str__(self):
-        return self.title
-
-
-class Tag_Field(models.Model):
-    tag = models.ForeignKey(Tag)
-    field = models.ForeignKey(Field)
-    lang = models.CharField(max_length=300)
-    title = models.CharField(max_length=300)
-
-# class Movie_Field(models.Model):
-#     movie = models.ForeignKey(Movie)
-#     field = models.ForeignKey(Field)
-#     lang = models.CharField(max_length=300)
-#     title = models.CharField(max_length=300)
 
 class Movie_Tag_Field(models.Model):
     movie = models.ForeignKey(Movie)
@@ -106,10 +85,21 @@ class Collection_Movie(models.Model):
         return 'Collection={}, Movie={}'.format(self.collection, self.movie)
 
 
-class Description(models.Model):
-    movie = models.ForeignKey(Movie, related_name='description')
-    summery = models.TextField()
-    lang = models.CharField(max_length=300)
-    
+class Person(models.Model):
+    tid = models.IntegerField(unique=True)
+    name_he = models.CharField(max_length=300, null=True, blank=True)
+    name_en = models.CharField(max_length=300, null=True, blank=True)
+    first_name_he = models.CharField(max_length=300, null=True, blank=True)
+    first_name_en = models.CharField(max_length=300, null=True, blank=True)
+    last_name_he = models.CharField(max_length=300, null=True, blank=True)
+    last_name_en = models.CharField(max_length=300, null=True, blank=True)
+
     def __str__(self):
-        return 'Movie={}, MovieId={}, Summary={}, Lang={}'.format(self.movie, self.movie.bid, self.summery, self.lang)
+        return self.first_name_en + " " + self.last_name_en
+
+class MoviePerson(models.Model):
+    movie = models.ForeignKey(Movie)
+    people = models.ManyToManyField(Person)
+
+    def __str__(self):
+        return str(self.movie)

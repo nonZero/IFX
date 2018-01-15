@@ -23,9 +23,9 @@ class Command(BaseCommand):
 
         parser.add_argument(
             '--json',
-            action = 'store_true',
-            dest = 'json',
-            help = 'input is json file',
+            action='store_true',
+            dest='json',
+            help='input is json file',
         )
 
     def handle(self, f, **options):
@@ -40,20 +40,29 @@ class Command(BaseCommand):
             o, created = Movie.objects.get_or_create(bid=row.bid)
             if created:
                 o.bid = row.bid
-                o.year = None if np.isnan(row.year) else row.year
-                o.full_clean()
-                if not options['readonly']:
-                    o.save()
-            self.save_title(o, row.title, row.lang)
+            o.year = None if np.isnan(row.year) else row.year
+            self.update_title(o, row.title, row.lang)
+            o.full_clean()
+            if not options['readonly']:
+                o.save()
+
             progress.update(1)
         progress.close()
-        
-    def save_title(self, movie, title, lang):
-        o, created = Movie_Title.objects.get_or_create(movie=movie, lang=lang)
-        if  created:
-            o.title = title
-            o.save()
-        
+
+    @staticmethod
+    def update_title(movie, title, lang):
+        if np.isnan(lang):
+            print('Error - language field is NaN')
+            return
+
+        if int(lang) == 1:  # HEB
+            movie.title_he = title
+        elif int(lang) == 2:  # ENG
+            movie.title_en = title
+        else:
+            print('Proper language title not found, lang="{}", title="{}"'.format(lang, title))
+
+
     def handle_json(self, f, **options):
         df = pd.read_json(f)
 

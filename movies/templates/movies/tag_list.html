@@ -6,30 +6,26 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="{% static "style.css" %}" rel="stylesheet">
 
-    <h1>My Movies</h1>
-
-    <ul>
-        <a href= {% url "movies:movie_create" %}>Add movie...</a>
-    </ul>
+    <h1>My Tags</h1>
 
     <ul>Count: {{count}} items</ul>
     <table border="1" width="100%">
         <tr>
             <th>#</th>
-            <th>bid</th>
+            <th>tid</th>
             <th>Title</th>
-            <th>Year</th>
-            <th>Duration</th>
+            <th>Tag-Field Count</th>
+            <th>Movie-Tag-Field Count</th>
         </tr>
         {% for object in objects %}
             <tr>
                 <td>#{{ object.id }}</td>
-                <td>{{ object.bid }}</td>
+                <td>{{ object.tid }}</td>
                 <td>
-                    <a href= "{% url 'movies:movie_detail' object.id %}">{{ object.get_title }}</a>
+                    <a href= "{% url 'movies:tag_detail' object.id %}">{{ object.title }}</a>
                 </td>
-                <td>{{ object.year }}</td>
-                <td>{{ object.duration }}</td>
+                <td>{{ object.tag_field_set.count }}</td>
+                <td>{{ object.movie_tag_field_set.count }}</td>
             </tr>
         {% endfor %}
 

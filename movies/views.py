@@ -1,16 +1,26 @@
+import pdb
 from builtins import super
 
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 from django.db.models import Q
 
-from movies.models import Movie, Collection, Tag, Field, Movie_Tag_Field, Movie_Title, Description
+from movies.models import Movie, Collection, Tag, Field, Movie_Tag_Field, Person
 from movies.forms import MovieForm, CollectionForm, SearchByYearForm
 
 
 def homePage(request):
      return render(request, "movies/homePage.html", {'set_jumbotron':1})
+
+
+class HomePage(TemplateView):
+    template_name = 'movies/homePage.html'
+
+    def get_context_data(self, **kwargs):
+        d = super().get_context_data(**kwargs)
+        d['set_jumbotron'] = 1
+        return d
 
 
 def about(request):
@@ -39,26 +49,6 @@ def movies_json(request):
     }
 
     return JsonResponse(data)
-
-
-def query(request, query):
-    movies = []
-    
-    titles = Movie_Title.objects.filter(title__contains=query)
-    if titles:
-        for item in titles:
-            movies.append(item.movie)
-    description = Description.objects.filter(summery__icontains=query)
-    if description:
-        for item in description:
-            movies.append(item.movie)
-    tags = Tag.objects.filter(title__icontains=query)
-    
-    d = {
-        'objects': movies,
-        'count': len(movies)
-    }
-    return render(request, "movies/movies_list.html", d)
 
 
 def movies_list(request):
@@ -250,7 +240,7 @@ def search_results(request, results, query_str):
 
 
 def search_title(request, query):
-    qs = Movie_Title.objects.filter(title__icontains=query)
+    qs = Movie.objects.filter(title_he__icontains=query, title_en__icontains=query)
     results = []
     for item in qs:
         results.append(item.movie)
@@ -274,14 +264,10 @@ def search_director(request, query):
 def search_all(request, query):
     results = []
 
-    titles = Movie_Title.objects.filter(title__contains=query)
-    if titles:
-        for item in titles:
-            results.append(item.movie)
-
-    description = Description.objects.filter(summery__icontains=query)
-    if description:
-        for item in description:
+    movies = Movie.objects.filter(title_he__contains=query, title_en__contains=query,
+                                  summary_he__contains=query, summary_en__contains=query)
+    if movies:
+        for item in movies:
             results.append(item.movie)
 
     tags = Tag.objects.filter(title__icontains=query)
@@ -292,8 +278,59 @@ def search_all(request, query):
 
     if query.isdigit():
         qs = Movie.objects.filter(year=int(query))
-        for item in qs:
-            results.append(item)
+        if qs:
+            for item in qs:
+                results.append(item)
 
     query_str = 'Search All="{}"'.format(query)
     return search_results(request, results, query_str)
+
+
+def field_list(request):
+    qs = Field.objects.all()
+    d = {
+        'objects': qs,
+        'count': len(qs)
+    }
+    return render(request, "movies/field_list.html", d)
+
+
+def field_detail(request, id):
+    o = get_object_or_404(Field, id=id)
+    d = {
+        'o': o,
+    }
+    return render(request, "movies/field_detail.html", d)
+
+
+def tag_list(request):
+    qs = Tag.objects.order_by('?')[:100]
+    d = {
+        'objects': qs,
+        'count': len(qs)
+    }
+    return render(request, "movies/tag_list.html", d)
+
+
+def tag_detail(request, id):
+    o = get_object_or_404(Tag, id=id)
+    d = {
+        'o': o,
+    }
+    return render(request, "movies/tag_detail.html", d)
+
+
+def person_list(request):
+    qs = Person.objects.order_by('?')[:100]
+    d = {
+        'objects': qs,
+        'count': len(qs)
+    }
+    return render(request, "movies/person_list.html", d)
+
+def person_detail(request, id):
+    o = get_object_or_404(Person, id=id)
+    d = {
+        'o': o,
+    }
+    return render(request, "movies/person_detail.html", d)
