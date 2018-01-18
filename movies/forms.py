@@ -18,4 +18,6 @@ class CollectionForm(forms.ModelForm):
 class SearchByYearForm(forms.ModelForm):
     class Meta:
         model = Movie
-        fields = ['year',]
+        fields = [
+            'year',
+        ]

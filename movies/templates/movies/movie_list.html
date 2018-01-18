@@ -32,6 +32,12 @@
         </span>
     </div>
 
+    <div>
+        {% for object in object_list %}
+           {% block movie %}{% include 'movies/_movie_search.html' %}{% endblock %}
+        {% endfor %}
+    </div>
+
 
     <table border="1" width="100%">
         <tr>

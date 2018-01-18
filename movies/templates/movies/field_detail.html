@@ -6,24 +6,31 @@
 
     <ul>
         <li><b>Title: {{ o.title }}</b></li>
-        <li>fid: {{o.tid}} </li>
+        <li>fid: {{ o.tid }} </li>
         <li>
-            Movie-Field-Tag ({{ o.movie_tag_field_set.count }} item(s)):
-            {% for item in o.movie_tag_field_set.all %}
-                <ul>
-                    Movie:
-                    <a href= "{% url 'movies:movie_detail' item.movie.id %}">
-                        {{item.movie.get_title}}</a>,
-                    Field:
-                    {{ item.field}}
-                </ul>
-            {% endfor %}
+            <ul>
+                {% for mtf in tags %}
+                    <li>
+                        <a href="{% url "movies:tag_detail" mtf.tag_id %}">{{ mtf.tag }}</a>
+                        ({{ mtf.tag.movie_tag_field_set.count }})
+                    </li>
+                {% endfor %}
+            </ul>
+
+            {#            ({{ o.movie_tag_field_set.count }} item(s)):#}
+            {#            {% for item in o.movie_tag_field_set.all %}#}
+            {#                <ul>#}
+            {#                    {{ item.tag }}:#}
+            {#                    <a href= "{% url 'movies:movie_detail' item.movie.id %}">#}
+            {#                        {{item.movie.get_title}}</a>,#}
+            {#                </ul>#}
+            {#            {% endfor %}#}
         </li>
         <li>
             Field-Tag ({{ o.tag_field_set.count }} item(s)):
             {% for item in o.tag_field_set.all %}
                 <ul>
-                    Field: {{ item.field}},
+                    Field: {{ item.field }},
                     Language: {{ item.lang }},
                     title: {{ item.title }}
                 </ul>
