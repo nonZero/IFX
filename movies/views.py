@@ -10,10 +10,6 @@ from movies.models import Movie, Collection, Tag, Field, Movie_Tag_Field, \
     Person
 
 
-def homePage(request):
-    return render(request, "movies/homePage.html", {'set_jumbotron': 1})
-
-
 class HomePage(TemplateView):
     template_name = 'movies/homePage.html'
 
@@ -52,13 +48,60 @@ def movies_json(request):
     return JsonResponse(data)
 
 
-def movies_list(request):
-    qs = Movie.objects.order_by('?')[:10]
-    d = {
-        'objects': qs,
-        'count': len(Movie.objects.all())
-    }
-    return render(request, "movies/movies_list.html", d)
+MOVIE_ORDER_FIELDS = {
+    'title_he',
+    'title_en',
+    'year',
+}
+
+
+class MovieListView(ListView):
+    model = Movie
+    paginate_by = 10
+
+    def get_ordering(self):
+        k = self.request.GET.get('order', None)
+        if k not in MOVIE_ORDER_FIELDS:
+            k = "title_he"
+        return k
+
+# def search_query(request):
+#     q = request.GET.get('q', None)
+#     selection = request.GET.get('idselect', None)
+#
+#     if selection == 'all':  # Select All
+#         return search_all(request, q)
+#     elif selection == 'title':  # Title
+#         return search_title(request, q)
+#     elif selection == 'year':  # Year/s
+#         return search_year(request, q)
+#     elif selection == 'director':  # Director
+#         return search_director(request, q)
+#
+
+class MoviesSearchListView(MovieListView):
+    def get_queryset(self):
+        qs = super(MoviesSearchListView, self).get_queryset()
+        query = self.request.GET.get('q')
+        search_type = self.request.GET.get('idselect')
+        q = self.get_filters(query, search_type)
+        qs = qs.filter(q)
+        return qs
+
+    def get_filters(self, query, search_type):
+        q = (
+                Q(title_he__icontains=query) |
+                Q(title_en__icontains=query) |
+                Q(summary_he__icontains=query) |
+                Q(summary_en__icontains=query)
+        )
+        if query.isdigit():
+            q |= Q(year=int(query))
+        return q
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
 
 
 def movie_detail(request, id):
@@ -144,58 +187,6 @@ def search_by_year(request):
         'form': form,
     }
     return render(request, "movies/search_form.html", d)
-
-
-class MoviesSearchListView(ListView):
-    template_name = 'movies/searchresult.html'
-    model = Movie
-    context_object_name = 'movies'
-
-    def get_queryset(self):
-        qs = super(MoviesSearchListView, self).get_queryset()
-        search_type = self.request.GET.get('type')
-        q = self.request.GET.get('q')
-
-        if q:
-            if search_type == 'name':
-                return qs.filter(title__icontain=q)
-            elif search_type == 'year':
-                if q.find('-') != -1:
-                    q_list = q.split('-')
-                    if q_list.isdigit():
-                        year1 = q[0]
-                        year2 = q[1]
-                        if year1 < year2:
-                            return qs.filter(year__gte=int(year2)).exclude(
-                                year__gt=year1)
-                        elif year1 > year2:
-                            return qs.filter(year__gte=int(year1)).exclude(
-                                year__gt=year2)
-                else:
-                    if q.isdigit():
-                        return qs.filter(year__gte=int(q))
-
-            elif search_type == 'director':
-                pass
-        return []
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
-
-
-def search_query(request):
-    q = request.GET.get('q', None)
-    selection = request.GET.get('idselect', None)
-
-    if selection == 'all':  # Select All
-        return search_all(request, q)
-    elif selection == 'title':  # Title
-        return search_title(request, q)
-    elif selection == 'year':  # Year/s
-        return search_year(request, q)
-    elif selection == 'director':  # Director
-        return search_director(request, q)
 
 
 def search_year(request, q):
@@ -296,8 +287,10 @@ def field_list(request):
 
 def field_detail(request, id):
     o = get_object_or_404(Field, id=id)
+    distinct_tags = o.movie_tag_field_set.distinct('tag')
     d = {
         'o': o,
+        'tags': distinct_tags,
     }
     return render(request, "movies/field_detail.html", d)
 

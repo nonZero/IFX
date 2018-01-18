@@ -1,0 +1,64 @@
+{% extends 'movies/../base.html' %}
+{% load static i18n humanize %}
+
+{% block content %}
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          rel="stylesheet">
+    <link href="{% static "style.css" %}" rel="stylesheet">
+
+    <h1>{% trans "Movies" %}</h1>
+
+    <div class="pagination">
+        <span>
+        {{ page_obj.start_index }}-{{ page_obj.end_index }}
+        of {{ paginator.count|intcomma }}
+        </span>
+        |
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?order={{ view.get_ordering }}&page=1">&laquo; first</a>
+                <a href="?order={{ view.get_ordering }}&page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?order={{ view.get_ordering }}&page={{ page_obj.next_page_number }}">next</a>
+                <a href="?order={{ view.get_ordering }}&page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
+    <div>
+        {% for object in object_list %}
+           {% block movie %}{% include 'movies/_movie_search.html' %}{% endblock %}
+        {% endfor %}
+    </div>
+
+
+    <table border="1" width="100%">
+        <tr>
+            <th>#</th>
+            <th>bid</th>
+            <th>Title</th>
+            <th>Year</th>
+            <th>Duration</th>
+        </tr>
+        {% for object in object_list %}
+            <tr>
+                <td>#{{ object.id }}</td>
+                <td>{{ object.bid }}</td>
+                <td>
+                    <a href="{% url 'movies:movie_detail' object.id %}">{{ object.get_title }}</a>
+                </td>
+                <td>{{ object.year }}</td>
+                <td>{{ object.duration }}</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+
+{% endblock %}

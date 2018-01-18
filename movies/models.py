@@ -9,19 +9,19 @@ class Languages(object):
     )
 
 
-class Tag(models.Model):
-    tid = models.IntegerField(unique=True)
+class Field(models.Model):
+    fid = models.CharField(unique=True, max_length=300)
     title = models.CharField(max_length=300)
-    type_id = models.CharField(max_length=300, null=True, blank=True)
-    lang = models.CharField(max_length=300, null=True, blank=True)
 
     def __str__(self):
         return self.title
 
 
-class Field(models.Model):
-    fid = models.CharField(unique=True, max_length=300)
+class Tag(models.Model):
+    tid = models.IntegerField(unique=True)
     title = models.CharField(max_length=300)
+    type_id = models.CharField(max_length=300, null=True, blank=True)
+    lang = models.CharField(max_length=300, null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -37,8 +37,9 @@ class Movie(models.Model):
     summary_en = models.TextField(null=True, blank=True)
 
     def __str__(self):
-        return str('{}: "en:{}", "he:{}"'.format(self.id, self.title_en, self.title_he))
-    
+        return str('{}: "en:{}", "he:{}"'.format(self.id, self.title_en,
+                                                 self.title_he))
+
     def get_title(self):
         if self.title_he:
             return self.title_he
@@ -54,7 +55,7 @@ class Movie(models.Model):
                 fields[item.field.title].append(item.tag.title)
             else:
                 fields[item.field.title] = [(item.tag.title)]
-        
+
         return fields
 
 
@@ -62,17 +63,18 @@ class Movie_Tag_Field(models.Model):
     movie = models.ForeignKey(Movie)
     field = models.ForeignKey(Field)
     tag = models.ForeignKey(Tag)
-    
+
     def __str__(self):
-        return 'Movie={}, Field={}, Tag={}'.format(self.movie, self.field, self.tag)
+        return 'Movie={}, Field={}, Tag={}'.format(self.movie, self.field,
+                                                   self.tag)
 
 
 class Collection(models.Model):
     title = models.CharField(max_length=300)
-    
+
     def __str__(self):
         return self.title
-    
+
     def get_items(self):
         return Collection_Movie.objects.filter(collection=self.id)
 
@@ -80,7 +82,7 @@ class Collection(models.Model):
 class Collection_Movie(models.Model):
     collection = models.ForeignKey(Collection)
     movie = models.ForeignKey(Movie)
-    
+
     def __str__(self):
         return 'Collection={}, Movie={}'.format(self.collection, self.movie)
 
@@ -96,6 +98,7 @@ class Person(models.Model):
 
     def __str__(self):
         return self.first_name_en + " " + self.last_name_en
+
 
 class MoviePerson(models.Model):
     movie = models.ForeignKey(Movie)

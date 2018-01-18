@@ -27,10 +27,9 @@
 
         <hr>
         <div>
-            {% for object in objects %}
+            {% for object in object_list %}
                {% block movie %}{% include 'movies/_movie_search.html' %}{% endblock %}
             {% endfor %}
-
         </div>
     </div>
 {% endblock %}
