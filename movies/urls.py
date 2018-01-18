@@ -4,6 +4,10 @@ from . import views
 
 app_name = "movies"
 urlpatterns = [
+
+    url(r"^$", views.HomePage.as_view(), name='home'),
+
+    url(r"^movies/$", views.MovieListView.as_view(), name='movies_list'),
     url(r"^movies/as-json/$", views.movies_json, name='movies_list_json'),
     url(r"^movies/add/$", views.movie_create, name='movie_create'),
     url(r"^movies/(?P<id>[0-9]+)/$", views.movie_detail, name='movie_detail'),
@@ -15,12 +19,10 @@ urlpatterns = [
     url(r"^movies/searchresult/$", views.searchresult, name='searchresult'),
     url(r"^movies/movie_details/$", views.movie_details, name='movie_details'),
     url(r"^movies/search/year/$", views.search_by_year, name='search_by_year'),
-    url(r"^movies/$", views.movies_list, name='movies_list'),
     url(r"^field/$", views.field_list, name='field_list'),
     url(r"^field/(?P<id>[0-9]+)/$", views.field_detail, name='field_detail'),
     url(r"^tag/$", views.tag_list, name='tag_list'),
     url(r"^tag/(?P<id>[0-9]+)/$", views.tag_detail, name='tag_detail'),
-    url(r"^$", views.HomePage.as_view(), name='home'),
     url(r"^movies/search/$", views.search_query, name='search_query'),
     url(r"^person/$", views.person_list, name='person_list'),
     url(r"^person/(?P<id>[0-9]+)/$", views.person_detail, name='person_detail'),

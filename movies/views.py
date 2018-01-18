@@ -10,10 +10,6 @@ from movies.models import Movie, Collection, Tag, Field, Movie_Tag_Field, \
     Person
 
 
-def homePage(request):
-    return render(request, "movies/homePage.html", {'set_jumbotron': 1})
-
-
 class HomePage(TemplateView):
     template_name = 'movies/homePage.html'
 
@@ -52,13 +48,22 @@ def movies_json(request):
     return JsonResponse(data)
 
 
-def movies_list(request):
-    qs = Movie.objects.order_by('?')[:10]
-    d = {
-        'objects': qs,
-        'count': len(Movie.objects.all())
-    }
-    return render(request, "movies/movies_list.html", d)
+MOVIE_ORDER_FIELDS = {
+    'title_he',
+    'title_en',
+    'year',
+}
+
+
+class MovieListView(ListView):
+    model = Movie
+    paginate_by = 25
+
+    def get_ordering(self):
+        k = self.request.GET.get('order', None)
+        if k not in MOVIE_ORDER_FIELDS:
+            k = "title_he"
+        return k
 
 
 def movie_detail(request, id):
