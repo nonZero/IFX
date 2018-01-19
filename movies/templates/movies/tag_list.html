@@ -1,29 +1,56 @@
 {% extends 'movies/../base.html' %}
-{% load static i18n %}
+{% load static i18n humanize %}
 
 {% block content %}
 
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          rel="stylesheet">
     <link href="{% static "style.css" %}" rel="stylesheet">
 
-    <h1>My Tags</h1>
+    <h1>{% trans "Tags" %}</h1>
 
-    <ul>Count: {{count}} items</ul>
+    <div class="pagination">
+        <span>
+        {{ page_obj.start_index }}-{{ page_obj.end_index }}
+        of {{ paginator.count|intcomma }}
+        </span>
+        |
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?order={{ view.get_ordering }}&page=1">&laquo; first</a>
+                <a href="?order={{ view.get_ordering }}&page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?order={{ view.get_ordering }}&page={{ page_obj.next_page_number }}">next</a>
+                <a href="?order={{ view.get_ordering }}&page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
     <table border="1" width="100%">
         <tr>
             <th>#</th>
             <th>tid</th>
             <th>Title</th>
+            <th>Field</th>
+            <th>Language</th>
             <th>Tag-Field Count</th>
             <th>Movie-Tag-Field Count</th>
         </tr>
-        {% for object in objects %}
+        {% for object in object_list %}
             <tr>
                 <td>#{{ object.id }}</td>
                 <td>{{ object.tid }}</td>
                 <td>
                     <a href= "{% url 'movies:tag_detail' object.id %}">{{ object.title }}</a>
                 </td>
+                <td>{{ object.type_id }}</td>
+                <td>{{ object.lang }}</td>
                 <td>{{ object.tag_field_set.count }}</td>
                 <td>{{ object.movie_tag_field_set.count }}</td>
             </tr>

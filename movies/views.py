@@ -295,14 +295,22 @@ def field_detail(request, id):
     return render(request, "movies/field_detail.html", d)
 
 
-def tag_list(request):
-    qs = Tag.objects.order_by('?')[:100]
-    d = {
-        'objects': qs,
-        'count': len(qs)
-    }
-    return render(request, "movies/tag_list.html", d)
+TAG_ORDER_FIELDS = {
+    'title',
+    'lang',
+    'type_id',
+}
 
+
+class TagListView(ListView):
+    model = Tag
+    paginate_by = 10
+
+    def get_ordering(self):
+        k = self.request.GET.get('order', None)
+        if k not in TAG_ORDER_FIELDS:
+            k = "title"
+        return k
 
 def tag_detail(request, id):
     o = get_object_or_404(Tag, id=id)
