@@ -12,6 +12,8 @@ urlpatterns = [
 
     url(r"^tag/$", views.TagListView.as_view(), name='tag_list'),
 
+    url(r"^person/$", views.PersonListView.as_view(), name='person_list'),
+
     url(r"^movies/as-json/$", views.movies_json, name='movies_list_json'),
     url(r"^movies/add/$", views.movie_create, name='movie_create'),
     url(r"^movies/(?P<id>[0-9]+)/$", views.movie_detail, name='movie_detail'),
@@ -26,6 +28,5 @@ urlpatterns = [
     url(r"^field/$", views.field_list, name='field_list'),
     url(r"^field/(?P<id>[0-9]+)/$", views.field_detail, name='field_detail'),
     url(r"^tag/(?P<id>[0-9]+)/$", views.tag_detail, name='tag_detail'),
-    url(r"^person/$", views.person_list, name='person_list'),
     url(r"^person/(?P<id>[0-9]+)/$", views.person_detail, name='person_detail'),
 ]

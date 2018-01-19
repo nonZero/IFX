@@ -320,13 +320,25 @@ def tag_detail(request, id):
     return render(request, "movies/tag_detail.html", d)
 
 
-def person_list(request):
-    qs = Person.objects.order_by('?')[:100]
-    d = {
-        'objects': qs,
-        'count': len(qs)
-    }
-    return render(request, "movies/person_list.html", d)
+PERSON_ORDER_FIELDS = {
+    'name_he',
+    'name_en',
+    'first_name_he',
+    'first_name_en',
+    'last_name_he',
+    'last_name_en',
+}
+
+
+class PersonListView(ListView):
+    model = Person
+    paginate_by = 10
+
+    def get_ordering(self):
+        k = self.request.GET.get('order', None)
+        if k not in PERSON_ORDER_FIELDS:
+            k = "name_he"
+        return k
 
 
 def person_detail(request, id):
