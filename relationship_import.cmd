@@ -1,1 +1,0 @@
-@python manage.py import_relationship "IdeaData\book_tags.tsv"%*

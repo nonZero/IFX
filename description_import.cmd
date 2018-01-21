@@ -1,1 +1,0 @@
-@python manage.py import_description "IdeaData\book_sum.tsv"%*
