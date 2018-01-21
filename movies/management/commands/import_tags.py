@@ -38,8 +38,8 @@ class Command(BaseCommand):
                     tag.save()
                 progress.update(1)
             else:
-                heb = is_hebrew(row.title)
                 p, created = Person.objects.get_or_create(tid=row.book_id_s)
+                heb = is_hebrew(row.title)
                 if heb:
                     p.name_he = row.title
                 else:

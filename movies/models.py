@@ -100,9 +100,13 @@ class Person(models.Model):
         return self.first_name_en + " " + self.last_name_en
 
 
-class MoviePerson(models.Model):
-    movie = models.ForeignKey(Movie)
-    people = models.ManyToManyField(Person)
+class Role(models.Model):
+     tid = models.CharField(unique=True, max_length=300)
+     title_en = models.CharField(max_length=300, null=True, blank=True)
+     title_he = models.CharField(max_length=300, null=True, blank=True)
+ 
 
-    def __str__(self):
-        return str(self.movie)
+class Movie_Role_Person(models.Model):
+     movie = models.ForeignKey(Movie, related_name='people')
+     role = models.ForeignKey(Role, related_name='movie_people')
+     person = models.ForeignKey(Person, related_name='movies')
