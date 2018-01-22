@@ -7,7 +7,7 @@ from django.views.generic import ListView, TemplateView
 
 from movies.forms import MovieForm, CollectionForm, SearchByYearForm
 from movies.models import Movie, Collection, Tag, Field, Movie_Tag_Field, \
-    Person
+    Person, Movie_Role_Person
 
 
 class HomePage(TemplateView):
@@ -343,7 +343,10 @@ class PersonListView(ListView):
 
 def person_detail(request, id):
     o = get_object_or_404(Person, id=id)
+    
+    r =  Movie_Role_Person.objects.filter(person=o)
     d = {
         'o': o,
+        'r': r,
     }
     return render(request, "movies/person_detail.html", d)

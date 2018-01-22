@@ -14,6 +14,12 @@
         <li>last_name_en: {{ o.last_name_en }}</li>
     </ul>
 
+	{% for item in r %}
+		{{ item.role.title_he }}:
+		<li><a href="{% url 'movies:movie_detail' item.movie.id %}">{{ item.movie.get_title }}</a></li>
+
+	{% endfor %}
+
     <a href='{% url "movies:person_list" %}'>Back To My People</a>
 
 {% endblock %}
