@@ -11,10 +11,10 @@ class Command(BaseCommand):
 
     def handle(self, **options):
 
-        tags = Tag.objects.filter(movie_tag_field=None, tag_field=None).delete()
+        tags = Tag.objects.filter(movie_tag_field=None).delete()
         print(tags)
 
-        fields = Field.objects.filter(movie_tag_field=None, tag_field=None).delete()
+        fields = Field.objects.filter(movie_tag_field=None).delete()
         print(fields)
         # progress = tqdm(total=len(tags))
         #

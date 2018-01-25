@@ -22,18 +22,6 @@
                 </ul>
             {% endfor %}
         </li>
-        <li>
-            Field-Tag ({{ o.tag_field_set.count }} item(s)):
-            {% for item in o.tag_field_set.all %}
-                <ul>
-                    Field: <a href= "{% url 'movies:field_detail' item.field.id %}">
-                        {{ item.field}}</a>
-    ,
-                    Language: {{ item.lang }},
-                    title: {{ item.title }}
-                </ul>
-            {% endfor %}
-        </li>
     </ul>
 
     <a href="{% url 'movies:tag_list' %}">Back To My Tags</a>

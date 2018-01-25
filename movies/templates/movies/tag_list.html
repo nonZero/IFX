@@ -39,7 +39,6 @@
             <th>Title</th>
             <th>Field</th>
             <th>Language</th>
-            <th>Tag-Field Count</th>
             <th>Movie-Tag-Field Count</th>
         </tr>
         {% for object in object_list %}
@@ -51,7 +50,6 @@
                 </td>
                 <td>{{ object.type_id }}</td>
                 <td>{{ object.lang }}</td>
-                <td>{{ object.tag_field_set.count }}</td>
                 <td>{{ object.movie_tag_field_set.count }}</td>
             </tr>
         {% endfor %}
