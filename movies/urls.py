@@ -9,6 +9,7 @@ urlpatterns = [
 
     url(r"^movies/$", views.MovieListView.as_view(), name='movies_list'),
     url(r"^movies/search/$", views.MoviesSearchListView.as_view(), name='search_query'),
+    url(r"^movies/(?P<pk>[0-9]+)/$", views.MovieDetailView.as_view(), name='movie_detail'),
 
     url(r"^tag/$", views.TagListView.as_view(), name='tag_list'),
 
@@ -16,7 +17,6 @@ urlpatterns = [
 
     url(r"^movies/as-json/$", views.movies_json, name='movies_list_json'),
     url(r"^movies/add/$", views.movie_create, name='movie_create'),
-    url(r"^movies/(?P<id>[0-9]+)/$", views.movie_detail, name='movie_detail'),
     url(r"^movies/collections/$", views.collections_list, name='collections_list'),
     url(r"^movies/collections/add/$", views.collection_create, name='collection_create'),
     url(r"^movies/collections/(?P<id>[0-9]+)/$", views.collection_detail, name='collection_detail'),

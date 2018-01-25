@@ -3,7 +3,7 @@ from builtins import super
 from django.db.models import Q
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import ListView, TemplateView
+from django.views.generic import ListView, TemplateView, DetailView
 
 from movies.forms import MovieForm, CollectionForm, SearchByYearForm
 from movies.models import Movie, Collection, Tag, Field, Movie_Tag_Field, \
@@ -104,13 +104,14 @@ class MoviesSearchListView(MovieListView):
         return context
 
 
-def movie_detail(request, id):
-    m = get_object_or_404(Movie, id=id)
-    d = {
-        'movie': m,
-        'set_jumbotron': 3
-    }
-    return render(request, "movies/movie_detail.html", d)
+class MovieDetailView(DetailView):
+
+    model = Movie
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['set_jumbotron'] = 3
+        return context
 
 
 def movie_create(request):
