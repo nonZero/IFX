@@ -3,7 +3,7 @@ from tqdm import tqdm
 
 from django.core.management.base import BaseCommand
 
-from movies.models import Tag, Movie_Tag_Field, Person
+from movies.models import Tag, MovieTagField, Person
 
 PERSON_FIELDS = {
     'BAMAI': 'במאי',

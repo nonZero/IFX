@@ -4,7 +4,7 @@ from tqdm import tqdm
 
 from django.core.management.base import BaseCommand
 
-from movies.models import Movie, Tag, Field, Movie_Tag_Field, models, Person, Role, Movie_Role_Person
+from movies.models import Movie, Tag, Field, MovieTagField, models, Person, Role, MovieRolePerson
 
 
 class Command(BaseCommand):
@@ -50,7 +50,7 @@ class Command(BaseCommand):
                             roles_added+=1
                         f.delete()
                         fields_removed+=1
-                    mrp = Movie_Role_Person(movie=m, person=p, role=r)
+                    mrp = MovieRolePerson(movie=m, person=p, role=r)
                     if not options['readonly']:
                         mrp.save()
                         mrp_counter+=1
@@ -58,7 +58,7 @@ class Command(BaseCommand):
                     try:
                         f = Field.objects.get(fid=row.lif)
                         t = Tag.objects.get(tid=row.book2_id[1:])
-                        mtf = Movie_Tag_Field(movie=m, tag = t, field = f)
+                        mtf = MovieTagField(movie=m, tag = t, field = f)
                         if not options['readonly']:
                             mtf.save()
                             mtf_counter+=1

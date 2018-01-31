@@ -3,7 +3,7 @@ from tqdm import tqdm
 
 from django.core.management.base import BaseCommand
 
-from movies.models import Movie, Tag, Field, Movie_Tag_Field, models
+from movies.models import Movie, Tag, Field, MovieTagField, models
 
 
 class Command(BaseCommand):
@@ -11,10 +11,10 @@ class Command(BaseCommand):
 
     def handle(self, **options):
 
-        tags = Tag.objects.filter(movie_tag_field=None).delete()
+        tags = Tag.objects.filter(movietagfield=None).delete()
         print(tags)
 
-        fields = Field.objects.filter(movie_tag_field=None).delete()
+        fields = Field.objects.filter(movietagfield=None).delete()
         print(fields)
         # progress = tqdm(total=len(tags))
         #

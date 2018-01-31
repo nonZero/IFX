@@ -48,7 +48,7 @@ class Movie(models.Model):
         return '<No Title>'
 
     def get_extra_data(self):
-        mft = Movie_Tag_Field.objects.filter(movie=self.id)
+        mft = MovieTagField.objects.filter(movie=self.id)
         fields = {}
         for item in mft:
             if item.field.title in fields:
@@ -59,7 +59,7 @@ class Movie(models.Model):
         return fields
 
 
-class Movie_Tag_Field(models.Model):
+class MovieTagField(models.Model):
     movie = models.ForeignKey(Movie)
     field = models.ForeignKey(Field)
     tag = models.ForeignKey(Tag)
@@ -76,10 +76,10 @@ class Collection(models.Model):
         return self.title
 
     def get_items(self):
-        return Collection_Movie.objects.filter(collection=self.id)
+        return CollectionMovie.objects.filter(collection=self.id)
 
 
-class Collection_Movie(models.Model):
+class CollectionMovie(models.Model):
     collection = models.ForeignKey(Collection)
     movie = models.ForeignKey(Movie)
 
@@ -106,7 +106,7 @@ class Role(models.Model):
      title_he = models.CharField(max_length=300, null=True, blank=True)
  
 
-class Movie_Role_Person(models.Model):
+class MovieRolePerson(models.Model):
      movie = models.ForeignKey(Movie, related_name='people')
      role = models.ForeignKey(Role, related_name='movie_people')
      person = models.ForeignKey(Person, related_name='movies')

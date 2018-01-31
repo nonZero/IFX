@@ -11,8 +11,8 @@
         <li>type_id: {{o.type_id}} </li>
         <li>lang: {{o.lang}} </li>
         <li>
-            Movie-Field-Tag ({{ o.movie_tag_field_set.count }} item(s)):
-            {% for item in o.movie_tag_field_set.all %}
+            Movie-Field-Tag ({{ o.movietagfield_set.count }} item(s)):
+            {% for item in o.movietagfield_set.all %}
                 <ul>
                     Movie:
                     <a href= "{% url 'movies:movie_detail' item.movie.id %}">

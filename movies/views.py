@@ -6,8 +6,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, TemplateView, DetailView
 
 from movies.forms import MovieForm, CollectionForm, SearchByYearForm
-from movies.models import Movie, Collection, Tag, Field, Movie_Tag_Field, \
-    Person, Movie_Role_Person
+from movies.models import Movie, Collection, Tag, Field, MovieTagField, \
+    Person, MovieRolePerson
 
 
 class HomePage(TemplateView):
@@ -240,7 +240,7 @@ def search_director(request, query):
         Q(title__icontains='במאי') | Q(title__icontains='director')
     )
     tags = Tag.objects.filter(title__icontains=query)
-    qs = Movie_Tag_Field.objects.filter(Q(field__in=fields) & Q(tag__in=tags))
+    qs = MovieTagField.objects.filter(Q(field__in=fields) & Q(tag__in=tags))
     results = []
     for item in qs:
         results.append(item.movie)
@@ -264,7 +264,7 @@ def search_all(request, query):
 
     tags = Tag.objects.filter(title__icontains=query)
     if tags:
-        qs = Movie_Tag_Field.objects.filter(tag__in=tags)
+        qs = MovieTagField.objects.filter(tag__in=tags)
         for item in qs:
             results.append(item.movie)
 
@@ -288,7 +288,7 @@ def field_list(request):
 
 def field_detail(request, id):
     o = get_object_or_404(Field, id=id)
-    distinct_tags = o.movie_tag_field_set.distinct('tag')
+    distinct_tags = o.movietagfield_set.distinct('tag')
     d = {
         'o': o,
         'tags': distinct_tags,
@@ -345,7 +345,7 @@ class PersonListView(ListView):
 def person_detail(request, id):
     o = get_object_or_404(Person, id=id)
     
-    r =  Movie_Role_Person.objects.filter(person=o)
+    r =  MovieRolePerson.objects.filter(person=o)
     d = {
         'o': o,
         'r': r,
