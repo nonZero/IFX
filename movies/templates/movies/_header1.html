@@ -8,13 +8,19 @@
 				<div class="bg-inverse p-4">
 					<div class="list-group">
 						<a href="#" class="list-group-item list-group-item-action active">{% trans "Search Archive" %}</a>
-						<a href="#" class="list-group-item list-group-item-action">{% trans "Collections" %}</a>
+ 						<a href="#" class="list-group-item list-group-item-action">{% trans "Collections" %}</a>
 						<a href="{% url 'movies:person_list' %}" class="list-group-item list-group-item-action">{% trans "Personalities" %}</a>
 						<a href="{% url 'movies:about' %}" class="list-group-item list-group-item-action">{% trans "About Archive" %}</a>
 						<a href="#" class="list-group-item list-group-item-action">{% trans "Conservation and Restoration" %}</a>
 						<a href="#" class="list-group-item list-group-item-action">{% trans "Depositing Materials" %}</a>
 						<a href="#" class="list-group-item list-group-item-action">{% trans "Contact" %}</a>
 						<a href="#" class="list-group-item list-group-item-action">{% trans "Jerusalem Cinematheque Site" %}</a>
+                        {% if user.is_authenticated %}
+						    <a href="#" class="list-group-item list-group-item-action">{{ user }}</a>
+						    <a href="{% url "logout" %}" class="list-group-item list-group-item-action">{% trans "Logout" %}</a>
+                        {% else %}
+						    <a href="{% url "login" %}" class="list-group-item list-group-item-action">{% trans "Login" %}</a>
+                        {% endif %}
 					</div>
 
 				</div>

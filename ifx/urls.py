@@ -36,5 +36,6 @@ urlpatterns = [
 
 urlpatterns += i18n_patterns(
     url(r'', include("movies.urls")),
+    url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^i18n/', include('django.conf.urls.i18n'))
 )
