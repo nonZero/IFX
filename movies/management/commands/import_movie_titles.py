@@ -5,7 +5,7 @@ import pandas as pd
 from django.core.management.base import BaseCommand
 from tqdm import tqdm
 
-from movies.models import models, Movie
+from movies.models import models, Movie, Person
 
 
 class Command(BaseCommand):
@@ -28,8 +28,8 @@ class Command(BaseCommand):
             df = pd.read_csv(f, delimiter='\t')
             progress = tqdm(total=len(df))
             for i, row in df.iterrows():
-                try:
-                    if str(row.book_id).isdigit():
+                if str(row.book_id).isdigit():
+                    try:
                         m = Movie.objects.get(bid=row.book_id)
                         if row.lang_id == "ENG":
                             m.title_en = row.title
@@ -38,11 +38,30 @@ class Command(BaseCommand):
                         else:
                             assert False, row
                         c[row.lang_id] += 1
-                except models.ObjectDoesNotExist:
-                    # log error to server?
-                    c['missing'] += 1
-                finally:
-                    progress.update(1)
+                    except models.ObjectDoesNotExist:
+                        c['missing'] += 1
+                elif row.book_id[0] == "T":
+                    try:
+                        p = Person.objects.get(tid=row.book_id[1:])
+                        if row.lang_id == "ENG":
+                            # if p.name_en and p.name_en != row.title:
+                            #     print(p.name_en, "!=", row.title)
+                            p.name_en = row.title
+                            p.save()
+                        elif row.lang_id == "HEB":
+                            # if p.name_he and p.name_he != row.title:
+                            #     print(p.name_he, "!=", row.title)
+                            p.name_he = row.title
+                            p.save()
+                        else:
+                            assert False, row
+                        c[row.lang_id] += 1
+                    except models.ObjectDoesNotExist:
+                        c['skipped'] += 1
+                else:
+                    c['unknown'] += 1
+
+                progress.update(1)
             progress.close()
         finally:
             pprint(c.most_common())
