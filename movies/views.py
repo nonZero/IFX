@@ -1,6 +1,6 @@
 from builtins import super
 
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, TemplateView, DetailView
@@ -65,6 +65,7 @@ class MovieListView(ListView):
             k = "title_he"
         return k
 
+
 # def search_query(request):
 #     q = request.GET.get('q', None)
 #     selection = request.GET.get('idselect', None)
@@ -105,7 +106,6 @@ class MoviesSearchListView(MovieListView):
 
 
 class MovieDetailView(DetailView):
-
     model = Movie
 
     def get_context_data(self, **kwargs):
@@ -278,7 +278,9 @@ def search_all(request, query):
 
 
 def field_list(request):
-    qs = Field.objects.all()
+    qs = Field.objects.annotate(movie_count=Count('movietagfield')).filter(
+        movie_count__gt=0
+    )
     d = {
         'objects': qs,
         'count': len(qs)
@@ -288,10 +290,11 @@ def field_list(request):
 
 def field_detail(request, id):
     o = get_object_or_404(Field, id=id)
-    distinct_tags = o.movietagfield_set.distinct('tag')
+    qs = Tag.objects.filter(movietagfield__field=o).annotate(
+        count=Count('movietagfield')).order_by('title')
     d = {
         'o': o,
-        'tags': distinct_tags,
+        'tags': qs,
     }
     return render(request, "movies/field_detail.html", d)
 
@@ -312,6 +315,7 @@ class TagListView(ListView):
         if k not in TAG_ORDER_FIELDS:
             k = "title"
         return k
+
 
 def tag_detail(request, id):
     o = get_object_or_404(Tag, id=id)
@@ -344,8 +348,8 @@ class PersonListView(ListView):
 
 def person_detail(request, id):
     o = get_object_or_404(Person, id=id)
-    
-    r =  MovieRolePerson.objects.filter(person=o)
+
+    r = MovieRolePerson.objects.filter(person=o)
     d = {
         'o': o,
         'r': r,

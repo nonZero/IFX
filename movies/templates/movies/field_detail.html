@@ -9,10 +9,10 @@
         <li>fid: {{ o.tid }} </li>
         <li>
             <ul>
-                {% for mtf in tags %}
+                {% for tag in tags %}
                     <li>
-                        <a href="{% url "movies:tag_detail" mtf.tag_id %}">{{ mtf.tag }}</a>
-                        ({{ mtf.tag.movietagfield_set.count }})
+                        <a href="{% url "movies:tag_detail" tag.id %}">{{ tag }}</a>
+                        ({{ tag.count }})
                     </li>
                 {% endfor %}
             </ul>
