@@ -97,7 +97,10 @@ class Person(models.Model):
     last_name_en = models.CharField(max_length=300, null=True, blank=True)
 
     def __str__(self):
-        return self.first_name_en + " " + self.last_name_en
+        if self.name_en:
+            return self.name_en
+        elif self.first_name_en and self.last_name_en:
+            return self.first_name_en + " " + self.last_name_en
 
 
 class Role(models.Model):

@@ -78,6 +78,7 @@ class Identity(models.Model):
         print(uri)
 
     def get_wikipedia_info(self):
+        # https://pypi.python.org/pypi/wikipedia
         try:
             # TODO: movie support
             p = Person.objects.get(pk=self.object_id)
