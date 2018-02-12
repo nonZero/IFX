@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static i18n humanize %}
+{% load static i18n humanize bootstrap4 %}
 
 {% block content %}
     <h1>{% trans "Add Collection" %}</h1>
@@ -7,8 +7,10 @@
     <form method="post" novalidate>
         {% csrf_token %}
 
-        {{ form.as_ul }}
+        {% bootstrap_form form %}
 
-        <button>Add</button>
+        <button class="btn btn-primary">
+            {% trans "Add" %}
+        </button>
     </form>
 {% endblock %}

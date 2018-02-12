@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
 
     'django_extensions',
+    'bootstrap4',
 
     'general',
     'users',

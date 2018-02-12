@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n bootstrap4 %}
 
 {% block content %}
 
@@ -17,12 +17,11 @@
 
     <form method="post" action="{% url 'login' %}">
         {% csrf_token %}
-        <table>
-            {{ form.as_table }}
-        </table>
-
-        <button>{% trans "Login" %}</button>
         <input type="hidden" name="next" value="{{ next }}"/>
+
+        {% bootstrap_form form %}
+
+        <button class="btn btn-primary">{% trans "Login" %}</button>
     </form>
 
     {#    <p><a href="{% url 'password_reset' %}">Lost password?</a></p>#}
