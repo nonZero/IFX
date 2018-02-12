@@ -1,3 +1,13 @@
+h1 {
+    background-color: #4a4a4a;
+    color: #fcfcfc;
+    font-weight: 100;
+    font-size: 18pt;
+    padding: 10px;
+    /*height: 45px;*/
+    /*margin-top: -20px;*/
+}
+
 input#lang-switcher {
     background-color: black;
     border: none;
@@ -74,5 +84,23 @@ input#lang-switcher {
 }
 
 .movie-list > .media:nth-child(odd)  {
+
     background: #f2f0f0;
 }
+
+.jumbotron  {
+    margin:0;
+}
+.jumbotron h1 {
+    color: #FFFFFF;
+    font-family: "Open Sans Hebrew";
+    font-size: 60px;
+    font-weight: 300;
+    /*line-height: 65px;*/
+    text-align: center !important;
+}
+
+div#smaller_jum {
+    height: 100px;
+}
+

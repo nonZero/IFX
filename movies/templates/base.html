@@ -2,52 +2,55 @@
 {% load staticfiles i18n %}
 {% get_current_language as LANGUAGE_CODE %}
 
-<html lang="{{LANGUAGE_CODE}}" class="lang-{{LANGUAGE_CODE}}">
-    <head>
-        <meta charset="UTF-8">
+<html lang="{{ LANGUAGE_CODE }}" class="lang-{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
 
-        <link rel="icon" href="{% static "favicon.ico" %}"/>
+    <link rel="icon" href="{% static "favicon.ico" %}"/>
 
-        {% if LANGUAGE_CODE == 'he' %}
-            <link rel="stylesheet" href="{% static "vendor/bootstrap/css/bootstrap-rtl.css" %}" >
-            <link href="{% static 'style.css' %}" rel="stylesheet">
-            <link href="{% static 'style_rtl.css' %}" rel="stylesheet">
-        {% else %}
-            <link rel="stylesheet" href="{% static "vendor/bootstrap/css/bootstrap-ltr.css" %}" >
-            <link href="{% static 'style.css' %}" rel="stylesheet">
-            <link href="{% static 'style_ltr.css' %}" rel="stylesheet">
-        {% endif %}
-        <link href="{% static 'vendor/font-awesome/css/fontawesome-all.css' %}" rel="stylesheet">
+    {% if LANGUAGE_CODE == 'he' %}
+        <link rel="stylesheet"
+              href="{% static "vendor/bootstrap/css/bootstrap-rtl.css" %}">
+        <link href="{% static 'style.css' %}" rel="stylesheet">
+        <link href="{% static 'style_rtl.css' %}" rel="stylesheet">
+    {% else %}
+        <link rel="stylesheet"
+              href="{% static "vendor/bootstrap/css/bootstrap-ltr.css" %}">
+        <link href="{% static 'style.css' %}" rel="stylesheet">
+        <link href="{% static 'style_ltr.css' %}" rel="stylesheet">
+    {% endif %}
+    <link href="{% static 'vendor/font-awesome/css/fontawesome-all.css' %}"
+          rel="stylesheet">
 
 
-        <title>Cinematheque Home page</title>
-    </head>
-    <body>
-        <div class="baseC">
-            <div>
-                {% block header %}{% include 'movies/_header1.html' %}{% endblock %}
-            </div>
-            {% block main %}
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <main>
-                                {% block content %}BASE CONTENT{% endblock %}
-                            </main>
-                        </div>
-                    </div>
+    <title>Cinematheque Home page</title>
+</head>
+<body>
+<div class="baseC">
+    <div>
+        {% block header %}{% include 'movies/_header1.html' %}{% endblock %}
+    </div>
+    {% block main %}
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col col-lg-10">
+                    <main>
+                        {% block content %}BASE CONTENT{% endblock %}
+                    </main>
                 </div>
-            {% endblock %}
-
-            {% block footer %}
-                {% include 'movies/_footer.html' %}
-            {% endblock %}
+            </div>
         </div>
+    {% endblock %}
 
-    </body>
+    {% block footer %}
+        {% include 'movies/_footer.html' %}
+    {% endblock %}
+</div>
 
-        <script src="{% static "vendor/jquery-3.2.1.js" %}"></script>
-        <script src="{% static "vendor/bootstrap/js/bootstrap.bundle.js" %}"></script>
-        <script src="{% static 'allScripts.js' %}"></script>
+</body>
+
+<script src="{% static "vendor/jquery-3.2.1.js" %}"></script>
+<script src="{% static "vendor/bootstrap/js/bootstrap.bundle.js" %}"></script>
+<script src="{% static 'allScripts.js' %}"></script>
 
 </html>

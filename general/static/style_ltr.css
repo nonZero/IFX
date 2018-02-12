@@ -22,15 +22,6 @@ body {
     color: white;
 }
 
-.jumbotron h1 {
-    color: #FFFFFF;
-    font-family: "Open Sans Hebrew";
-    font-size: 60px;
-    font-weight: 300;
-    line-height: 65px;
-    text-align: center !important;
-    margin-bottom: 55px;
-}
 
 .baseC.container {
     max-width: 1170px !important;
@@ -447,19 +438,6 @@ button.btnRegular {
 }
 
 /*-------------------- About ----------------------------*/
-div#smaller_jum {
-    height: 130px;
-}
-
-h1#h1reasult {
-    background-color: #4a4a4a;
-    color: #fcfcfc;
-    font-weight: 100;
-    font-size: 18pt;
-    padding: 10px;
-    position: relative;
-    margin-top: -20px;
-}
 
 div#aboutJumb {
     background-image: url(../static/images/archivelia.jpg) !important;

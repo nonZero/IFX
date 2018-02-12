@@ -2,31 +2,20 @@
 
 <div id="smaller_jum" class="jumbotron">
     <form id="searchform" action="{% url 'search:query' %}">
-        {% csrf_token %}
         <div class="row justify-content-center">
-            <div class="col col-2 dropdown">
-                  <select id="idselect" name="idselect" class="dropdown dropBtnSearch searchDD" aria-labelledby="dropdownMenu1"
-                              onchange="{% if LANGUAGE_CODE == 'he' %}onJumboSearchChangeHe(){% else %}onJumboSearchChange(){% endif %}">
-                        <option value="all"><a href="#">{% trans "Search All" %}</a></option>
-                          <span role="separator" class="divider"></span>
-                        <option value="title"><a href="#">{% trans "Title" %}</a></option>
-                          <span role="separator" class="divider"></span>
-                        <option value="year"><a href="#">{% trans "Year/s" %}</a></option>
-                          <span role="separator" class="divider"></span>
-                        <option value="director"><a href="#">{% trans "Director" %}</a></option>
-                  </select>
+            <div class="col col-md-7 col-sm-8 col-xs-9 searchBox">
+                <div class="input-group">
+                    <input type="text"
+                           class="form-control"
+                           id="searchbox"
+                           name="q" placeholder="{% trans 'Search...' %}">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary">
+                            <span class="fa fa-search"></span>
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="col-5 searchContainer noPadding">
-                <input type="text" id="searchbox" name="q" class="btnSearchIdex sInput" placeholder="{% trans 'Search...' %}">
-            </div>
-            <div class="col col-1 padding6">
-                <span class="input-group-btn">
-                    <button class="btn btn-default btnSearch" type="submit">
-                        <span class="fa fa-search"></span>
-                    </button>
-                </span>
-            </div>
-
         </div>
     </form>
 </div>

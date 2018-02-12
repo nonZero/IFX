@@ -1,60 +1,55 @@
 {% load static i18n movies ifx %}
 
-<div class="row justify-content-center">
-    <div class="col col-lg-10">
+<ul class="list-unstyled movie-list">
+    {% for object in object_list %}
 
-        <ul class="list-unstyled movie-list">
-            {% for object in object_list %}
+        <li class="media m-2">
+            <img class="mr-3"
+                 src="{% static "images/camera-icon.png" %}"
+                 height="120"
+                 width="120"
+                 alt="{{ object|bdtitle }}"/>
 
-                <li class="media m-2">
-                    <img class="mr-3"
-                         src="{% static "images/camera-icon.png" %}"
-                         height="120"
-                         width="120"
-                         alt="{{ object|bdtitle }}"/>
+            <div class="media-body p-2">
 
-                    <div class="media-body p-2">
-
-                        <h5>
-                            <strong>
-                                {{ object|ut }}
-                            </strong>
-                            {% if object.year != none %}
-                                <span dir="ltr" class="year">({{ object.year }})</span>
-                            {% endif %}
-                            {% if object.duration != none %}
-                                <span>{{ object.duration }} {% trans "min" %}</span>
-                            {% endif %}
-                        </h5>
-                        {#            <form action="">#}
-                        {#                <input type="image" src="{% static 'images/Shopping-bag-black.svg' %}" alt="Submit">#}
-                        {#            </form>#}
-                        {#            <p>{% trans "Director" %}: <strong>Name</strong></p>#}
-                        <ul class="list-inline">
-                            {% for key, values in object.get_short_data %}
-                                <li class="list-inline-item">
-                                    <b>{{ key }}:</b>
-                                    {% for value in values %}
-                                        {{ value|ut }}{% if not forloop.last %}
-                                            ,{% endif %}
-                                    {% endfor %}
-                                </li>
+                <h5>
+                    <strong>
+                        {{ object|ut }}
+                    </strong>
+                    {% if object.year != none %}
+                        <span dir="ltr" class="year">({{ object.year }})</span>
+                    {% endif %}
+                    {% if object.duration != none %}
+                        <span>{{ object.duration }} {% trans "min" %}</span>
+                    {% endif %}
+                </h5>
+                {#            <form action="">#}
+                {#                <input type="image" src="{% static 'images/Shopping-bag-black.svg' %}" alt="Submit">#}
+                {#            </form>#}
+                {#            <p>{% trans "Director" %}: <strong>Name</strong></p>#}
+                <ul class="list-inline">
+                    {% for key, values in object.get_short_data %}
+                        <li class="list-inline-item">
+                            <b>{{ key }}:</b>
+                            {% for value in values %}
+                                {{ value|ut }}{% if not forloop.last %}
+                                    ,{% endif %}
                             {% endfor %}
-                            {% for r in object.get_short_roles %}
-                                <li class="list-inline-item">
-                                    <b>{{ r.role }}:</b> {{ r.person|un }}
-                                </li>
-                            {% endfor %}
-                        </ul>
-                        {% if object|get_description %}
-                            <p class="summary ellipsis multiline">
-                                <strong>{% trans "Summary" %}:</strong>
-                                {{ object|get_description }}
-                            </p>
-                        {% endif %}
-                    </div>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-</div>
+                        </li>
+                    {% endfor %}
+                    {% for r in object.get_short_roles %}
+                        <li class="list-inline-item">
+                            <b>{{ r.role }}:</b> {{ r.person|un }}
+                        </li>
+                    {% endfor %}
+                </ul>
+                {% if object|get_description %}
+                    <p class="summary ellipsis multiline">
+                        <strong>{% trans "Summary" %}:</strong>
+                        {{ object|get_description }}
+                    </p>
+                {% endif %}
+            </div>
+        </li>
+    {% endfor %}
+</ul>
