@@ -1,3 +1,17 @@
 from django.contrib import admin
 
-# Register your models here.
+from . import models
+
+
+class RoleAdmin(admin.ModelAdmin):
+    list_display = (
+        'tid',
+        'title_en',
+        'title_he',
+        'appears_in_short_version',
+        'short_version_order',
+    )
+
+
+admin.site.register(models.Person)
+admin.site.register(models.Role, RoleAdmin)

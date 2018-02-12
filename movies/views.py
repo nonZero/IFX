@@ -19,7 +19,7 @@ class AboutView(IFXMixin, TemplateView):
 
 class MovieListView(IFXMixin, ListView):
     model = Movie
-    paginate_by = 10
+    paginate_by = 25
 
     ORDER_FIELDS = {
         'title_he',

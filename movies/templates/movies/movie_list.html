@@ -6,7 +6,7 @@
     <h1>
         {% trans "Movies" %}
         <small class="text-muted">
-        {{ page_obj.start_index }} - {{ page_obj.end_index }}
+            {{ page_obj.start_index }} - {{ page_obj.end_index }}
             {% trans "of" %} {{ paginator.count|intcomma }}
         </small>
 
@@ -15,9 +15,11 @@
     <div class="pagination">
         <span class="step-links">
             {% if page_obj.has_previous %}
-                <a href="?order={{ view.get_ordering }}&page=1{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">&laquo; {% trans "first" %}</a>
+                <a href="?order={{ view.get_ordering }}&page=1
+                        {% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">&laquo; {% trans "first" %}</a>
                 |
-                <a href="?order={{ view.get_ordering }}&page={{ page_obj.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{% trans "previous" %}</a>
+                <a href="?order={{ view.get_ordering }}&page=
+                        {{ page_obj.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{% trans "previous" %}</a>
                 |
             {% endif %}
 
@@ -27,17 +29,16 @@
 
             {% if page_obj.has_next %}
                 |
-                <a href="?order={{ view.get_ordering }}&page={{ page_obj.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{% trans "next" %}</a>
+                <a href="?order={{ view.get_ordering }}&page=
+                        {{ page_obj.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{% trans "next" %}</a>
                 |
-                <a href="?order={{ view.get_ordering }}&page={{ page_obj.paginator.num_pages }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{% trans "last" %} &raquo;</a>
+                <a href="?order={{ view.get_ordering }}&page=
+                        {{ page_obj.paginator.num_pages }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{% trans "last" %} &raquo;</a>
             {% endif %}
         </span>
     </div>
 
-    <div>
-        {% for object in object_list %}
-           {% block movie %}{% include 'movies/_movie.html' %}{% endblock %}
-        {% endfor %}
-    </div>
+    {% include 'movies/_movies.html' %}
 
 {% endblock %}
+

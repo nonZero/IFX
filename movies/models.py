@@ -18,7 +18,15 @@ class Language(object):
 
 class Field(models.Model):
     fid = models.CharField(unique=True, max_length=300)
-    title = models.CharField(max_length=300)
+    title = models.CharField(_('title'), max_length=300)
+    appears_in_short_version = models.BooleanField(
+        _('appears in short version'), default=False)
+    short_version_order = models.PositiveIntegerField(_('short version order'),
+                                                      null=True, blank=True)
+
+    class Meta:
+        verbose_name = _("field")
+        verbose_name_plural = _("fields")
 
     def __str__(self):
         return self.title
@@ -47,7 +55,6 @@ class Tag(models.Model):
         return reverse('movies:tag_detail', args=(self.pk,))
 
 
-
 class Movie(models.Model):
     bid = models.IntegerField(unique=True)
     year = models.IntegerField(null=True, blank=True)
@@ -71,12 +78,24 @@ class Movie(models.Model):
             return self.title_en
         return '<No Title>'
 
-    def get_extra_data(self):
+    def get_extra_data(self, short=False):
         mft = MovieTagField.objects.filter(movie=self.id)
+        print(mft.count())
+        if short:
+            mft = mft.filter(field__appears_in_short_version=True).order_by(
+                'field__short_version_order')
         fields = defaultdict(list)
         for item in mft:
             fields[item.field].append(item.tag)
         return list(fields.items())
+
+    def get_short_data(self):
+        return self.get_extra_data(short=True)
+
+    def get_short_roles(self):
+        return self.people.filter(
+            role__appears_in_short_version=True).order_by(
+            'role__short_version_order')
 
 
 class MovieTagField(models.Model):

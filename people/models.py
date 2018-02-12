@@ -20,11 +20,12 @@ class Person(models.Model):
         return reverse('people:detail', args=(self.pk,))
 
 
-
 class Role(models.Model):
     tid = models.CharField(unique=True, max_length=300)
     title_en = models.CharField(max_length=300, null=True, blank=True)
     title_he = models.CharField(max_length=300, null=True, blank=True)
+    appears_in_short_version = models.BooleanField(default=False)
+    short_version_order = models.PositiveIntegerField(null=True, blank=True)
 
     def __str__(self):
         return self.title_he

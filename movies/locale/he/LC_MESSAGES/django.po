@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-12 18:55+0200\n"
-"PO-Revision-Date: 2018-02-12 18:55+0200\n"
+"POT-Creation-Date: 2018-02-12 21:26+0200\n"
+"PO-Revision-Date: 2018-02-12 21:26+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -23,6 +23,21 @@ msgstr "עברית"
 
 msgid "English"
 msgstr "אנגלית"
+
+msgid "title"
+msgstr "סרט"
+
+msgid "appears in short version"
+msgstr "מופיע בתצוגה מקוצרת"
+
+msgid "short version order"
+msgstr "סדר הופעה בתצוגה מקוצרת"
+
+msgid "field"
+msgstr "שדה"
+
+msgid "fields"
+msgstr "שדות"
 
 msgid "404 Not Found"
 msgstr "404 הדף לא קיים"
@@ -83,7 +98,9 @@ msgstr "חיפוש..."
 msgid "min"
 msgstr "שניות"
 
-msgid "Summery"
+#, fuzzy
+#| msgid "Summery"
+msgid "Summary"
 msgstr "תקציר"
 
 msgid "About The Israeli Film Archive"
@@ -142,6 +159,9 @@ msgstr "ז'אנר"
 
 msgid "Color"
 msgstr "צבעוניות"
+
+msgid "Summery"
+msgstr "תקציר"
 
 msgid "of"
 msgstr "מתוך"

@@ -60,4 +60,19 @@ input#lang-switcher {
     height: 100vh;
 }
 
+.movie-list .media  {
+    height: 120px;
+    overflow: hidden;
+}
+.movie-list .summary {
+    overflow: hidden;
+    height: 3em;
+}
 
+.movie-list .media h5 {
+    margin-bottom: 3px;
+}
+
+.movie-list > .media:nth-child(odd)  {
+    background: #f2f0f0;
+}
