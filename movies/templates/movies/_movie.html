@@ -1,5 +1,4 @@
-{% load static i18n %}
-<!--{% load i18n static movies %}-->
+{% load static i18n movies ifx  %}
 {% get_current_language as LANGUAGE_CODE %}
 
 <div class="row movieResult">
@@ -8,10 +7,10 @@
         <section>
             <h3>
                 <strong>
-                    <a href= "{% url 'movies:movie_detail' object.id %}">{{ object.get_title }}</a>
+                    {{ object|ut }}
                 </strong>
                 {% if object.year != none %}
-                    ({{ object.year }})
+                    <span dir="ltr" class="year">({{ object.year }})</span>
                 {% endif %}
                 {% if object.duration != none %}
                     <span>{{ object.duration }} {% trans "min" %}</span>

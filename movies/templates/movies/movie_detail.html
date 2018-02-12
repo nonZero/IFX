@@ -41,12 +41,19 @@
                 {% endfor %}
             </li>
         {% endfor %}
-        {% for role in movie.people.all %}
-            <li>
-                <b>{{ role.role }}:</b> {{ role.person|un }}
-            </li>
-        {% endfor %}
     </ul>
+    {% if movie.people.exists %}
+        <h4>
+            {% trans "Personalities" %}
+        </h4>
+        <ul>
+            {% for role in movie.people.all %}
+                <li>
+                    <b>{{ role.role }}:</b> {{ role.person|un }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 
 {% endblock %}
 

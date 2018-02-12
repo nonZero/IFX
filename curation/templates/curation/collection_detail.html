@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+
+    <h1>{{ collection }}</h1>
+
+    <h3>{% trans "Movies" %}</h3>
+    <ul>
+        {% for object in collection.movies.all %}
+            <li>
+                <a href= {% url "movies:detail" object.movie.id %}>{{ object.movie.title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+
+
+{% endblock %}

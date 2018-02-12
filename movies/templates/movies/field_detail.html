@@ -2,11 +2,14 @@
 {% load static i18n ifx %}
 
 {% block content %}
-    <div>
-        <li class="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
             <a href="{% url "movies:field_list" %}">{% trans "Fields" %}</a>
         </li>
-    </div>
+        <li class="breadcrumb-item active">
+            {{ object }}
+        </li>
+    </ol>
 
     <h1>{{ object }}</h1>
 

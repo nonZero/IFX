@@ -61,6 +61,9 @@ class Movie(models.Model):
         return str('{}: "en:{}", "he:{}"'.format(self.id, self.title_en,
                                                  self.title_he))
 
+    def get_absolute_url(self):
+        return reverse('movies:detail', args=(self.pk,))
+
     def get_title(self):
         if self.title_he:
             return self.title_he

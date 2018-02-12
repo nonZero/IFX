@@ -38,6 +38,7 @@ class Command(BaseCommand):
                             m.title_he = row.title
                         else:
                             assert False, row
+                        m.save()
                         c[row.lang_id] += 1
                     except models.ObjectDoesNotExist:
                         c['missing'] += 1
@@ -48,14 +49,13 @@ class Command(BaseCommand):
                             # if p.name_en and p.name_en != row.title:
                             #     print(p.name_en, "!=", row.title)
                             p.name_en = row.title
-                            p.save()
                         elif row.lang_id == "HEB":
                             # if p.name_he and p.name_he != row.title:
                             #     print(p.name_he, "!=", row.title)
                             p.name_he = row.title
-                            p.save()
                         else:
                             assert False, row
+                        p.save()
                         c["P" + row.lang_id] += 1
                     except models.ObjectDoesNotExist:
                         try:

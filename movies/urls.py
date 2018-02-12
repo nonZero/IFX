@@ -13,7 +13,7 @@ urlpatterns = [
 
     url(r"^movie/$", views.MovieListView.as_view(), name='list'),
     url(r"^movie/(?P<pk>[0-9]+)/$", views.MovieDetailView.as_view(),
-        name='movie_detail'),
+        name='detail'),
 
     url(r"^field/$", views.FieldListView.as_view(), name='field_list'),
     url(r"^field/(?P<pk>[0-9]+)/$", views.FieldDetailView.as_view(),

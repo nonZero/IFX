@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-07 14:57+0200\n"
-"PO-Revision-Date: 2018-02-07 14:57+0200\n"
+"POT-Creation-Date: 2018-02-12 18:55+0200\n"
+"PO-Revision-Date: 2018-02-12 18:55+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -62,6 +62,9 @@ msgstr "אישים"
 msgid "Collections"
 msgstr "אוספים"
 
+msgid "Fields"
+msgstr "שדות"
+
 msgid "About Archive"
 msgstr "אודות הארכיון"
 
@@ -92,9 +95,6 @@ msgstr "שימור ורסטורציה"
 msgid "Depositing Materials"
 msgstr "הפקדת חומרים"
 
-msgid "Fields"
-msgstr "שדות"
-
 msgid "The Nathan Axelrod Newsreel Collection"
 msgstr "אוסף יומני נתן אקסלרוד"
 
@@ -112,9 +112,6 @@ msgstr "כותרת באנגלית"
 
 msgid "Year"
 msgstr "שנה"
-
-msgid "Hebrew Summary"
-msgstr "עברית"
 
 msgid "English Summary"
 msgstr "תקציר באנגלית"
@@ -146,6 +143,9 @@ msgstr "ז'אנר"
 msgid "Color"
 msgstr "צבעוניות"
 
+msgid "of"
+msgstr "מתוך"
+
 msgid "first"
 msgstr "הראשון"
 
@@ -154,9 +154,6 @@ msgstr "הקודם"
 
 msgid "Page"
 msgstr "עמוד"
-
-msgid "of"
-msgstr "מתוך"
 
 msgid "next"
 msgstr "הבא"
@@ -196,6 +193,9 @@ msgstr "שנה/ים"
 
 msgid "Tags"
 msgstr "תגים"
+
+#~ msgid "Hebrew Summary"
+#~ msgstr "עברית"
 
 #~ msgid "Search Archive"
 #~ msgstr "חיפוש בארכיון"

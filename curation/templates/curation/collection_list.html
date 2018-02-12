@@ -1,29 +1,22 @@
 {% extends 'base.html' %}
-{% load static i18n humanize %}
+{% load static i18n humanize ifx %}
 
 {% block content %}
 
     <h1>{% trans "Collections" %}</h1>
 
-    <ul>
-        <a href= {% url "collections:create" %}>
-            {% trans "Add collection" %}...
-        </a>
+    <ul class="list-group">
+        {% for object in object_list %}
+            <li class="list-group-item">
+                {{ object|u }}
+            </li>
+        {% endfor %}
     </ul>
 
-    <table border="1" width="100%">
-        <tr>
-            <th>#</th>
-            <th>Title</th>
-        </tr>
-        {% for object in objects %}
-            <tr>
-                <td>#{{ object.id }}</td>
-                <td>
-                    <a href={% url "collections:detail" object.id %}>{{ object.title }}</a>
-                </td>
-            </tr>
-        {% endfor %}
+    <br/>
 
-    </table>
+    <a href="{% url "curation:create" %}" class="btn btn-primary">
+        {% trans "Add collection" %}...
+    </a>
+
 {% endblock %}

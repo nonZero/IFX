@@ -3,6 +3,20 @@
 
 {% block content %}
 
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{% url "movies:field_list" %}">
+                {% trans "Fields" %}
+            </a>
+        </li>
+        <li class="breadcrumb-item">
+            {{ object.movietagfield_set.all.0.field|u }}
+        </li>
+        <li class="breadcrumb-item active">
+            {{ object|bdtitle }}
+        </li>
+    </ul>
+
     <h1>
         {{ object|bdtitle }}
     </h1>
@@ -21,7 +35,7 @@
     <ul class="list-group">
         {% for item in object.movietagfield_set.all %}
             <li class="list-group-item">
-                <a href="{% url 'movies:movie_detail' item.movie.id %}">
+                <a href="{% url 'movies:detail' item.movie.id %}">
                     {{ item.movie.get_title }}</a>
             </li>
         {% endfor %}

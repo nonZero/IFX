@@ -25,11 +25,13 @@ def bd(instance, field):
     lang = translation.get_language()[:2]
     return getattr(instance, field + "_" + lang)
 
+
 @register.filter
 def ut(instance, field='title'):
     lang = translation.get_language()[:2]
     attr = f"{field}_{lang}"
     return u(instance, attr)
+
 
 @register.filter
 def un(instance):
