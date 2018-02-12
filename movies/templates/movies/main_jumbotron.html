@@ -1,7 +1,9 @@
 {% load i18n %}
 
 <div class="jumbotron">
-    <h1>{% trans "The Israeli Film Archive" %}</h1>
+    <div class="display-4 text-center">{% trans "The Israeli Film Archive" %}</div>
+    <br>
+    <br>
     <form id="searchform" action="{% url 'search:query' %}">
         <div class="row justify-content-md-center">
             <div class="col col-sm-6 searchBox">
