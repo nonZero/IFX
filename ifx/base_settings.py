@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'curation',
     'people',
     'search',
+    'enrich',
 ]
 
 MIDDLEWARE = [
