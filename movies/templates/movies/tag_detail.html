@@ -1,29 +1,30 @@
-{% extends 'movies/../base.html' %}
-{% load static i18n %}
+{% extends 'base.html' %}
+{% load static i18n ifx %}
 
 {% block content %}
 
-    <h1>Tag #{{ o.id }}</h1>
+    <h1>
+        {{ object|bdtitle }}
+    </h1>
 
     <ul>
-        <li><b>Title: {{ o.title }}</b></li>
-        <li>tid: {{o.tid}} </li>
-        <li>type_id: {{o.type_id}} </li>
-        <li>lang: {{o.lang}} </li>
-        <li>
-            Movie-Field-Tag ({{ o.movietagfield_set.count }} item(s)):
-            {% for item in o.movietagfield_set.all %}
-                <ul>
-                    Movie:
-                    <a href= "{% url 'movies:movie_detail' item.movie.id %}">
-                        {{item.movie.get_title}}</a>,
-                    Field:
-                    {{ item.field}}
-                </ul>
-            {% endfor %}
-        </li>
-    </ul>
+        {% if object.title_he %}
+            <li><b>{% trans "Hebrew Title" %}:</b> {{ object.title_he }}</li>
+        {% endif %}
 
-    <a href="{% url 'movies:tag_list' %}">Back To My Tags</a>
+        {% if object.title_en %}
+            <li><b>{% trans "English Title" %}:</b> {{ object.title_en }}</li>
+        {% endif %}
+
+    </ul>
+    {{ object.movietagfield_set.count }} {% trans "Movies" %}
+    <ul class="list-group">
+        {% for item in object.movietagfield_set.all %}
+            <li class="list-group-item">
+                <a href="{% url 'movies:movie_detail' item.movie.id %}">
+                    {{ item.movie.get_title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
 
 {% endblock %}

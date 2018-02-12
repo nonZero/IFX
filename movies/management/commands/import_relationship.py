@@ -4,7 +4,8 @@ from tqdm import tqdm
 
 from django.core.management.base import BaseCommand
 
-from movies.models import Movie, Tag, Field, MovieTagField, models, Person, Role, MovieRolePerson
+from movies.models import Movie, Tag, Field, MovieTagField, models
+from people.models import Person, Role, MovieRolePerson
 
 
 class Command(BaseCommand):

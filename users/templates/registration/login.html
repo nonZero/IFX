@@ -4,12 +4,15 @@
 {% block content %}
 
     {% if next %}
-        {% if user.is_authenticated %}
-            <p>Your account doesn't have access to this page. To proceed,
-                please login with an account that has access.</p>
-        {% else %}
-            <p>Please login to see this page.</p>
-        {% endif %}
+        <div class="alert alert-warning">
+            {% if user.is_authenticated %}
+                {% trans "Your account doesn't have access to this page." %}
+                <br/>
+                {% trans "To proceed, please login with an account that has access." %}
+            {% else %}
+                {% trans "Please login to see this page." %}
+            {% endif %}
+        </div>
     {% endif %}
 
     <form method="post" action="{% url 'login' %}">

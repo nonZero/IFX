@@ -5,7 +5,8 @@ from tqdm import tqdm
 from django.core.management.base import BaseCommand
 
 from ifx.util import is_hebrew
-from movies.models import Tag, Person
+from movies.models import Tag
+from people.models import Person
 
 
 class Command(BaseCommand):

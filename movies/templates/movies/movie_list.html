@@ -1,64 +1,43 @@
-{% extends 'movies/../base.html' %}
+{% extends 'base.html' %}
 {% load static i18n humanize %}
 
 {% block content %}
 
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          rel="stylesheet">
-    <link href="{% static "style.css" %}" rel="stylesheet">
+    <h1>
+        {% trans "Movies" %}
+        <small class="text-muted">
+        {{ page_obj.start_index }} - {{ page_obj.end_index }}
+            {% trans "of" %} {{ paginator.count|intcomma }}
+        </small>
 
-    <h1>{% trans "Movies" %}</h1>
+    </h1>
 
     <div class="pagination">
-        <span>
-        {{ page_obj.start_index }}-{{ page_obj.end_index }}
-        of {{ paginator.count|intcomma }}
-        </span>
-        |
         <span class="step-links">
             {% if page_obj.has_previous %}
-                <a href="?order={{ view.get_ordering }}&page=1{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">&laquo; first</a>
-                <a href="?order={{ view.get_ordering }}&page={{ page_obj.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">previous</a>
+                <a href="?order={{ view.get_ordering }}&page=1{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">&laquo; {% trans "first" %}</a>
+                |
+                <a href="?order={{ view.get_ordering }}&page={{ page_obj.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{% trans "previous" %}</a>
+                |
             {% endif %}
 
             <span class="current">
-                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                {% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}
             </span>
 
             {% if page_obj.has_next %}
-                <a href="?order={{ view.get_ordering }}&page={{ page_obj.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">next</a>
-                <a href="?order={{ view.get_ordering }}&page={{ page_obj.paginator.num_pages }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">last &raquo;</a>
+                |
+                <a href="?order={{ view.get_ordering }}&page={{ page_obj.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{% trans "next" %}</a>
+                |
+                <a href="?order={{ view.get_ordering }}&page={{ page_obj.paginator.num_pages }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{% trans "last" %} &raquo;</a>
             {% endif %}
         </span>
     </div>
 
     <div>
         {% for object in object_list %}
-           {% block movie %}{% include 'movies/_movie_search.html' %}{% endblock %}
+           {% block movie %}{% include 'movies/_movie.html' %}{% endblock %}
         {% endfor %}
     </div>
-
-
-    <table border="1" width="100%">
-        <tr>
-            <th>#</th>
-            <th>bid</th>
-            <th>Title</th>
-            <th>Year</th>
-            <th>Duration</th>
-        </tr>
-        {% for object in object_list %}
-            <tr>
-                <td>#{{ object.id }}</td>
-                <td>{{ object.bid }}</td>
-                <td>
-                    <a href="{% url 'movies:movie_detail' object.id %}">{{ object.get_title }}</a>
-                </td>
-                <td>{{ object.year }}</td>
-                <td>{{ object.duration }}</td>
-            </tr>
-        {% endfor %}
-
-    </table>
 
 {% endblock %}

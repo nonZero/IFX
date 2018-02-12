@@ -1,4 +1,4 @@
-{% extends 'movies/../base.html' %}
+{% extends 'base.html' %}
 {% load static i18n %}
 {% csrf_token %}
 
@@ -28,7 +28,7 @@
         <hr>
         <div>
             {% for object in object_list %}
-               {% block movie %}{% include 'movies/_movie_search.html' %}{% endblock %}
+               {% block movie %}{% include 'movies/_movie.html' %}{% endblock %}
             {% endfor %}
         </div>
     </div>

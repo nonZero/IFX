@@ -1,7 +1,7 @@
 {% load i18n %}
 
 <div id="smaller_jum" class="jumbotron">
-    <form id="searchform" action="{% url 'movies:search_query' %}">
+    <form id="searchform" action="{% url 'search:query' %}">
         {% csrf_token %}
         <div class="row justify-content-center">
             <div class="col col-2 dropdown">
@@ -21,7 +21,9 @@
             </div>
             <div class="col col-1 padding6">
                 <span class="input-group-btn">
-                        <button class="btn btn-default btnSearch glyphicon glyphicon-search" type="submit"></button>
+                        <button class="btn btn-default btnSearch" type="submit">
+                            <span class="fa fa-search"></span>
+                        </button>
                 </span>
             </div>
 

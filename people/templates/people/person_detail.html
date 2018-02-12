@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+
+{% block content %}
+    <div class="ul">
+        <li class="breadcrumb"><a
+                href='{% url "people:list" %}'>{% trans "Personalities" %}</a>
+        </li>
+    </div>
+    <h1>
+        {{ object }}
+    </h1>
+
+    <ul>
+        <li>{% trans "Hebrew name" %}: {{ object.name_he }}</li>
+        <li>{% trans "English name" %}: {{ object.name_en }}</li>
+
+        {% for item in object.movies.all %}
+            <li>
+                {{ item.role.title_he }}:
+                <a href="{% url 'movies:movie_detail' item.movie.id %}">
+                {{ item.movie.get_title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}
