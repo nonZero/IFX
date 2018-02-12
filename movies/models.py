@@ -1,11 +1,18 @@
+from collections import defaultdict
+
 from django.db import models
+from django.db.models import Count
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 
-class Languages(object):
+class Language(object):
+    HEBREW = 'he'
+    ENGLISH = 'en'
+
     choices = (
-        ('he', _('Hebrew')),
-        ('en', _('English')),
+        (HEBREW, _('Hebrew')),
+        (ENGLISH, _('English')),
     )
 
 
@@ -16,15 +23,29 @@ class Field(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('movies:field_detail', args=(self.pk,))
+
+    def get_tags(self):
+        return Tag.objects.filter(movietagfield__field=self).annotate(
+            count=Count('movietagfield')
+        ).order_by('title')
+
 
 class Tag(models.Model):
     tid = models.IntegerField(unique=True)
     title = models.CharField(max_length=300)
+    title_en = models.CharField(max_length=300, null=True, blank=True)
+    title_he = models.CharField(max_length=300, null=True, blank=True)
     type_id = models.CharField(max_length=300, null=True, blank=True)
     lang = models.CharField(max_length=300, null=True, blank=True)
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('movies:tag_detail', args=(self.pk,))
+
 
 
 class Movie(models.Model):
@@ -49,14 +70,10 @@ class Movie(models.Model):
 
     def get_extra_data(self):
         mft = MovieTagField.objects.filter(movie=self.id)
-        fields = {}
+        fields = defaultdict(list)
         for item in mft:
-            if item.field.title in fields:
-                fields[item.field.title].append(item.tag.title)
-            else:
-                fields[item.field.title] = [(item.tag.title)]
-
-        return fields
+            fields[item.field].append(item.tag)
+        return list(fields.items())
 
 
 class MovieTagField(models.Model):
@@ -65,48 +82,5 @@ class MovieTagField(models.Model):
     tag = models.ForeignKey(Tag)
 
     def __str__(self):
-        return 'Movie={}, Field={}, Tag={}'.format(self.movie, self.field,
-                                                   self.tag)
-
-
-class Collection(models.Model):
-    title = models.CharField(max_length=300)
-
-    def __str__(self):
-        return self.title
-
-    def get_items(self):
-        return CollectionMovie.objects.filter(collection=self.id)
-
-
-class CollectionMovie(models.Model):
-    collection = models.ForeignKey(Collection)
-    movie = models.ForeignKey(Movie)
-
-    def __str__(self):
-        return 'Collection={}, Movie={}'.format(self.collection, self.movie)
-
-
-class Person(models.Model):
-    tid = models.IntegerField(unique=True)
-    name_he = models.CharField(max_length=300, null=True, blank=True)
-    name_en = models.CharField(max_length=300, null=True, blank=True)
-    first_name_he = models.CharField(max_length=300, null=True, blank=True)
-    first_name_en = models.CharField(max_length=300, null=True, blank=True)
-    last_name_he = models.CharField(max_length=300, null=True, blank=True)
-    last_name_en = models.CharField(max_length=300, null=True, blank=True)
-
-    def __str__(self):
-        return self.first_name_en + " " + self.last_name_en
-
-
-class Role(models.Model):
-     tid = models.CharField(unique=True, max_length=300)
-     title_en = models.CharField(max_length=300, null=True, blank=True)
-     title_he = models.CharField(max_length=300, null=True, blank=True)
- 
-
-class MovieRolePerson(models.Model):
-     movie = models.ForeignKey(Movie, related_name='people')
-     role = models.ForeignKey(Role, related_name='movie_people')
-     person = models.ForeignKey(Person, related_name='movies')
+        return 'Movie={}, Field={}, Tag={}'.format(
+            self.movie, self.field, self.tag)

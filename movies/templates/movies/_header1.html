@@ -1,94 +1,96 @@
 {% load i18n %}
 {% get_current_language as LANGUAGE_CODE %}
 <header>
-	<div class="App-header">
-		<!--button class="btnMenu"><img src="/static/images/Menu.svg"/></button-->
-		<div class="pos-f-t">
-			<div class="collapse" id="navbarToggleExternalContent">
-				<div class="bg-inverse p-4">
-					<div class="list-group">
-						<a href="#" class="list-group-item list-group-item-action active">{% trans "Search Archive" %}</a>
-						<a href="#" class="list-group-item list-group-item-action">{% trans "Collections" %}</a>
-						<a href="{% url 'movies:person_list' %}" class="list-group-item list-group-item-action">{% trans "Personalities" %}</a>
-						<a href="{% url 'movies:about' %}" class="list-group-item list-group-item-action">{% trans "About Archive" %}</a>
-						<a href="#" class="list-group-item list-group-item-action">{% trans "Conservation and Restoration" %}</a>
-						<a href="#" class="list-group-item list-group-item-action">{% trans "Depositing Materials" %}</a>
-						<a href="#" class="list-group-item list-group-item-action">{% trans "Contact" %}</a>
-						<a href="#" class="list-group-item list-group-item-action">{% trans "Jerusalem Cinematheque Site" %}</a>
-					</div>
+    <div class="App-header">
+        <!--button class="btnMenu"><img src="/static/images/Menu.svg"/></button-->
+        <div class="pos-f-t">
+            <div class="side-nav collapse" id="navbarToggleExternalContent">
+                <div class="bg-inverse p-4">
+                    <div class="list-group">
+                        <a href="{% url 'movies:list' %}"
+                           class="list-group-item list-group-item-action active">{% trans "Movies" %}</a>
+                        <a href="{% url 'people:list' %}"
+                           class="list-group-item list-group-item-action">{% trans "Personalities" %}</a>
+                        <a href="{% url 'collections:list' %}"
+                           class="list-group-item list-group-item-action">{% trans "Collections" %}</a>
+                        <a href="{% url 'movies:field_list' %}"
+                           class="list-group-item list-group-item-action active">{% trans "Fields" %}</a>
+                        <a href="{% url 'movies:about' %}"
+                           class="list-group-item list-group-item-action">{% trans "About Archive" %}</a>
+{#                        <a href="#"#}
+{#                           class="list-group-item list-group-item-action">{% trans "Conservation and Restoration" %}</a>#}
+{#                        <a href="#"#}
+{#                           class="list-group-item list-group-item-action">{% trans "Depositing Materials" %}</a>#}
+{#                        <a href="#"#}
+{#                           class="list-group-item list-group-item-action">{% trans "Contact" %}</a>#}
+{#                        <a href="#"#}
+{#                           class="list-group-item list-group-item-action">{% trans "Jerusalem Cinematheque Site" %}</a>#}
+                        {% if user.is_authenticated %}
+                            <a href="#"
+                               class="list-group-item list-group-item-action">{{ user }}</a>
+                            <a href="{% url "logout" %}"
+                               class="list-group-item list-group-item-action">{% trans "Logout" %}</a>
+                        {% else %}
+                            <a href="{% url "login" %}"
+                               class="list-group-item list-group-item-action">{% trans "Login" %}</a>
+                        {% endif %}
+                    </div>
 
-				</div>
-			</div>
-			<nav class="navbar-inverse bg-inverse">
-				<button class="navbar-toggler btnMenu" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-					<img src="/static/images/Menu.svg"/>
-				</button>
-			</nav>
-		</div>
-		<div class="logo">
-			<a href="{% url 'movies:home' %}#"><img src="/static/images/Jerusalem_Cinematheque_Logo.png" alt="Jerusalem Cinematheque Logo"></a>
-			<span>{% trans "Israeli Film <br> Arcive" %}</span>
-		</div>
+                </div>
+            </div>
+            <nav class="navbar-inverse bg-inverse">
+                <button class="navbar-toggler btnMenu" type="button"
+                        data-toggle="collapse"
+                        data-target="#navbarToggleExternalContent"
+                        aria-controls="navbarToggleExternalContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <img src="/static/images/Menu.svg"/>
+                </button>
+            </nav>
+        </div>
+        <div class="logo">
+            <a href="{% url 'movies:home' %}#"><img
+                    src="/static/images/Jerusalem_Cinematheque_Logo.png"
+                    alt="Jerusalem Cinematheque Logo"></a>
+            <span>{% trans "Israeli Film <br> Arcive" %}</span>
+        </div>
 
-		<form id="lang-form" action="{% url 'set_language' %}" method="post">{% csrf_token %}
-			<input id="redirectLang" name="next" type="hidden" value="{{ redirect_to }}" />
-			{% get_current_language as LANGUAGE_CODE %}
-			{% get_available_languages as LANGUAGES %}
-			{% get_language_info_list for LANGUAGES as languages %}
+        <form id="lang-form" action="{% url 'set_language' %}"
+              method="post">{% csrf_token %}
+            <input id="redirectLang" name="next" type="hidden"
+                   value="{{ redirect_to }}"/>
+            {% get_current_language as LANGUAGE_CODE %}
+            {% get_available_languages as LANGUAGES %}
+            {% get_language_info_list for LANGUAGES as languages %}
 
-			{% comment %}
-            <select name="language">
-                {% get_current_language as LANGUAGE_CODE %}
-                {% get_available_languages as LANGUAGES %}
-                {% get_language_info_list for LANGUAGES as languages %}
-                {% for language in languages %}
-                    <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
-                        {{ language.name_local }} ({{ language.code }})
-                    </option>
-                {% endfor %}
-            </select>
-            {% endcomment %}
-			<input type="hidden" name="language" value="{% if LANGUAGE_CODE == 'he' %}en-us{% else %}he{% endif %}">
-			<input id="lang-switcher" type="submit" class="langHebEng" value="{% if LANGUAGE_CODE == 'he' %}{% trans 'Eng' %}{% else %}{% trans 'עבר' %}{% endif %}" />
-		</form>
-		<a class="btnBag" href="#"><img src="/static/images/Shopping-bag.svg"/></a>
-		<a id="searchShowHide" class="btnSearchIcon glyphicon glyphicon-search" href="#"></a>
+            <input type="hidden" name="language"
+                   value="{% if LANGUAGE_CODE == 'he' %}en-us{% else %}he{% endif %}">
+            <input id="lang-switcher" type="submit" class="langHebEng" value="{% if LANGUAGE_CODE == 'he' %}English⏵{% else %}⏴עברית{% endif %}"/>
+        </form>
+{#        <a class="btnBag" href="#"><img src="/static/images/Shopping-bag.svg"/></a>#}
+        <a id="searchShowHide" class="btnSearchIcon glyphicon glyphicon-search"
+           href="#"></a>
 
-		<form id="searchform" action="{% url 'movies:search_query' %}">
-			{% csrf_token %}
-			<div id="searchBarUp" class="hideSearchBar">
-				<div>
+        <form id="searchform" action="{% url 'search:query' %}">
+            {% csrf_token %}
+            <div id="searchBarUp">
+                <div>
+                    <input type="text" class="upperSearchInput sInput" name="q"
+                           placeholder="{% trans 'Search...' %}">
+                </div>
+                <div>
+                    <button class="searchIcon"
+                            type="submit"><span class="fa fa-search"></span> </button>
+                </div>
+            </div>
+        </form>
 
-						<select name="idselect" class="dropdown dropBtnSearchUp searchDD" aria-labelledby="dropdownMenu1"
-								onchange="{% if LANGUAGE_CODE == 'he' %}onSearchChangeHe(){% else %}onSearchChange(){% endif %}">
-						<option value="all"><a href="#">{% trans "Search All" %}</a></option>
-						<span role="separator" class="divider"></span>
-						<option value="title"><a href="#">{% trans "Title" %}</a></option>
-						<span role="separator" class="divider"></span>
-						<option value="year"><a href="#">{% trans "Year/s" %}</a></option>
-						<span role="separator" class="divider"></span>
-						<option value="director"><a href="#">{% trans "Director" %}</a></option>
-					</select>
-				</div>
-				<div>
-					<input type="text" class="upperSearchInput sInput" name="q" placeholder="{% trans 'Search...' %}">
-				</div>
-				<div>
-					<button class="searchIcon glyphicon glyphicon-search" type="submit"></button>
-				</div>
-			</div>
-		</form>
+    </div>
 
-	</div>
-
-	{% block header %}
-		{% if set_jumbotron == 1 %}
-			{% include 'movies/main_jumbotron.html' %}
-		{% elif set_jumbotron == 2 %}
-			{% include 'movies/about_jumbotron.html' %}
-		{% elif set_jumbotron == 3 %}
-			{% include 'movies/searchresult_jumbotron.html' %}
-		{% endif %}
-	{% endblock %}
+    {% block header %}
+        {% if view.jumbotron %}
+            {% include view.jumbotron %}
+        {% endif %}
+    {% endblock %}
 
 </header>

@@ -1,24 +1,26 @@
-{% extends 'movies/../base.html' %}
-{% load static i18n %}
+{% extends 'base.html' %}
+{% load static i18n ifx %}
 
 {% block content %}
-    <h1>Field #{{ o.id }}</h1>
+    <div>
+        <li class="breadcrumb">
+            <a href="{% url "movies:field_list" %}">{% trans "Fields" %}</a>
+        </li>
+    </div>
+
+    <h1>{{ object }}</h1>
 
     <ul>
-        <li><b>Title: {{ o.title }}</b></li>
-        <li>fid: {{ o.tid }} </li>
         <li>
             <ul>
-                {% for tag in tags %}
+                {% for tag in object.get_tags %}
                     <li>
-                        <a href="{% url "movies:tag_detail" tag.id %}">{{ tag }}</a>
+                        {{ tag|ut }}
                         ({{ tag.count }})
                     </li>
                 {% endfor %}
             </ul>
         </li>
     </ul>
-
-    <a href="{% url "movies:field_list" %}">Back To My Fields</a>
 
 {% endblock %}

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-15 19:50+0200\n"
-"PO-Revision-Date: 2018-01-15 19:50+0200\n"
+"POT-Creation-Date: 2018-02-07 14:57+0200\n"
+"PO-Revision-Date: 2018-02-07 14:57+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -16,219 +16,202 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.5\n"
+"X-Generator: Poedit 2.0.6\n"
 
-#: .\models.py:7
 msgid "Hebrew"
 msgstr "עברית"
 
-#: .\models.py:8
 msgid "English"
-msgstr ""
+msgstr "אנגלית"
 
-#: .\templates\404.html:5 .\templates\404.html:9
 msgid "404 Not Found"
-msgstr ""
+msgstr "404 הדף לא קיים"
 
-#: .\templates\movies\_collection.html:10
 msgid "Watch Collection"
 msgstr "לעיון באוסף"
 
-#: .\templates\movies\_footer.html:9 .\templates\movies\_header1.html:16
 msgid "Contact"
 msgstr "צרו קשר"
 
-#: .\templates\movies\_footer.html:10
 msgid "Pel: 02-5654332"
 msgstr "טלפון : 02-5654332"
 
-#: .\templates\movies\_footer.html:11
 msgid "Email: rusom@jer-cin.org.il"
 msgstr "דוא\"ל : rusom@jer-cin.org.il"
 
-#: .\templates\movies\_footer.html:14
 msgid "Address"
 msgstr "מיקום"
 
-#: .\templates\movies\_footer.html:15
 msgid "11 Hebron rd. POB 8651 <br> Jerusalem, 9108402"
 msgstr ""
 "דרך חברון 11, ת.ד. 8561\n"
 "ירושלים, 9108402"
 
-#: .\templates\movies\_footer.html:18
 msgid "Enter Site"
 msgstr "לאתר"
 
-#: .\templates\movies\_footer.html:19
 msgid "Jerusalem Cinematheque"
 msgstr "סינמטק ירושלים"
 
-#: .\templates\movies\_header1.html:10
-msgid "Search Archive"
-msgstr "חיפוש בארכיון"
+msgid "Movies"
+msgstr "סרטים"
 
-#: .\templates\movies\_header1.html:11 .\templates\movies\about.html:37
-msgid "Collections"
-msgstr "אוספים"
-
-#: .\templates\movies\_header1.html:12
 msgid "Personalities"
 msgstr "אישים"
 
-#: .\templates\movies\_header1.html:13
+msgid "Collections"
+msgstr "אוספים"
+
 msgid "About Archive"
 msgstr "אודות הארכיון"
 
-#: .\templates\movies\_header1.html:14 .\templates\movies\about.html:33
-msgid "Conservation and Restoration"
-msgstr "שימור ורסטורציה"
+msgid "Logout"
+msgstr "יציאה"
 
-#: .\templates\movies\_header1.html:15 .\templates\movies\about.html:41
-msgid "Depositing Materials"
-msgstr "הפקדת חומרים"
+msgid "Login"
+msgstr "כניסה"
 
-#: .\templates\movies\_header1.html:17
-msgid "Jerusalem Cinematheque Site"
-msgstr "לאתר סינמטק ירושלים"
-
-#: .\templates\movies\_header1.html:30
 msgid "Israeli Film <br> Arcive"
 msgstr "הארכיון הישראלי<br>לסרטים"
 
-#: .\templates\movies\_header1.html:53
-msgid "Eng"
-msgstr "Eng"
-
-# Eng
-#: .\templates\movies\_header1.html:53
-msgid "עבר"
-msgstr "Eng"
-
-#: .\templates\movies\_header1.html:65
-#: .\templates\movies\main_jumbotron.html:11
-#: .\templates\movies\searchresult_jumbotron.html:10
-msgid "Search All"
-msgstr "חיפוש חופשי"
-
-#: .\templates\movies\_header1.html:67
-#: .\templates\movies\main_jumbotron.html:13
-#: .\templates\movies\movie_details.html:6
-#: .\templates\movies\searchresult_jumbotron.html:12
-msgid "Title"
-msgstr "סרט"
-
-#: .\templates\movies\_header1.html:69
-#: .\templates\movies\main_jumbotron.html:15
-#: .\templates\movies\searchresult_jumbotron.html:14
-msgid "Year/s"
-msgstr "שנה/ים"
-
-#: .\templates\movies\_header1.html:71 .\templates\movies\_movie_search.html:23
-#: .\templates\movies\main_jumbotron.html:17
-#: .\templates\movies\movie_details.html:15
-#: .\templates\movies\searchresult_jumbotron.html:16
-msgid "Director"
-msgstr "במאי/ת"
-
-#: .\templates\movies\_header1.html:75
-#: .\templates\movies\main_jumbotron.html:21
-#: .\templates\movies\searchresult_jumbotron.html:20
 msgid "Search..."
 msgstr "חיפוש..."
 
-#: .\templates\movies\_movie_search.html:17
-#: .\templates\movies\movie_details.html:14
 msgid "min"
 msgstr "שניות"
 
-#: .\templates\movies\_movie_search.html:25
-#: .\templates\movies\_movie_search.html:29
-#: .\templates\movies\movie_details.html:30
 msgid "Summery"
 msgstr "תקציר"
 
-#: .\templates\movies\about.html:9
 msgid "About The Israeli Film Archive"
 msgstr "אודות הארכיון הישראלי לסרטים"
 
-#: .\templates\movies\homePage.html:10
-msgid "The Nathan Axelrod Newsreel Collection"
-msgstr "אוסף יומני נתן אקסלר"
+msgid "Conservation and Restoration"
+msgstr "שימור ורסטורציה"
 
-#: .\templates\movies\homePage.html:21
+msgid "Depositing Materials"
+msgstr "הפקדת חומרים"
+
+msgid "Fields"
+msgstr "שדות"
+
+msgid "The Nathan Axelrod Newsreel Collection"
+msgstr "אוסף יומני נתן אקסלרוד"
+
 msgid "Watch more"
 msgstr "לעיון באוסף"
 
-#: .\templates\movies\main_jumbotron.html:4
 msgid "The Israeli Film Archive"
 msgstr "הארכיון הישראלי לסרטים"
 
-#: .\templates\movies\movie_details.html:14
+msgid "Hebrew Title"
+msgstr "כותרת בעברית"
+
+msgid "English Title"
+msgstr "כותרת באנגלית"
+
+msgid "Year"
+msgstr "שנה"
+
+msgid "Hebrew Summary"
+msgstr "עברית"
+
+msgid "English Summary"
+msgstr "תקציר באנגלית"
+
+msgid "Title"
+msgstr "סרט"
+
 msgid "Runtime"
 msgstr "אורך בדיקות"
 
-#: .\templates\movies\movie_details.html:16
+msgid "Director"
+msgstr "במאי/ת"
+
 msgid "Producer"
 msgstr "מפיק/ה"
 
-#: .\templates\movies\movie_details.html:17
 msgid "Screenwriter"
 msgstr "תסריטאי/ת"
 
-#: .\templates\movies\movie_details.html:18
 msgid "Photographer"
 msgstr "צלמ/ת"
 
-#: .\templates\movies\movie_details.html:19
 msgid "Cast"
 msgstr "שחקנים/ות"
 
-#: .\templates\movies\movie_details.html:20
 msgid "Genre/s"
 msgstr "ז'אנר"
 
-#: .\templates\movies\movie_details.html:21
 msgid "Color"
 msgstr "צבעוניות"
 
-#: .\templates\movies\search_result.html:7
+msgid "first"
+msgstr "הראשון"
+
+msgid "previous"
+msgstr "הקודם"
+
+msgid "Page"
+msgstr "עמוד"
+
+msgid "of"
+msgstr "מתוך"
+
+msgid "next"
+msgstr "הבא"
+
+msgid "last"
+msgstr "האחרון"
+
 msgid "Search results for:"
 msgstr "תוצאות עבור:"
 
-#: .\templates\movies\searchresult.html:7
 msgid "Search reasults for"
 msgstr "תוצאות עבור"
 
-#: .\templates\movies\searchresult.html:10
 msgid "Titles were found"
 msgstr "סרטים נמצאו"
 
-#: .\templates\movies\searchresult.html:14
 msgid "Sorted by"
 msgstr "מיון תוצאות לפי"
 
-#: .\templates\movies\searchresult.html:16
 msgid "Title A-Z"
 msgstr "אלפביתי א-ת"
 
-#: .\templates\movies\searchresult.html:18
 msgid "Oldest"
 msgstr "שנים - מהישן לחדש"
 
-#: .\templates\movies\searchresult.html:20
 msgid "Newest"
 msgstr "שנים - מהחדש לישן"
 
-#: .\templates\movies\searchresult.html:22
 msgid "Director A-Z"
 msgstr "במאי/ת - א-ת"
 
+msgid "Search All"
+msgstr "חיפוש חופשי"
+
+msgid "Year/s"
+msgstr "שנה/ים"
+
+msgid "Tags"
+msgstr "תגים"
+
+#~ msgid "Search Archive"
+#~ msgstr "חיפוש בארכיון"
+
+#~ msgid "Jerusalem Cinematheque Site"
+#~ msgstr "לאתר סינמטק ירושלים"
+
+#~ msgid "Eng"
+#~ msgstr "Eng"
+
+# Eng
+#~ msgid "עבר"
+#~ msgstr "Eng"
+
 #~ msgid "(Year)"
 #~ msgstr "(שנה)"
-
-#~ msgid "Movie name"
-#~ msgstr "שם הסרט"
 
 #~ msgid "Director's Name"
 #~ msgstr "במאי/ת"

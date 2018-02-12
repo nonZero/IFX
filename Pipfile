@@ -17,6 +17,7 @@ tqdm = "*"
 numpy = "*"
 pandas = "*"
 pexpect = "*"
+wikipedia = "*"
 
 
 [dev-packages]

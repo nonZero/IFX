@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+
+    {% if next %}
+        <div class="alert alert-warning">
+            {% if user.is_authenticated %}
+                {% trans "Your account doesn't have access to this page." %}
+                <br/>
+                {% trans "To proceed, please login with an account that has access." %}
+            {% else %}
+                {% trans "Please login to see this page." %}
+            {% endif %}
+        </div>
+    {% endif %}
+
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+
+        <button>{% trans "Login" %}</button>
+        <input type="hidden" name="next" value="{{ next }}"/>
+    </form>
+
+    {#    <p><a href="{% url 'password_reset' %}">Lost password?</a></p>#}
+
+{% endblock %}

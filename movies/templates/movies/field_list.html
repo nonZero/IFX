@@ -1,14 +1,11 @@
-{% extends 'movies/../base.html' %}
+{% extends 'base.html' %}
 {% load static i18n %}
 
 {% block content %}
 
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{% static "style.css" %}" rel="stylesheet">
+    <h1>{% trans "Fields" %}</h1>
 
-    <h1>My Fields</h1>
-
-    <ul>Count: {{count}} items</ul>
+    <ul>Count: {{ object_list.count }} items</ul>
     <table border="1" width="100%">
         <tr>
             <th>#</th>
@@ -16,12 +13,12 @@
             <th>Title</th>
             <th>Movie-Tag-Field Count</th>
         </tr>
-        {% for object in objects %}
+        {% for object in object_list  %}
             <tr>
                 <td>#{{ object.id }}</td>
                 <td>{{ object.fid }}</td>
                 <td>
-                    <a href= "{% url 'movies:field_detail' object.id %}">{{ object.title }}</a>
+                    <a href="{% url 'movies:field_detail' object.id %}">{{ object.title }}</a>
                 </td>
                 <td>{{ object.movietagfield_set.count }}</td>
             </tr>

@@ -1,38 +1,53 @@
-{% extends 'movies/../base.html' %}
-{% load static i18n %}
+{% extends 'base.html' %}
+{% load static i18n ifx %}
 
 {% block content %}
-    <h1>Movie #{{ movie.id }}</h1>
+    <div>
+        <li class="breadcrumb">
+            <a href='{% url "movies:list" %}'>
+                {% trans "Movies" %}
+            </a>
+        </li>
+    </div>
+
+
+    <h1>{{ movie|bdtitle }}</h1>
 
     <ul>
-        <li><b>Title: {{ movie.get_title }}</b>
-            <ul>
-                <li><b>Title(he):</b>{{movie.title_he}}</li>
-                <li><b>Title(en):</b>{{movie.title_en}}</li>
-            </ul>
-        </li>
-        <li>Year: {{ movie.year }}</li>
-        <li>Description:
-            <ul>
-                <b>Summary(he):</b><p>{{movie.summary_he}}</p>
-                <b>Summary(en):</b><p>{{movie.summary_en}}</p>
-            </ul>
-        </li>
-        <li>bid: {{movie.bid}} </li>
-        <li>Additional data:<ul>
-            {% for key,values in movie.get_extra_data.items %}
+        {% if movie.title_he %}
+            <li><b>{% trans "Hebrew Title" %}:</b> {{ movie.title_he }}</li>
+        {% endif %}
+
+        {% if movie.title_en %}
+            <li><b>{% trans "English Title" %}:</b> {{ movie.title_en }}</li>
+        {% endif %}
+        <li><b>{% trans "Year" %}</b>: {{ movie.year }}</li>
+        {% if movie.summary_he %}
             <li>
-                <b>{{key}}:</b>
+                {{ movie.summary_he|linebreaks }}
+            </li>
+        {% endif %}
+        {% if movie.summary_en %}
+            <li>
+                <b>{% trans "English Summary" %}</b>:
+                {{ movie.summary_en|linebreaks }}
+            </li>
+        {% endif %}
+        {% for key, values in movie.get_extra_data %}
+            <li>
+                <b>{{ key }}:</b>
                 {% for value in values %}
-                    <q>{{ value }}</q>
+                    {{ value|ut }}{% if not forloop.last %},{% endif %}
                 {% endfor %}
             </li>
-            {% endfor %}
-        </ul>
-        </li>
+        {% endfor %}
+        {% for role in movie.people.all %}
+            <li>
+                <b>{{ role.role }}:</b> {{ role.person|un }}
+            </li>
+        {% endfor %}
     </ul>
 
-    <a href='{% url "movies:movies_list" %}'>Back To My Movies</a>
 {% endblock %}
 
 

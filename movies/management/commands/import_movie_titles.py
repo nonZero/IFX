@@ -5,7 +5,8 @@ import pandas as pd
 from django.core.management.base import BaseCommand
 from tqdm import tqdm
 
-from movies.models import models, Movie, Person
+from movies.models import models, Movie, Tag
+from people.models import Person
 
 
 class Command(BaseCommand):
@@ -55,9 +56,21 @@ class Command(BaseCommand):
                             p.save()
                         else:
                             assert False, row
-                        c[row.lang_id] += 1
+                        c["P" + row.lang_id] += 1
                     except models.ObjectDoesNotExist:
-                        c['skipped'] += 1
+                        try:
+                            t = Tag.objects.get(tid=row.book_id[1:])
+                            if row.lang_id == "ENG":
+                                t.title_en = row.title
+                                t.save()
+                            elif row.lang_id == "HEB":
+                                t.title_he = row.title
+                                t.save()
+                            else:
+                                assert False, row
+                            c["T" + row.lang_id] += 1
+                        except models.ObjectDoesNotExist:
+                            c['skipped'] += 1
                 else:
                     c['unknown'] += 1
 
