@@ -1,9 +1,25 @@
+from urllib.parse import urlencode
+
 from django import template
 from django.utils import translation
 from django.utils.html import conditional_escape
 from django.utils.safestring import mark_safe
 
 register = template.Library()
+
+
+@register.inclusion_tag("_pagination.html", takes_context=True)
+def pagination(context, page_obj):
+    return {
+        'request': context['request'],
+        'page_obj': page_obj,
+    }
+
+
+@register.simple_tag(takes_context=True)
+def qs(context, **kwargs):
+    items = {**context.request.GET.dict(), **kwargs}
+    return urlencode(items)
 
 
 @register.filter(needs_autoescape=True)

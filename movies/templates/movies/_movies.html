@@ -1,26 +1,34 @@
-{% load static i18n movies ifx %}
+{% load static i18n movies ifx bootstrap4 %}
+
+{% pagination page_obj %}
 
 <ul class="list-unstyled movie-list">
-    {% for object in object_list %}
+    {% for m in object_list %}
 
         <li class="media m-2">
             <img class="mr-3"
                  src="{% static "images/camera-icon.png" %}"
                  height="120"
                  width="120"
-                 alt="{{ object|bdtitle }}"/>
+                 alt="{{ m|bdtitle }}"/>
 
             <div class="media-body p-2">
 
                 <h5>
                     <strong>
-                        {{ object|ut }}
+                        {% if m.roles %}
+                            {% for role in m.roles %}
+                                {{ role|bdtitle }}{% if forloop.last %}:
+                                {% else %}, {% endif %}{% endfor %}
+
+                        {% endif %}
+                        {{ m|ut }}
                     </strong>
-                    {% if object.year != none %}
-                        <span dir="ltr" class="year">({{ object.year }})</span>
+                    {% if m.year != none %}
+                        <span dir="ltr" class="year">({{ m.year }})</span>
                     {% endif %}
-                    {% if object.duration != none %}
-                        <span>{{ object.duration }} {% trans "min" %}</span>
+                    {% if m.duration != none %}
+                        <span>{{ m.duration }} {% trans "min" %}</span>
                     {% endif %}
                 </h5>
                 {#            <form action="">#}
@@ -28,7 +36,7 @@
                 {#            </form>#}
                 {#            <p>{% trans "Director" %}: <strong>Name</strong></p>#}
                 <ul class="list-inline">
-                    {% for key, values in object.get_short_data %}
+                    {% for key, values in m.get_short_data %}
                         <li class="list-inline-item">
                             <b>{{ key }}:</b>
                             {% for value in values %}
@@ -37,19 +45,21 @@
                             {% endfor %}
                         </li>
                     {% endfor %}
-                    {% for r in object.get_short_roles %}
+                    {% for r in m.get_short_roles %}
                         <li class="list-inline-item">
                             <b>{{ r.role }}:</b> {{ r.person|un }}
                         </li>
                     {% endfor %}
                 </ul>
-                {% if object|get_description %}
+                {% if m|get_description %}
                     <p class="summary ellipsis multiline">
                         <strong>{% trans "Summary" %}:</strong>
-                        {{ object|get_description }}
+                        {{ m|get_description }}
                     </p>
                 {% endif %}
             </div>
         </li>
     {% endfor %}
 </ul>
+
+{% pagination page_obj %}

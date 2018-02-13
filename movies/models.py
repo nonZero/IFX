@@ -80,7 +80,6 @@ class Movie(models.Model):
 
     def get_extra_data(self, short=False):
         mft = MovieTagField.objects.filter(movie=self.id)
-        print(mft.count())
         if short:
             mft = mft.filter(field__appears_in_short_version=True).order_by(
                 'field__short_version_order')

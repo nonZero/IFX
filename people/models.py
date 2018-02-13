@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 from django.db import models
 from django.urls import reverse
 
@@ -18,6 +20,18 @@ class Person(models.Model):
 
     def get_absolute_url(self):
         return reverse('people:detail', args=(self.pk,))
+
+    def distinct_roles(self):
+        return self.movies.distinct('role')
+
+    def movies_flat(self):
+        movies = defaultdict(set)
+        for mrp in self.movies.order_by('-movie__year'):
+            movies[mrp.movie].add(mrp.role)
+
+        for m, roles in movies.items():
+            m.roles = roles
+            yield m
 
 
 class Role(models.Model):

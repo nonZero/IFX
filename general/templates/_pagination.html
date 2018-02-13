@@ -1,0 +1,33 @@
+{% load i18n ifx %}
+
+
+{% if page_obj %}
+    <div class="pagination row m-1">
+        <div class="col text-left">
+            {% if page_obj.has_previous %}
+                <a href="?{% qs page=1 %}">
+                    &laquo; {% trans "first" %}
+                </a>
+                |
+                <a href="?{% qs page=page_obj.previous_page_number %}">
+                    &lsaquo; {% trans "previous" %}
+                </a>
+            {% endif %}
+        </div>
+        <div class="col text-center">
+            {% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}
+        </div>
+
+        <div class="col text-right">
+            {% if page_obj.has_next %}
+                <a href="?{% qs page=page_obj.next_page_number %}">
+                    {% trans "next" %} &rsaquo;
+                </a>
+                |
+                <a href="?{% qs page=page_obj.paginator.num_pages %}">
+                    {% trans "last" %} &raquo;
+                </a>
+            {% endif %}
+        </div>
+    </div>
+{% endif %}
