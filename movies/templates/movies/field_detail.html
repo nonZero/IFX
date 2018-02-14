@@ -2,6 +2,7 @@
 {% load static i18n ifx %}
 
 {% block content %}
+
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
             <a href="{% url "movies:field_list" %}">{% trans "Fields" %}</a>
@@ -13,17 +14,13 @@
 
     <h1>{{ object }}</h1>
 
-    <ul>
-        <li>
-            <ul>
-                {% for tag in object.get_tags %}
-                    <li>
-                        {{ tag|ut }}
-                        ({{ tag.count }})
-                    </li>
-                {% endfor %}
-            </ul>
-        </li>
+    <ul class="list-group">
+        {% for tag in object.get_tags %}
+            <li class="list-group-item">
+                {{ tag|ut }}
+                ({{ tag.count }})
+            </li>
+        {% endfor %}
     </ul>
 
 {% endblock %}
