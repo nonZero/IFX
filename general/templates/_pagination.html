@@ -1,9 +1,19 @@
-{% load i18n ifx %}
+{% load i18n ifx humanize %}
 
-
-{% if page_obj %}
+{% if page_obj and page_obj.paginator.num_pages > 1 %}
     <div class="pagination row m-1">
-        <div class="col text-left">
+        <div class="col-12 col-md-6 text-center">
+            {% trans "Page" %}
+            {{ page_obj.number|intcomma }}
+            {% trans "of" %}
+            {{ page_obj.paginator.num_pages|intcomma }}
+            |
+
+            {% blocktrans with a=page_obj.start_index|intcomma b=page_obj.end_index|intcomma %}
+                (Items #{{ a }} - #{{ b }}){% endblocktrans %}
+        </div>
+
+        <div class="col-6 col-md-3 order-md-first">
             {% if page_obj.has_previous %}
                 <a href="?{% qs page=1 %}">
                     &laquo; {% trans "first" %}
@@ -14,11 +24,7 @@
                 </a>
             {% endif %}
         </div>
-        <div class="col text-center">
-            {% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}
-        </div>
-
-        <div class="col text-right">
+        <div class="col-6 col-md-3 text-right">
             {% if page_obj.has_next %}
                 <a href="?{% qs page=page_obj.next_page_number %}">
                     {% trans "next" %} &rsaquo;

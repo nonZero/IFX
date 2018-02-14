@@ -5,12 +5,7 @@
 
     <h1>
         {% trans "Movies" %}
-        <small class="text-muted">
-            {{ page_obj.start_index }} - {{ page_obj.end_index }}
-            {% trans "of" %} {{ paginator.count|intcomma }}
-        </small>
     </h1>
-
 
     {% include 'movies/_movies.html' %}
 
