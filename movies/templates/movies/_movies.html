@@ -1,14 +1,13 @@
 {% load static i18n movies ifx humanize %}
 
-
 <h5 class="totals">
-    {% if paginator.count == 0 %}
+    {% if count == 0 %}
         {% trans "No items found" %}
-    {% elif paginator.count == 1 %}
+    {% elif count == 1 %}
         {% trans "One item found" %}
     {% else %}
         {% trans "Found" %}
-        {{ paginator.count|intcomma }}
+        {{ count|intcomma }}
         {% trans "items" %}
     {% endif %}
 </h5>
@@ -65,7 +64,7 @@
                 </ul>
                 {% if m|get_description %}
                     <p class="summary ellipsis multiline">
-                        <strong>{% trans "Summary" %}:</strong>
+                        <strong>{% trans "Summary" context "movie" %}:</strong>
                         {{ m|get_description }}
                     </p>
                 {% endif %}

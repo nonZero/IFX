@@ -7,30 +7,28 @@
             {{ page_obj.number|intcomma }}
             {% trans "of" %}
             {{ page_obj.paginator.num_pages|intcomma }}
-            |
 
-            {% blocktrans with a=page_obj.start_index|intcomma b=page_obj.end_index|intcomma %}
-                (Items #{{ a }} - #{{ b }}){% endblocktrans %}
+            <i>
+                ({% trans "Items" %} #{{ page_obj.start_index|intcomma }} - #{{ page_obj.end_index|intcomma }})
+            </i>
         </div>
 
         <div class="col-6 col-md-3 order-md-first">
             {% if page_obj.has_previous %}
-                <a href="?{% qs page=1 %}">
+                <a class="btn btn-sm btn-light" href="?{% qs page=1 %}">
                     &laquo; {% trans "first" %}
                 </a>
-                |
-                <a href="?{% qs page=page_obj.previous_page_number %}">
+                <a class="btn btn-sm btn-light" href="?{% qs page=page_obj.previous_page_number %}">
                     &lsaquo; {% trans "previous" %}
                 </a>
             {% endif %}
         </div>
         <div class="col-6 col-md-3 text-right">
             {% if page_obj.has_next %}
-                <a href="?{% qs page=page_obj.next_page_number %}">
+                <a class="btn btn-sm btn-light" href="?{% qs page=page_obj.next_page_number %}">
                     {% trans "next" %} &rsaquo;
                 </a>
-                |
-                <a href="?{% qs page=page_obj.paginator.num_pages %}">
+                <a class="btn btn-sm btn-light" href="?{% qs page=page_obj.paginator.num_pages %}">
                     {% trans "last" %} &raquo;
                 </a>
             {% endif %}

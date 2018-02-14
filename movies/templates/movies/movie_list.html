@@ -7,7 +7,7 @@
         {% trans "Movies" %}
     </h1>
 
-    {% include 'movies/_movies.html' %}
+    {% include 'movies/_movies.html' with count=paginator.count %}
 
 {% endblock %}
 

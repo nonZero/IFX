@@ -16,6 +16,6 @@
         <li>{% trans "English name" %}: {{ object.name_en }}</li>
     </ul>
 
-    {% include "movies/_movies.html" with object_list=object.movies_flat %}
+    {% include "movies/_movies.html" with object_list=object.movies_flat count=object.movies.count %}
 
 {% endblock %}
