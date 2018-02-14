@@ -1,18 +1,5 @@
-/*------------כללי לכולם-----------*/
-@import url(//fonts.googleapis.com/earlyaccess/opensanshebrew.css);
-
 body {
     direction: rtl;
-    font-family: 'Open Sans Hebrew', sans-serif !important;
-    background-color: #cecece !important;
-}
-
-.App-header {
-    height: 45px;
-    padding: 20px;
-    color: white;
-    background-color: black;
-    position: relative;
 }
 
 .jumbotron {
@@ -570,34 +557,3 @@ input.addToChart {
     left: 38px;
 }
 
-@media screen and (max-width: 844px) {
-    div#boxContainer {
-        /*width: 100%;
-        position: absolute;
-        right: 0;*/
-        /*width: 80%;
-        margin-left: 25px;*/
-        margin-right: 16px;
-    }
-
-    div#contentHeb {
-        width: 100%;
-        margin-top: 15px;
-    }
-
-    iframe.d-flex.col-xs-7 {
-        width: 100%;
-    }
-
-    .jumbotron {
-        height: 266px;
-    }
-
-    h1 {
-        font-size: 3em !important;
-    }
-
-    .row.justify-content-center {
-        margin-right: -66px;
-    }
-}

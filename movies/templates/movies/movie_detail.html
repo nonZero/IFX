@@ -2,16 +2,10 @@
 {% load static i18n ifx %}
 
 {% block content %}
-    <div>
-        <li class="breadcrumb">
-            <a href='{% url "movies:list" %}'>
-                {% trans "Movies" %}
-            </a>
-        </li>
-    </div>
 
-
-    <h1>{{ movie|bdtitle }}</h1>
+{#    <h1>#}
+{#        {{ movie|bdtitle }}#}
+{#    </h1>#}
 
     <ul>
         {% if movie.title_he %}

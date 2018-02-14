@@ -2,6 +2,7 @@ from collections import defaultdict
 
 from django.db import models
 from django.urls import reverse
+from django.utils.translation import ugettext_lazy as _
 
 from movies.models import Movie
 
@@ -14,6 +15,10 @@ class Person(models.Model):
     first_name_en = models.CharField(max_length=300, null=True, blank=True)
     last_name_he = models.CharField(max_length=300, null=True, blank=True)
     last_name_en = models.CharField(max_length=300, null=True, blank=True)
+
+    class Meta:
+        verbose_name = _("person")
+        verbose_name_plural = _("people")
 
     def __str__(self):
         return f"{self.first_name_en} {self.last_name_en}"
@@ -32,6 +37,14 @@ class Person(models.Model):
         for m, roles in movies.items():
             m.roles = roles
             yield m
+
+    @property
+    def title_he(self):
+        return self.name_he
+
+    @property
+    def title_en(self):
+        return self.name_en
 
 
 class Role(models.Model):

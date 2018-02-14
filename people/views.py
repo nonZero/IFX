@@ -1,3 +1,5 @@
+from django.urls import reverse_lazy
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView, DetailView
 
 from ifx.base_views import IFXMixin
@@ -20,6 +22,10 @@ class PersonListView(IFXMixin, ListView):
 
 class PersonDetailView(IFXMixin, DetailView):
     model = Person
+
+    breadcrumbs = (
+        (_("People"), reverse_lazy("people:list")),
+    )
 
 
 PERSON_ORDER_FIELDS = {

@@ -23,29 +23,47 @@
           rel="stylesheet">
 
 
-    <title>Cinematheque Home page</title>
+    <title>
+        {% block title %}
+            {{ view.get_title }}
+        {% endblock %}
+        🎞 {% trans "IFX" %}
+    </title>
 </head>
 <body>
-<div class="baseC">
-    <div>
-        {% block header %}{% include 'movies/_header1.html' %}{% endblock %}
-    </div>
-    {% block main %}
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col col-lg-10">
-                    <main>
-                        {% block content %}BASE CONTENT{% endblock %}
-                    </main>
-                </div>
-            </div>
-        </div>
-    {% endblock %}
 
-    {% block footer %}
-        {% include 'movies/_footer.html' %}
-    {% endblock %}
-</div>
+{% include '_header.html' %}
+
+{% block main %}
+    <main class="container">
+
+        {% with view.get_breadcrumbs as bread %}
+            {% if bread %}
+                <ol class="breadcrumb">
+                    {% for bc in bread %}
+                        <li class="breadcrumb-item">
+                            <a href="{{ bc.1 }}">
+                                {{ bc.0 }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ol>
+            {% endif %}
+        {% endwith %}
+
+        <h1>
+            {% block header %}
+                {{ view.get_header }}
+            {% endblock %}
+        </h1>
+
+        {% block content %}
+            CONTENT
+        {% endblock %}
+    </main>
+{% endblock %}
+
+{% include '_footer.html' %}
 
 </body>
 

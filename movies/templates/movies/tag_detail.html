@@ -2,25 +2,6 @@
 {% load static i18n ifx %}
 
 {% block content %}
-
-    <ul class="breadcrumb">
-        <li class="breadcrumb-item">
-            <a href="{% url "movies:field_list" %}">
-                {% trans "Fields" %}
-            </a>
-        </li>
-        <li class="breadcrumb-item">
-            {{ object.movietagfield_set.all.0.field|u }}
-        </li>
-        <li class="breadcrumb-item active">
-            {{ object|bdtitle }}
-        </li>
-    </ul>
-
-    <h1>
-        {{ object|bdtitle }}
-    </h1>
-
     <ul>
         {% if object.title_he %}
             <li><b>{% trans "Hebrew Title" %}:</b> {{ object.title_he }}</li>

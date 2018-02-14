@@ -3,22 +3,11 @@
 
 {% block content %}
 
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-            <a href="{% url "movies:field_list" %}">{% trans "Fields" %}</a>
-        </li>
-        <li class="breadcrumb-item active">
-            {{ object }}
-        </li>
-    </ol>
-
-    <h1>{{ object }}</h1>
-
     <ul class="list-group">
         {% for tag in object.get_tags %}
             <li class="list-group-item">
                 {{ tag|ut }}
-                ({{ tag.count }})
+                <span dir="ltr">({{ tag.count }})</span>
             </li>
         {% endfor %}
     </ul>

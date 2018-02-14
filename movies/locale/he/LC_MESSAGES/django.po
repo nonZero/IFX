@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-14 12:48+0200\n"
-"PO-Revision-Date: 2018-02-14 12:48+0200\n"
+"POT-Creation-Date: 2018-02-14 22:28+0200\n"
+"PO-Revision-Date: 2018-02-14 22:28+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -39,61 +39,20 @@ msgstr "שדה"
 msgid "fields"
 msgstr "שדות"
 
+msgid "movie"
+msgstr "סרט"
+
+msgid "movies"
+msgstr "סרטים"
+
 msgid "404 Not Found"
 msgstr "404 הדף לא קיים"
 
+msgid "IFX"
+msgstr ""
+
 msgid "Watch Collection"
 msgstr "לעיון באוסף"
-
-msgid "Contact"
-msgstr "צרו קשר"
-
-msgid "Pel: 02-5654332"
-msgstr "טלפון : 02-5654332"
-
-msgid "Email: rusom@jer-cin.org.il"
-msgstr "דוא\"ל : rusom@jer-cin.org.il"
-
-msgid "Address"
-msgstr "מיקום"
-
-msgid "11 Hebron rd. POB 8651 <br> Jerusalem, 9108402"
-msgstr ""
-"דרך חברון 11, ת.ד. 8561\n"
-"ירושלים, 9108402"
-
-msgid "Enter Site"
-msgstr "לאתר"
-
-msgid "Jerusalem Cinematheque"
-msgstr "סינמטק ירושלים"
-
-msgid "Movies"
-msgstr "סרטים"
-
-msgid "Personalities"
-msgstr "אישים"
-
-msgid "Collections"
-msgstr "אוספים"
-
-msgid "Fields"
-msgstr "שדות"
-
-msgid "About Archive"
-msgstr "אודות הארכיון"
-
-msgid "Logout"
-msgstr "יציאה"
-
-msgid "Login"
-msgstr "כניסה"
-
-msgid "Israeli Film <br> Arcive"
-msgstr "הארכיון הישראלי<br>לסרטים"
-
-msgid "Search..."
-msgstr "חיפוש..."
 
 msgid "No items found"
 msgstr "לא נמצאו פריטים"
@@ -120,8 +79,14 @@ msgstr "אודות הארכיון הישראלי לסרטים"
 msgid "Conservation and Restoration"
 msgstr "שימור ורסטורציה"
 
+msgid "Collections"
+msgstr "אוספים"
+
 msgid "Depositing Materials"
 msgstr "הפקדת חומרים"
+
+msgid "Fields"
+msgstr "שדות"
 
 msgid "The Nathan Axelrod Newsreel Collection"
 msgstr "אוסף יומני נתן אקסלרוד"
@@ -131,6 +96,12 @@ msgstr "לעיון באוסף"
 
 msgid "The Israeli Film Archive"
 msgstr "הארכיון הישראלי לסרטים"
+
+msgid "Search..."
+msgstr "חיפוש..."
+
+msgid "Movies"
+msgstr "סרטים"
 
 msgid "Hebrew Title"
 msgstr "כותרת בעברית"
@@ -143,6 +114,9 @@ msgstr "שנה"
 
 msgid "English Summary"
 msgstr "תקציר באנגלית"
+
+msgid "Personalities"
+msgstr "אישים"
 
 msgid "Title"
 msgstr "סרט"
@@ -200,6 +174,47 @@ msgstr "במאי/ת - א-ת"
 
 msgid "Tags"
 msgstr "תגים"
+
+msgid "Home"
+msgstr "בית"
+
+msgid "About"
+msgstr "על אודות"
+
+#~ msgid "Contact"
+#~ msgstr "צרו קשר"
+
+#~ msgid "Pel: 02-5654332"
+#~ msgstr "טלפון : 02-5654332"
+
+#~ msgid "Email: rusom@jer-cin.org.il"
+#~ msgstr "דוא\"ל : rusom@jer-cin.org.il"
+
+#~ msgid "Address"
+#~ msgstr "מיקום"
+
+#~ msgid "11 Hebron rd. POB 8651 <br> Jerusalem, 9108402"
+#~ msgstr ""
+#~ "דרך חברון 11, ת.ד. 8561\n"
+#~ "ירושלים, 9108402"
+
+#~ msgid "Enter Site"
+#~ msgstr "לאתר"
+
+#~ msgid "Jerusalem Cinematheque"
+#~ msgstr "סינמטק ירושלים"
+
+#~ msgid "About Archive"
+#~ msgstr "אודות הארכיון"
+
+#~ msgid "Logout"
+#~ msgstr "יציאה"
+
+#~ msgid "Login"
+#~ msgstr "כניסה"
+
+#~ msgid "Israeli Film <br> Arcive"
+#~ msgstr "הארכיון הישראלי<br>לסרטים"
 
 #~ msgid "of"
 #~ msgstr "מתוך"

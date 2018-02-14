@@ -1,30 +1,54 @@
 {% extends 'base.html' %}
 {% load static i18n %}
 
-{% block content %}
+{% block main %}
+    <main class="container">
+
     <div class="media row">
 
-        <iframe class="d-flex col-xs-7" width="1897" height="884" src="https://www.youtube.com/embed/c0v98E0m9qA" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
-          <!--img class="d-flex mr-3 col-xs-7" src="/static/images/defaultImg.jpg" alt="Generic placeholder image"-->
+        <iframe class="d-flex col-xs-7" width="1897" height="884"
+                src="https://www.youtube.com/embed/c0v98E0m9qA" frameborder="0"
+                gesture="media" allow="encrypted-media"
+                allowfullscreen></iframe>
+        <!--img class="d-flex mr-3 col-xs-7" src="/static/images/defaultImg.jpg" alt="Generic placeholder image"-->
         <div id="contentHeb" class="col-xs-5">
             <h5 class="mt-0 mb-1">{% trans "The Nathan Axelrod Newsreel Collection" %}</h5>
             {% if LANGUAGE_CODE == 'en-us' %}
-            <p>"The Axelrod Newsreel Collection is a unique collection of newsreels filmed by pioneer of Israeli film Nathan Axelrod between the years 1927 and 1958. Axelrod enthusiastically documented, in approximately 450 newsreels, with an average length of 10 minutes per newsreel, the establishment and development of Jewish settlements throughout Eretz Israel, the British mandatory presence in Palestine, famous figures from politics, culture and arts, holidays and leisure events, as well as countless and priceless scenes from everyday life."</p>
+                <p>"The Axelrod Newsreel Collection is a unique collection of
+                    newsreels filmed by pioneer of Israeli film Nathan Axelrod
+                    between the years 1927 and 1958. Axelrod enthusiastically
+                    documented, in approximately 450 newsreels, with an average
+                    length of 10 minutes per newsreel, the establishment and
+                    development of Jewish settlements throughout Eretz Israel,
+                    the British mandatory presence in Palestine, famous figures
+                    from politics, culture and arts, holidays and leisure
+                    events, as well as countless and priceless scenes from
+                    everyday life."</p>
 
             {% else %}
-            <p>
-              אוסף יומני-החדשות הנדיר, שצילם חלוץ הקולנוע הישראלי נתן אקסלרוד בין השנים 1927-1958, מתעד את הקמת היישוב היהודי בארץ ישראל ואת התפתחותו.
-450 יומני חדשות - יומני "מולדת" ויומני "כרמל" ( באורך של כ-10 דקות כל אחד) - מציירים תמונה רחבה של ההתיישבות היהודית בארץ, מימי המנדט והנוכחות הבריטית בפלשתינה ועד שנת העשור למדינה.
-            </p>
+                <p>
+                    אוסף יומני-החדשות הנדיר, שצילם חלוץ הקולנוע הישראלי נתן
+                    אקסלרוד בין השנים 1927-1958, מתעד את הקמת היישוב היהודי
+                    בארץ ישראל ואת התפתחותו.
+                    450 יומני חדשות - יומני "מולדת" ויומני "כרמל" ( באורך של
+                    כ-10 דקות כל אחד) - מציירים תמונה רחבה של ההתיישבות היהודית
+                    בארץ, מימי המנדט והנוכחות הבריטית בפלשתינה ועד שנת העשור
+                    למדינה.
+                </p>
             {% endif %}
             </br>
-            <a href="https://www.youtube.com/channel/UCOH_oW31tWhVFHwreAxhIgA" type="button" class="btn btn-secondary btn-lg">{% trans "Watch more" %}</a>
+            <a href="https://www.youtube.com/channel/UCOH_oW31tWhVFHwreAxhIgA"
+               type="button"
+               class="btn btn-secondary btn-lg">{% trans "Watch more" %}</a>
 
         </div>
 
         <div class="collection">
-            {% block collection %}{% include 'movies/_collection.html' %}{% endblock %}
+            {% block collection %}
+                {% include 'movies/_collection.html' %}{% endblock %}
         </div>
 
-     </div>
+    </div>
+    <main class="container">
+
 {% endblock %}

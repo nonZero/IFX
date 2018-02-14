@@ -1,7 +1,7 @@
 {% load i18n %}
 {% get_current_language as LANGUAGE_CODE %}
 <header>
-    <div class="App-header">
+    <div class="header">
         <!--button class="btnMenu"><img src="/static/images/Menu.svg"/></button-->
         <div class="pos-f-t">
             <div class="side-nav collapse" id="navbarToggleExternalContent">
@@ -87,10 +87,8 @@
 
     </div>
 
-    {% block header %}
-        {% if view.jumbotron %}
-            {% include view.jumbotron %}
-        {% endif %}
-    {% endblock %}
+    {% if view.jumbotron %}
+        {% include view.jumbotron %}
+    {% endif %}
 
 </header>

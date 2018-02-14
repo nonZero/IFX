@@ -1,3 +1,20 @@
+@import url(//fonts.googleapis.com/earlyaccess/opensanshebrew.css);
+
+body {
+    background-color: white;
+    font-family: 'Open Sans Hebrew', sans-serif !important;
+}
+
+.header {
+    height: 45px;
+    padding: 20px;
+    color: white;
+    background-color: black;
+    position: relative;
+}
+
+
+
 h1 {
     background-color: #4a4a4a;
     color: #fcfcfc;
@@ -108,4 +125,10 @@ h5.totals {
     border-bottom: 2px solid #4A4A4A;
     font-size: 1.15em;
     line-height: 2em;
+}
+
+@media screen and (max-width: 844px) {
+    .jumbotron {
+        height: 266px;
+    }
 }

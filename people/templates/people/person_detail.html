@@ -2,15 +2,6 @@
 {% load static i18n ifx %}
 
 {% block content %}
-    <div class="ul">
-        <li class="breadcrumb"><a
-                href='{% url "people:list" %}'>{% trans "Personalities" %}</a>
-        </li>
-    </div>
-    <h1>
-        {{ object|bd:'name' }}
-    </h1>
-
     <ul class="list-unstyled">
         <li>{% trans "Hebrew name" %}: {{ object.name_he }}</li>
         <li>{% trans "English name" %}: {{ object.name_en }}</li>

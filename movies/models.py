@@ -39,6 +39,16 @@ class Field(models.Model):
             count=Count('movietagfield')
         ).order_by('title')
 
+    @property
+    def title_he(self):
+        # TODO: distinct titles
+        return self.title
+
+    @property
+    def title_en(self):
+        # TODO: distinct titles
+        return self.title
+
 
 class Tag(models.Model):
     tid = models.IntegerField(unique=True)
@@ -63,6 +73,10 @@ class Movie(models.Model):
     title_en = models.CharField(max_length=300, null=True, blank=True)
     summary_he = models.TextField(null=True, blank=True)
     summary_en = models.TextField(null=True, blank=True)
+
+    class Meta:
+        verbose_name = _("movie")
+        verbose_name_plural = _("movies")
 
     def __str__(self):
         return str('{}: "en:{}", "he:{}"'.format(self.id, self.title_en,
