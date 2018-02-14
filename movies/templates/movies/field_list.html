@@ -1,29 +1,18 @@
 {% extends 'base.html' %}
-{% load static i18n %}
+{% load static i18n ifx %}
 
 {% block content %}
 
     <h1>{% trans "Fields" %}</h1>
 
-    <ul>Count: {{ object_list.count }} items</ul>
-    <table border="1" width="100%">
-        <tr>
-            <th>#</th>
-            <th>fid</th>
-            <th>Title</th>
-            <th>Movie-Tag-Field Count</th>
-        </tr>
-        {% for object in object_list  %}
-            <tr>
-                <td>#{{ object.id }}</td>
-                <td>{{ object.fid }}</td>
-                <td>
-                    <a href="{% url 'movies:field_detail' object.id %}">{{ object.title }}</a>
-                </td>
-                <td>{{ object.movietagfield_set.count }}</td>
-            </tr>
+    <ul class="list-group">
+        {% for object in object_list %}
+            <li class="list-group-item">
+                {{ object|u }}
+                ({{ object.movietagfield_set.count }})
+            </li>
         {% endfor %}
+    </ul>
 
-    </table>
 
 {% endblock %}
