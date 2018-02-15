@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-14 23:19+0200\n"
-"PO-Revision-Date: 2018-02-14 23:21+0200\n"
+"POT-Creation-Date: 2018-02-15 15:42+0200\n"
+"PO-Revision-Date: 2018-02-15 15:43+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -88,6 +88,15 @@ msgstr "הבא"
 
 msgid "last"
 msgstr "האחרון"
+
+msgid "All Movies"
+msgstr "כל הסרטים"
+
+msgid "People"
+msgstr "אישים"
+
+msgid "All People"
+msgstr "כל האישים"
 
 #~ msgid "(Items #%(a)s - #%(b)s)"
 #~ msgstr "(פריטים #%(a)s - #%(b)s)"
