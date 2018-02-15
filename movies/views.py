@@ -31,7 +31,7 @@ class AboutView(IFXMixin, TemplateView):
 
 
 class MovieListView(IFXMixin, ListView):
-    jumbotron = 'movies/searchresult_jumbotron.html'
+    # jumbotron = 'movies/searchresult_jumbotron.html'
     model = Movie
     paginate_by = 25
 

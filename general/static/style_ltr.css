@@ -162,32 +162,10 @@ div#searchGroup {
     margin-left: 76px;
 }
 
-footer {
-    height: 163px;
-    margin: 0 auto;
-    background-color: #D8D8D8;
-    direction: ltr;
-}
-
-footer div .col-xs-3 {
-    width: 25%;
-    margin: 36px auto;
-}
-
-footer h4 {
-}
-
 .row.container {
     margin: 0 auto;
 }
 
-img#cinemathequeLogoFooter {
-    width: 80%;
-    max-width: 200px;
-    /* margin: 0 auto; */
-    margin: auto 17%;
-    margin-top: 11px;
-}
 
 option:hover {
     color: white !important;
@@ -467,10 +445,6 @@ a.col-4 > h4 {
 
 article {
     margin-bottom: 50px;
-}
-
-footer {
-    margin-top: 30px;
 }
 
 /*----------------------Search Reasulte------------------------------*/

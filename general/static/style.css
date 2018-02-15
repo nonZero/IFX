@@ -1,8 +1,13 @@
 @import url(//fonts.googleapis.com/earlyaccess/opensanshebrew.css);
 
 body {
-    background-color: white;
     font-family: 'Open Sans Hebrew', sans-serif !important;
+    background-color: #D8D8D8;
+}
+
+main {
+    background-color: white;
+    padding-bottom: 2rem;
 }
 
 .header {
@@ -12,8 +17,6 @@ body {
     background-color: black;
     position: relative;
 }
-
-
 
 h1 {
     background-color: #4a4a4a;
@@ -87,10 +90,11 @@ input#lang-switcher {
     height: 100vh;
 }
 
-.movie-list .media  {
+.movie-list .media {
     height: 120px;
     overflow: hidden;
 }
+
 .movie-list .summary {
     overflow: hidden;
     height: 3em;
@@ -100,21 +104,49 @@ input#lang-switcher {
     margin-bottom: 3px;
 }
 
-.movie-list > .media:nth-child(odd)  {
+.movie-list > .media:nth-child(odd) {
 
     background: #f2f0f0;
 }
 
-.jumbotron  {
-    margin:0;
+body .jumbotron {
+    height: 16rem;
+    padding: 2rem;
+    background-image: url(./images/film-movie-motion-picture-darker.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    border-radius: 0;
+    margin-bottom: 0;
 }
+
 .jumbotron h1 {
     color: #FFFFFF;
-    font-family: "Open Sans Hebrew";
     font-size: 60px;
     font-weight: 300;
-    /*line-height: 65px;*/
     text-align: center !important;
+}
+
+@media screen and (max-width: 844px) {
+    .jumbotron {
+        height: 6rem;
+        padding: 1rem;
+    }
+
+    .jumbotron .display-4 {
+        font-size: 3rem;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .jumbotron {
+        height: 4rem;
+        padding: 0.5rem;
+    }
+
+    .jumbotron .display-4 {
+        font-size: 2rem;
+    }
 }
 
 div#smaller_jum {
@@ -127,8 +159,8 @@ h5.totals {
     line-height: 2em;
 }
 
-@media screen and (max-width: 844px) {
-    .jumbotron {
-        height: 266px;
-    }
+footer {
+    background-color: #D8D8D8;
+    margin-top: 30px;
 }
+

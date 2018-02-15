@@ -37,33 +37,34 @@
 {% include '_header.html' %}
 
 {% block main %}
-    <main class="container">
+    <main>
+        <div class="container">
+            {% with view.get_breadcrumbs as bread %}
+                {% if bread %}
+                    <ol class="breadcrumb">
+                        {% for bc in bread %}
+                            <li class="breadcrumb-item">
+                                <a href="{{ bc.1 }}">
+                                    {{ bc.0 }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ol>
+                {% endif %}
+            {% endwith %}
 
-        {% with view.get_breadcrumbs as bread %}
-            {% if bread %}
-                <ol class="breadcrumb">
-                    {% for bc in bread %}
-                        <li class="breadcrumb-item">
-                            <a href="{{ bc.1 }}">
-                                {{ bc.0 }}
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ol>
-            {% endif %}
-        {% endwith %}
+            {% block header_container %}
+                <h1>
+                    {% block header %}
+                        {{ view.get_header }}
+                    {% endblock %}
+                </h1>
+            {% endblock %}
 
-        {% block header_container %}
-            <h1>
-                {% block header %}
-                    {{ view.get_header }}
-                {% endblock %}
-            </h1>
-        {% endblock %}
-
-        {% block content %}
-            CONTENT
-        {% endblock %}
+            {% block content %}
+                CONTENT
+            {% endblock %}
+        </div>
     </main>
 {% endblock %}
 
