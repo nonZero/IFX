@@ -53,11 +53,13 @@
             {% endif %}
         {% endwith %}
 
-        <h1>
-            {% block header %}
-                {{ view.get_header }}
-            {% endblock %}
-        </h1>
+        {% block header_container %}
+            <h1>
+                {% block header %}
+                    {{ view.get_header }}
+                {% endblock %}
+            </h1>
+        {% endblock %}
 
         {% block content %}
             CONTENT

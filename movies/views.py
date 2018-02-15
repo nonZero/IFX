@@ -8,11 +8,20 @@ from ifx.base_views import IFXMixin
 from movies.models import Movie, Tag, Field
 from django.utils.translation import ugettext_lazy as _
 
+from people.models import Person
+
 
 class HomePage(IFXMixin, TemplateView):
-    template_name = 'movies/homePage.html'
+    template_name = 'home.html'
     jumbotron = 'movies/main_jumbotron.html'
     title = _("Home")
+
+    def random_movies(self, n=3):
+        return Movie.objects.order_by("?")[:n]
+
+    def random_people(self, n=8):
+        return Person.objects.exclude(movies=None).order_by("?")[:n]
+
 
 
 class AboutView(IFXMixin, TemplateView):
@@ -77,6 +86,7 @@ TAG_ORDER_FIELDS = {
     'type_id',
 }
 
+
 class TagDetailView(IFXMixin, DetailView):
     model = Tag
 
@@ -85,4 +95,3 @@ class TagDetailView(IFXMixin, DetailView):
         return FieldDetailView.breadcrumbs + (
             (str(fld), fld.get_absolute_url()),
         )
-

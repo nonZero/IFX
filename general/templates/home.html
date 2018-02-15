@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static i18n ifx %}
+
+{% block header_container %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+
+        <div class="col-md-8">
+            <h3 class="p-2">
+                {% trans "Movies" %}
+            </h3>
+            {% include "movies/_movies.html" with object_list=view.random_movies hide_totals=1 %}
+            <div class="text-right">
+                <a href="{% url "movies:list" %}" class="btn btn-light btn-lg">
+                    {% trans "All Movies" %} &raquo;
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <h3 class="pb-2 pt-2">
+                {% trans "People" %}
+            </h3>
+            <ul class="list-group">
+                {% for object in view.random_people %}
+                    <li class="list-group-item">
+                        {{ object|un }}
+                        <span dir="ltr">({{ object.movies.count }})</span>
+
+                        {% for mrp in object.distinct_roles %}
+                            <span class="badge badge-light">{{ mrp.role }}</span>
+
+                            {#                            {% if not forloop.last %}, {% endif %}#}
+                        {% endfor %}
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="text-right">
+                <a href="{% url "people:list" %}" class="btn btn-light btn-lg">
+                    {% trans "All People" %} &raquo;
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
