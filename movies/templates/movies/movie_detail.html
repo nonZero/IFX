@@ -15,7 +15,10 @@
         {% if movie.title_en %}
             <li><b>{% trans "English Title" %}:</b> {{ movie.title_en }}</li>
         {% endif %}
-        <li><b>{% trans "Year" %}</b>: {{ movie.year }}</li>
+        <li><b>{% trans "Year" %}</b>: </li>
+        {% if movie.duration %}
+            <li><span title="{{ movie.duration }} {% trans "m." %}" class="badge badge-light p-0"><span class="fa fa-clock"></span> {{ movie.duration|duration }} </span></li>
+        {% endif %}
         {% if movie.summary_he %}
             <li>
                 {{ movie.summary_he|linebreaks }}
@@ -35,6 +38,9 @@
                 {% endfor %}
             </li>
         {% endfor %}
+        {% if movie.bid %}
+            <li><span class="bg-warning">{% trans "Legacy ID" %}: {{ movie.bid }}</span></li>
+        {% endif %}
     </ul>
     {% if movie.people.exists %}
         <h4>

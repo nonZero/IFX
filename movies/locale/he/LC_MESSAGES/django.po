@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-14 22:28+0200\n"
-"PO-Revision-Date: 2018-02-14 22:28+0200\n"
+"POT-Creation-Date: 2018-02-18 22:03+0200\n"
+"PO-Revision-Date: 2018-02-18 22:03+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -66,8 +66,8 @@ msgstr "נמצאו"
 msgid "items"
 msgstr "פריטים"
 
-msgid "min"
-msgstr "שניות"
+msgid "min."
+msgstr "דק'"
 
 msgctxt "movie"
 msgid "Summary"
@@ -85,23 +85,11 @@ msgstr "אוספים"
 msgid "Depositing Materials"
 msgstr "הפקדת חומרים"
 
-msgid "Fields"
-msgstr "שדות"
-
-msgid "The Nathan Axelrod Newsreel Collection"
-msgstr "אוסף יומני נתן אקסלרוד"
-
-msgid "Watch more"
-msgstr "לעיון באוסף"
-
 msgid "The Israeli Film Archive"
 msgstr "הארכיון הישראלי לסרטים"
 
 msgid "Search..."
 msgstr "חיפוש..."
-
-msgid "Movies"
-msgstr "סרטים"
 
 msgid "Hebrew Title"
 msgstr "כותרת בעברית"
@@ -112,8 +100,17 @@ msgstr "כותרת באנגלית"
 msgid "Year"
 msgstr "שנה"
 
+msgid "Unknown"
+msgstr ""
+
+msgid "m."
+msgstr "דק'"
+
 msgid "English Summary"
 msgstr "תקציר באנגלית"
+
+msgid "Legacy ID"
+msgstr ""
 
 msgid "Personalities"
 msgstr "אישים"
@@ -123,6 +120,9 @@ msgstr "סרט"
 
 msgid "Runtime"
 msgstr "אורך בדיקות"
+
+msgid "min"
+msgstr "דק'"
 
 msgid "Director"
 msgstr "במאי/ת"
@@ -147,6 +147,9 @@ msgstr "צבעוניות"
 
 msgid "Summery"
 msgstr "תקציר"
+
+msgid "Movies"
+msgstr "סרטים"
 
 msgid "Search results for:"
 msgstr "תוצאות עבור:"
@@ -180,6 +183,15 @@ msgstr "בית"
 
 msgid "About"
 msgstr "על אודות"
+
+msgid "Fields"
+msgstr "שדות"
+
+#~ msgid "The Nathan Axelrod Newsreel Collection"
+#~ msgstr "אוסף יומני נתן אקסלרוד"
+
+#~ msgid "Watch more"
+#~ msgstr "לעיון באוסף"
 
 #~ msgid "Contact"
 #~ msgstr "צרו קשר"

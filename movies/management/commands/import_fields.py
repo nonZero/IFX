@@ -1,4 +1,5 @@
 import pandas as pd
+from django.db import IntegrityError
 from tqdm import tqdm
 
 from django.core.management.base import BaseCommand
@@ -30,7 +31,10 @@ class Command(BaseCommand):
             o.fid = row.lif
             o.title = row.descr
             if not options['readonly']:
-                o.save()
+                try:
+                    o.save()
+                except IntegrityError:
+                    pass
             progress.update(1)
 
         progress.close()

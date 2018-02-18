@@ -40,9 +40,6 @@
                     {% if m.year != none %}
                         <span dir="ltr" class="year">({{ m.year }})</span>
                     {% endif %}
-                    {% if m.duration != none %}
-                        <span>{{ m.duration }} {% trans "min" %}</span>
-                    {% endif %}
                 </h5>
                 {#            <form action="">#}
                 {#                <input type="image" src="{% static 'images/Shopping-bag-black.svg' %}" alt="Submit">#}
@@ -63,6 +60,12 @@
                             <b>{{ r.role }}:</b> {{ r.person|un }}
                         </li>
                     {% endfor %}
+                    {% if m.duration %}
+                        <li class="list-inline-item">
+                            <span class="badge badge-light p-0"><span class="fa fa-clock"></span> {{ m.duration|duration }} </span>
+                        </li>
+                    {% endif %}
+
                 </ul>
                 {% if m|get_description %}
                     <p class="summary ellipsis multiline">
