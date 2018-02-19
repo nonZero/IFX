@@ -64,7 +64,7 @@ class Movie(models.Model):
     summary_he = models.TextField(null=True, blank=True)
     summary_en = models.TextField(null=True, blank=True)
 
-    suggestions = GenericRelation('enrich.Suggestion')
+    # suggestions = GenericRelation('enrich.Suggestion')
 
     class Meta:
         verbose_name = _("movie")
