@@ -30,7 +30,7 @@
                         <span dir="ltr">({{ object.movies.count }})</span>
 
                         {% for mrp in object.distinct_roles %}
-                            <span class="badge badge-light">{{ mrp.role }}</span>
+                            <span class="badge badge-light">{{ mrp.role|bdtitle }}</span>
 
                             {#                            {% if not forloop.last %}, {% endif %}#}
                         {% endfor %}

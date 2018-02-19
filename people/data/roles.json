@@ -1,0 +1,79 @@
+[
+  {
+    "tid": "#61",
+    "title_en": "Editing Assistant",
+    "title_he": "\u05e2\u05d5\u05d6\u05e8 \u05e2\u05e8\u05d9\u05db\u05d4",
+    "appears_in_short_version": false,
+    "short_version_order": null
+  },
+  {
+    "tid": "#45",
+    "title_en": "Sound Editor",
+    "title_he": "\u05e2\u05d5\u05e8\u05da \u05e1\u05d0\u05d5\u05e0\u05d3",
+    "appears_in_short_version": false,
+    "short_version_order": null
+  },
+  {
+    "tid": "#38",
+    "title_en": "Cast",
+    "title_he": "\u05e9\u05d7\u05e7\u05df",
+    "appears_in_short_version": false,
+    "short_version_order": null
+  },
+  {
+    "tid": "#53",
+    "title_en": "Writer",
+    "title_he": "\u05ea\u05e1\u05e8\u05d9\u05d8\u05d0\u05d9",
+    "appears_in_short_version": false,
+    "short_version_order": null
+  },
+  {
+    "tid": "#37",
+    "title_en": "Producer",
+    "title_he": "\u05de\u05e4\u05d9\u05e7",
+    "appears_in_short_version": false,
+    "short_version_order": null
+  },
+  {
+    "tid": "#42",
+    "title_en": "Editor",
+    "title_he": "\u05e2\u05d5\u05e8\u05da",
+    "appears_in_short_version": false,
+    "short_version_order": null
+  },
+  {
+    "tid": "#41",
+    "title_en": "Cinematographer",
+    "title_he": "\u05e6\u05dc\u05dd",
+    "appears_in_short_version": false,
+    "short_version_order": null
+  },
+  {
+    "tid": "#44",
+    "title_en": "Music",
+    "title_he": "\u05de\u05d5\u05d6\u05d9\u05e7\u05d4",
+    "appears_in_short_version": false,
+    "short_version_order": null
+  },
+  {
+    "tid": "BAMAI",
+    "title_en": "Director",
+    "title_he": "\u05d1\u05de\u05d0\u05d9",
+    "appears_in_short_version": true,
+    "short_version_order": 1
+  },
+  {
+    "tid": "#165",
+    "title_en": "Crew",
+    "title_he": "\u05e6\u05d5\u05d5\u05ea",
+    "appears_in_short_version": false,
+    "short_version_order": null
+  },
+  {
+    "tid": "#62",
+    "title_en": "Narrator",
+    "title_he": "\u05e7\u05e8\u05d9\u05d9\u05df",
+    "appears_in_short_version": false,
+    "short_version_order": null
+  }
+]

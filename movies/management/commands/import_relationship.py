@@ -4,7 +4,7 @@ from tqdm import tqdm
 
 from django.core.management.base import BaseCommand
 
-from movies.models import Movie, Tag, Field, MovieTagField, models
+from movies.models import Movie, Tag, Field, MovieTag, models
 from people.models import Person, Role, MovieRolePerson
 
 
@@ -57,11 +57,10 @@ class Command(BaseCommand):
                         mrp_counter+=1
                 except:
                     try:
-                        f = Field.objects.get(fid=row.lif)
+                        # f = Field.objects.get(fid=row.lif)
                         t = Tag.objects.get(tid=row.book2_id[1:])
-                        mtf = MovieTagField(movie=m, tag = t, field = f)
                         if not options['readonly']:
-                            mtf.save()
+                            MovieTag.objects.get_or_create(movie=m, tag=t)
                             mtf_counter+=1
                     except models.ObjectDoesNotExist:
                         bad_relationship_count+=1

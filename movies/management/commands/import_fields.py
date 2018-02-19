@@ -1,14 +1,13 @@
-import pandas as pd
-from django.db import IntegrityError
-from tqdm import tqdm
+# import pandas as pd
+# from django.db import IntegrityError
+# from tqdm import tqdm
 
 from django.core.management.base import BaseCommand
 
-from movies.models import Field
-
+# from movies.models import Field
 
 class Command(BaseCommand):
-    help = "Import fields."
+    help = "Import fields from legacy data."
 
     def add_arguments(self, parser):
         parser.add_argument('f', type=str,
@@ -22,19 +21,20 @@ class Command(BaseCommand):
         )
 
     def handle(self, f, **options):
-        df = pd.read_csv(f, delimiter='\t')
-
-        progress = tqdm(total=len(df))
-
-        for i, row in df.iterrows():
-            o = Field()
-            o.fid = row.lif
-            o.title = row.descr
-            if not options['readonly']:
-                try:
-                    o.save()
-                except IntegrityError:
-                    pass
-            progress.update(1)
-
-        progress.close()
+        assert False, "Don't use me anymore. see import_fields_and_tags"
+        # df = pd.read_csv(f, delimiter='\t')
+        #
+        # progress = tqdm(total=len(df))
+        #
+        # for i, row in df.iterrows():
+        #     o = Field()
+        #     o.fid = row.lif
+        #     o.title = row.descr
+        #     if not options['readonly']:
+        #         try:
+        #             o.save()
+        #         except IntegrityError:
+        #             pass
+        #     progress.update(1)
+        #
+        # progress.close()

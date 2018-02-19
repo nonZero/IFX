@@ -12,9 +12,9 @@
         {% endif %}
 
     </ul>
-    {{ object.movietagfield_set.count }} {% trans "Movies" %}
+    {{ object.movies.count }} {% trans "Movies" %}
     <ul class="list-group">
-        {% for item in object.movietagfield_set.all %}
+        {% for item in object.movies.all %}
             <li class="list-group-item">
                 <a href="{% url 'movies:detail' item.movie.id %}">
                     {{ item.movie.get_title }}</a>

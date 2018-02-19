@@ -48,7 +48,7 @@
                 <ul class="list-inline">
                     {% for key, values in m.get_short_data %}
                         <li class="list-inline-item">
-                            <b>{{ key }}:</b>
+                            <b>{{ key|bdtitle }}:</b>
                             {% for value in values %}
                                 {{ value|ut }}{% if not forloop.last %}
                                     ,{% endif %}
@@ -57,12 +57,13 @@
                     {% endfor %}
                     {% for r in m.get_short_roles %}
                         <li class="list-inline-item">
-                            <b>{{ r.role }}:</b> {{ r.person|un }}
+                            <b>{{ r.role|bdtitle }}:</b> {{ r.person|un }}
                         </li>
                     {% endfor %}
                     {% if m.duration %}
                         <li class="list-inline-item">
-                            <span class="badge badge-light p-0"><span class="fa fa-clock"></span> {{ m.duration|duration }} </span>
+                            <span class="badge badge-light p-0"><span
+                                    class="fa fa-clock"></span> {{ m.duration|duration }} </span>
                         </li>
                     {% endif %}
 

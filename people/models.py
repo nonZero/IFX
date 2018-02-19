@@ -55,7 +55,7 @@ class Role(models.Model):
     short_version_order = models.PositiveIntegerField(null=True, blank=True)
 
     def __str__(self):
-        return self.title_he
+        return self.title_en or self.title_he or "???"
 
 
 class MovieRolePerson(models.Model):

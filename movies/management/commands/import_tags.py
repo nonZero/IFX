@@ -24,19 +24,19 @@ class Command(BaseCommand):
         )
 
     def handle(self, f, **options):
-        Tag.objects.all().delete()
+        # Tag.objects.all().delete()
         df = pd.read_csv(f, delimiter='\t')
         progress = tqdm(total=len(df))
         for i, row in df.iterrows():
             if row.type1_id != "BAMAI":
-                tag, created = Tag.objects.get_or_create(tid=row.book_id_s)
-                if created:
-                    tag.tid = row.book_id_s
-                tag.title = row.title
-                tag.type_id = row.type1_id
-                self.update_lang(tag, row.lang_id)
-                if not options['readonly']:
-                    tag.save()
+                # tag, created = Tag.objects.get_or_create(tid=row.book_id_s)
+                # if created:
+                #     tag.tid = row.book_id_s
+                # tag.title = row.title
+                # tag.type_id = row.type1_id
+                # self.update_lang(tag, row.lang_id)
+                # if not options['readonly']:
+                #     tag.save()
                 progress.update(1)
             else:
                 p, created = Person.objects.get_or_create(tid=row.book_id_s)
@@ -51,17 +51,17 @@ class Command(BaseCommand):
                 
         progress.close()
 
-    @staticmethod
-    def update_lang(tag, lang):
-        if pd.isnull(lang):
-            print('Error - language tag is NaN')
-            return
-
-        if str(lang) == 'HEB' or \
-                (lang.isdigit() and int(lang) == 1):  # HEB
-            tag.lang = 'he'
-        elif str(lang) == 'ENG' or \
-                (lang.isdigit() and int(lang) == 1):  # ENG
-            tag.lang = 'en'
-        else:
-            print('Proper language not found, lang="{}"'.format(lang))
+    # @staticmethod
+    # def update_lang(tag, lang):
+    #     if pd.isnull(lang):
+    #         print('Error - language tag is NaN')
+    #         return
+    #
+    #     if str(lang) == 'HEB' or \
+    #             (lang.isdigit() and int(lang) == 1):  # HEB
+    #         tag.lang = 'he'
+    #     elif str(lang) == 'ENG' or \
+    #             (lang.isdigit() and int(lang) == 1):  # ENG
+    #         tag.lang = 'en'
+    #     else:
+    #         print('Proper language not found, lang="{}"'.format(lang))

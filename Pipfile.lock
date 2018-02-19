@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "bdbc139e33e0e746d5a9b25a890cb8d606a8e8862ac1f33c453a317ad5d34dec"
+            "sha256": "7ee5dc84ce28e98e2842d9c40d96feb3f96193372c00edaafe81a575f3cab1ba"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
@@ -9,9 +9,9 @@
             "os_name": "posix",
             "platform_machine": "x86_64",
             "platform_python_implementation": "CPython",
-            "platform_release": "4.14.15-1-ARCH",
+            "platform_release": "4.15.3-2-ARCH",
             "platform_system": "Linux",
-            "platform_version": "#1 SMP PREEMPT Tue Jan 23 21:49:25 UTC 2018",
+            "platform_version": "#1 SMP PREEMPT Thu Feb 15 00:13:49 UTC 2018",
             "python_full_version": "3.6.4",
             "python_version": "3.6",
             "sys_platform": "linux"
@@ -27,6 +27,13 @@
         ]
     },
     "default": {
+        "babel": {
+            "hashes": [
+                "sha256:ad209a68d7162c4cff4b29cdebe3dec4cef75492df501b0049a9433c96ce6f80",
+                "sha256:8ce4cb6fdd4393edd323227cba3a077bceb2a6ce5201c902c65e730046f41f14"
+            ],
+            "version": "==2.5.3"
+        },
         "beautifulsoup4": {
             "hashes": [
                 "sha256:7015e76bf32f1f574636c4288399a6de66ce08fb7b2457f628a8d70c0fbabb11",
@@ -65,9 +72,9 @@
         },
         "django-bootstrap4": {
             "hashes": [
-                "sha256:be495c8b2872a3941c6b984f76ec211d2d53188fee0e217eb04971ca178aafca"
+                "sha256:6db4a27b33851833e68b96344f9df063150dcace8d4787ebfc21eceb55196945"
             ],
-            "version": "==0.0.5"
+            "version": "==0.0.6"
         },
         "django-extensions": {
             "hashes": [
@@ -323,6 +330,13 @@
                 "sha256:3df37372226d6e63e1b1e1eda15c594bca98a22d33a23832a90998faa96bc65e"
             ],
             "version": "==0.1.7"
+        },
+        "wikidata": {
+            "hashes": [
+                "sha256:72998341af4fc3484ae46d6f6e140334325508dcebe3ab80fe5dbe84931c9f66",
+                "sha256:895753e98c3f3d8d391249c636ee7af6e7181add50d7c68094e1bad69ab7d422"
+            ],
+            "version": "==0.6.1"
         },
         "wikipedia": {
             "hashes": [

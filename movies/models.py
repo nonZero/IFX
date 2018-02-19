@@ -1,5 +1,6 @@
 from collections import defaultdict
 
+from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.db.models import Count
 from django.urls import reverse
@@ -18,7 +19,8 @@ class Language(object):
 
 class Field(models.Model):
     fid = models.CharField(unique=True, max_length=300)
-    title = models.CharField(_('title'), max_length=300)
+    title_en = models.CharField(_('Hebrew title'), max_length=300)
+    title_he = models.CharField(_('English title'), max_length=300)
     appears_in_short_version = models.BooleanField(
         _('appears in short version'), default=False)
     short_version_order = models.PositiveIntegerField(_('short version order'),
@@ -29,37 +31,25 @@ class Field(models.Model):
         verbose_name_plural = _("fields")
 
     def __str__(self):
-        return self.title
+        return self.title_en or self.title_he or "???"
 
     def get_absolute_url(self):
         return reverse('movies:field_detail', args=(self.pk,))
 
     def get_tags(self):
-        return Tag.objects.filter(movietagfield__field=self).annotate(
-            count=Count('movietagfield')
-        ).order_by('title')
-
-    @property
-    def title_he(self):
-        # TODO: distinct titles
-        return self.title
-
-    @property
-    def title_en(self):
-        # TODO: distinct titles
-        return self.title
+        return self.tags.annotate(count=Count('movies')).order_by('title_he')
 
 
 class Tag(models.Model):
+    field = models.ForeignKey(Field, related_name='tags')
     tid = models.IntegerField(unique=True)
-    title = models.CharField(max_length=300)
     title_en = models.CharField(max_length=300, null=True, blank=True)
     title_he = models.CharField(max_length=300, null=True, blank=True)
     type_id = models.CharField(max_length=300, null=True, blank=True)
     lang = models.CharField(max_length=300, null=True, blank=True)
 
     def __str__(self):
-        return self.title
+        return self.title_en or self.title_he or "???"
 
     def get_absolute_url(self):
         return reverse('movies:tag_detail', args=(self.pk,))
@@ -73,6 +63,8 @@ class Movie(models.Model):
     title_en = models.CharField(max_length=300, null=True, blank=True)
     summary_he = models.TextField(null=True, blank=True)
     summary_en = models.TextField(null=True, blank=True)
+
+    suggestions = GenericRelation('enrich.Suggestion')
 
     class Meta:
         verbose_name = _("movie")
@@ -93,13 +85,14 @@ class Movie(models.Model):
         return '<No Title>'
 
     def get_extra_data(self, short=False):
-        mft = MovieTagField.objects.filter(movie=self.id)
+        mft = self.tags.all()
         if short:
-            mft = mft.filter(field__appears_in_short_version=True).order_by(
-                'field__short_version_order')
+            mft = mft.filter(
+                tag__field__appears_in_short_version=True).order_by(
+                'tag__field__short_version_order')
         fields = defaultdict(list)
         for item in mft:
-            fields[item.field].append(item.tag)
+            fields[item.tag.field].append(item.tag)
         return list(fields.items())
 
     def get_short_data(self):
@@ -111,11 +104,14 @@ class Movie(models.Model):
             'role__short_version_order')
 
 
-class MovieTagField(models.Model):
-    movie = models.ForeignKey(Movie)
-    field = models.ForeignKey(Field)
-    tag = models.ForeignKey(Tag)
+class MovieTag(models.Model):
+    movie = models.ForeignKey(Movie, related_name='tags')
+    tag = models.ForeignKey(Tag, related_name='movies')
+
+    class Meta:
+        unique_together = (
+            ('movie', 'tag'),
+        )
 
     def __str__(self):
-        return 'Movie={}, Field={}, Tag={}'.format(
-            self.movie, self.field, self.tag)
+        return f'Movie={self.movie}, Tag={self.tag}'

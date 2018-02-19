@@ -11,7 +11,7 @@
                 {{ object|un }}
                 <span dir="ltr">({{ object.movies.count }})</span>
 
-                ({% for mrp in object.distinct_roles %}{{ mrp.role }}{% if not forloop.last %}, {% endif %}{% endfor %})
+                ({% for mrp in object.distinct_roles %}{{ mrp.role|bdtitle }}{% if not forloop.last %}, {% endif %}{% endfor %})
 
             </li>
         {% endfor %}

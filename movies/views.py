@@ -23,7 +23,6 @@ class HomePage(IFXMixin, TemplateView):
         return Person.objects.exclude(movies=None).order_by("?")[:n]
 
 
-
 class AboutView(IFXMixin, TemplateView):
     template_name = "movies/about.html"
     jumbotron = "movies/about_jumbotron.html"
@@ -67,9 +66,8 @@ class FieldListView(IFXMixin, ListView):
     model = Field
 
     def get_queryset(self):
-        return Field.objects.annotate(
-            movie_count=Count('movietagfield')
-        ).filter(movie_count__gt=0)
+        return Field.objects.annotate(movie_count=Count('tags__movies')).filter(
+            movie_count__gt=0)
 
 
 class FieldDetailView(IFXMixin, DetailView):
@@ -81,7 +79,8 @@ class FieldDetailView(IFXMixin, DetailView):
 
 
 TAG_ORDER_FIELDS = {
-    'title',
+    'title_he',
+    'title_en',
     'lang',
     'type_id',
 }
@@ -91,7 +90,7 @@ class TagDetailView(IFXMixin, DetailView):
     model = Tag
 
     def get_breadcrumbs(self):
-        fld = self.get_object().movietagfield_set.first().field
+        fld = self.get_object().field
         return FieldDetailView.breadcrumbs + (
             (str(fld), fld.get_absolute_url()),
         )

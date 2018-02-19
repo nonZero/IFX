@@ -4,7 +4,7 @@
 {% block content %}
 
     <ul class="list-group">
-        {% for tag in object.get_tags %}
+        {% for tag in object.get_tags|bdorder %}
             <li class="list-group-item">
                 {{ tag|ut }}
                 <span dir="ltr">({{ tag.count }})</span>

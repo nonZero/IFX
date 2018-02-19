@@ -59,6 +59,13 @@ def bdtitle(instance):
     lang = translation.get_language()[:2]
     return getattr(instance, "title_" + lang)
 
+
+@register.filter
+def bdorder(qs):
+    lang = translation.get_language()[:2]
+    return qs.order_by("title_" + lang)
+
+
 @register.filter
 def duration(n: int):
     return "{:01.0f}:{:02.0f}".format(*divmod(n, 60))

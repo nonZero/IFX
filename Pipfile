@@ -19,6 +19,7 @@ pandas = "*"
 pexpect = "*"
 wikipedia = "*"
 "django-bootstrap4" = "*"
+wikidata = "*"
 
 
 [dev-packages]

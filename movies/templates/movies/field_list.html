@@ -7,7 +7,7 @@
         {% for object in object_list %}
             <li class="list-group-item">
                 {{ object|u }}
-                ({{ object.movietagfield_set.count }})
+                ({{ object.tags.count }})
             </li>
         {% endfor %}
     </ul>
