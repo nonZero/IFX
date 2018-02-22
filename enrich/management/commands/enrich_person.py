@@ -36,7 +36,7 @@ class Command(BaseCommand):
                 print('Found identity by person, id={}'.format(o.object_id))
             else:
                 o = Identity.objects.create(entity=person,
-                                            source_type=Identity.wikipedia)
+                                            source_type=Identity.WIKIPEDIA)
                 print('Identity created with person, id={}'.format(
                     o.object_id))
 

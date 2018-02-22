@@ -103,6 +103,8 @@ class Suggestion(models.Model):
         FOUND_UNVERIFIED = 100
         VERIFIED = 200
 
+        REJECTED = 500
+
         CHOICES = (
             (PENDING, _('pending')),
             (ERROR, _('error')),
@@ -110,18 +112,21 @@ class Suggestion(models.Model):
             (MANY_RESULTS, _('too many results')),
             (FOUND_UNVERIFIED, _('found (unverified)')),
             (VERIFIED, _('verified')),
+            (REJECTED, _('rejected')),
         )
 
-    status = models.IntegerField(choices=Status.CHOICES)
+    status = models.IntegerField(_('status'), choices=Status.CHOICES)
 
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE,
-                                     limit_choices_to=ENTITY_CONTENT_TYPES)
+                                     limit_choices_to=ENTITY_CONTENT_TYPES,
+                                     verbose_name=_('entity type')
+                                     )
     object_id = models.PositiveIntegerField()
     entity = GenericForeignKey()
 
-    query = models.CharField(max_length=300)
+    query = models.CharField(_('query string'), max_length=300)
 
-    source = models.IntegerField(choices=Source.CHOICES)
+    source = models.IntegerField(_('source'), choices=Source.CHOICES)
     source_key = models.CharField(max_length=500, null=True)
     source_url = models.URLField(null=True)
 
@@ -129,6 +134,9 @@ class Suggestion(models.Model):
     result = JSONField(null=True)
 
     error_message = models.TextField(null=True)
+
+    def found(self):
+        return self.status in (self.Status.VERIFIED, self.Status.FOUND_UNVERIFIED)
 
     # def __str__(self):
     #     return f"{self.id}|{self.entity}|{self.get_source_display}|{self.get_status_display}"

@@ -1,0 +1,22 @@
+<div class="row pb-3">
+    <div class="col-sm-2 text-right">
+        <b><a href="http://www.wikidata.org/entity/{{ e.id }}">
+            [{{ e.id }}]
+        </a></b>
+    </div>
+    <div class="col-sm-10">
+        <b>{{ e.labels.he.value }}</b>: {{ e.descriptions.he.value }}
+        {% for a in e.aliases.he %}
+            <br/>
+            <span class="fa fa-plus"></span>
+            {{ a.value }}
+        {% endfor %}
+        <br/>
+        <b>{{ e.labels.en.value }}</b>: {{ e.descriptions.en.value }}
+        {% for a in e.aliases.en %}
+            <br/>
+            <span class="fa fa-plus fa-sm"></span>
+            {{ a.value }}
+        {% endfor %}
+    </div>
+</div>

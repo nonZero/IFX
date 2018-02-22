@@ -21,6 +21,7 @@ INSTALLED_APPS = [
 
     'django_extensions',
     'bootstrap4',
+    'django_filters',
 
     'general',
     'editing_logs',

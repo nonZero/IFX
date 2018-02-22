@@ -20,6 +20,7 @@ pexpect = "*"
 wikipedia = "*"
 "django-bootstrap4" = "*"
 wikidata = "*"
+django-filter = "*"
 
 
 [dev-packages]

@@ -64,27 +64,21 @@
 
     <ul class="list-group">
         {% for s in movie.suggestions.all %}
-            {% if s.status == s.Status.AUTO_ACCEPTED %}
+            {% if s.found %}
                 <li class="list-group-item">
                     <a href="{{ s.source_url }}">{{ s.get_source_display }}: {{ s.source_key }}</a>
+                        {% include 'enrich/_entity.html' with e=s.result %}
                 </li>
             {% else %}
                 <li class="list-group-item list-group-item-danger">
                     {{ s.get_source_display }}: {{ s.get_status_display }}
-                    {% for en in s.result %}
-                        <span class="badge badge-default">
-                            <a href="http://www.wikidata.org/entity/{{ en.id }}">
-                                {{ en.labels.he.value|default:en.labels.en.value }} ({{ en.id }})
-                            </a>
-                        </span>
+                    {% for e in s.result %}
+                        {% include 'enrich/_entity.html' %}
                     {% endfor %}
-
                 </li>
             {% endif %}
         {% endfor %}
     </ul>
-
-
 
 {% endblock %}
 
