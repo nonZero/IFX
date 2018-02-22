@@ -31,7 +31,7 @@ class Command(BaseCommand):
             for i, row in df.iterrows():
                 if str(row.book_id).isdigit():
                     try:
-                        m = Movie.objects.get(bid=row.book_id)
+                        m = Movie.objects.get(idea_bid=row.book_id)
                         if row.lang_id == "ENG":
                             m.title_en = row.title
                         elif row.lang_id == "HEB":
@@ -44,7 +44,7 @@ class Command(BaseCommand):
                         c['missing'] += 1
                 elif row.book_id[0] == "T":
                     try:
-                        p = Person.objects.get(tid=row.book_id[1:])
+                        p = Person.objects.get(idea_tid=row.book_id[1:])
                         if row.lang_id == "ENG":
                             # if p.name_en and p.name_en != row.title:
                             #     print(p.name_en, "!=", row.title)
@@ -59,7 +59,7 @@ class Command(BaseCommand):
                         c["P" + row.lang_id] += 1
                     except models.ObjectDoesNotExist:
                         try:
-                            t = Tag.objects.get(tid=row.book_id[1:])
+                            t = Tag.objects.get(idea_tid=row.book_id[1:])
                             if row.lang_id == "ENG":
                                 t.title_en = row.title
                                 t.save()

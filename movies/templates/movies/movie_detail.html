@@ -3,9 +3,9 @@
 
 {% block content %}
 
-{#    <h1>#}
-{#        {{ movie|bdtitle }}#}
-{#    </h1>#}
+    {#    <h1>#}
+    {#        {{ movie|bdtitle }}#}
+    {#    </h1>#}
 
     <ul>
         {% if movie.title_he %}
@@ -15,9 +15,14 @@
         {% if movie.title_en %}
             <li><b>{% trans "English Title" %}:</b> {{ movie.title_en }}</li>
         {% endif %}
-        <li><b>{% trans "Year" %}</b>: </li>
+        {% if movie.year %}
+            <li><b>{% trans "Year" %}</b>: {{ movie.year }}</li>
+        {% endif %}
         {% if movie.duration %}
-            <li><span title="{{ movie.duration }} {% trans "m." %}" class="badge badge-light p-0"><span class="fa fa-clock"></span> {{ movie.duration|duration }} </span></li>
+            <li><span title="{{ movie.duration }} {% trans "m." %}"
+                      class="badge badge-light p-0"><span
+                    class="fa fa-clock"></span> {{ movie.duration|duration }} </span>
+            </li>
         {% endif %}
         {% if movie.summary_he %}
             <li>
@@ -38,8 +43,10 @@
                 {% endfor %}
             </li>
         {% endfor %}
-        {% if movie.bid %}
-            <li><span class="bg-warning">{% trans "Legacy ID" %}: {{ movie.bid }}</span></li>
+        {% if movie.idea_bid %}
+            <li><span
+                    class="bg-warning">{% trans "Legacy ID" %}: {{ movie.idea_bid }}</span>
+            </li>
         {% endif %}
     </ul>
     {% if movie.people.exists %}
@@ -49,11 +56,35 @@
         <ul>
             {% for role in movie.people.all %}
                 <li>
-                    <b>{{ role.role }}:</b> {{ role.person|un }}
+                    <b>{{ role.role|bdtitle }}:</b> {{ role.person|un }}
                 </li>
             {% endfor %}
         </ul>
     {% endif %}
+
+    <ul class="list-group">
+        {% for s in movie.suggestions.all %}
+            {% if s.status == s.Status.AUTO_ACCEPTED %}
+                <li class="list-group-item">
+                    <a href="{{ s.source_url }}">{{ s.get_source_display }}: {{ s.source_key }}</a>
+                </li>
+            {% else %}
+                <li class="list-group-item list-group-item-danger">
+                    {{ s.get_source_display }}: {{ s.get_status_display }}
+                    {% for en in s.result %}
+                        <span class="badge badge-default">
+                            <a href="http://www.wikidata.org/entity/{{ en.id }}">
+                                {{ en.labels.he.value|default:en.labels.en.value }} ({{ en.id }})
+                            </a>
+                        </span>
+                    {% endfor %}
+
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+
 
 {% endblock %}
 

@@ -24,15 +24,16 @@ class Command(BaseCommand):
 
     def handle(self, f, **options):
         df = pd.read_csv(f, delimiter='\t')
-        progress = tqdm(total=len(df))
-        Person.objects.all().delete()
-        for i, row in df.iterrows():
+        # Person.objects.all().delete()
+        for i, row in tqdm(df.iterrows(), total=len(df)):
             try:
-                tid = row.book_id
+                idea_tid = row.book_id
                 f = row.lif
                 lang = row.lang_id
-                if not str(tid)[0].isdigit() :
-                    p, created = Person.objects.get_or_create(tid=tid[1:])
+                if not str(idea_tid)[0].isdigit():
+                    p, created = Person.objects.get_or_create(
+                        idea_tid=idea_tid[1:]
+                    )
                     title = row.strans_id
                     if f == '#127':
                         if lang == "HEB":
@@ -44,13 +45,10 @@ class Command(BaseCommand):
                             p.first_name_he = title
                         elif lang == "ENG":
                             p.first_name_en = title
-                    
+
                     if not options['readonly']:
                         p.save()
-                        
+
             except models.ObjectDoesNotExist:
                 # log error to server?
                 print("\nPerson was not found in DB, line=" + str(i))
-            finally:
-                progress.update(1)
-        progress.close()

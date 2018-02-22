@@ -28,7 +28,7 @@ class Command(BaseCommand):
         #
         # for i, row in df.iterrows():
         #     o = Field()
-        #     o.fid = row.lif
+        #     o.idea_fid = row.lif
         #     o.title = row.descr
         #     if not options['readonly']:
         #         try:

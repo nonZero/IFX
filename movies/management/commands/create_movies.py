@@ -22,17 +22,17 @@ class Command(BaseCommand):
     def handle(self, n, **options):
         next_bid = 0
         try:
-            next_bid = Movie.objects.latest('bid').bid + 1
+            next_bid = Movie.objects.latest('idea_bid').idea_bid + 1
         except models.ObjectDoesNotExist:
             print('No Movies found')
         finally:
-            print('Next bid in DB=' + str(next_bid))
+            print('Next idea_bid in DB=' + str(next_bid))
 
         progress = tqdm(total=n)
 
         for i in range(n):
             o = Movie()
-            o.bid = next_bid + i
+            o.idea_bid = next_bid + i
             o.title = silly.a_thing()
             o.year = random.randint(1900, 2100)
             o.lang = random.choice(['Heb', 'Eng', 'Unknown'])

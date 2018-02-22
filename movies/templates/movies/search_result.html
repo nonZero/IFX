@@ -10,7 +10,7 @@
         <table border="1" width="100%">
             <tr>
                 <th>#</th>
-                <th>bid</th>
+                <th>idea_bid</th>
                 <th>Title</th>
                 <th>Year</th>
                 <th>Language</th>
@@ -18,7 +18,7 @@
             {% for object in objects %}
                 <tr>
                     <td>#{{ object.id }}</td>
-                    <td>{{ object.bid }}</td>
+                    <td>{{ object.idea_bid }}</td>
                     <td>
                         <a href= "{% url 'movies:detail' object.id %}">{{ object.get_pretty_title }}</a>
                     </td>

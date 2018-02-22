@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static i18n humanize ifx %}
+
+{% block content %}
+
+    {% pagination page_obj %}
+
+    <ul class="list-group">
+        {% for object in object_list %}
+            <li class="list-group-item">
+                [#{{ object.id }}]
+                {{ object.entity|ut }}
+                {{ object.get_source_display }}:
+                {{ object.get_status_display }}
+            </li>
+        {% endfor %}
+    </ul>
+
+    {% pagination page_obj %}
+
+{% endblock %}

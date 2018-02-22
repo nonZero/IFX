@@ -37,6 +37,9 @@ urlpatterns += i18n_patterns(
     url(r'^people/', include("people.urls")),
     url(r'^search/', include("search.urls")),
     url(r'^collections/', include("curation.urls")),
+    url(r'^links/', include("links.urls")),
+
+    url(r'^enrich/', include("enrich.urls")),
 
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^i18n/', include('django.conf.urls.i18n'))

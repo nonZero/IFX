@@ -5,7 +5,7 @@ from . import models
 
 class RoleAdmin(admin.ModelAdmin):
     list_display = (
-        'tid',
+        'idea_tid',
         'title_en',
         'title_he',
         'appears_in_short_version',

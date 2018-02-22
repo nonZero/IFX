@@ -15,7 +15,7 @@ from django.core.management.base import BaseCommand
 #     for f in Field.objects.exclude(fid__in=BLACKLIST).exclude(
 #             movietagfield=None):
 #         yield {
-#             'fid': f.fid,
+#             'idea_fid': f.idea_fid,
 #             'title_en': f.title,
 #             'title_he': f.title,
 #             'appears_in_short_version': f.appears_in_short_version,
@@ -28,7 +28,7 @@ from django.core.management.base import BaseCommand
 #     for mft in f.movietagfield_set.distinct('tag'):
 #         t = mft.tag
 #         yield {
-#             'tid': t.tid,
+#             'idea_tid': t.idea_tid,
 #             'title_en': t.title_en,
 #             'title_he': t.title_he,
 #             'type_id': t.type_id,

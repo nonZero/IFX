@@ -8,7 +8,7 @@ from people.models import Role
 def get_roles():
     for r in Role.objects.all():
         yield {
-            'tid': r.tid,
+            'idea_tid': r.idea_tid,
             'title_en': r.title_en,
             'title_he': r.title_he,
             'appears_in_short_version': r.appears_in_short_version,

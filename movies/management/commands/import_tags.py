@@ -26,20 +26,9 @@ class Command(BaseCommand):
     def handle(self, f, **options):
         # Tag.objects.all().delete()
         df = pd.read_csv(f, delimiter='\t')
-        progress = tqdm(total=len(df))
-        for i, row in df.iterrows():
-            if row.type1_id != "BAMAI":
-                # tag, created = Tag.objects.get_or_create(tid=row.book_id_s)
-                # if created:
-                #     tag.tid = row.book_id_s
-                # tag.title = row.title
-                # tag.type_id = row.type1_id
-                # self.update_lang(tag, row.lang_id)
-                # if not options['readonly']:
-                #     tag.save()
-                progress.update(1)
-            else:
-                p, created = Person.objects.get_or_create(tid=row.book_id_s)
+        for i, row in tqdm(df.iterrows(), total=len(df)):
+            if row.type1_id == "BAMAI":
+                p, created = Person.objects.get_or_create(idea_tid=row.book_id_s)
                 heb = is_hebrew(row.title)
                 if heb:
                     p.name_he = row.title
@@ -47,9 +36,15 @@ class Command(BaseCommand):
                     p.name_en = row.title
                 if not options['readonly']:
                     p.save()
-                progress.update(1)
-                
-        progress.close()
+            # else:
+                # tag, created = Tag.objects.get_or_create(idea_tid=row.book_id_s)
+                # if created:
+                #     tag.idea_tid = row.book_id_s
+                # tag.title = row.title
+                # tag.type_id = row.type1_id
+                # self.update_lang(tag, row.lang_id)
+                # if not options['readonly']:
+                #     tag.save()
 
     # @staticmethod
     # def update_lang(tag, lang):

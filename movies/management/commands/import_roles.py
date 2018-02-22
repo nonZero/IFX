@@ -19,7 +19,7 @@ class Command(BaseCommand):
         with transaction.atomic():
             for r in data:
                 o, created = Role.objects.update_or_create(
-                    tid=r["tid"],
+                    idea_tid=r["idea_tid"],
                     defaults=dict(
                         title_en=r["title_en"],
                         title_he=r["title_he"],

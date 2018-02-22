@@ -24,17 +24,15 @@ class Command(BaseCommand):
     def handle(self, f, **options):
         df = pd.read_csv(f, delimiter='\t')
         df_sorted = df.sort_values(["book_id", "counter"])
-        progress = tqdm(total=len(df))
-
         count_total = 0
         count_movie_missing = 0
         count_movie_found = 0
 
-        for i, row in df_sorted.iterrows():
+        for i, row in tqdm(df_sorted.iterrows(), total=len(df)):
             count_total += 1
             if str(row.book_id).isdigit():
                 try:
-                    movie = Movie.objects.get(bid=row.book_id)
+                    movie = Movie.objects.get(idea_bid=row.book_id)
                     if movie:
                         count_movie_found += 1
 
@@ -48,22 +46,22 @@ class Command(BaseCommand):
                             continue
 
                         if (row.lang_id.isdigit() and int(row.lang_id) == 1) or \
-                            row.lang_id == 'HEB':  # he
+                                row.lang_id == 'HEB':  # he
                             # movie.summary_he += str(row.summary)
-                            self.update_summary_he(movie, row.summary, row.counter)
-                        elif (row.lang_id.isdigit() and int(row.lang_id) == 2) or \
-                            row.lang_id == 'ENG':  # en
+                            self.update_summary_he(movie, row.summary,
+                                                   row.counter)
+                        elif (row.lang_id.isdigit() and int(
+                                row.lang_id) == 2) or \
+                                row.lang_id == 'ENG':  # en
                             # movie.summary_en += str(row.summary)
-                            self.update_summary_en(movie, row.summary, row.counter)
+                            self.update_summary_en(movie, row.summary,
+                                                   row.counter)
 
                         if not options['readonly']:
                             movie.save()
 
                 except ObjectDoesNotExist:
                     count_movie_missing += 1
-
-            progress.update(1)
-        progress.close()
 
         print('Report:')
         print('Total rows={}'.format(count_total))

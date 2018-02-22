@@ -23,10 +23,12 @@ INSTALLED_APPS = [
     'bootstrap4',
 
     'general',
+    'editing_logs',
     'users',
     'movies',
     'curation',
     'people',
+    'links',
     'search',
     'enrich',
 ]

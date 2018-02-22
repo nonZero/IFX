@@ -6,25 +6,28 @@ from django.db.models import Count
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
-
-class Language(object):
-    HEBREW = 'he'
-    ENGLISH = 'en'
-
-    choices = (
-        (HEBREW, _('Hebrew')),
-        (ENGLISH, _('English')),
-    )
+from ifx.base_models import Undeletable, WikiDataEntity
 
 
-class Field(models.Model):
-    fid = models.CharField(unique=True, max_length=300)
+class Field(Undeletable, WikiDataEntity):
     title_en = models.CharField(_('Hebrew title'), max_length=300)
     title_he = models.CharField(_('English title'), max_length=300)
     appears_in_short_version = models.BooleanField(
         _('appears in short version'), default=False)
     short_version_order = models.PositiveIntegerField(_('short version order'),
                                                       null=True, blank=True)
+
+    idea_fid = models.CharField(unique=True, max_length=300)
+    idea_modified = models.BooleanField(default=False)
+
+    FIELDS_TO_LOG = (
+        'title_en',
+        'title_he',
+        'appears_in_short_version',
+        'short_version_order',
+        'idea_fid',
+        'idea_modified',
+    )
 
     class Meta:
         verbose_name = _("field")
@@ -40,13 +43,25 @@ class Field(models.Model):
         return self.tags.annotate(count=Count('movies')).order_by('title_he')
 
 
-class Tag(models.Model):
+class Tag(Undeletable, WikiDataEntity):
     field = models.ForeignKey(Field, related_name='tags')
-    tid = models.IntegerField(unique=True)
     title_en = models.CharField(max_length=300, null=True, blank=True)
     title_he = models.CharField(max_length=300, null=True, blank=True)
     type_id = models.CharField(max_length=300, null=True, blank=True)
     lang = models.CharField(max_length=300, null=True, blank=True)
+
+    idea_tid = models.IntegerField(unique=True, null=True, blank=True)
+    idea_modified = models.BooleanField(default=False)
+
+    FIELDS_TO_LOG = (
+        'field_id',
+        'title_en',
+        'title_he',
+        'type_id',
+        'lang',
+        'idea_tid',
+        'idea_modified',
+    )
 
     def __str__(self):
         return self.title_en or self.title_he or "???"
@@ -55,8 +70,7 @@ class Tag(models.Model):
         return reverse('movies:tag_detail', args=(self.pk,))
 
 
-class Movie(models.Model):
-    bid = models.IntegerField(unique=True)
+class Movie(Undeletable, WikiDataEntity):
     year = models.IntegerField(null=True, blank=True)
     duration = models.IntegerField(null=True, blank=True)
     title_he = models.CharField(max_length=300, null=True, blank=True)
@@ -64,7 +78,21 @@ class Movie(models.Model):
     summary_he = models.TextField(null=True, blank=True)
     summary_en = models.TextField(null=True, blank=True)
 
-    # suggestions = GenericRelation('enrich.Suggestion')
+    idea_bid = models.IntegerField(unique=True, null=True, blank=True)
+    idea_modified = models.BooleanField(default=False)
+
+    suggestions = GenericRelation('enrich.Suggestion')
+
+    FIELDS_TO_LOG = (
+        'year',
+        'duration',
+        'title_he',
+        'title_en',
+        'summary_he',
+        'summary_en',
+        'idea_bid',
+        'idea_modified',
+    )
 
     class Meta:
         verbose_name = _("movie")
@@ -104,9 +132,19 @@ class Movie(models.Model):
             'role__short_version_order')
 
 
-class MovieTag(models.Model):
+class MovieTag(Undeletable):
     movie = models.ForeignKey(Movie, related_name='tags')
     tag = models.ForeignKey(Tag, related_name='movies')
+
+    idea_uid = models.IntegerField(null=True, blank=True, unique=True)
+    idea_modified = models.BooleanField(default=False)
+
+    FIELDS_TO_LOG = (
+        'movie_id',
+        'tag_id',
+        'idea_uid',
+        'idea_modified',
+    )
 
     class Meta:
         unique_together = (

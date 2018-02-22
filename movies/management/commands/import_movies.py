@@ -1,8 +1,7 @@
-import pandas as pd
 import numpy as np
-from tqdm import tqdm
-
+import pandas as pd
 from django.core.management.base import BaseCommand
+from tqdm import tqdm
 
 from movies.models import Movie
 
@@ -34,20 +33,13 @@ class Command(BaseCommand):
 
         df = pd.read_csv(f, delimiter='\t')
 
-        progress = tqdm(total=len(df))
-
-        for i, row in df.iterrows():
-            o, created = Movie.objects.get_or_create(bid=row.bid)
-            if created:
-                o.bid = row.bid
+        for i, row in tqdm(df.iterrows(), total=len(df)):
+            o, created = Movie.objects.get_or_create(idea_bid=row.bid)
             o.year = None if np.isnan(row.year) else row.year
             self.update_title(o, row.title, row.lang)
             o.full_clean()
             if not options['readonly']:
                 o.save()
-
-            progress.update(1)
-        progress.close()
 
     @staticmethod
     def update_title(movie, title, lang):
@@ -63,25 +55,3 @@ class Command(BaseCommand):
             print(
                 'Proper language title not found, lang="{}", title="{}"'.format(
                     lang, title))
-
-    def handle_json(self, f, **options):
-        df = pd.read_json(f)
-
-        progress = tqdm(total=len(df))
-
-        for i, row in df.iterrows():
-            if Movie.objects.filter(bid=row.fields['bid']).exists():
-                continue
-            o = Movie()
-            o.bid = row.fields['bid']
-            o.title = row.fields['title']
-            o.year = None if np.isnan(row.fields['year']) else row.fields[
-                'year']
-            o.lang = row.fields['lang']
-            o.full_clean()
-
-            if not options['readonly']:
-                o.save()
-            progress.update(1)
-
-        progress.close()

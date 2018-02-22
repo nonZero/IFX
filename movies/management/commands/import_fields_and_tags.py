@@ -20,7 +20,7 @@ class Command(BaseCommand):
         with transaction.atomic():
             for fld in data:
                 o = Field.objects.create(
-                    fid=fld["fid"],
+                    idea_fid=fld["idea_fid"],
                     title_en=fld["title_en"],
                     title_he=fld["title_he"],
                     appears_in_short_version=fld["appears_in_short_version"],
@@ -28,7 +28,7 @@ class Command(BaseCommand):
                 )
                 for tag in fld['tags']:
                     o.tags.create(
-                        tid=tag['tid'],
+                        idea_tid=tag['idea_tid'],
                         title_en=tag['title_en'],
                         title_he=tag['title_he'],
                         type_id=tag['type_id'],

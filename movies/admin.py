@@ -6,7 +6,7 @@ from . import models
 
 class FieldAdmin(admin.ModelAdmin):
     list_display = (
-        'fid',
+        'idea_fid',
         'title_he',
         'title_en',
         'appears_in_short_version',
@@ -18,7 +18,7 @@ class TagAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'field',
-        'tid',
+        'idea_tid',
         'title_he',
         'title_en',
     )
