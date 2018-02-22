@@ -6,79 +6,71 @@
     {#    <h1>#}
     {#        {{ movie|bdtitle }}#}
     {#    </h1>#}
+    <div class="row">
+        <div class="col-sm-8">
+            <ul>
+                {% if movie.title_he %}
+                    <li><b>{% trans "Hebrew Title" %}:</b> {{ movie.title_he }}
+                    </li>
+                {% endif %}
 
-    <ul>
-        {% if movie.title_he %}
-            <li><b>{% trans "Hebrew Title" %}:</b> {{ movie.title_he }}</li>
-        {% endif %}
-
-        {% if movie.title_en %}
-            <li><b>{% trans "English Title" %}:</b> {{ movie.title_en }}</li>
-        {% endif %}
-        {% if movie.year %}
-            <li><b>{% trans "Year" %}</b>: {{ movie.year }}</li>
-        {% endif %}
-        {% if movie.duration %}
-            <li><span title="{{ movie.duration }} {% trans "m." %}"
-                      class="badge badge-light p-0"><span
-                    class="fa fa-clock"></span> {{ movie.duration|duration }} </span>
-            </li>
-        {% endif %}
-        {% if movie.summary_he %}
-            <li>
-                {{ movie.summary_he|linebreaks }}
-            </li>
-        {% endif %}
-        {% if movie.summary_en %}
-            <li>
-                <b>{% trans "English Summary" %}</b>:
-                {{ movie.summary_en|linebreaks }}
-            </li>
-        {% endif %}
-        {% for key, values in movie.get_extra_data %}
-            <li>
-                <b>{{ key }}:</b>
-                {% for value in values %}
-                    {{ value|ut }}{% if not forloop.last %},{% endif %}
+                {% if movie.title_en %}
+                    <li>
+                        <b>{% trans "English Title" %}:</b> {{ movie.title_en }}
+                    </li>
+                {% endif %}
+                {% if movie.year %}
+                    <li><b>{% trans "Year" %}</b>: {{ movie.year }}</li>
+                {% endif %}
+                {% if movie.duration %}
+                    <li><span title="{{ movie.duration }} {% trans "m." %}"
+                              class="badge badge-light p-0"><span
+                            class="fa fa-clock"></span> {{ movie.duration|duration }} </span>
+                    </li>
+                {% endif %}
+                {% if movie.summary_he %}
+                    <li>
+                        {{ movie.summary_he|linebreaks }}
+                    </li>
+                {% endif %}
+                {% if movie.summary_en %}
+                    <li>
+                        <b>{% trans "English Summary" %}</b>:
+                        {{ movie.summary_en|linebreaks }}
+                    </li>
+                {% endif %}
+                {% for key, values in movie.get_extra_data %}
+                    <li>
+                        <b>{{ key }}:</b>
+                        {% for value in values %}
+                            {{ value|ut }}{% if not forloop.last %},{% endif %}
+                        {% endfor %}
+                    </li>
                 {% endfor %}
-            </li>
-        {% endfor %}
-        {% if movie.idea_bid %}
-            <li><span
-                    class="bg-warning">{% trans "Legacy ID" %}: {{ movie.idea_bid }}</span>
-            </li>
-        {% endif %}
-    </ul>
-    {% if movie.people.exists %}
-        <h4>
-            {% trans "Personalities" %}
-        </h4>
-        <ul>
-            {% for role in movie.people.all %}
-                <li>
-                    <b>{{ role.role|bdtitle }}:</b> {{ role.person|un }}
-                </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-
-    <ul class="list-group">
-        {% for s in movie.suggestions.all %}
-            {% if s.found %}
-                <li class="list-group-item">
-                    <a href="{{ s.source_url }}">{{ s.get_source_display }}: {{ s.source_key }}</a>
-                        {% include 'enrich/_entity.html' with e=s.result %}
-                </li>
-            {% else %}
-                <li class="list-group-item list-group-item-danger">
-                    {{ s.get_source_display }}: {{ s.get_status_display }}
-                    {% for e in s.result %}
-                        {% include 'enrich/_entity.html' %}
+                {% if movie.idea_bid %}
+                    <li><span
+                            class="bg-warning">{% trans "Legacy ID" %}: {{ movie.idea_bid }}</span>
+                    </li>
+                {% endif %}
+            </ul>
+            {% if movie.people.exists %}
+                <h4>
+                    {% trans "Personalities" %}
+                </h4>
+                <ul>
+                    {% for role in movie.people.all %}
+                        <li>
+                            <b>{{ role.role|bdtitle }}:</b> {{ role.person|un }}
+                        </li>
                     {% endfor %}
-                </li>
+                </ul>
             {% endif %}
-        {% endfor %}
-    </ul>
+        </div>
+
+        <div class="col-sm-4">
+            {% include "enrich/_suggestions.html" %}
+        </div>
+    </div>
 
 {% endblock %}
 

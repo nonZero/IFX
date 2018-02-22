@@ -6,6 +6,7 @@ from django.db.models import Count
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
+from enrich.wikidata import FILM
 from ifx.base_models import Undeletable, WikiDataEntity
 
 
@@ -71,6 +72,8 @@ class Tag(Undeletable, WikiDataEntity):
 
 
 class Movie(Undeletable, WikiDataEntity):
+    WIKIDATA_CLASSIFIER_PID = FILM
+
     year = models.IntegerField(null=True, blank=True)
     duration = models.IntegerField(null=True, blank=True)
     title_he = models.CharField(max_length=300, null=True, blank=True)

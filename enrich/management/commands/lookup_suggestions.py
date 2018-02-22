@@ -7,6 +7,8 @@ from django.core.management.base import BaseCommand
 from enrich.lookup import query_suggestion
 from enrich.models import Suggestion
 
+MAX_WORKERS = 50
+
 
 class Command(BaseCommand):
     help = "Lookup pending suggestions"
@@ -15,7 +17,7 @@ class Command(BaseCommand):
         c = Counter()
         qs = Suggestion.objects.filter(status=Suggestion.Status.PENDING)
         try:
-            with ThreadPoolExecutor(max_workers=20) as ex:
+            with ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
                 futs = {ex.submit(query_suggestion, o): o for o in qs}
                 print("Submitted....")
                 for fut in tqdm.tqdm(as_completed(futs), total=len(futs)):

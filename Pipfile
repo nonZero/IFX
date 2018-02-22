@@ -21,6 +21,7 @@ wikipedia = "*"
 "django-bootstrap4" = "*"
 wikidata = "*"
 django-filter = "*"
+celery = "*"
 
 
 [dev-packages]

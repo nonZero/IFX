@@ -2,11 +2,19 @@
 {% load static i18n ifx %}
 
 {% block content %}
-    <ul class="list-unstyled">
-        <li>{% trans "Hebrew name" %}: {{ object.name_he }}</li>
-        <li>{% trans "English name" %}: {{ object.name_en }}</li>
-    </ul>
+    <div class="row">
+        <div class="col-sm-8">
+            <ul class="list-unstyled">
+                <li>{% trans "Hebrew name" %}: {{ object.name_he }}</li>
+                <li>{% trans "English name" %}: {{ object.name_en }}</li>
+            </ul>
 
-    {% include "movies/_movies.html" with object_list=object.movies_flat count=object.movies.count %}
+            {% include "movies/_movies.html" with object_list=object.movies_flat count=object.movies.count %}
+        </div>
+
+        <div class="col-sm-4">
+            {% include "enrich/_suggestions.html" %}
+        </div>
+    </div>
 
 {% endblock %}

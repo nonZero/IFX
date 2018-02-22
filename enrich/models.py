@@ -8,10 +8,7 @@ from django_extensions.db.fields.json import JSONField
 
 from people.models import Person
 
-ENTITY_CONTENT_TYPES = (
-        models.Q(app_label='movies', model='person') |
-        models.Q(app_label='movies', model='movie')
-)
+ENTITY_CONTENT_TYPES = models.Q(model__in=('person', 'movie'))
 
 
 class Source:
@@ -115,6 +112,16 @@ class Suggestion(models.Model):
             (REJECTED, _('rejected')),
         )
 
+        TAG = dict((
+            (PENDING, 'default'),
+            (ERROR, 'danger'),
+            (NO_RESULTS, 'danger'),
+            (MANY_RESULTS, 'danger'),
+            (FOUND_UNVERIFIED, 'success'),
+            (VERIFIED, 'success'),
+            (REJECTED, 'warning'),
+        ))
+
     status = models.IntegerField(_('status'), choices=Status.CHOICES)
 
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE,
@@ -135,8 +142,15 @@ class Suggestion(models.Model):
 
     error_message = models.TextField(null=True)
 
+    class Meta:
+        verbose_name = _("suggestion")
+        verbose_name_plural = _("suggestions")
+
     def found(self):
         return self.status in (self.Status.VERIFIED, self.Status.FOUND_UNVERIFIED)
+
+    def status_tag(self):
+        return self.Status.TAG[self.status]
 
     # def __str__(self):
     #     return f"{self.id}|{self.entity}|{self.get_source_display}|{self.get_status_display}"

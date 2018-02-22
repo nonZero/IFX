@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static i18n humanize bootstrap4 ifx %}
+
+{% block header %}
+    {{ view.movie|ut }} {% trans "Add Link" %}
+{% endblock %}
+
+{% block content %}
+    <form method="post" novalidate>
+        {% csrf_token %}
+
+        {% bootstrap_form form %}
+
+        <button class="btn btn-primary">
+            {% trans "Add" %}
+        </button>
+    </form>
+{% endblock %}

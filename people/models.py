@@ -1,14 +1,18 @@
 from collections import defaultdict
 
+from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
+from enrich.wikidata import HUMAN
 from ifx.base_models import Undeletable, WikiDataEntity
 from movies.models import Movie
 
 
 class Person(Undeletable, WikiDataEntity):
+    WIKIDATA_CLASSIFIER_PID = HUMAN
+
     name_he = models.CharField(max_length=300, null=True, blank=True,
                                db_index=True)
     name_en = models.CharField(max_length=300, null=True, blank=True,
@@ -23,6 +27,8 @@ class Person(Undeletable, WikiDataEntity):
                                     db_index=True)
     idea_tid = models.IntegerField(unique=True, null=True, blank=True)
     idea_modified = models.BooleanField(default=False)
+
+    suggestions = GenericRelation('enrich.Suggestion')
 
     FIELDS_TO_LOG = (
         'name_he',

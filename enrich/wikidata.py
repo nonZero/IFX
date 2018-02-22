@@ -1,6 +1,10 @@
 import requests
 from wikidata.client import Client
 
+INSTANCE_OF = 'P31'
+HUMAN = 'Q5'
+FILM = 'Q11424'
+
 
 def get_suggestions(query, lang='en'):
     url = "http://www.wikidata.org/w/api.php"
@@ -25,19 +29,21 @@ class NoResults(Exception):
     pass
 
 
-def get_wikidata_result(query):
+def get_wikidata_result(query, classifier_pid):
     cl = Client()
-    instance_of = cl.get('P31')
-    film = cl.get('Q11424')
-    results = get_suggestions(query)
-    entities = [cl.get(result['id']) for result in results['search']]
-    films = [en for en in entities if
-             instance_of in en and en[instance_of] == film]
 
-    if len(films) == 0:
+    prop = cl.get(INSTANCE_OF)
+    q = cl.get(classifier_pid)
+
+    results = get_suggestions(query)
+
+    entities = [cl.get(result['id']) for result in results['search']]
+    filtered = [en for en in entities if prop in en and en[prop] == q]
+
+    if len(filtered) == 0:
         raise NoResults()
 
-    if len(films) > 1:
-        raise TooManyResults(films)
+    if len(filtered) > 1:
+        raise TooManyResults(filtered)
 
-    return films[0]
+    return filtered[0]
