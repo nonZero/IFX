@@ -8,9 +8,12 @@
                 {% if s.source_key %}
                     <a href="{{ s.source_url }}">[{{ s.source_key }}]</a>
                 {% else %}
-                    <form class="form-inline d-inline" action="{% url 'enrich:refresh' s.id %}" method="post">
+                    <form class="form-inline d-inline"
+                          action="{% url 'enrich:refresh' s.id %}"
+                          method="post">
                         {% csrf_token %}
-                        <button class="btn btn-warning btn-sm"><span class="fa fa-sync-alt"></span></button>
+                        <button class="btn btn-warning btn-sm"><span
+                                class="fa fa-sync-alt"></span></button>
                     </form>
                 {% endif %}
             </b>

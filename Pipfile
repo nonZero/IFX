@@ -22,6 +22,7 @@ wikipedia = "*"
 wikidata = "*"
 django-filter = "*"
 celery = "*"
+django-authtools = "*"
 
 
 [dev-packages]

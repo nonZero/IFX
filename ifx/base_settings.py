@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
 
     'django_extensions',
+    'authtools',
     'bootstrap4',
     'django_filters',
 
@@ -77,8 +78,11 @@ DATABASES = {
     }
 }
 
+AUTH_USER_MODEL = 'users.User'
+
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {

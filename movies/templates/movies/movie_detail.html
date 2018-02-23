@@ -2,21 +2,19 @@
 {% load static i18n ifx %}
 
 {% block content %}
-
-    {#    <h1>#}
-    {#        {{ movie|bdtitle }}#}
-    {#    </h1>#}
     <div class="row">
         <div class="col-sm-8">
             <ul>
                 {% if movie.title_he %}
                     <li><b>{% trans "Hebrew Title" %}:</b> {{ movie.title_he }}
+                        {% search_links movie.title_he %}
                     </li>
                 {% endif %}
 
                 {% if movie.title_en %}
                     <li>
                         <b>{% trans "English Title" %}:</b> {{ movie.title_en }}
+                        {% search_links movie.title_en %}
                     </li>
                 {% endif %}
                 {% if movie.year %}

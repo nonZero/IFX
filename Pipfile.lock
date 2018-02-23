@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "ad3393fb31d6779f415243fdb7c0c2aa35e198747ffa140adf6d751ae0592ccb"
+            "sha256": "f47b60e5f9ccd80e26b36fe525c8f1385a3e0f2c4329fa6654b16db33b4a9558"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
@@ -90,6 +90,12 @@
                 "sha256:8918e392530d8fc6965a56af6504229e7924c27265893f3949aa0529cd1d4b99"
             ],
             "version": "==1.11.7"
+        },
+        "django-authtools": {
+            "hashes": [
+                "sha256:9ced04f5b124625e6dfc2bb8e802b478d7707aa854f00a720c50fb2512bd33d5"
+            ],
+            "version": "==1.6.0"
         },
         "django-bootstrap4": {
             "hashes": [
@@ -466,6 +472,7 @@
                 "sha256:87f837459c3c78d75cb4f5aadf08a7104db15e8c7618a5c732e60f252279c7a6",
                 "sha256:df9083a992b17a28cd4251a3f5c879e0198bb26c9e808c4647e0a18739f1d11d"
             ],
+            "markers": "platform_python_implementation != 'PyPy'",
             "version": "==1.11.4"
         },
         "cryptography": {

@@ -69,3 +69,28 @@ def bdorder(qs):
 @register.filter
 def duration(n: int):
     return "{:01.0f}:{:02.0f}".format(*divmod(n, 60))
+
+
+@register.inclusion_tag('enrich/_search_link.html')
+def google_search(q):
+    return {
+        'url': 'https://www.google.com/search?q=',
+        'class': 'fab fa-google',
+        'q': q,
+    }
+
+
+@register.inclusion_tag('enrich/_search_link.html')
+def imdb_search(q):
+    return {
+        'url': 'http://www.imdb.com/find?s=all&q=',
+        'class': 'fab fa-imdb',
+        'q': q,
+    }
+
+
+@register.inclusion_tag('enrich/_search_links.html')
+def search_links(q):
+    return {
+        'q': q,
+    }
