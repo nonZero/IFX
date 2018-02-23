@@ -22,7 +22,13 @@ Israeli film archive
         CELERY_TASK_ALWAYS_EAGER = True
 
 
-* `pipenv install`
+* Install dependencies with `pipenv`:
+
+        pipenv install
+
+  And start it:
+
+        pipenv shell
 
 * Assuming your user can create DBs:
 
