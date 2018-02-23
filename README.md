@@ -3,8 +3,8 @@ Israeli film archive
 
 # Requirements
 
-    * postgres
-    * pipenv
+    * [postgres](https://github.com/nonZero/setups/blob/master/postgres-setup.md)
+    * [pipenv](http://pipenv.readthedocs.io/en/latest/)
 
 # Setup instructions
 
