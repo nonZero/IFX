@@ -1,19 +1,26 @@
+import datetime
+
 from django.db.models import Model
 from django.db.transaction import Atomic
 
 from editing_logs.models import LogItem, LogItemRow
 
+def fix(x):
+    if isinstance(x, datetime.datetime):
+        return x.isoformat()
+    return x
+
 
 def get_data(entity):
-    return [(fld, getattr(entity, fld)) for fld in entity.FIELDS_TO_LOG]
+    return [(fld, fix(getattr(entity, fld))) for fld in entity.FIELDS_TO_LOG]
 
 
 class Recorder(Atomic):
 
-    def __init__(self, user=None, note=None):
+    def __init__(self, user=None, note=None, using=None, savepoint=None):
         self.user = user
         self.note = note
-        super().__init__()
+        super().__init__(using, savepoint)
 
     def __enter__(self):
         super().__enter__()

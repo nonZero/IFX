@@ -37,7 +37,8 @@ class LinkType(Undeletable):
 
 
 class Link(Undeletable):
-    type = models.ForeignKey(LinkType, related_name="%(class)ss")
+    type = models.ForeignKey(LinkType, related_name="%(class)ss",
+                             on_delete=models.PROTECT)
     value = models.CharField(max_length=400)
     title_he = models.CharField(max_length=300, null=True, blank=True)
     title_en = models.CharField(max_length=300, null=True, blank=True)
@@ -72,9 +73,15 @@ class Link(Undeletable):
     def __str__(self):
         return f"{self.type}: {self.value}"
 
+    def url(self):
+        if self.type.template:
+            return self.type.template.format(self.value)
+        return self.value
+
 
 class MovieLink(Link):
-    parent = models.ForeignKey(Movie, related_name='links')
+    parent = models.ForeignKey(Movie, related_name='links',
+                               on_delete=models.PROTECT)
 
     class Meta:
         unique_together = (
@@ -83,7 +90,8 @@ class MovieLink(Link):
 
 
 class PersonLink(Link):
-    parent = models.ForeignKey(Person, related_name='links')
+    parent = models.ForeignKey(Person, related_name='links',
+                               on_delete=models.PROTECT)
 
     class Meta:
         unique_together = (

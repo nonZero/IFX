@@ -97,9 +97,12 @@ class Role(Undeletable, WikiDataEntity):
 
 
 class MovieRolePerson(Undeletable):
-    movie = models.ForeignKey(Movie, related_name='people')
-    role = models.ForeignKey(Role, related_name='movie_people')
-    person = models.ForeignKey(Person, related_name='movies')
+    movie = models.ForeignKey(Movie, related_name='people',
+                              on_delete=models.PROTECT)
+    role = models.ForeignKey(Role, related_name='movie_people',
+                             on_delete=models.PROTECT)
+    person = models.ForeignKey(Person, related_name='movies',
+                               on_delete=models.PROTECT)
     priority = models.PositiveIntegerField(default=100)
     note = models.CharField(max_length=250, null=True, blank=True)
     idea_uid = models.IntegerField(null=True, blank=True, unique=True)

@@ -41,6 +41,8 @@ urlpatterns += i18n_patterns(
 
     url(r'^enrich/', include("enrich.urls")),
 
+    url(r'^logs/', include("editing_logs.urls")),
+
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^i18n/', include('django.conf.urls.i18n'))
 )

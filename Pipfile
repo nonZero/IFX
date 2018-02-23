@@ -7,11 +7,10 @@ name = "pypi"
 
 [packages]
 
-django = "==1.11.7"
-django-extensions = "==1.9.7"
-django-taggit = "==0.22.1"
+django = "*"
+django-extensions = "*"
+django-taggit = "*"
 ipython = "*"
-"psycopg2" = "*"
 silly = "*"
 tqdm = "*"
 numpy = "*"
@@ -23,9 +22,10 @@ wikidata = "*"
 django-filter = "*"
 celery = "*"
 django-authtools = "*"
+"psycopg2-binary" = "*"
 
 
 [dev-packages]
 
-notebook = "==5.2.2"
+notebook = "*"
 "fabric3" = "*"

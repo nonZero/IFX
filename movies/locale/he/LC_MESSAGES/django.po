@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-18 22:03+0200\n"
-"PO-Revision-Date: 2018-02-18 22:03+0200\n"
+"POT-Creation-Date: 2018-02-23 14:41+0200\n"
+"PO-Revision-Date: 2018-02-23 14:41+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -18,14 +18,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.6\n"
 
-msgid "Hebrew"
-msgstr "עברית"
+msgid "Hebrew title"
+msgstr "כותרת בעברית"
 
-msgid "English"
-msgstr "אנגלית"
-
-msgid "title"
-msgstr "כותרת"
+msgid "English title"
+msgstr "כותרת באנגלית"
 
 msgid "appears in short version"
 msgstr "מופיע בתצוגה מקוצרת"
@@ -66,9 +63,6 @@ msgstr "נמצאו"
 msgid "items"
 msgstr "פריטים"
 
-msgid "min."
-msgstr "דק'"
-
 msgctxt "movie"
 msgid "Summary"
 msgstr "תקציר"
@@ -100,9 +94,6 @@ msgstr "כותרת באנגלית"
 msgid "Year"
 msgstr "שנה"
 
-msgid "Unknown"
-msgstr ""
-
 msgid "m."
 msgstr "דק'"
 
@@ -110,10 +101,16 @@ msgid "English Summary"
 msgstr "תקציר באנגלית"
 
 msgid "Legacy ID"
-msgstr ""
+msgstr "מזהה מערכת IDEA"
 
 msgid "Personalities"
 msgstr "אישים"
+
+msgid "Links"
+msgstr "קישורים"
+
+msgid "Add Link"
+msgstr "הוספת קישור"
 
 msgid "Title"
 msgstr "סרט"
@@ -186,6 +183,18 @@ msgstr "על אודות"
 
 msgid "Fields"
 msgstr "שדות"
+
+#~ msgid "Hebrew"
+#~ msgstr "עברית"
+
+#~ msgid "English"
+#~ msgstr "אנגלית"
+
+#~ msgid "title"
+#~ msgstr "כותרת"
+
+#~ msgid "min."
+#~ msgstr "דק'"
 
 #~ msgid "The Nathan Axelrod Newsreel Collection"
 #~ msgstr "אוסף יומני נתן אקסלרוד"

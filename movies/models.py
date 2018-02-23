@@ -45,7 +45,8 @@ class Field(Undeletable, WikiDataEntity):
 
 
 class Tag(Undeletable, WikiDataEntity):
-    field = models.ForeignKey(Field, related_name='tags')
+    field = models.ForeignKey(Field, related_name='tags',
+                              on_delete=models.PROTECT)
     title_en = models.CharField(max_length=300, null=True, blank=True)
     title_he = models.CharField(max_length=300, null=True, blank=True)
     type_id = models.CharField(max_length=300, null=True, blank=True)
@@ -136,8 +137,10 @@ class Movie(Undeletable, WikiDataEntity):
 
 
 class MovieTag(Undeletable):
-    movie = models.ForeignKey(Movie, related_name='tags')
-    tag = models.ForeignKey(Tag, related_name='movies')
+    movie = models.ForeignKey(Movie, related_name='tags',
+                              on_delete=models.PROTECT)
+    tag = models.ForeignKey(Tag, related_name='movies',
+                            on_delete=models.PROTECT)
 
     idea_uid = models.IntegerField(null=True, blank=True, unique=True)
     idea_modified = models.BooleanField(default=False)

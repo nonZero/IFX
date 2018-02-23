@@ -30,8 +30,10 @@ class Collection(models.Model):
 
 
 class CollectionMovie(models.Model):
-    collection = models.ForeignKey(Collection, related_name='movies')
-    movie = models.ForeignKey(Movie, related_name='collections')
+    collection = models.ForeignKey(Collection, related_name='movies',
+                                   on_delete=models.PROTECT)
+    movie = models.ForeignKey(Movie, related_name='collections',
+                              on_delete=models.PROTECT)
     ordinal = models.IntegerField(default=100)
 
     def __str__(self):

@@ -4,6 +4,7 @@ from django import template
 from django.utils import translation
 from django.utils.html import conditional_escape
 from django.utils.safestring import mark_safe
+from django.utils.translation import ugettext_lazy as _
 
 register = template.Library()
 
@@ -74,6 +75,7 @@ def duration(n: int):
 @register.inclusion_tag('enrich/_search_link.html')
 def google_search(q):
     return {
+        'title': _('Google search'),
         'url': 'https://www.google.com/search?q=',
         'class': 'fab fa-google',
         'q': q,
@@ -83,14 +85,40 @@ def google_search(q):
 @register.inclusion_tag('enrich/_search_link.html')
 def imdb_search(q):
     return {
+        'title': _('IMDB search'),
         'url': 'http://www.imdb.com/find?s=all&q=',
         'class': 'fab fa-imdb',
         'q': q,
     }
 
 
-@register.inclusion_tag('enrich/_search_links.html')
-def search_links(q):
+@register.inclusion_tag('enrich/_search_link.html')
+def wikidata_search(q):
     return {
+        'title': _('WikiData search'),
+        'url': 'https://www.wikidata.org/w/index.php?search=',
+        'class': 'fa fa-barcode',
         'q': q,
     }
+
+@register.inclusion_tag('enrich/_search_link.html')
+def wikipedia_search(lang, q):
+    return {
+        'title': _('Wikipedia search'),
+        'url': f'https://{lang}.wikipedia.org/w/index.php?search=',
+        'class': 'fa fa-wikipedia',
+        'q': q,
+    }
+
+
+@register.inclusion_tag('enrich/_search_links.html')
+def search_links(q, lang='he'):
+    return {
+        'lang': lang,
+        'q': q,
+    }
+
+
+@register.filter
+def tolist(x):
+    return list(x)
