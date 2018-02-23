@@ -26,7 +26,7 @@ Israeli film archive
 
 * Assuming your user can create DBs:
 
-        python manage.py sqlcreate
+        python manage.py sqlcreate | psql
 
 * Create tables:
 
