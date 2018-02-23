@@ -1,5 +1,5 @@
 <!doctype html>
-{% load staticfiles i18n %}
+{% load staticfiles i18n bootstrap4 %}
 {% get_current_language as LANGUAGE_CODE %}
 
 <html lang="{{ LANGUAGE_CODE }}" class="lang-{{ LANGUAGE_CODE }}">
@@ -60,6 +60,8 @@
                     {% endblock %}
                 </h1>
             {% endblock %}
+
+            {% bootstrap_messages %}
 
             {% block content %}
                 CONTENT

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-07 13:43+0200\n"
-"PO-Revision-Date: 2018-02-07 13:45+0200\n"
+"POT-Creation-Date: 2018-02-23 10:22+0200\n"
+"PO-Revision-Date: 2018-02-23 10:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -18,6 +18,33 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.6\n"
 
+msgid "Hebrew full name (for display)"
+msgstr "שם מלא בעברית (פתוח לציבור)"
+
+msgid "English full name (for display)"
+msgstr "שם באנגלית (פתוח לציבור)"
+
+msgid "Hebrew full name"
+msgstr "שם מלא בעברית (לשימוש פנימי)"
+
+msgid "English full name"
+msgstr "שם מלא באנגלית (לשימוש פנימי)"
+
+msgid "Personal bio in Hebrew(, public)"
+msgstr "ביוגרפיה אישית בעברית"
+
+msgid "Personal bio in English(, public)"
+msgstr "ביוגרפיה אישית באנגלית"
+
+msgid "team member"
+msgstr "חבר צוות"
+
+msgid "data volunteer"
+msgstr "מתנדב הזנת תוכן"
+
+msgid "Login"
+msgstr "כניסה"
+
 msgid "Your account doesn't have access to this page."
 msgstr "אינך מורשה לצפות בדף זה."
 
@@ -26,6 +53,3 @@ msgstr "לצפיה בדף יש להכנס לאתר באמצעות חשבון ב�
 
 msgid "Please login to see this page."
 msgstr "לצפיה בדף יש להכנס למערכת."
-
-msgid "Login"
-msgstr "כניסה"
