@@ -1,15 +1,29 @@
 # 🎥 IFX 🎥
 Israeli film archive
 
-# Requirements
+# Development Setup Instructions
 
+## Requirements
+
+* Python 3.6.x
 * [postgres](https://github.com/nonZero/setups/blob/master/postgres-setup.md)
 * [pipenv](http://pipenv.readthedocs.io/en/latest/)
+* Optional: [RabbitMQ](https://www.rabbitmq.com/)
 
-# Setup instructions
+
+## Setup
 
 * Clone this repo.
+* Add an `IFX/ifx/local_settings.py` file with:
+
+        DEBUG = True
+        SECRET_KEY = "kukuriku"
+
+        CELERY_TASK_ALWAYS_EAGER = True
+
+
 * `pipenv install`
+
 * Assuming your user can create DBs:
 
         python manage.py sqlcreate
