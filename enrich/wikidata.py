@@ -1,3 +1,5 @@
+import typing
+
 import requests
 from wikidata.client import Client
 
@@ -47,3 +49,17 @@ def get_wikidata_result(query, classifier_pid):
         raise TooManyResults(filtered)
 
     return filtered[0]
+
+
+def get_props(qid: str, pids: list) -> typing.Dict[str, str]:
+    cl = Client()
+    entity = cl.get(qid)
+
+    d = dict()
+
+    for pid in pids:
+        prop = cl.get(pid)
+        if prop in entity:
+            d[pid] = entity[prop]
+
+    return d
