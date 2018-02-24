@@ -66,31 +66,7 @@
         </div>
 
         <div class="col-sm-4">
-            <div class="card card-default">
-                <div class="card-heading">
-                    <h3 class="panel-title">
-                        {% trans "Links" %}
-                    </h3>
-                </div>
-                <ul class="list-group">
-                    {% for link in object.links.all %}
-                        <li class="list-group-item">
-                            <a href="{{ link.url }}">{{ link.type|bdtitle }}</a>
-                        {% if link.notes_he %}
-                            {{ link.notes_he }}
-                        {% endif %}
-
-                        </li>
-                    {% endfor %}
-                </ul>
-                <div class="card-footer text-center">
-                    <a href="{% url "links:create_movie" object.id %}">
-                        <button class="btn btn-primary">{% trans "Add Link" %}</button>
-                    </a>
-                </div>
-            </div>
-
-
+            {% include "links/_links.html" with create_url="links:create_movie"%}
             {% include "enrich/_suggestions.html" %}
         </div>
     </div>

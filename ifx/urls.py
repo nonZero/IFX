@@ -28,11 +28,7 @@ from django.conf.urls import include, url
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 
-urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-]
-
-urlpatterns += i18n_patterns(
+urlpatterns = i18n_patterns(
     url(r'', include("movies.urls")),
     url(r'^people/', include("people.urls")),
     url(r'^search/', include("search.urls")),
@@ -44,5 +40,6 @@ urlpatterns += i18n_patterns(
     url(r'^logs/', include("editing_logs.urls")),
 
     url(r'^accounts/', include('django.contrib.auth.urls')),
-    url(r'^i18n/', include('django.conf.urls.i18n'))
+    url(r'^i18n/', include('django.conf.urls.i18n')),
+    url(r'^admin/', admin.site.urls),
 )

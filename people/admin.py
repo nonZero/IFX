@@ -8,6 +8,7 @@ class RoleAdmin(admin.ModelAdmin):
         'idea_tid',
         'title_en',
         'title_he',
+        'wikidata_id',
         'appears_in_short_version',
         'short_version_order',
     )

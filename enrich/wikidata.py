@@ -13,7 +13,7 @@ def get_suggestions(query, lang='en'):
         "action": "wbsearchentities",
         "format": "json",
         "language": lang,
-        "limit": "10"
+        "limit": 50,
     }
     return requests.get(url, params=params).json()
 
