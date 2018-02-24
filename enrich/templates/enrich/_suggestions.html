@@ -1,38 +1,55 @@
-{% for s in object.suggestions.all %}
-    <div class="card mb-2">
-        <div class="card-header bg-{{ s.status_tag }}">
-            <b class="card-title">
-                {{ s.get_source_display }}: {{ s.get_status_display }}
-                &nbsp;
-                <kbd><a href="https://www.wikidata.org/w/index.php?search={{ s.query|urlencode }}">{{ s.query }}</a></kbd>
-                {% if s.source_key %}
-                    <a href="{{ s.source_url }}">[{{ s.source_key }}]</a>
-                {% else %}
-                    <form class="form-inline d-inline"
-                          action="{% url 'enrich:refresh' s.id %}"
-                          method="post">
-                        {% csrf_token %}
-                        <button class="btn btn-warning btn-sm"><span
-                                class="fa fa-sync-alt"></span></button>
-                    </form>
-                {% endif %}
-            </b>
+{% if object.wikidata_id %}
+    <div class="card bg-primary mb-2">
+        <div class="card-header">
+            <a class="text-light" href="{{ object.wikidata_url }}"
+               title="{{ object.wikidata_id }}"><span
+                    class="fa fa-barcode"></span></a>
         </div>
-        {% if s.found %}
-            <div class="card-body p-3 pb-0 pt-0">
-                {% include 'enrich/_entity.html' with e=s.result %}
-            </div>
-        {% else %}
-            <ul class="list-group">
-                {% for e in s.result %}
-                    <li class="list-group-item list-group-item-danger pb-1 pt-1">
-                        <b><a href="http://www.wikidata.org/entity/{{ e.id }}">
-                            [{{ e.id }}]
-                        </a></b>
-                        {% include 'enrich/_entity.html' %}
-                    </li>
-                {% endfor %}
-            </ul>
-        {% endif %}
     </div>
-{% endfor %}
+{% else %}
+    {% for s in object.suggestions.all %}
+        <div class="card mb-2">
+            <div class="card-header bg-{{ s.status_tag }}">
+                <b class="card-title">
+                    {{ s.get_source_display }}: {{ s.get_status_display }}
+                    &nbsp;
+                    <kbd><a href="https://www.wikidata.org/w/index.php?search={{ s.query|urlencode }}">{{ s.query }}</a></kbd>
+                    <div class="float-right">
+                        <form class="form-inline d-inline"
+                              action="{% url 'enrich:refresh' s.id %}"
+                              method="post">
+                            {% csrf_token %}
+                            <button class="btn btn-warning btn-sm"><span
+                                    class="fa fa-sync-alt"></span></button>
+                        </form>
+                    </div>
+                    {% if s.source_key %}
+                        <a href="{{ s.source_url }}">[{{ s.source_key }}]</a>
+                    {% endif %}
+                </b>
+            </div>
+            {% if s.found %}
+                <div class="card-body p-3 pb-0 pt-0">
+                    {% include 'enrich/_entity.html' with e=s.result %}
+                </div>
+            {% elif s.status == s.Status.ERROR %}
+                {% if user.is_superuser %}
+                    <pre>
+                    {{ s.error_message }}
+                </pre>
+                {% endif %}
+            {% else %}
+                <ul class="list-group">
+                    {% for e in s.result %}
+                        <li class="list-group-item list-group-item-danger pb-1 pt-1">
+                            <b><a href="http://www.wikidata.org/entity/{{ e.id }}">
+                                [{{ e.id }}]
+                            </a></b>
+                            {% include 'enrich/_entity.html' %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% endif %}

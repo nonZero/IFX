@@ -35,7 +35,7 @@
                                 {{ role|bdtitle }}{% if forloop.last %}:
                                 {% else %}, {% endif %}{% endfor %}
                         {% endif %}
-                        {{ m|ut }}
+                        {{ m|ut_plus }}
                     </strong>
                     {% if m.year != none %}
                         <span dir="ltr" class="year">({{ m.year }})</span>

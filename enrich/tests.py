@@ -83,13 +83,20 @@ class VerifyTestCase(TestCase):
         self.assertIsNone(self.m.wikidata_id)
         self.assertIsNone(self.p.wikidata_id)
 
-        verify_and_update_movie(self.m, "Q1145082")
+        changed, facts = verify_and_update_movie(self.m, "Q1145082")
+
+        self.assertEqual(changed, 2)
 
         self.m.refresh_from_db()
         self.p.refresh_from_db()
 
+        self.assertEqual(self.m.wikidata_status, Movie.Status.ASSIGNED)
         self.assertEqual(self.m.wikidata_id, "Q1145082")
+        self.assertEqual(self.p.wikidata_status, Movie.Status.ASSIGNED)
         self.assertEqual(self.p.wikidata_id, "Q653645")
+
+        changed, facts = verify_and_update_movie(self.m, "Q1145082")
+        self.assertEqual(changed, 0)
 
     def test_verify_suggestion(self):
         qid = "Q1145082"
@@ -104,7 +111,10 @@ class VerifyTestCase(TestCase):
         self.assertIsNone(self.m.wikidata_id)
         self.assertIsNone(self.p.wikidata_id)
 
-        verify_suggestion(s)
+        movie_verified, total_verified = verify_suggestion(s)
+
+        assert movie_verified
+        self.assertEqual(total_verified, 2)
 
         s.refresh_from_db()
         self.m.refresh_from_db()

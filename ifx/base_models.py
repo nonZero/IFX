@@ -44,3 +44,6 @@ class WikiDataEntity(models.Model):
 
     class Meta:
         abstract = True
+
+    def wikidata_url(self):
+        return f"https://www.wikidata.org/wiki/{self.wikidata_id}"

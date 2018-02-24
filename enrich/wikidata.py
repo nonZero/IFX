@@ -51,7 +51,7 @@ def get_wikidata_result(query, classifier_pid):
     return filtered[0]
 
 
-def get_props(qid: str, pids: list) -> typing.Dict[str, str]:
+def get_props_by_pids(qid: str, pids: list) -> typing.Dict[str, str]:
     cl = Client()
     entity = cl.get(qid)
 

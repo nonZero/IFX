@@ -4,7 +4,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 import tqdm
 from django.core.management.base import BaseCommand
 
-from enrich.lookup import get_missing_links
+from enrich.lookup import create_missing_links
 from movies.models import Movie
 from people.models import Person
 
@@ -21,7 +21,7 @@ class Command(BaseCommand):
             Person.objects.exclude(wikidata_id=None))
         try:
             with ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
-                futs = {ex.submit(get_missing_links, o): o for o in objs}
+                futs = {ex.submit(create_missing_links, o): o for o in objs}
                 print("Submitted....")
                 for fut in tqdm.tqdm(as_completed(futs), total=len(futs)):
                     # o = futs[fut]

@@ -4,7 +4,7 @@ from django.views.generic import CreateView
 from django.views.generic.detail import SingleObjectMixin
 from django.views.generic.list import MultipleObjectMixin
 
-from general.templatetags.ifx import bdtitle
+from general.templatetags.ifx import bdtitle, bdtitle_plus
 
 
 class IFXMixin(LoginRequiredMixin):
@@ -20,7 +20,7 @@ class IFXMixin(LoginRequiredMixin):
         if isinstance(self, CreateView):
             return "{} {}".format(_('Create'), self.get_model_name())
         if isinstance(self, SingleObjectMixin):
-            return bdtitle(self.get_object())
+            return bdtitle_plus(self.get_object())
         if isinstance(self, MultipleObjectMixin):
             return self.get_model_plural_name()
 

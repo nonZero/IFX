@@ -1,5 +1,6 @@
 from enrich.models import Suggestion, Source
-from enrich.wikidata import get_wikidata_result, TooManyResults, NoResults, get_props
+from enrich.wikidata import get_wikidata_result, TooManyResults, NoResults, \
+    get_props_by_pids
 from ifx.base_models import WikiDataEntity
 from links.models import LinkType
 
@@ -37,12 +38,15 @@ def query_suggestion(o: Suggestion):
     return o
 
 
-def get_missing_links(obj: WikiDataEntity):
-    link_types_pid = {lt.wikidata_id: lt.id for lt in LinkType.objects.all()}
-    props = get_props(obj.wikidata_id, list(link_types_pid.keys()))
+def create_missing_links(obj: WikiDataEntity):
+    link_types = {lt.wikidata_id: lt for lt in
+                  LinkType.objects.exclude(wikidata_id=None)}
+    props = get_props_by_pids(obj.wikidata_id, list(link_types.keys()))
+
     n = 0
-    for prop, value in props.items():
-        link, created = obj.links.get_or_create(type_id=link_types_pid[prop], value=value)
+    for pid, value in props.items():
+        link, created = obj.links.get_or_create(type=link_types[pid],
+                                                value=value)
         if created:
             n += 1
     return n

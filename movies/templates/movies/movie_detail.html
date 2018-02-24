@@ -5,15 +5,19 @@
     <h1>
         <div class="row flex-rtl">
             <div class="col-6 rtl">
-                <b>{{ object.title_he }}</b>
-                {% if movie.year %}
-                    <span title="{% trans "Year" %}">({{ movie.year }})</span>
+                {% if object.title_he %}
+                    <b>{{ object.title_he }}</b>
+                    {% if movie.year %}
+                        <span title="{% trans "Year" %}">({{ movie.year }})</span>
+                    {% endif %}
                 {% endif %}
             </div>
             <div class="col-6 ltr">
-                <b>{{ object.title_en }}</b>
-                {% if movie.year %}
-                    <span title="{% trans "Year" %}">({{ movie.year }})</span>
+                {% if object.title_en %}
+                    <b>{{ object.title_en }}</b>
+                    {% if movie.year %}
+                        <span title="{% trans "Year" %}">({{ movie.year }})</span>
+                    {% endif %}
                 {% endif %}
             </div>
         </div>
@@ -65,8 +69,8 @@
         </div>
 
         <div class="col-md-6 col-lg-4">
-            {% include "links/_links.html" with create_url="links:create_movie" edit_url="links:update_movie" %}
             {% include "enrich/_suggestions.html" %}
+            {% include "links/_links.html" with create_url="links:create_movie" edit_url="links:update_movie" %}
             <div class="card bg-warning mb-2">
                 <div class="card-header">
                     {% trans "Search the web" %}

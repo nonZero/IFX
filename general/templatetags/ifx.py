@@ -61,6 +61,27 @@ def bdtitle(instance):
     return getattr(instance, "title_" + lang)
 
 
+FLIP = {'en': 'he', 'he': 'en'}
+
+
+@register.filter
+def bdtitle_plus(instance):
+    lang = translation.get_language()[:2]
+    title = getattr(instance, "title_" + lang)
+    if not title:
+        title = getattr(instance, "title_" + FLIP[lang])
+    return title
+
+@register.filter
+def ut_plus(instance, field='title'):
+    lang = translation.get_language()[:2]
+    attr = f"{field}_{lang}"
+    if not getattr(instance, attr):
+        attr = f"{field}_{FLIP[lang]}"
+    return u(instance, attr)
+
+
+
 @register.filter
 def bdorder(qs):
     lang = translation.get_language()[:2]
@@ -100,6 +121,7 @@ def wikidata_search(q):
         'class': 'fa fa-barcode',
         'q': q,
     }
+
 
 @register.inclusion_tag('enrich/_search_link.html')
 def wikipedia_search(lang, q):
