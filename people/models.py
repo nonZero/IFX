@@ -46,7 +46,7 @@ class Person(Undeletable, WikiDataEntity):
         verbose_name_plural = _("people")
 
     def __str__(self):
-        return f"{self.first_name_en} {self.last_name_en}"
+        return str(self.name_en or self.name_he)
 
     def get_absolute_url(self):
         return reverse('people:detail', args=(self.pk,))
