@@ -1,4 +1,6 @@
-/*------------כללי לכולם-----------*/
+.flex-rtl {
+    flex-direction: row-reverse;
+}
 
 .jumbotron {
     height: 400px;

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-23 14:39+0200\n"
-"PO-Revision-Date: 2018-02-23 14:07+0200\n"
+"POT-Creation-Date: 2018-02-24 16:01+0200\n"
+"PO-Revision-Date: 2018-02-24 16:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -18,17 +18,104 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.6\n"
 
+msgid "Type"
+msgstr "סוג"
+
 msgid "Hebrew"
 msgstr "עברית"
 
 msgid "English"
 msgstr "אנגלית"
 
+msgid "Hebrew title"
+msgstr "כותרת בעברית"
+
+msgid "English title"
+msgstr "כותרת באנגלית"
+
+msgid "slug"
+msgstr "סלאג"
+
+msgid "Hebrew description"
+msgstr "תיאור בעברית"
+
+msgid "English description"
+msgstr "תיאור באנגלית"
+
+msgid "priority"
+msgstr "קדימות"
+
+msgid "title required"
+msgstr "חובה להזין כותרת"
+
+msgid "for movies"
+msgstr "לסרטים"
+
+msgid "for people"
+msgstr "לאישויות"
+
+msgid "wikidata id"
+msgstr "מזהה WikiData"
+
+msgid "template"
+msgstr "תבנית"
+
+msgid "type"
+msgstr "סוג"
+
+msgid "value or URL"
+msgstr "ערך או קישור (URL)"
+
+msgid "notes in Hebrew"
+msgstr "הערות בעברית"
+
+msgid "notes in English"
+msgstr "הערות באנגלית"
+
+msgid "language"
+msgstr "שפה"
+
+msgid "limit to this language"
+msgstr "הגבל לשפה זו בלבד"
+
+msgid "editing comment"
+msgstr "הערת עריכה"
+
+msgid "created at"
+msgstr "מועד יצירה"
+
 msgid "Add Link"
 msgstr "הוספת קישור"
+
+msgid "Links"
+msgstr "קישורים"
+
+msgid "Edit Link"
+msgstr "עריכת קישור"
+
+msgid "Save"
+msgstr "שמירה"
 
 msgid "Add"
 msgstr "הוספה"
 
 msgid "Link added successfully"
 msgstr "הקישור נוסף בהצלחה"
+
+msgid "Movies"
+msgstr "סרטים"
+
+msgid "People"
+msgstr "אישים"
+
+msgid "Link updated successfully"
+msgstr "הקישור עודכן בהצלחה"
+
+#~ msgid "title he"
+#~ msgstr "כותרת בעברית"
+
+#~ msgid "title en"
+#~ msgstr "כותרת באנגלית"
+
+#~ msgid "description_en"
+#~ msgstr "תיאור באנגלית"

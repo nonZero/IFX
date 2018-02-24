@@ -1,25 +1,29 @@
 {% extends 'base.html' %}
 {% load static i18n ifx %}
 
+{% block header_container %}
+    <h1>
+        <div class="row flex-rtl">
+            <div class="col-6 rtl">
+                <b>{{ object.title_he }}</b>
+                {% if movie.year %}
+                    <span title="{% trans "Year" %}">({{ movie.year }})</span>
+                {% endif %}
+            </div>
+            <div class="col-6 ltr">
+                <b>{{ object.title_en }}</b>
+                {% if movie.year %}
+                    <span title="{% trans "Year" %}">({{ movie.year }})</span>
+                {% endif %}
+            </div>
+        </div>
+    </h1>
+{% endblock %}
+
 {% block content %}
     <div class="row">
-        <div class="col-sm-8">
+        <div class="col-md-6 col-lg-8">
             <ul>
-                {% if movie.title_he %}
-                    <li><b>{% trans "Hebrew Title" %}:</b> {{ movie.title_he }}
-                        {% search_links movie.title_he 'he' %}
-                    </li>
-                {% endif %}
-
-                {% if movie.title_en %}
-                    <li>
-                        <b>{% trans "English Title" %}:</b> {{ movie.title_en }}
-                        {% search_links movie.title_en 'en' %}
-                    </li>
-                {% endif %}
-                {% if movie.year %}
-                    <li><b>{% trans "Year" %}</b>: {{ movie.year }}</li>
-                {% endif %}
                 {% if movie.duration %}
                     <li><span title="{{ movie.duration }} {% trans "m." %}"
                               class="badge badge-light p-0"><span
@@ -45,11 +49,6 @@
                         {% endfor %}
                     </li>
                 {% endfor %}
-                {% if movie.idea_bid %}
-                    <li><span
-                            class="bg-warning">{% trans "Legacy ID" %}: {{ movie.idea_bid }}</span>
-                    </li>
-                {% endif %}
             </ul>
             {% if movie.people.exists %}
                 <h4>
@@ -65,33 +64,46 @@
             {% endif %}
         </div>
 
-        <div class="col-sm-4">
-            <div class="card card-default">
-                <div class="card-heading">
-                    <h3 class="panel-title">
-                        {% trans "Links" %}
-                    </h3>
-                </div>
-                <ul class="list-group">
-                    {% for link in object.links.all %}
-                        <li class="list-group-item">
-                            <a href="{{ link.url }}">{{ link.type|bdtitle }}</a>
-                        {% if link.notes_he %}
-                            {{ link.notes_he }}
-                        {% endif %}
-
-                        </li>
-                    {% endfor %}
-                </ul>
-                <div class="card-footer text-center">
-                    <a href="{% url "links:create_movie" object.id %}">
-                        <button class="btn btn-primary">{% trans "Add Link" %}</button>
-                    </a>
-                </div>
-            </div>
-
-
+        <div class="col-md-6 col-lg-4">
+            {% include "links/_links.html" with create_url="links:create_movie" edit_url="links:update_movie" %}
             {% include "enrich/_suggestions.html" %}
+            <div class="card bg-warning mb-2">
+                <div class="card-header">
+                    {% trans "Search the web" %}
+                </div>
+                <ul class="list-group list-group-flush">
+
+                    {% if movie.title_he %}
+                        <li class="list-group-item">
+                            {% trans "Hebrew Title" %}
+                            {% search_links movie.title_he 'he' %}:
+                            {% if movie.year %}
+                                | +{% trans "Year" %}:
+                                {% search_links movie.title_and_year_he 'he' %}
+                            {% endif %}
+                        </li>
+                    {% endif %}
+
+                    {% if movie.title_en %}
+                        <li class="list-group-item">
+                            {% trans "English Title" %}:
+                            {% search_links movie.title_en 'en' %}
+                            {% if movie.year %}
+                                | +{% trans "Year" %}:
+                                {% search_links movie.title_and_year_en 'en' %}
+                            {% endif %}
+                        </li>
+                    {% endif %}
+                </ul>
+
+            </div>
+            {% if movie.idea_bid %}
+                <div class="card bg-secondary">
+                    <div class="card-body">
+                        {% trans "Legacy ID" %}: {{ movie.idea_bid }}
+                    </div>
+                </div>
+            {% endif %}
         </div>
     </div>
 

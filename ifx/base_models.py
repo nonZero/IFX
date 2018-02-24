@@ -11,7 +11,7 @@ class UndeletableQueryset(models.QuerySet):
 
 
 class Undeletable(models.Model):
-    active = models.BooleanField(default=True)
+    active = models.BooleanField(_("active"), default=True)
 
     objects = UndeletableQueryset.as_manager()
 

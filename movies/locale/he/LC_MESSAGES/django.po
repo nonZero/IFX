@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-23 14:41+0200\n"
-"PO-Revision-Date: 2018-02-23 14:41+0200\n"
+"POT-Creation-Date: 2018-02-24 16:59+0200\n"
+"PO-Revision-Date: 2018-02-24 17:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -85,12 +85,6 @@ msgstr "הארכיון הישראלי לסרטים"
 msgid "Search..."
 msgstr "חיפוש..."
 
-msgid "Hebrew Title"
-msgstr "כותרת בעברית"
-
-msgid "English Title"
-msgstr "כותרת באנגלית"
-
 msgid "Year"
 msgstr "שנה"
 
@@ -100,17 +94,20 @@ msgstr "דק'"
 msgid "English Summary"
 msgstr "תקציר באנגלית"
 
-msgid "Legacy ID"
-msgstr "מזהה מערכת IDEA"
-
 msgid "Personalities"
 msgstr "אישים"
 
-msgid "Links"
-msgstr "קישורים"
+msgid "Search the web"
+msgstr "חיפוש ברשת"
 
-msgid "Add Link"
-msgstr "הוספת קישור"
+msgid "Hebrew Title"
+msgstr "כותרת בעברית"
+
+msgid "English Title"
+msgstr "כותרת באנגלית"
+
+msgid "Legacy ID"
+msgstr "מזהה מערכת אידאה"
 
 msgid "Title"
 msgstr "סרט"
@@ -183,6 +180,12 @@ msgstr "על אודות"
 
 msgid "Fields"
 msgstr "שדות"
+
+#~ msgid "Links"
+#~ msgstr "קישורים"
+
+#~ msgid "Add Link"
+#~ msgstr "הוספת קישור"
 
 #~ msgid "Hebrew"
 #~ msgstr "עברית"
@@ -263,9 +266,6 @@ msgstr "שדות"
 
 #~ msgid "Hebrew Summary"
 #~ msgstr "עברית"
-
-#~ msgid "Search Archive"
-#~ msgstr "חיפוש בארכיון"
 
 #~ msgid "Jerusalem Cinematheque Site"
 #~ msgstr "לאתר סינמטק ירושלים"

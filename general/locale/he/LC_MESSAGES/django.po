@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-23 12:46+0200\n"
+"POT-Creation-Date: 2018-02-24 16:05+0200\n"
 "PO-Revision-Date: 2018-02-23 12:46+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -111,6 +111,11 @@ msgid "IMDB search"
 msgstr "חיפוש ב-IMDB"
 
 msgid "WikiData search"
+msgstr "חיפוש ב-WikiData"
+
+#, fuzzy
+#| msgid "WikiData search"
+msgid "Wikipedia search"
 msgstr "חיפוש ב-WikiData"
 
 #~ msgid "(Items #%(a)s - #%(b)s)"

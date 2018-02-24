@@ -107,7 +107,7 @@ USE_L10N = True
 USE_TZ = True
 TIME_ZONE = 'Asia/Jerusalem'
 LANGUAGES = [
-    ('en-us', _('English')),
+    ('en', _('English')),
     ('he', _('Hebrew'))
 ]
 LOCALE_PATHS = [
