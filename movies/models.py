@@ -135,6 +135,12 @@ class Movie(Undeletable, WikiDataEntity):
             role__appears_in_short_version=True).order_by(
             'role__short_version_order')
 
+    def title_and_year_he(self):
+        return f"{self.title_he} {self.year}"
+
+    def title_and_year_en(self):
+        return f"{self.title_en} {self.year}"
+
 
 class MovieTag(Undeletable):
     movie = models.ForeignKey(Movie, related_name='tags',

@@ -18,3 +18,4 @@ class LogItemListView(IFXMixin, FilterView):
     filterset_class = LogItemFilter
     model = LogItem
     paginate_by = 25
+    queryset = LogItem.objects.order_by('-created_at')

@@ -8,6 +8,10 @@
                 {% if movie.title_he %}
                     <li><b>{% trans "Hebrew Title" %}:</b> {{ movie.title_he }}
                         {% search_links movie.title_he 'he' %}
+                        {% if movie.year %}
+                            | {% trans "With year: " %}
+                            {% search_links movie.title_and_year_he 'he' %}
+                        {% endif %}
                     </li>
                 {% endif %}
 
@@ -15,6 +19,10 @@
                     <li>
                         <b>{% trans "English Title" %}:</b> {{ movie.title_en }}
                         {% search_links movie.title_en 'en' %}
+                        {% if movie.year %}
+                            | {% trans "With year: " %}
+                            {% search_links movie.title_and_year_en 'en' %}
+                        {% endif %}
                     </li>
                 {% endif %}
                 {% if movie.year %}
@@ -66,7 +74,7 @@
         </div>
 
         <div class="col-sm-4">
-            {% include "links/_links.html" with create_url="links:create_movie"%}
+            {% include "links/_links.html" with create_url="links:create_movie" edit_url="links:update_movie" %}
             {% include "enrich/_suggestions.html" %}
         </div>
     </div>

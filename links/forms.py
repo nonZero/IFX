@@ -14,6 +14,7 @@ FIELDS = (
     'language',
     'limit_to_language',
     'editing_comment',
+    'active',
 )
 
 

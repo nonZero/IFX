@@ -2,7 +2,11 @@
 {% load static i18n humanize bootstrap4 ifx %}
 
 {% block header %}
-    {% trans "Add Link" %}
+    {% if object %}
+        {% trans "Edit Link" %}
+    {% else %}
+        {% trans "Add Link" %}
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -12,7 +16,12 @@
         {% bootstrap_form form %}
 
         <button class="btn btn-primary">
-            {% trans "Add" %}
+            <span class="fa fa-save"></span>
+            {% if object %}
+                {% trans "Save" %}
+            {% else %}
+                {% trans "Add" %}
+            {% endif %}
         </button>
     </form>
 {% endblock %}

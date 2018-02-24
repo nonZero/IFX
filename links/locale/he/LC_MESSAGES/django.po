@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-24 12:54+0200\n"
-"PO-Revision-Date: 2018-02-24 12:55+0200\n"
+"POT-Creation-Date: 2018-02-24 16:01+0200\n"
+"PO-Revision-Date: 2018-02-24 16:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -84,11 +84,17 @@ msgstr "הערת עריכה"
 msgid "created at"
 msgstr "מועד יצירה"
 
+msgid "Add Link"
+msgstr "הוספת קישור"
+
 msgid "Links"
 msgstr "קישורים"
 
-msgid "Add Link"
-msgstr "הוספת קישור"
+msgid "Edit Link"
+msgstr "עריכת קישור"
+
+msgid "Save"
+msgstr "שמירה"
 
 msgid "Add"
 msgstr "הוספה"
@@ -101,6 +107,9 @@ msgstr "סרטים"
 
 msgid "People"
 msgstr "אישים"
+
+msgid "Link updated successfully"
+msgstr "הקישור עודכן בהצלחה"
 
 #~ msgid "title he"
 #~ msgstr "כותרת בעברית"
