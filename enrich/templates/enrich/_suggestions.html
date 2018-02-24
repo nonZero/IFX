@@ -1,5 +1,5 @@
 {% for s in object.suggestions.all %}
-    <div class="card">
+    <div class="card mb-2">
         <div class="card-header bg-{{ s.status_tag }}">
             <b class="card-title">
                 {{ s.get_source_display }}: {{ s.get_status_display }}

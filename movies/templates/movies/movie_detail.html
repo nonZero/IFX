@@ -23,10 +23,10 @@
 {% block content %}
     <div class="row">
         <div class="col-md-6 col-lg-8">
-            <ul>
+            <ul class="list-unstyled">
                 {% if movie.duration %}
                     <li><span title="{{ movie.duration }} {% trans "m." %}"
-                              class="badge badge-light p-0"><span
+                              class=""><span
                             class="fa fa-clock"></span> {{ movie.duration|duration }} </span>
                     </li>
                 {% endif %}
@@ -98,9 +98,11 @@
 
             </div>
             {% if movie.idea_bid %}
-                <div class="card bg-secondary">
+                <div class="card bg-dark">
                     <div class="card-body">
-                        {% trans "Legacy ID" %}: {{ movie.idea_bid }}
+                        <p class="card-text text-light">
+                            {% trans "Legacy ID" %}: {{ movie.idea_bid }}
+                        </p>
                     </div>
                 </div>
             {% endif %}
