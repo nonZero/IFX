@@ -490,12 +490,6 @@ img.col-3 {
     margin: 10px auto;
 }
 
-.col-6 span {
-    direction: rtl;
-    position: absolute;
-    right: 15px;
-}
-
 .collection {
     margin-top: 20px;
 }

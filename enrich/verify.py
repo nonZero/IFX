@@ -1,5 +1,10 @@
+import typing
 from collections import defaultdict
+
+from django.db.models import Model
 from wikidata.client import Client
+
+from enrich.models import Suggestion
 from movies.models import Movie
 from people.models import Person
 
@@ -41,7 +46,7 @@ def validate_wikidata_movie_people(wikidata_id, people):
     return facts
 
 
-def verify_movie(m: Movie, wikidata_id) -> dict:
+def verify_movie(m: Movie, wikidata_id) -> typing.Dict[Model, str]:
     people_in_movie = get_people_in_local_movie(m)
     facts = validate_wikidata_movie_people(wikidata_id, people_in_movie)
     if facts:
@@ -49,5 +54,13 @@ def verify_movie(m: Movie, wikidata_id) -> dict:
     return facts
 
 
-def verify_person(p: Person, wikidata_id) -> bool:
+def verify_person(p: Person, wikidata_id) -> typing.Dict[Model, str]:
+    raise NotImplementedError(":-)")
+
+
+def verify_and_update_movie(m: Movie, wikidata_id):
+    raise NotImplementedError(":-)")
+
+
+def verify_suggestion(s: Suggestion):
     raise NotImplementedError(":-)")

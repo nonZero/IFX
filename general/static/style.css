@@ -5,6 +5,19 @@ body {
     background-color: #D8D8D8;
 }
 
+.flex-rtl {
+}
+
+.rtl {
+    direction: rtl;
+    text-align: right;
+}
+
+.ltr {
+    direction: ltr;
+    text-align: left;
+}
+
 main {
     background-color: white;
     padding-bottom: 2rem;

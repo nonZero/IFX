@@ -1,8 +1,9 @@
 from django.test import TestCase
 
 from enrich.lookup import create_suggestion, query_suggestion
-from enrich.models import Suggestion
-from enrich.verify import verify_movie
+from enrich.models import Suggestion, Source
+from enrich.verify import verify_movie, verify_and_update_movie, \
+    verify_suggestion
 from enrich.wikidata import get_wikidata_result, TooManyResults, NoResults, \
     FILM
 from movies.models import Movie
@@ -46,19 +47,24 @@ class VerifyTestCase(TestCase):
             title_en='Director',
             wikidata_id='P57',
         )
-
-    def test_verify_movie_correct(self):
-        m = Movie.objects.create(
+        self.m = Movie.objects.create(
             title_he="קלרה הקדושה",
         )
-        m.people.create(
-            person=Person.objects.create(name_en='Ari Folman'),
+        self.p = Person.objects.create(name_en='Ari Folman')
+        self.m.people.create(
+            person=self.p,
             role=self.director
         )
 
-        result = verify_movie(m, "Q1145082")
+    def test_verify_movie_correct(self):
+        result = verify_movie(self.m, "Q1145082")
 
-        self.assertTrue(result)
+        expected = {
+            self.m: "Q1145082",
+            self.p: "Q653645",
+        }
+
+        self.assertEqual(result, expected)
 
     def test_verify_movie_wrong(self):
         m = Movie.objects.create(
@@ -71,4 +77,39 @@ class VerifyTestCase(TestCase):
 
         result = verify_movie(m, "Q948635")
 
-        self.assertFalse(result)
+        self.assertEqual(result, {})
+
+    def test_verify_and_update_movie(self):
+        self.assertIsNone(self.m.wikidata_id)
+        self.assertIsNone(self.p.wikidata_id)
+
+        verify_and_update_movie(self.m, "Q1145082")
+
+        self.m.refresh_from_db()
+        self.p.refresh_from_db()
+
+        self.assertEqual(self.m.wikidata_id, "Q1145082")
+        self.assertEqual(self.m.wikidata_id, "Q653645")
+
+    def test_verify_suggestion(self):
+        qid = "Q1145082"
+
+        s = Suggestion.objects.create(
+            entity=self.m,
+            source=Source.WIKIDATA,
+            source_key=qid,
+            status=Suggestion.Status.FOUND_UNVERIFIED,
+        )
+
+        self.assertIsNone(self.m.wikidata_id)
+        self.assertIsNone(self.p.wikidata_id)
+
+        verify_suggestion(s)
+
+        s.refresh_from_db()
+        self.m.refresh_from_db()
+        self.p.refresh_from_db()
+
+        self.assertEqual(s.status, Suggestion.Status.VERIFIED)
+        self.assertEqual(self.m.wikidata_id, qid)
+        self.assertEqual(self.m.wikidata_id, "Q653645")
