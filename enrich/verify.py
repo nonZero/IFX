@@ -11,7 +11,18 @@ def get_people_in_local_movie(movie):
     return d
 
 
+def compare(claim, person):
+    if person.wikidata_id and claim.id == person.wikidata_id:
+        return True
+    if 'en' in claim.label and claim.label['en'] == person.name_en:
+        return True
+    if 'he' in claim.label and claim.label['he'] == person.name_he:
+        return True
+    return False
+
+
 def validate_wikidata_movie_people(wikidata_id, people):
+    facts = {}
     cl = Client()
     wiki_movie = cl.get(wikidata_id)
     for role in people:
@@ -23,21 +34,19 @@ def validate_wikidata_movie_people(wikidata_id, people):
             continue
 
         for person in people[role]:
-            for item in claims:
-                if person.wikidata_id and item.id == person.wikidata_id:
-                    return True
-                if 'en' in item.label and item.label['en'] == person.name_en:
-                    return True
-                if 'he' in item.label and item.label['he'] == person.name_he:
-                    return True
+            for claim in claims:
+                if compare(claim, person):
+                    facts[person] = claim.id
 
-    return False
+    return facts
 
 
-def verify_movie(m: Movie, wikidata_id) -> bool:
+def verify_movie(m: Movie, wikidata_id) -> dict:
     people_in_movie = get_people_in_local_movie(m)
-    is_valid = validate_wikidata_movie_people(wikidata_id, people_in_movie)
-    return is_valid
+    facts = validate_wikidata_movie_people(wikidata_id, people_in_movie)
+    if facts:
+        facts[m] = wikidata_id
+    return facts
 
 
 def verify_person(p: Person, wikidata_id) -> bool:
