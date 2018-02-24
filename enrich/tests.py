@@ -89,7 +89,7 @@ class VerifyTestCase(TestCase):
         self.p.refresh_from_db()
 
         self.assertEqual(self.m.wikidata_id, "Q1145082")
-        self.assertEqual(self.m.wikidata_id, "Q653645")
+        self.assertEqual(self.p.wikidata_id, "Q653645")
 
     def test_verify_suggestion(self):
         qid = "Q1145082"
@@ -112,4 +112,4 @@ class VerifyTestCase(TestCase):
 
         self.assertEqual(s.status, Suggestion.Status.VERIFIED)
         self.assertEqual(self.m.wikidata_id, qid)
-        self.assertEqual(self.m.wikidata_id, "Q653645")
+        self.assertEqual(self.p.wikidata_id, "Q653645")

@@ -59,8 +59,21 @@ def verify_person(p: Person, wikidata_id) -> typing.Dict[Model, str]:
 
 
 def verify_and_update_movie(m: Movie, wikidata_id):
-    raise NotImplementedError(":-)")
+    facts = verify_movie(m, wikidata_id)
+    if facts:
+        for item, wiki_id in facts.items():
+            item.wikidata_id = wiki_id
+            item.save()
+        return True
 
+    return False
 
 def verify_suggestion(s: Suggestion):
-    raise NotImplementedError(":-)")
+    m = s.entity
+    wikidata_id = s.source_key
+    if verify_and_update_movie(m, wikidata_id):
+        s.status = Suggestion.Status.VERIFIED
+        s.save()
+        return True
+
+    return False
