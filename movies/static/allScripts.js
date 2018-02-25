@@ -143,4 +143,8 @@
         $('.ellipsis').ellipsis(true);
     });
 
+    $("form.confirm").submit(() => {
+        return confirm("Are you sure?")
+    });
+
 }(jQuery));

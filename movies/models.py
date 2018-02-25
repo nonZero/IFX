@@ -96,6 +96,8 @@ class Movie(Undeletable, WikiDataEntity):
         'summary_en',
         'idea_bid',
         'idea_modified',
+        'wikidata_status',
+        'wikidata_id',
     )
 
     class Meta:

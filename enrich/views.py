@@ -6,9 +6,12 @@ from django.views import View
 from django.views.generic.detail import SingleObjectMixin
 from django_filters.views import FilterView
 
+from editing_logs.api import Recorder
 from enrich.models import Suggestion
 from enrich.tasks import lookup_suggestion_by_id
+from ifx.base_models import WikiDataEntity
 from ifx.base_views import IFXMixin
+from . import forms
 
 
 class SuggestionFilter(django_filters.FilterSet):
@@ -45,3 +48,32 @@ class SuggestionForceLookupView(IFXMixin, SingleObjectMixin, View):
         lookup_suggestion_by_id.delay(o.id)
         messages.info(request, _("Suggestion queued for lookup"))
         return redirect(o.entity)
+
+
+class SetWikiDataIDView(IFXMixin, SingleObjectMixin, View):
+    model = Suggestion
+
+    def post(self, request, *args, **kwargs):
+        # TODO: check permissions
+        s = self.get_object()  # type: Suggestion
+        o = s.entity
+        form = forms.WikiDataIDForm(request.POST)
+        if form.is_valid():
+            if o.wikidata_id != form.cleaned_data['wikidata_id']:
+                with Recorder(user=self.request.user) as r:
+                    r.record_update_before(o)
+                    o.wikidata_status = WikiDataEntity.Status.ASSIGNED
+                    o.wikidata_id = form.cleaned_data['wikidata_id']
+                    o.save()
+                    r.record_update_after(o)
+
+                    s.status = s.Status.VERIFIED
+                    s.save()
+
+                # TODO: fetch wikidata info
+
+                messages.success(request, _("Wikidata ID assigned."))
+        else:
+            messages.error(request, _("Invalid form"))
+
+        return redirect(o)

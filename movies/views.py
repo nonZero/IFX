@@ -2,12 +2,11 @@ from builtins import super
 
 from django.db.models import Count
 from django.urls import reverse_lazy
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView, TemplateView, DetailView
 
 from ifx.base_views import IFXMixin
 from movies.models import Movie, Tag, Field
-from django.utils.translation import ugettext_lazy as _
-
 from people.models import Person
 
 
@@ -66,7 +65,8 @@ class FieldListView(IFXMixin, ListView):
     model = Field
 
     def get_queryset(self):
-        return Field.objects.annotate(movie_count=Count('tags__movies')).filter(
+        return Field.objects.annotate(
+            movie_count=Count('tags__movies')).filter(
             movie_count__gt=0)
 
 

@@ -1,3 +1,4 @@
+{% load i18n %}
 <div>
     <b>{{ e.labels.he.value }}</b>: {{ e.descriptions.he.value }}
     {% for a in e.aliases.he %}
@@ -12,4 +13,11 @@
         <span class="fa fa-plus fa-sm"></span>
         {{ a.value }}
     {% endfor %}
+    <form class="form-inline confirm" action="{% url "enrich:set_wd_id" s.id %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="wikidata_id" value="{{ e.id }}">
+        <button class="btn btn-primary btn-sm"><span class="fa fa-check"
+                                                     title="{% trans "Accept Wikidata ID" %}"></span>
+        </button>
+    </form>
 </div>

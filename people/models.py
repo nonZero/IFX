@@ -39,6 +39,8 @@ class Person(Undeletable, WikiDataEntity):
         'last_name_en',
         'idea_tid',
         'idea_modified',
+        'wikidata_status',
+        'wikidata_id',
     )
 
     class Meta:

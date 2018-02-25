@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-23 01:32+0200\n"
-"PO-Revision-Date: 2018-02-23 01:32+0200\n"
+"POT-Creation-Date: 2018-02-25 23:52+0200\n"
+"PO-Revision-Date: 2018-02-25 23:53+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -66,6 +66,9 @@ msgstr "הצעה לחיבור"
 msgid "suggestions"
 msgstr "הצעות לחיבור"
 
+msgid "Accept Wikidata ID"
+msgstr "אישור מזהה ויקינתונים זה"
+
 msgid "Filter"
 msgstr "סינון"
 
@@ -83,6 +86,12 @@ msgstr "פריטים"
 
 msgid "Suggestion queued for lookup"
 msgstr "ההצעה תעודכן מהשרת"
+
+msgid "Wikidata ID assigned."
+msgstr "מזהה ויקינתונים אושר."
+
+msgid "Invalid form"
+msgstr "הטופס אינו תקין"
 
 #~ msgid "auto accepted"
 #~ msgstr "התקבל אוטומטית"
