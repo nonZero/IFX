@@ -25,5 +25,7 @@ class Command(BaseCommand):
                         title_he=r["title_he"],
                         appears_in_short_version=r["appears_in_short_version"],
                         short_version_order=r["short_version_order"],
+                        wikidata_status=r["wikidata_status"],
+                        wikidata_id=r["wikidata_id"],
                     )
                 )

@@ -4,76 +4,98 @@
     "title_en": "Editing Assistant",
     "title_he": "\u05e2\u05d5\u05d6\u05e8 \u05e2\u05e8\u05d9\u05db\u05d4",
     "appears_in_short_version": false,
-    "short_version_order": null
+    "short_version_order": null,
+    "wikidata_id": null,
+    "wikidata_status": null
   },
   {
     "idea_tid": "#45",
     "title_en": "Sound Editor",
     "title_he": "\u05e2\u05d5\u05e8\u05da \u05e1\u05d0\u05d5\u05e0\u05d3",
     "appears_in_short_version": false,
-    "short_version_order": null
-  },
-  {
-    "idea_tid": "#38",
-    "title_en": "Cast",
-    "title_he": "\u05e9\u05d7\u05e7\u05df",
-    "appears_in_short_version": false,
-    "short_version_order": null
-  },
-  {
-    "idea_tid": "#53",
-    "title_en": "Writer",
-    "title_he": "\u05ea\u05e1\u05e8\u05d9\u05d8\u05d0\u05d9",
-    "appears_in_short_version": false,
-    "short_version_order": null
-  },
-  {
-    "idea_tid": "#37",
-    "title_en": "Producer",
-    "title_he": "\u05de\u05e4\u05d9\u05e7",
-    "appears_in_short_version": false,
-    "short_version_order": null
-  },
-  {
-    "idea_tid": "#42",
-    "title_en": "Editor",
-    "title_he": "\u05e2\u05d5\u05e8\u05da",
-    "appears_in_short_version": false,
-    "short_version_order": null
-  },
-  {
-    "idea_tid": "#41",
-    "title_en": "Cinematographer",
-    "title_he": "\u05e6\u05dc\u05dd",
-    "appears_in_short_version": false,
-    "short_version_order": null
-  },
-  {
-    "idea_tid": "#44",
-    "title_en": "Music",
-    "title_he": "\u05de\u05d5\u05d6\u05d9\u05e7\u05d4",
-    "appears_in_short_version": false,
-    "short_version_order": null
-  },
-  {
-    "idea_tid": "BAMAI",
-    "title_en": "Director",
-    "title_he": "\u05d1\u05de\u05d0\u05d9",
-    "appears_in_short_version": true,
-    "short_version_order": 1
-  },
-  {
-    "idea_tid": "#165",
-    "title_en": "Crew",
-    "title_he": "\u05e6\u05d5\u05d5\u05ea",
-    "appears_in_short_version": false,
-    "short_version_order": null
+    "short_version_order": null,
+    "wikidata_id": null,
+    "wikidata_status": null
   },
   {
     "idea_tid": "#62",
     "title_en": "Narrator",
     "title_he": "\u05e7\u05e8\u05d9\u05d9\u05df",
     "appears_in_short_version": false,
-    "short_version_order": null
+    "short_version_order": null,
+    "wikidata_id": null,
+    "wikidata_status": null
+  },
+  {
+    "idea_tid": "#53",
+    "title_en": "Screenwriter",
+    "title_he": "\u05ea\u05e1\u05e8\u05d9\u05d8\u05d0\u05d9",
+    "appears_in_short_version": false,
+    "short_version_order": null,
+    "wikidata_id": "P58",
+    "wikidata_status": 10
+  },
+  {
+    "idea_tid": "BAMAI",
+    "title_en": "Director",
+    "title_he": "\u05d1\u05de\u05d0\u05d9",
+    "appears_in_short_version": true,
+    "short_version_order": 1,
+    "wikidata_id": "P57",
+    "wikidata_status": 10
+  },
+  {
+    "idea_tid": "#38",
+    "title_en": "Cast",
+    "title_he": "\u05e9\u05d7\u05e7\u05df",
+    "appears_in_short_version": false,
+    "short_version_order": null,
+    "wikidata_id": "P161",
+    "wikidata_status": 10
+  },
+  {
+    "idea_tid": "#37",
+    "title_en": "Producer",
+    "title_he": "\u05de\u05e4\u05d9\u05e7",
+    "appears_in_short_version": false,
+    "short_version_order": null,
+    "wikidata_id": "P162",
+    "wikidata_status": 10
+  },
+  {
+    "idea_tid": "#42",
+    "title_en": "Film Editor",
+    "title_he": "\u05e2\u05d5\u05e8\u05da",
+    "appears_in_short_version": false,
+    "short_version_order": null,
+    "wikidata_id": "P1040",
+    "wikidata_status": 10
+  },
+  {
+    "idea_tid": "#44",
+    "title_en": "Composer",
+    "title_he": "\u05de\u05d5\u05d6\u05d9\u05e7\u05d4",
+    "appears_in_short_version": false,
+    "short_version_order": null,
+    "wikidata_id": "P86",
+    "wikidata_status": 10
+  },
+  {
+    "idea_tid": "#41",
+    "title_en": "Director of photography",
+    "title_he": "\u05e6\u05dc\u05dd",
+    "appears_in_short_version": false,
+    "short_version_order": null,
+    "wikidata_id": "P344",
+    "wikidata_status": 10
+  },
+  {
+    "idea_tid": "#165",
+    "title_en": "Crew",
+    "title_he": "\u05e6\u05d5\u05d5\u05ea",
+    "appears_in_short_version": false,
+    "short_version_order": null,
+    "wikidata_id": "P3092",
+    "wikidata_status": 10
   }
 ]
