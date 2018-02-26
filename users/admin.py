@@ -1,4 +1,5 @@
 import authtools.admin
+from authtools.forms import AdminUserChangeForm
 from django.contrib import admin
 
 from . import models
@@ -14,12 +15,20 @@ BASE_FIELDS = (None, {
         'bio_en',
         'is_team_member',
         'is_data_volunteer',
-        'password'
+        'password',
     )
 })
 
 
+class FixedChangeForm(AdminUserChangeForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['password'].help_text = self.fields[
+            'password'].help_text.format('../password/')
+
+
 class UserAdmin(authtools.admin.UserAdmin):
+    form = FixedChangeForm
     fieldsets = (
         BASE_FIELDS,
         authtools.admin.ADVANCED_PERMISSION_FIELDS,
