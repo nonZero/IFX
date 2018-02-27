@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from general.templatetags.ifx import ut
-from links.models import LinkType, MovieLink, PersonLink
+from links.models import LinkType, Link
 
 
 class LinkTypeAdmin(admin.ModelAdmin):
@@ -21,7 +21,8 @@ class LinkAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'type',
-        'parent_link',
+        'content_type',
+        'entity_link',
         'value',
         'title_he',
         'title_en',
@@ -30,11 +31,9 @@ class LinkAdmin(admin.ModelAdmin):
         'created_at',
     )
 
-
-    def parent_link(self, instance):
-        return ut(instance.parent)
+    def entity_link(self, instance):
+        return ut(instance.entity)
 
 
 admin.site.register(LinkType, LinkTypeAdmin)
-admin.site.register(MovieLink, LinkAdmin)
-admin.site.register(PersonLink)
+admin.site.register(Link, LinkAdmin)

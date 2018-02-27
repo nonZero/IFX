@@ -35,7 +35,10 @@
                             {% for row in object.rows.all %}
                                 <li>
                                     {{ row.get_op_display }}
-                                    {{ row.content_type.model }} {{ row.entity.id }}
+                                    {{ row.content_type }} {{ row.object_id }}
+                                    {% if row.content_type.model_class %}
+                                        {{ row.entity|utpp }}
+                                    {% endif %}
                                     <ul class="list-unstyled">
                                         {% for line in row.data|tolist %}
                                             <li>

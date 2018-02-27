@@ -1,9 +1,10 @@
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from general.entities import ENTITY_CONTENT_TYPES
 from ifx.base_models import Undeletable
-from movies.models import Movie
-from people.models import Person
 
 
 class Language(object):
@@ -46,6 +47,11 @@ class LinkType(Undeletable):
 
 
 class Link(Undeletable):
+    content_type = models.ForeignKey(ContentType, on_delete=models.PROTECT,
+                                     limit_choices_to=ENTITY_CONTENT_TYPES)
+    object_id = models.PositiveIntegerField()
+    entity = GenericForeignKey()
+
     type = models.ForeignKey(LinkType, related_name="%(class)ss",
                              on_delete=models.PROTECT, verbose_name=_('type'))
     value = models.CharField(_('value or URL'), max_length=400)
@@ -68,7 +74,8 @@ class Link(Undeletable):
 
     FIELDS_TO_LOG = (
         'active',
-        'parent_id',
+        'content_type_id',
+        'object_id',
         'type_id',
         'value',
         'title_he',
@@ -82,9 +89,9 @@ class Link(Undeletable):
     )
 
     class Meta:
-        abstract = True
         ordering = (
-            '-type.priority',
+            'type__priority',
+            '-created_at',
         )
 
     def __str__(self):
@@ -94,25 +101,3 @@ class Link(Undeletable):
         if self.type.template:
             return self.type.template.format(self.value)
         return self.value
-
-
-class MovieLink(Link):
-    parent_model = Movie
-    parent = models.ForeignKey(parent_model, related_name='links',
-                               on_delete=models.PROTECT)
-
-    class Meta:
-        unique_together = (
-            ('parent', 'type', 'value'),
-        )
-
-
-class PersonLink(Link):
-    parent_model = Person
-    parent = models.ForeignKey(parent_model, related_name='links',
-                               on_delete=models.PROTECT)
-
-    class Meta:
-        unique_together = (
-            ('parent', 'type', 'value'),
-        )

@@ -6,9 +6,8 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django_extensions.db.fields.json import JSONField
 
+from general.entities import ENTITY_CONTENT_TYPES
 from people.models import Person
-
-ENTITY_CONTENT_TYPES = models.Q(model__in=('person', 'movie'))
 
 
 class Source:
@@ -147,7 +146,8 @@ class Suggestion(models.Model):
         verbose_name_plural = _("suggestions")
 
     def found(self):
-        return self.status in (self.Status.VERIFIED, self.Status.FOUND_UNVERIFIED)
+        return self.status in (
+        self.Status.VERIFIED, self.Status.FOUND_UNVERIFIED)
 
     def status_tag(self):
         return self.Status.TAG[self.status]

@@ -72,6 +72,7 @@ def bdtitle_plus(instance):
         title = getattr(instance, "title_" + FLIP[lang])
     return title
 
+
 @register.filter
 def ut_plus(instance, field='title'):
     lang = translation.get_language()[:2]
@@ -80,6 +81,12 @@ def ut_plus(instance, field='title'):
         attr = f"{field}_{FLIP[lang]}"
     return u(instance, attr)
 
+
+@register.filter
+def utpp(instance, field='title'):
+    if hasattr(instance, 'get_absolute_url'):
+        return ut_plus(instance)
+    return bdtitle_plus(instance)
 
 
 @register.filter

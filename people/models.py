@@ -11,6 +11,7 @@ from movies.models import Movie
 
 
 class Person(Undeletable, WikiDataEntity):
+    ENTITY_CODE = 'person'
     WIKIDATA_CLASSIFIER_PID = HUMAN
 
     name_he = models.CharField(max_length=300, null=True, blank=True,
@@ -28,6 +29,7 @@ class Person(Undeletable, WikiDataEntity):
     idea_tid = models.IntegerField(unique=True, null=True, blank=True)
     idea_modified = models.BooleanField(default=False)
 
+    links = GenericRelation('links.Link')
     suggestions = GenericRelation('enrich.Suggestion')
 
     FIELDS_TO_LOG = (

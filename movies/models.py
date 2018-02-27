@@ -73,6 +73,7 @@ class Tag(Undeletable, WikiDataEntity):
 
 
 class Movie(Undeletable, WikiDataEntity):
+    ENTITY_CODE = 'movie'
     WIKIDATA_CLASSIFIER_PID = FILM
 
     year = models.IntegerField(null=True, blank=True)
@@ -85,6 +86,7 @@ class Movie(Undeletable, WikiDataEntity):
     idea_bid = models.IntegerField(unique=True, null=True, blank=True)
     idea_modified = models.BooleanField(default=False)
 
+    links = GenericRelation('links.Link')
     suggestions = GenericRelation('enrich.Suggestion')
 
     FIELDS_TO_LOG = (

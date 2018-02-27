@@ -2,7 +2,7 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 
 from general.fields import LocaleModelChoiceField
-from links.models import MovieLink, PersonLink, LinkType
+from links.models import LinkType, Link
 
 FIELDS = (
     'type',
@@ -18,19 +18,9 @@ FIELDS = (
 )
 
 
-class MovieLinkForm(forms.ModelForm):
-    type = LocaleModelChoiceField(LinkType.objects.filter(for_movies=True),
-                                  label=_('Type'))
+class LinkForm(forms.ModelForm):
+    type = LocaleModelChoiceField(LinkType.objects.all(), label=_('Type'))
 
     class Meta:
-        model = MovieLink
-        fields = FIELDS
-
-
-class PersonLinkForm(forms.ModelForm):
-    type = LocaleModelChoiceField(LinkType.objects.filter(for_people=True),
-                                  label=_('Type'))
-
-    class Meta:
-        model = PersonLink
+        model = Link
         fields = FIELDS

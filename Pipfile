@@ -7,7 +7,7 @@ name = "pypi"
 
 [packages]
 
-django = "*"
+Django = "*"
 django-extensions = "*"
 django-taggit = "*"
 ipython = "*"
@@ -18,7 +18,7 @@ pandas = "*"
 pexpect = "*"
 wikipedia = "*"
 "django-bootstrap4" = "*"
-wikidata = "*"
+Wikidata = "*"
 django-filter = "*"
 celery = "*"
 django-authtools = "*"
@@ -28,4 +28,4 @@ django-authtools = "*"
 [dev-packages]
 
 notebook = "*"
-"fabric3" = "*"
+"Fabric3" = "*"

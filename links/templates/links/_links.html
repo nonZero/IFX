@@ -3,7 +3,7 @@
     <div class="card-header p-2 pb-0">
         {% if user.is_authenticated %}
             <div class="float-right">
-                <a href="{% url create_url object.id %}">
+                <a href="{% url "links:create" object.ENTITY_CODE object.id %}">
                     <button class="btn btn-primary btn-sm">
                         <span class="fa fa-plus"></span>
                         {% trans "Add Link" %}
@@ -21,7 +21,7 @@
                 {% if user.is_authenticated %}
                     <span class="float-right">
                         <a class="btn btn-sm"
-                           href="{% url edit_url link.id %}">
+                           href="{% url "links:update" link.id %}">
                             <span class="fa fa-edit"></span>
                         </a>
                     </span>
