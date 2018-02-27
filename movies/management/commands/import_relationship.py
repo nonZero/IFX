@@ -86,7 +86,7 @@ class Command(BaseCommand):
                     except models.ObjectDoesNotExist:
                         bad_relationship_count += 1
         finally:
-            print('Report:')
+            print('MovieReport:')
             print('Total rows={}'.format(count_total))
             print('Movie_Role_Person found={}'.format(mrp_counter))
             print('Movie_Role_Person duplicate={}'.format(mrp_duplicates))

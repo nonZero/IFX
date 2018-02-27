@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
+"MovieReport-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-24 16:59+0200\n"
 "PO-Revision-Date: 2018-02-24 17:00+0200\n"
 "Last-Translator: \n"

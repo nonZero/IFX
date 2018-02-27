@@ -1,21 +1,58 @@
 {% extends 'base.html' %}
 {% load static i18n ifx %}
 
+{% block header_container %}
+    <h1>
+        <div class="row flex-rtl">
+            <div class="col-6 rtl">
+                {% if object.name_he %}
+                    <b>{{ object.name_he }}</b>
+                {% endif %}
+            </div>
+            <div class="col-6 ltr">
+                {% if object.name_en %}
+                    <b>{{ object.name_en }}</b>
+                {% endif %}
+            </div>
+        </div>
+    </h1>
+{% endblock %}
+
+
 {% block content %}
     <div class="row">
         <div class="col-sm-8">
-            <ul class="list-unstyled">
-                <li>{% trans "Hebrew name" %}: {{ object.name_he }}</li>
-                <li>{% trans "English name" %}: {{ object.name_en }}</li>
-            </ul>
-
             {% include "movies/_movies.html" with object_list=object.movies_flat count=object.movies.count %}
         </div>
 
         <div class="col-sm-4">
+
             {% include "enrich/_suggestions.html" %}
+
             {% include "links/_links.html" with create_url="links:create_person" edit_url="links:update_person" %}
+
+            <div class="card bg-warning mb-2">
+                <div class="card-header">
+                    {% trans "Search the web" %}
+                </div>
+                <ul class="list-group list-group-flush">
+                    {% if object.name_he %}
+                        <li class="list-group-item">
+                            {% trans "Hebrew Title" %}
+                            {% search_links object.name_he 'he' %}
+                        </li>
+                    {% endif %}
+
+                    {% if object.name_en %}
+                        <li class="list-group-item">
+                            {% trans "English Title" %}:
+                            {% search_links object.name_en 'en' %}
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
         </div>
     </div>
+    {% include "_idea_bid.html" %}
 
 {% endblock %}

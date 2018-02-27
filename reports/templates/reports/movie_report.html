@@ -1,0 +1,19 @@
+{% extends "base_datatable.html" %}
+{% load i18n ifx %}
+
+{% block row %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ object|u:'title_he' }}</td>
+        <td>{{ object|u:'title_en' }}</td>
+        <td>{{ object.year }}</td>
+        <td>
+            {% if object.wikidata_id %}
+                <a href="{{ object.wikidata_url }}"
+                   title="{{ object.wikidata_id }}"><span
+                        class="fa fa-barcode"></span></a>
+            {% endif %}
+        </td>
+        <td>{{ object.idea_bid }}</td>
+    </tr>
+{% endblock %}

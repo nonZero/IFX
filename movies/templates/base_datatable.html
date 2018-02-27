@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load staticfiles i18n bootstrap4 humanize %}
+
+{% block css %}
+    <link rel="stylesheet"
+          href="{% static "vendor/datatables/css/dataTables.bootstrap4.css" %}"/>
+
+{% endblock %}
+
+{% block content %}
+    {% with object_list.count as count %}
+        <h5 class="totals">
+            {% if count == 0 %}
+                {% trans "No items found" %}
+            {% elif count == 1 %}
+                {% trans "One item found" %}
+            {% else %}
+                {% trans "Found" %}
+                {{ count|intcomma }}
+                {% trans "items" %}
+            {% endif %}
+        </h5>
+    {% endwith %}
+
+    <table id="main-dt"
+           class="table table-striped table-bordered"
+           cellspacing="0" width="100%">
+
+        <thead>
+        <tr>
+            {% for col in view.cols %}
+                <th>{{ col }}</th>
+            {% endfor %}
+        </tr>
+        </thead>
+
+        <tfoot>
+        <tr>
+            {% for col in view.cols %}
+                <th>{{ col }}</th>
+            {% endfor %}
+        </tr>
+        </tfoot>
+
+        <tbody>
+        {% for object in object_list %}
+            {% block row %}
+            {% endblock %}
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static "vendor/datatables/js/jquery.dataTables.js" %}"></script>
+    <script src="{% static "vendor/datatables/js/dataTables.bootstrap4.js" %}"></script>
+    <script>
+        $(function () {
+            const options = {};
+            console.log($('body').attr('lang'));
+            if ($('html').attr('lang') === 'he') {
+                options.language = {url: '{% static "vendor/datatables/js/dataTables.hebrew.js" %}'};
+            }
+            console.log(options);
+            $('#main-dt').DataTable(options);
+        });
+    </script>
+{% endblock %}
+

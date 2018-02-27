@@ -24,6 +24,10 @@
     <link href="{% static 'vendor/font-awesome/css/fontawesome-all.css' %}"
           rel="stylesheet">
 
+    {% block css %}
+
+    {% endblock %}
+
 
     <title>
         {% block title %}
@@ -76,6 +80,13 @@
 
 <script src="{% static "vendor/jquery-3.2.1.js" %}"></script>
 <script src="{% static "vendor/bootstrap/js/bootstrap.bundle.js" %}"></script>
+
+{% block js %}
+
+{% endblock %}
+
 <script src="{% static 'allScripts.js' %}"></script>
+
+
 
 </html>

@@ -63,7 +63,7 @@ class Command(BaseCommand):
                 except ObjectDoesNotExist:
                     count_movie_missing += 1
 
-        print('Report:')
+        print('MovieReport:')
         print('Total rows={}'.format(count_total))
         print('Movies found={}'.format(count_movie_found))
         print('Movies missing={}'.format(count_movie_missing))

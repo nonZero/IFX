@@ -41,10 +41,6 @@
                         <span dir="ltr" class="year">({{ m.year }})</span>
                     {% endif %}
                 </h5>
-                {#            <form action="">#}
-                {#                <input type="image" src="{% static 'images/Shopping-bag-black.svg' %}" alt="Submit">#}
-                {#            </form>#}
-                {#            <p>{% trans "Director" %}: <strong>Name</strong></p>#}
                 <ul class="list-inline">
                     {% for key, values in m.get_short_data %}
                         <li class="list-inline-item">
@@ -57,7 +53,7 @@
                     {% endfor %}
                     {% for r in m.get_short_roles %}
                         <li class="list-inline-item">
-                            <b>{{ r.role|bdtitle }}:</b> {{ r.person|un }}
+                            <b>{{ r.role|bdtitle }}:</b> {{ r.person|ut_plus }}
                         </li>
                     {% endfor %}
                     {% if m.duration %}

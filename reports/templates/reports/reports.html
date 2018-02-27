@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static i18n humanize ifx %}
+
+{% block content %}
+
+    <ul class="list-group">
+        {% for key, v in view.reports %}
+            <li class="list-group-item">
+                <a href="{% url key %}">{{ v.title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

@@ -76,7 +76,6 @@
                     {% trans "Search the web" %}
                 </div>
                 <ul class="list-group list-group-flush">
-
                     {% if movie.title_he %}
                         <li class="list-group-item">
                             {% trans "Hebrew Title" %}
@@ -101,15 +100,7 @@
                 </ul>
 
             </div>
-            {% if movie.idea_bid %}
-                <div class="card bg-dark">
-                    <div class="card-body">
-                        <p class="card-text text-light">
-                            {% trans "Legacy ID" %}: {{ movie.idea_bid }}
-                        </p>
-                    </div>
-                </div>
-            {% endif %}
+            {% include "_idea_bid.html" %}
         </div>
     </div>
 

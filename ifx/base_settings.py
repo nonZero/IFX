@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'links',
     'search',
     'enrich',
+    'reports',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,67 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-02-27 21:18+0200\n"
+"PO-Revision-Date: 2018-02-27 21:19+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.0.6\n"
+
+msgid "Reports"
+msgstr "דו\"חות"
+
+msgid "Hebrew Title"
+msgstr "כותרת בעברית"
+
+msgid "English Title"
+msgstr "כותרת באנגלית"
+
+msgid "Year"
+msgstr "שנה"
+
+msgid "Legacy ID"
+msgstr "מזהה מערכת אידאה"
+
+msgid "All Movies"
+msgstr "כל הסרטים"
+
+msgid "Missing Titles"
+msgstr "סרטים ללא כותרת"
+
+msgid "Missing English Titles"
+msgstr "סרטים ללא כותרת באנגלית"
+
+msgid "Missing Years"
+msgstr "סרטים ללא שנה"
+
+msgid "Duplicate Titles"
+msgstr "סרטים עם כותרות זהות"
+
+msgid "Duplicate English Titles"
+msgstr "סרטים עם שמות זהים באנגלית"
+
+msgid "Hebrew Name"
+msgstr "שם עברי"
+
+msgid "English Name"
+msgstr "שם אנגלי"
+
+msgid "Movies"
+msgstr "סרטים"
+
+msgid "Roles"
+msgstr "תפקידים"
+
+msgid "People without a name"
+msgstr "אישים ללא שם"

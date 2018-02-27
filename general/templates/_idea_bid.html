@@ -1,0 +1,10 @@
+{% load i18n %}
+{% if object.idea_bid %}
+    <div class="card bg-dark">
+        <div class="card-body">
+            <p class="card-text text-light">
+                {% trans "Legacy ID" %}: {{ object.idea_bid }}
+            </p>
+        </div>
+    </div>
+{% endif %}

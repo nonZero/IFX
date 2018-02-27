@@ -26,13 +26,11 @@
             <ul class="list-group">
                 {% for object in view.random_people %}
                     <li class="list-group-item">
-                        {{ object|un }}
+                        {{ object|ut_plus }}
                         <span dir="ltr">({{ object.movies.count }})</span>
 
                         {% for mrp in object.distinct_roles %}
                             <span class="badge badge-light">{{ mrp.role|bdtitle }}</span>
-
-                            {#                            {% if not forloop.last %}, {% endif %}#}
                         {% endfor %}
                     </li>
                 {% endfor %}
