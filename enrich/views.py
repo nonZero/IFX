@@ -12,6 +12,9 @@ from enrich.models import Suggestion
 from enrich.tasks import lookup_suggestion_by_id
 from ifx.base_models import WikiDataEntity
 from ifx.base_views import IFXMixin
+from links import tasks
+from movies.models import Movie
+from people.models import Person
 from . import forms
 
 
@@ -68,11 +71,13 @@ class SetWikiDataIDView(IFXMixin, SingleObjectMixin, View):
                         o.wikidata_id = form.cleaned_data['wikidata_id']
                         o.save()
                         r.record_update_after(o)
-
                         s.status = s.Status.VERIFIED
                         s.save()
 
-                    # TODO: fetch wikidata info
+                    if isinstance(o, Movie):
+                        tasks.add_links_by_movie_id.delay(o.id)
+                    elif isinstance(o, Person):
+                        tasks.add_links_by_person_id.delay(o.id)
                     messages.success(request, _("Wikidata ID assigned."))
                 except IntegrityError:
                     messages.error(request, _("Wikidata ID already exists!"))

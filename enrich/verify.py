@@ -6,6 +6,7 @@ from django.db.models import Model
 from wikidata.client import Client
 from wikidata.entity import Entity
 
+from editing_logs.api import Recorder
 from enrich.models import Suggestion, Source
 from movies.models import Movie
 from people.models import Person
@@ -61,9 +62,13 @@ def verify_and_update_movie(m: Movie, wikidata_id):
     facts = verify_movie(m, wikidata_id)
     for item, wiki_id in facts.items():
         if item.wikidata_id != wiki_id:
-            item.wikidata_status = Movie.Status.ASSIGNED
-            item.wikidata_id = wiki_id
-            item.save()
+            note = f"Auto verified {item.__class__.__name__} #{item.id} => {wiki_id}"
+            with Recorder(note=note) as r:
+                r.record_update_before(item)
+                item.wikidata_status = Movie.Status.ASSIGNED
+                item.wikidata_id = wiki_id
+                r.record_update_after(item)
+                item.save()
             n += 1
 
     return n, facts
