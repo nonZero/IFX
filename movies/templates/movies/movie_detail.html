@@ -61,7 +61,7 @@
                 <ul>
                     {% for role in movie.people.all %}
                         <li>
-                            <b>{{ role.role|bdtitle }}:</b> {{ role.person|un }}
+                            <b>{{ role.role|bdtitle }}:</b> {{ role.person|ut_plus }}
                         </li>
                     {% endfor %}
                 </ul>

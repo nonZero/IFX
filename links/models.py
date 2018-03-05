@@ -17,6 +17,11 @@ class Language(object):
     )
 
 
+class LinkTypeQuerySet(models.QuerySet):
+    def get_by_natural_key(self, slug):
+        return self.get(slug=slug)
+
+
 class LinkType(Undeletable):
     title_he = models.CharField(_('Hebrew title'), max_length=300)
     title_en = models.CharField(_('English title'), max_length=300)
@@ -36,6 +41,11 @@ class LinkType(Undeletable):
                                    blank=True)
     template = models.CharField(_('template'), max_length=500, null=True,
                                 blank=True)
+
+    objects = LinkTypeQuerySet.as_manager()
+
+    def natural_key(self):
+        return (self.slug,)
 
     class Meta:
         ordering = (

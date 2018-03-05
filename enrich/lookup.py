@@ -1,8 +1,15 @@
+from collections import Counter
+
+from editing_logs.api import Recorder
 from enrich.models import Suggestion, Source
 from enrich.wikidata import get_wikidata_result, TooManyResults, NoResults, \
     get_props_by_pids
 from ifx.base_models import WikiDataEntity
-from links.models import LinkType
+from links.models import LinkType, Link
+
+
+class Undo(Exception):
+    pass
 
 
 def create_suggestion(o):
@@ -39,14 +46,34 @@ def query_suggestion(o: Suggestion):
 
 
 def create_missing_links(obj: WikiDataEntity):
-    link_types = {lt.wikidata_id: lt for lt in
-                  LinkType.objects.exclude(wikidata_id=None)}
+    # TODO: update links
+    qs = LinkType.objects.exclude(wikidata_id=None)
+    link_types = {lt.wikidata_id: lt for lt in qs}
     props = get_props_by_pids(obj.wikidata_id, list(link_types.keys()))
 
-    n = 0
-    for pid, value in props.items():
-        link, created = obj.links.get_or_create(type=link_types[pid],
-                                                value=value)
-        if created:
-            n += 1
-    return n
+    created = 0
+    updated = 0
+    note = f"Auto updating links for {obj.__class__.__name__} #{obj.id}"
+    try:
+        with Recorder(note=note) as r:
+            for pid, value in props.items():
+                try:
+                    link = obj.links.get(type=link_types[pid])
+                    if link.value != value:
+                        r.record_update_before(link)
+                        link.value = value
+                        link.save()
+                        r.record_update_after(link)
+                        updated += 1
+                except Link.DoesNotExist:
+                    link = obj.links.create(
+                        type=link_types[pid],
+                        value=value,
+                    )
+                    r.record_addition(link)
+                    created += 1
+            if not created and not updated:
+                raise Undo()
+    except Undo:
+        pass
+    return Counter(updated=updated, created=created)

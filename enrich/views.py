@@ -1,5 +1,6 @@
 import django_filters
 from django.contrib import messages
+from django.db import IntegrityError
 from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
 from django.views import View
@@ -60,19 +61,21 @@ class SetWikiDataIDView(IFXMixin, SingleObjectMixin, View):
         form = forms.WikiDataIDForm(request.POST)
         if form.is_valid():
             if o.wikidata_id != form.cleaned_data['wikidata_id']:
-                with Recorder(user=self.request.user) as r:
-                    r.record_update_before(o)
-                    o.wikidata_status = WikiDataEntity.Status.ASSIGNED
-                    o.wikidata_id = form.cleaned_data['wikidata_id']
-                    o.save()
-                    r.record_update_after(o)
+                try:
+                    with Recorder(user=self.request.user) as r:
+                        r.record_update_before(o)
+                        o.wikidata_status = WikiDataEntity.Status.ASSIGNED
+                        o.wikidata_id = form.cleaned_data['wikidata_id']
+                        o.save()
+                        r.record_update_after(o)
 
-                    s.status = s.Status.VERIFIED
-                    s.save()
+                        s.status = s.Status.VERIFIED
+                        s.save()
 
-                # TODO: fetch wikidata info
-
-                messages.success(request, _("Wikidata ID assigned."))
+                    # TODO: fetch wikidata info
+                    messages.success(request, _("Wikidata ID assigned."))
+                except IntegrityError:
+                    messages.error(request, _("Wikidata ID already exists!"))
         else:
             messages.error(request, _("Invalid form"))
 
