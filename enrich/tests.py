@@ -1,9 +1,10 @@
 from django.test import TestCase
 
-from enrich.lookup import create_suggestion, query_suggestion
+from enrich.lookup import create_suggestion, query_suggestion, \
+    get_movies_for_person, SparqlMovie
 from enrich.models import Suggestion, Source
-from enrich.verify import verify_movie, verify_and_update_movie, \
-    verify_suggestion
+from enrich.verify import verify_movie, verify_and_update_entity, \
+    verify_suggestion, verify_person
 from enrich.wikidata import get_wikidata_result, TooManyResults, NoResults, \
     FILM
 from movies.models import Movie
@@ -39,6 +40,21 @@ class LookupTestCase(TestCase):
 
         self.assertEqual(o.status, Suggestion.Status.FOUND_UNVERIFIED)
         self.assertEqual(o.source_key, "Q1145082")
+
+    def test_query_movie_people(self):
+        movies = list(get_movies_for_person("Q653645"))
+        self.assertIn(SparqlMovie(
+            rel='P57',
+            id='Q1145082',
+            he='קלרה הקדושה',
+            en='Saint Clara'
+        ), movies)
+        self.assertIn(SparqlMovie(
+            rel='P58',
+            id='Q1145082',
+            he='קלרה הקדושה',
+            en='Saint Clara'
+        ), movies)
 
 
 class VerifyTestCase(TestCase):
@@ -83,7 +99,7 @@ class VerifyTestCase(TestCase):
         self.assertIsNone(self.m.wikidata_id)
         self.assertIsNone(self.p.wikidata_id)
 
-        changed, facts = verify_and_update_movie(self.m, "Q1145082")
+        changed, facts = verify_and_update_entity(self.m, "Q1145082")
 
         self.assertEqual(changed, 2)
 
@@ -95,10 +111,20 @@ class VerifyTestCase(TestCase):
         self.assertEqual(self.p.wikidata_status, Movie.Status.ASSIGNED)
         self.assertEqual(self.p.wikidata_id, "Q653645")
 
-        changed, facts = verify_and_update_movie(self.m, "Q1145082")
+        changed, facts = verify_and_update_entity(self.m, "Q1145082")
         self.assertEqual(changed, 0)
 
-    def test_verify_suggestion(self):
+    def test_verify_person_correct(self):
+        result = verify_person(self.p, "Q653645")
+
+        expected = {
+            self.m: "Q1145082",
+            self.p: "Q653645",
+        }
+
+        self.assertEqual(result, expected)
+
+    def test_verify_movie_suggestion(self):
         qid = "Q1145082"
 
         s = Suggestion.objects.create(
@@ -123,3 +149,29 @@ class VerifyTestCase(TestCase):
         self.assertEqual(s.status, Suggestion.Status.VERIFIED)
         self.assertEqual(self.m.wikidata_id, qid)
         self.assertEqual(self.p.wikidata_id, "Q653645")
+
+    def test_verify_person_suggestion(self):
+        qid = "Q653645"
+
+        s = Suggestion.objects.create(
+            entity=self.p,
+            source=Source.WIKIDATA,
+            source_key=qid,
+            status=Suggestion.Status.FOUND_UNVERIFIED,
+        )
+
+        self.assertIsNone(self.m.wikidata_id)
+        self.assertIsNone(self.p.wikidata_id)
+
+        movie_verified, total_verified = verify_suggestion(s)
+
+        assert movie_verified
+        self.assertEqual(total_verified, 2)
+
+        s.refresh_from_db()
+        self.m.refresh_from_db()
+        self.p.refresh_from_db()
+
+        self.assertEqual(s.status, Suggestion.Status.VERIFIED)
+        self.assertEqual(self.p.wikidata_id, qid)
+        self.assertEqual(self.m.wikidata_id, "Q1145082")

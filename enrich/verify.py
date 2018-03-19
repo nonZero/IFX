@@ -7,7 +7,9 @@ from wikidata.client import Client
 from wikidata.entity import Entity
 
 from editing_logs.api import Recorder
+from enrich.lookup import get_movies_for_person, SparqlMovie
 from enrich.models import Suggestion, Source
+from enrich.types import IFXEntity
 from movies.models import Movie
 from people.models import Person
 
@@ -19,12 +21,29 @@ def get_people_by_pid(movie) -> Dict[str, Set[Person]]:
     return d
 
 
+def get_movies_by_pid(person) -> Dict[str, Set[Movie]]:
+    d = defaultdict(set)
+    for mrp in person.movies.exclude(role__wikidata_id=None):
+        d[mrp.role.wikidata_id].add(mrp.movie)
+    return d
+
+
 def is_same_person(claim: Entity, person: Person):
     if person.wikidata_id and claim.id == person.wikidata_id:
         return True
     if 'en' in claim.label and claim.label['en'] == person.name_en:
         return True
     if 'he' in claim.label and claim.label['he'] == person.name_he:
+        return True
+    return False
+
+
+def is_same_movie(claim: SparqlMovie, movie: Movie):
+    if movie.wikidata_id and claim.id == movie.wikidata_id:
+        return True
+    if claim.en and claim.en == movie.title_en:
+        return True
+    if claim.he and claim.he == movie.title_he:
         return True
     return False
 
@@ -45,6 +64,23 @@ def validate_wikidata_movie_people(wikidata_id, people_by_pid):
     return facts
 
 
+def validate_wikidata_person_movies(wikidata_id, movies_by_pid):
+    wikidata_movies = list(get_movies_for_person(wikidata_id))
+    wikidata_movies_per_rel = defaultdict(list)
+    for o in wikidata_movies:
+        wikidata_movies_per_rel[o.rel].append(o)
+
+    facts = {}
+    for role, movies in movies_by_pid.items():
+        wiki_movies = wikidata_movies_per_rel.get(role, [])
+        for movie in movies:
+            for wiki_movie in wiki_movies:
+                if is_same_movie(wiki_movie, movie):
+                    facts[movie] = wiki_movie.id
+
+    return facts
+
+
 def verify_movie(m: Movie, wikidata_id) -> Dict[Model, str]:
     people_in_movie = get_people_by_pid(m)
     facts = validate_wikidata_movie_people(wikidata_id, people_in_movie)
@@ -54,12 +90,23 @@ def verify_movie(m: Movie, wikidata_id) -> Dict[Model, str]:
 
 
 def verify_person(p: Person, wikidata_id) -> Dict[Model, str]:
-    raise NotImplementedError(":-)")
+    movies_for_person = get_movies_by_pid(p)
+    facts = validate_wikidata_person_movies(wikidata_id, movies_for_person)
+    if facts:
+        facts[p] = wikidata_id
+    return facts
 
 
-def verify_and_update_movie(m: Movie, wikidata_id):
+def verify_and_update_entity(e: IFXEntity, wikidata_id):
+    if isinstance(e, Movie):
+        facts = verify_movie(e, wikidata_id)
+    elif isinstance(e, Person):
+        facts = verify_person(e, wikidata_id)
+    else:
+        raise ValueError(
+            f"Must be Person or Movie, got: {e.__class__.__name__}")
+
     n = 0
-    facts = verify_movie(m, wikidata_id)
     for item, wiki_id in facts.items():
         if item.wikidata_id != wiki_id:
             note = f"Auto verified {item.__class__.__name__} #{item.id} => {wiki_id}"
@@ -77,10 +124,9 @@ def verify_and_update_movie(m: Movie, wikidata_id):
 def verify_suggestion(s: Suggestion):
     assert s.source == Source.WIKIDATA
     assert s.status == s.Status.FOUND_UNVERIFIED
-    assert isinstance(s.entity, Movie)  # TODO: Person
 
     with transaction.atomic():
-        n, facts = verify_and_update_movie(s.entity, s.source_key)
+        n, facts = verify_and_update_entity(s.entity, s.source_key)
         if s.entity in facts:
             s.status = Suggestion.Status.VERIFIED
             s.save()

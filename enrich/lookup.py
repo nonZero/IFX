@@ -1,4 +1,7 @@
-from collections import Counter
+from collections import Counter, namedtuple
+from typing import Iterator
+
+from SPARQLWrapper import SPARQLWrapper, JSON
 
 from editing_logs.api import Recorder
 from enrich.models import Suggestion, Source
@@ -6,6 +9,15 @@ from enrich.wikidata import get_wikidata_result, TooManyResults, NoResults, \
     get_props_by_pids
 from ifx.base_models import WikiDataEntity
 from links.models import LinkType, Link
+
+MOVIE_SPARQL = """
+SELECT ?rel ?movie ?movieLabelHe ?movieLabelEn WHERE {
+  ?movie wdt:P31 wd:Q11424.
+  ?movie ?rel wd:%s.
+  OPTIONAL {?movie rdfs:label ?movieLabelHe filter (lang(?movieLabelHe) = "he")}.
+  OPTIONAL {?movie rdfs:label ?movieLabelEn filter (lang(?movieLabelEn) = "en")}.
+}
+"""
 
 
 class Undo(Exception):
@@ -77,3 +89,24 @@ def create_missing_links(obj: WikiDataEntity):
     except Undo:
         pass
     return Counter(updated=updated, created=created)
+
+
+SparqlMovie = namedtuple('SparqlMovie', 'rel,id,he,en')
+
+
+def get_movies_for_person(wikidata_id: str) -> Iterator[SparqlMovie]:
+    assert wikidata_id[0] in "QS"
+    assert wikidata_id[1:].isdigit()
+    sparql = SPARQLWrapper("https://query.wikidata.org/sparql")
+    query = MOVIE_SPARQL % wikidata_id
+    sparql.setQuery(query)
+    sparql.setReturnFormat(JSON)
+    results = sparql.query().convert()
+
+    for result in results["results"]["bindings"]:
+        yield SparqlMovie(
+            rel=result["rel"]["value"].split("/")[-1],
+            id=result["movie"]["value"].split("/")[-1],
+            he=result.get("movieLabelHe", {}).get("value"),
+            en=result.get("movieLabelEn", {}).get("value"),
+        )
