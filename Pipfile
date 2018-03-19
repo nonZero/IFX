@@ -23,6 +23,7 @@ django-filter = "*"
 celery = "*"
 django-authtools = "*"
 "psycopg2-binary" = "*"
+sparqlwrapper = "*"
 
 
 [dev-packages]
