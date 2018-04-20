@@ -168,3 +168,7 @@ LOGGING = {
         },
     }
 }
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_SCHEME', 'https')
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
