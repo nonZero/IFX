@@ -14,6 +14,8 @@ urlpatterns = [
         name='detail'),
     url(r"^movie/(?P<pk>[0-9]+)/edit/$", views.MovieUpdateView.as_view(),
         name='edit'),
+    url(r"^movie/(?P<pk>[0-9]+)/upload/$", views.PostToWikiDataView.as_view(),
+        name='upload'),
 
     url(r"^field/$", views.FieldListView.as_view(), name='field_list'),
     url(r"^field/(?P<pk>[0-9]+)/$", views.FieldDetailView.as_view(),

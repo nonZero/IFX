@@ -1,10 +1,13 @@
+{% load i18n staticfiles %}
 {% if object.wikidata_id %}
-    <div class="card bg-primary mb-2">
-        <div class="card-header">
-            <a class="text-light" href="{{ object.wikidata_url }}"
-               title="{{ object.wikidata_id }}"><span
-                    class="fa fa-barcode"></span></a>
-        </div>
+    <div class="card mb-2">
+        <h4 class="card-header">
+            <a class="" href="{{ object.wikidata_url }}"
+               title="{{ object.wikidata_id }}">
+                <img src="{% static "images/wikidata-logo.svg" %}" alt="{% trans "WikiData" %}"
+                     height="26"
+                >{% trans "WikiData item" %}</a>
+        </h4>
     </div>
 {% else %}
     {% for s in object.suggestions.all %}

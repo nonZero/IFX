@@ -36,6 +36,13 @@
                                 {% else %}, {% endif %}{% endfor %}
                         {% endif %}
                         {{ m|ut_plus }}
+                        {% if m.wikidata_id %}
+                            <img src="{% static "images/wikidata-logo.svg" %}"
+                                 height="20"
+                                 alt="{{ m.wikidata_id }}"
+                                 class="pb-1"
+                            >
+                        {% endif %}
                     </strong>
                     {% if m.year != none %}
                         <span dir="ltr" class="year">({{ m.year }})</span>

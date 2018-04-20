@@ -1,19 +1,29 @@
+import json
+import logging
 from builtins import super
 
 from django.contrib import messages
 from django.db.models import Count
 from django.shortcuts import redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import ListView, TemplateView, DetailView, UpdateView
+from django.views.generic import ListView, TemplateView, DetailView, \
+    UpdateView, FormView
+from django.views.generic.detail import BaseDetailView
 
 from editing_logs.api import Recorder
 from enrich.lookup import create_suggestion
 from enrich.tasks import lookup_suggestion_by_id
+from general.templatetags.ifx import bdtitle
 from ifx.base_views import IFXMixin
+from links.models import LinkType
+from links.tasks import add_links_by_movie_id
 from movies import forms
 from movies.models import Movie, Tag, Field
+from wikidata_edit.upload import upload_movie
 from people.models import Person
+
+logger = logging.getLogger(__name__)
 
 
 class HomePage(IFXMixin, TemplateView):
@@ -125,3 +135,79 @@ class TagDetailView(IFXMixin, DetailView):
         return FieldDetailView.breadcrumbs + (
             (str(fld), fld.get_absolute_url()),
         )
+
+
+class PostToWikiDataView(IFXMixin, BaseDetailView, FormView):
+    model = Movie
+    form_class = forms.PostToWikiDataForm
+    template_name = "movies/movie_upload.html"
+
+    def get(self, request, *args, **kwargs):
+        if self.request.user.wikidata_access_token is None:
+            redirect(f'{reverse("users:oauth")}?return_to={self.request.path}')
+        return super().get(request, *args, **kwargs)
+
+    def get_initial(self):
+        o = self.get_object()
+        d = super().get_initial()
+        d['desc_en'] = f"{o.year} Israeli film" if o.year else "Israeli film"
+        d['desc_he'] = f"סרט ישראלי משנת {o.year}" if o.year else "סרט ישראלי"
+        return d
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        for fld in forms.MOVIE_FIELDS:
+            form.fields[fld].help_text = getattr(self.object, fld)
+        for lt in LinkType.objects.filter(for_movies=True,
+                                          wikidata_id__isnull=False):
+            k = f'ext_{lt.wikidata_id}'
+            form.fields[k] = forms.forms.CharField(label=bdtitle(lt),
+                                                   required=False, help_text=_(
+                    "ID only! (do not enter full URL)"))
+        return form
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super().post(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        o = self.object  # type: Movie
+        d = form.cleaned_data
+
+        labels = {}
+        if d['title_he']:
+            labels['he'] = o.title_he
+        if d['title_en']:
+            labels['en'] = o.title_en
+
+        descs = {}
+        if d['desc_he']:
+            descs['he'] = d['desc_he']
+        if d['desc_en']:
+            descs['en'] = d['desc_en']
+
+        duration = o.duration if d['duration'] else None
+        year = o.year if d['year'] else None
+
+        ids = {}
+        qs = LinkType.objects.filter(for_movies=True,
+                                     wikidata_id__isnull=False)
+        for lt in qs:
+            k = f'ext_{lt.wikidata_id}'
+            if d[k]:
+                ids[lt.wikidata_id] = d[k]
+
+        resp = upload_movie(self.request.user.get_wikidata_oauth1(),
+                            labels, descs, ids, year,
+                            duration)
+        if resp['success'] != 1:
+            msg = f"Invalid success code: {resp['success']} != 1:"
+            logger.error(msg + "\n" + json.dumps(resp, indent=2))
+            messages.error(self.request, msg)
+        else:
+            o.wikidata_id = resp['entity']['id']
+            o.wikidata_status = o.Status.ASSIGNED
+            o.save()
+            messages.success(self.request, _("Added new wikidata entity."))
+            add_links_by_movie_id(o.id)
+        return redirect(o)

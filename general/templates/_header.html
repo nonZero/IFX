@@ -38,7 +38,7 @@
                                class="list-group-item list-group-item-action">
                                 {% trans "Editing Logs" %}
                             </a>
-                            <a href="#"
+                            <a href="{% url "users:my_profile" %}"
                                class="list-group-item list-group-item-action">{{ user }}</a>
                             {% if user.is_staff %}
                                 <a href="{% url "admin:index" %}"

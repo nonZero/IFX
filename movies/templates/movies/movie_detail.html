@@ -70,7 +70,9 @@
 
         <div class="col-md-6 col-lg-4">
             {% include "enrich/_suggestions.html" %}
+
             {% include "links/_links.html" with create_url="links:create_movie" edit_url="links:update_movie" %}
+
             <div class="card bg-warning mb-2">
                 <div class="card-header">
                     {% trans "Search the web" %}
@@ -100,14 +102,29 @@
                 </ul>
 
             </div>
+
+            {% if not object.wikidata_id %}
+                <div class="card mb-2">
+                    <h4 class="card-header">
+                        <a
+                           href="{% url "movies:upload" object.id %}">
+                            <span class="fa fa-upload"></span> {% trans "Upload to WikiData" %}
+                        </a>
+                    </h4>
+                </div>
+            {% endif %}
+
             {% include "_idea_bid.html" %}
             <div class="card bg-success mb-1">
                 <div class="card-body">
                     <p class="card-text text-light">
-                        <a class="text-light" href="{% url "movies:edit" object.id %}">
-                            <span class="fa fa-edit"></span> {% trans "Edit" %}</a>
+                        <a class="text-light"
+                           href="{% url "movies:edit" object.id %}">
+                            <span class="fa fa-edit"></span> {% trans "Edit" %}
+                        </a>
                         |
-                        <a class="text-light" href="{% url "editing_logs:movie" object.id %}">
+                        <a class="text-light"
+                           href="{% url "editing_logs:movie" object.id %}">
                             <span class="fa fa-list"></span> {% trans "Logs" %}
                         </a>
                     </p>
