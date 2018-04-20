@@ -200,7 +200,7 @@ class PostToWikiDataView(IFXMixin, BaseDetailView, FormView):
         resp = upload_movie(self.request.user.get_wikidata_oauth1(),
                             labels, descs, ids, year,
                             duration)
-        if resp['success'] != 1:
+        if resp.get('success') != 1:
             msg = f"Invalid success code: {resp['success']} != 1:"
             logger.error(msg + "\n" + json.dumps(resp, indent=2))
             messages.error(self.request, msg)
