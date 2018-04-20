@@ -101,6 +101,18 @@
 
             </div>
             {% include "_idea_bid.html" %}
+            <div class="card bg-success mb-1">
+                <div class="card-body">
+                    <p class="card-text text-light">
+                        <a class="text-light" href="{% url "movies:edit" object.id %}">
+                            <span class="fa fa-edit"></span> {% trans "Edit" %}</a>
+                        |
+                        <a class="text-light" href="{% url "editing_logs:movie" object.id %}">
+                            <span class="fa fa-list"></span> {% trans "Logs" %}
+                        </a>
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 

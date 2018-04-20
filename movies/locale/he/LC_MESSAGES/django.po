@@ -6,17 +6,21 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"MovieReport-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-24 16:59+0200\n"
-"PO-Revision-Date: 2018-02-24 17:00+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-04-20 10:56+0300\n"
+"PO-Revision-Date: 2018-04-20 10:56+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"MovieReport-Msgid-Bugs-To: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.6\n"
+
+msgid "Editing Comment"
+msgstr "הערת עריכה"
 
 msgid "Hebrew title"
 msgstr "כותרת בעברית"
@@ -36,6 +40,18 @@ msgstr "שדה"
 msgid "fields"
 msgstr "שדות"
 
+msgid "year"
+msgstr "שנה"
+
+msgid "duration"
+msgstr "משך הסרט (בדקות)"
+
+msgid "Hebrew summary"
+msgstr "תקציר בעברית"
+
+msgid "English summary"
+msgstr "תקציר באנגלית"
+
 msgid "movie"
 msgstr "סרט"
 
@@ -48,9 +64,6 @@ msgstr "404 הדף לא קיים"
 msgid "IFX"
 msgstr ""
 
-msgid "Watch Collection"
-msgstr "לעיון באוסף"
-
 msgid "No items found"
 msgstr "לא נמצאו פריטים"
 
@@ -62,6 +75,9 @@ msgstr "נמצאו"
 
 msgid "items"
 msgstr "פריטים"
+
+msgid "Watch Collection"
+msgstr "לעיון באוסף"
 
 msgctxt "movie"
 msgid "Summary"
@@ -106,8 +122,11 @@ msgstr "כותרת בעברית"
 msgid "English Title"
 msgstr "כותרת באנגלית"
 
-msgid "Legacy ID"
-msgstr "מזהה מערכת אידאה"
+msgid "Edit"
+msgstr "עריכה"
+
+msgid "Logs"
+msgstr "יומן עריכות"
 
 msgid "Title"
 msgstr "סרט"
@@ -141,6 +160,12 @@ msgstr "צבעוניות"
 
 msgid "Summery"
 msgstr "תקציר"
+
+msgid "Save"
+msgstr "שמירה"
+
+msgid "Add"
+msgstr "הוספה"
 
 msgid "Movies"
 msgstr "סרטים"
@@ -178,8 +203,14 @@ msgstr "בית"
 msgid "About"
 msgstr "על אודות"
 
+msgid "Movie updated successfully"
+msgstr "הסרט עודכן בהצלחה"
+
 msgid "Fields"
 msgstr "שדות"
+
+#~ msgid "Legacy ID"
+#~ msgstr "מזהה מערכת אידאה"
 
 #~ msgid "Links"
 #~ msgstr "קישורים"
@@ -213,9 +244,6 @@ msgstr "שדות"
 
 #~ msgid "Email: rusom@jer-cin.org.il"
 #~ msgstr "דוא\"ל : rusom@jer-cin.org.il"
-
-#~ msgid "Address"
-#~ msgstr "מיקום"
 
 #~ msgid "11 Hebron rd. POB 8651 <br> Jerusalem, 9108402"
 #~ msgstr ""
@@ -263,9 +291,6 @@ msgstr "שדות"
 
 #~ msgid "Year/s"
 #~ msgstr "שנה/ים"
-
-#~ msgid "Hebrew Summary"
-#~ msgstr "עברית"
 
 #~ msgid "Jerusalem Cinematheque Site"
 #~ msgstr "לאתר סינמטק ירושלים"

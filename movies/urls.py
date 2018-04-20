@@ -12,6 +12,8 @@ urlpatterns = [
     url(r"^movie/$", views.MovieListView.as_view(), name='list'),
     url(r"^movie/(?P<pk>[0-9]+)/$", views.MovieDetailView.as_view(),
         name='detail'),
+    url(r"^movie/(?P<pk>[0-9]+)/edit/$", views.MovieUpdateView.as_view(),
+        name='edit'),
 
     url(r"^field/$", views.FieldListView.as_view(), name='field_list'),
     url(r"^field/(?P<pk>[0-9]+)/$", views.FieldDetailView.as_view(),

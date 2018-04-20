@@ -6,6 +6,6 @@ app_name = "editing_logs"
 
 urlpatterns = [
     url(r"^$", views.LogItemListView.as_view(), name='list'),
-    # url(r"^(?P<pk>\d+)/refresh/$", views.SuggestionForceLookupView.as_view(),
-    #     name='refresh'),
+    url(r"^movie/(?P<pk>[0-9]+)/$", views.MovieLogItemListView.as_view(),
+        name='movie'),
 ]

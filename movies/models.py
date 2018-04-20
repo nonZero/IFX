@@ -76,18 +76,19 @@ class Movie(Undeletable, WikiDataEntity):
     ENTITY_CODE = 'movie'
     WIKIDATA_CLASSIFIER_PID = FILM
 
-    year = models.IntegerField(null=True, blank=True)
-    duration = models.IntegerField(null=True, blank=True)
-    title_he = models.CharField(max_length=300, null=True, blank=True)
-    title_en = models.CharField(max_length=300, null=True, blank=True)
-    summary_he = models.TextField(null=True, blank=True)
-    summary_en = models.TextField(null=True, blank=True)
+    year = models.IntegerField(_("year"), null=True, blank=True)
+    duration = models.IntegerField(_("duration"), null=True, blank=True)
+    title_he = models.CharField(_("Hebrew title"), max_length=300, null=True, blank=True)
+    title_en = models.CharField(_("English title"), max_length=300, null=True, blank=True)
+    summary_he = models.TextField(_("Hebrew summary"), null=True, blank=True)
+    summary_en = models.TextField(_("English summary"), null=True, blank=True)
 
     idea_bid = models.IntegerField(unique=True, null=True, blank=True)
     idea_modified = models.BooleanField(default=False)
 
     links = GenericRelation('links.Link')
     suggestions = GenericRelation('enrich.Suggestion')
+    log_rows = GenericRelation('editing_logs.LogItemRow')
 
     FIELDS_TO_LOG = (
         'year',

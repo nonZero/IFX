@@ -1,11 +1,17 @@
 from builtins import super
 
+from django.contrib import messages
 from django.db.models import Count
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import ListView, TemplateView, DetailView
+from django.views.generic import ListView, TemplateView, DetailView, UpdateView
 
+from editing_logs.api import Recorder
+from enrich.lookup import create_suggestion
+from enrich.tasks import lookup_suggestion_by_id
 from ifx.base_views import IFXMixin
+from movies import forms
 from movies.models import Movie, Tag, Field
 from people.models import Person
 
@@ -59,6 +65,31 @@ class MovieDetailView(IFXMixin, DetailView):
         context = super().get_context_data(**kwargs)
         context['set_jumbotron'] = 3
         return context
+
+
+class MovieUpdateView(IFXMixin, UpdateView):
+    model = Movie
+    form_class = forms.MovieForm
+
+    breadcrumbs = (
+        (_("Movies"), reverse_lazy("movies:list")),
+    )
+
+    def form_valid(self, form):
+        o = form.instance
+        original = o.__class__.objects.get(id=o.id)
+        if any(getattr(o, attr) != getattr(original, attr) for attr in
+               forms.MOVIE_FIELDS):
+            with Recorder(user=self.request.user,
+                          note=form.cleaned_data['editing_comment']) as r:
+                r.record_update_before(original)
+                form.save()
+                r.record_update_after(o)
+            messages.success(self.request, _("Movie updated successfully"))
+            if o.title_he:
+                s, created = create_suggestion(o)
+                lookup_suggestion_by_id.delay(s.id)
+        return redirect(o)
 
 
 class FieldListView(IFXMixin, ListView):

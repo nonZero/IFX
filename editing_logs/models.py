@@ -12,6 +12,10 @@ class LogItem(models.Model):
                              on_delete=models.PROTECT)
     note = models.TextField(null=True, blank=True)
 
+    class Meta:
+        verbose_name = _("log item")
+        verbose_name_plural = _("log items")
+
     def __str__(self):
         return f"[{self.id}] {self.user}@{self.created_at}"
 
@@ -38,3 +42,8 @@ class LogItemRow(models.Model):
     entity = GenericForeignKey()
 
     data = JSONField()
+
+    class Meta:
+        verbose_name = _("log item row")
+        verbose_name_plural = _("log item rows")
+

@@ -1,14 +1,21 @@
 {% extends 'base.html' %}
-{% load static i18n %}
+{% load static i18n humanize bootstrap4 ifx %}
 
 {% block content %}
 
     <form method="post" novalidate>
         {% csrf_token %}
 
-        {{ form.as_ul }}
+        {% bootstrap_form form %}
 
-        <button>Add</button>
+        <button class="btn btn-primary">
+            <span class="fa fa-save"></span>
+            {% if object %}
+                {% trans "Save" %}
+            {% else %}
+                {% trans "Add" %}
+            {% endif %}
+        </button>
     </form>
 
 {% endblock %}
