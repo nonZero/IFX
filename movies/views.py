@@ -201,8 +201,8 @@ class PostToWikiDataView(IFXMixin, BaseDetailView, FormView):
                             labels, descs, ids, year,
                             duration)
         if resp.get('success') != 1:
-            msg = f"Invalid success code: {resp['success']} != 1:"
-            logger.error(msg + "\n" + json.dumps(resp, indent=2))
+            msg = "Error uploading data to wikidata\n"
+            logger.error(msg + json.dumps(resp, indent=2))
             messages.error(self.request, msg)
         else:
             o.wikidata_id = resp['entity']['id']
