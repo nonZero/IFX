@@ -51,8 +51,33 @@
                     {% endif %}
                 </ul>
             </div>
+
+            {% if object.idea_tid %}
+                <div class="card bg-dark mb-1">
+                    <div class="card-body">
+                        <p class="card-text text-light">
+                            {% trans "Legacy ID" %}: {{ object.idea_tid }}
+                        </p>
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="card bg-success mb-1">
+                <div class="card-body">
+                    <p class="card-text text-light">
+                        <a class="text-light"
+                           href="{% url "people:edit" object.id %}">
+                            <span class="fa fa-edit"></span> {% trans "Edit" %}
+                        </a>
+                        |
+                        <a class="text-light"
+                           href="{% url "editing_logs:person" object.id %}">
+                            <span class="fa fa-list"></span> {% trans "Logs" %}
+                        </a>
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
-    {% include "_idea_bid.html" %}
 
 {% endblock %}

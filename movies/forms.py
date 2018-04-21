@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from movies.models import Movie
+from .models import Movie
 
 MOVIE_FIELDS = (
     'year',
@@ -37,6 +37,6 @@ class PostToWikiDataForm(forms.Form):
     title_en = forms.BooleanField(label=_("English title"), required=False,
                                   initial=True)
     desc_he = forms.CharField(label=_("Hebrew description"), required=False,
-                                  initial=True)
+                              initial=True)
     desc_en = forms.CharField(label=_("English description"), required=False,
-                                  initial=True)
+                              initial=True)

@@ -5,23 +5,20 @@ from builtins import super
 from django.contrib import messages
 from django.db.models import Count
 from django.shortcuts import redirect
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView, TemplateView, DetailView, \
     UpdateView, FormView
 from django.views.generic.detail import BaseDetailView
 
-from editing_logs.api import Recorder
-from enrich.lookup import create_suggestion
-from enrich.tasks import lookup_suggestion_by_id
 from general.templatetags.ifx import bdtitle
-from ifx.base_views import IFXMixin
+from ifx.base_views import IFXMixin, EntityEditMixin, EntityActionMixin
 from links.models import LinkType
 from links.tasks import add_links_by_movie_id
 from movies import forms
 from movies.models import Movie, Tag, Field
-from wikidata_edit.upload import upload_movie
 from people.models import Person
+from wikidata_edit.upload import upload_movie
 
 logger = logging.getLogger(__name__)
 
@@ -45,7 +42,6 @@ class AboutView(IFXMixin, TemplateView):
 
 
 class MovieListView(IFXMixin, ListView):
-    # jumbotron = 'movies/searchresult_jumbotron.html'
     model = Movie
     paginate_by = 25
 
@@ -71,81 +67,19 @@ class MovieDetailView(IFXMixin, DetailView):
         (_("Movies"), reverse_lazy("movies:list")),
     )
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['set_jumbotron'] = 3
-        return context
 
-
-class MovieUpdateView(IFXMixin, UpdateView):
+class MovieUpdateView(EntityEditMixin, UpdateView):
     model = Movie
+    breadcrumbs = MovieDetailView.breadcrumbs
     form_class = forms.MovieForm
 
-    breadcrumbs = (
-        (_("Movies"), reverse_lazy("movies:list")),
-    )
 
-    def form_valid(self, form):
-        o = form.instance
-        original = o.__class__.objects.get(id=o.id)
-        if any(getattr(o, attr) != getattr(original, attr) for attr in
-               forms.MOVIE_FIELDS):
-            with Recorder(user=self.request.user,
-                          note=form.cleaned_data['editing_comment']) as r:
-                r.record_update_before(original)
-                form.save()
-                r.record_update_after(o)
-            messages.success(self.request, _("Movie updated successfully"))
-            if o.title_he:
-                s, created = create_suggestion(o)
-                lookup_suggestion_by_id.delay(s.id)
-        return redirect(o)
-
-
-class FieldListView(IFXMixin, ListView):
-    model = Field
-
-    def get_queryset(self):
-        return Field.objects.annotate(
-            movie_count=Count('tags__movies')).filter(
-            movie_count__gt=0)
-
-
-class FieldDetailView(IFXMixin, DetailView):
-    breadcrumbs = (
-        (_("Fields"), reverse_lazy("movies:field_list")),
-    )
-
-    model = Field
-
-
-TAG_ORDER_FIELDS = {
-    'title_he',
-    'title_en',
-    'lang',
-    'type_id',
-}
-
-
-class TagDetailView(IFXMixin, DetailView):
-    model = Tag
-
-    def get_breadcrumbs(self):
-        fld = self.get_object().field
-        return FieldDetailView.breadcrumbs + (
-            (str(fld), fld.get_absolute_url()),
-        )
-
-
-class PostToWikiDataView(IFXMixin, BaseDetailView, FormView):
+class PostToWikiDataView(EntityActionMixin, BaseDetailView, FormView):
     model = Movie
+    breadcrumbs = MovieDetailView.breadcrumbs
+    action_name = _("Upload to WikiData")
     form_class = forms.PostToWikiDataForm
     template_name = "movies/movie_upload.html"
-
-    def get(self, request, *args, **kwargs):
-        if self.request.user.wikidata_access_token is None:
-            redirect(f'{reverse("users:oauth")}?return_to={self.request.path}')
-        return super().get(request, *args, **kwargs)
 
     def get_initial(self):
         o = self.get_object()
@@ -211,3 +145,38 @@ class PostToWikiDataView(IFXMixin, BaseDetailView, FormView):
             messages.success(self.request, _("Added new wikidata entity."))
             add_links_by_movie_id(o.id)
         return redirect(o)
+
+
+class FieldListView(IFXMixin, ListView):
+    model = Field
+
+    def get_queryset(self):
+        return Field.objects.annotate(
+            movie_count=Count('tags__movies')).filter(
+            movie_count__gt=0)
+
+
+class FieldDetailView(IFXMixin, DetailView):
+    breadcrumbs = (
+        (_("Fields"), reverse_lazy("movies:field_list")),
+    )
+
+    model = Field
+
+
+TAG_ORDER_FIELDS = {
+    'title_he',
+    'title_en',
+    'lang',
+    'type_id',
+}
+
+
+class TagDetailView(IFXMixin, DetailView):
+    model = Tag
+
+    def get_breadcrumbs(self):
+        fld = self.get_object().field
+        return FieldDetailView.breadcrumbs + (
+            (str(fld), fld.get_absolute_url()),
+        )

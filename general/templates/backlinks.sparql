@@ -1,0 +1,16 @@
+SELECT  ?relLabel ?itemLabel ?item ?sitelink {
+  VALUES (?ps_) {(wd:{{id}})}
+
+  ?item ?p ?statement .
+  ?statement ?ps ?ps_ .
+
+  ?rel wikibase:claim ?p.
+  ?rel wikibase:statementProperty ?ps.
+
+  OPTIONAL {
+    ?sitelink schema:about ?item.
+    ?sitelink schema:isPartOf <https://he.wikipedia.org/>.
+  }
+
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "he,en" }
+} ORDER BY ?wd ?statement ?ps_

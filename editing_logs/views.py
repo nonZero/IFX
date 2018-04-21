@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404
 from django_filters.views import FilterView
 
 from editing_logs.models import LogItem
+from general.templatetags.ifx import bdtitle
 from ifx.base_views import IFXMixin
 from movies.models import Movie
 
@@ -24,10 +25,17 @@ class LogItemListView(IFXMixin, FilterView):
     queryset = LogItem.objects.order_by('-created_at')
 
 
-class MovieLogItemListView(LogItemListView):
+class EntityLogItemListView(LogItemListView):
+
+    def get_breadcrumbs(self):
+        return (
+            (bdtitle(self.object), self.object.get_absolute_url()),
+        )
+
     def get_queryset(self):
-        self.movie = get_object_or_404(Movie, pk=self.kwargs['pk'])
-        ct = ContentType.objects.get_for_model(Movie)
+        model = self.kwargs['model']
+        self.object = get_object_or_404(model, pk=self.kwargs['pk'])
+        ct = ContentType.objects.get_for_model(model)
         qs = super().get_queryset().filter(rows__content_type=ct,
-                                           rows__object_id=self.movie.id)
+                                           rows__object_id=self.object.id)
         return qs

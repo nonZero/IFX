@@ -14,10 +14,10 @@ class Person(Undeletable, WikiDataEntity):
     ENTITY_CODE = 'person'
     WIKIDATA_CLASSIFIER_PID = HUMAN
 
-    name_he = models.CharField(max_length=300, null=True, blank=True,
-                               db_index=True)
-    name_en = models.CharField(max_length=300, null=True, blank=True,
-                               db_index=True)
+    name_he = models.CharField(_('Hebrew name'), max_length=300, null=True,
+                               blank=True, db_index=True)
+    name_en = models.CharField(_('English name'), max_length=300, null=True,
+                               blank=True, db_index=True)
     first_name_he = models.CharField(max_length=300, null=True, blank=True,
                                      db_index=True)
     first_name_en = models.CharField(max_length=300, null=True, blank=True,

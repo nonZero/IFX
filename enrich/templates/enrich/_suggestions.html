@@ -1,12 +1,27 @@
-{% load i18n staticfiles %}
+{% load i18n staticfiles ifx %}
 {% if object.wikidata_id %}
     <div class="card mb-2">
         <h4 class="card-header">
             <a class="" href="{{ object.wikidata_url }}"
-               title="{{ object.wikidata_id }}">
+               title="{% trans "WikiData" %} {{ object.wikidata_id }}">
                 <img src="{% static "images/wikidata-logo.svg" %}" alt="{% trans "WikiData" %}"
                      height="26"
-                >{% trans "WikiData item" %}</a>
+                ><span class="d-none d-xl-inline">{% trans "WikiData item" %}</span></a>
+            |
+            <a class="" href="https://tools.wmflabs.org/sqid/#/view?id={{ object.wikidata_id }}"
+               title="SQID {{ object.wikidata_id }}">
+                <img src="{% static "images/sqid.svg" %}" alt="{% trans "SQID" %}"
+                     height="24" width="16"
+                ></a>
+            <a class="" href="https://tools.wmflabs.org/reasonator/?q={{ object.wikidata_id }}"
+               title="Reasonator {{ object.wikidata_id }}">
+                <img src="{% static "images/reasonator.png" %}" alt="{% trans "Reasonator" %}"
+                     height="22"
+                ></a>
+            <a class="" href="{{ object.wikidata_id|wikidata_query_link }}"
+               title="Backlinks {{ object.wikidata_id }}">
+                <span class="fa fa-table fa-sm"></span></a>
+
         </h4>
     </div>
 {% else %}

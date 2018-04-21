@@ -1,9 +1,10 @@
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, UpdateView
 
-from ifx.base_views import IFXMixin
+from ifx.base_views import IFXMixin, EntityEditMixin
 from people.models import Person
+from . import forms
 
 
 class PersonListView(IFXMixin, ListView):
@@ -36,3 +37,10 @@ PERSON_ORDER_FIELDS = {
     'last_name_he',
     'last_name_en',
 }
+
+
+class PersonUpdateView(EntityEditMixin, UpdateView):
+    model = Person
+    breadcrumbs = PersonDetailView.breadcrumbs
+    form_class = forms.PersonForm
+    template_name = "generic_form.html"
