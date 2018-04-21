@@ -91,9 +91,6 @@ class MovieFilter(django_filters.FilterSet):
         return queryset.filter(q)
 
 
-print(MovieFilter.base_filters)
-
-
 class MovieListView(IFXMixin, FilterView):
     filterset_class = MovieFilter
     template_name = "movies/movie_list.html"
