@@ -1,13 +1,30 @@
+import django_filters
+from django.db.models import Q
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import ListView, DetailView, UpdateView
+from django.views.generic import DetailView, UpdateView
+from django_filters.views import FilterView
 
 from ifx.base_views import IFXMixin, EntityEditMixin
 from people.models import Person
 from . import forms
 
 
-class PersonListView(IFXMixin, ListView):
+class PersonFilter(django_filters.FilterSet):
+    name = django_filters.CharFilter(method='name_filter', label=_("name"))
+
+    class Meta:
+        model = Person
+        fields = ()
+
+    def name_filter(self, queryset, name, value):
+        q = Q(name_en__icontains=value) | Q(name_he__icontains=value)
+        return queryset.filter(q)
+
+
+class PersonListView(IFXMixin, FilterView):
+    template_name = "people/person_list.html"
+    filterset_class = PersonFilter
     model = Person
     paginate_by = 50
 
