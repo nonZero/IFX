@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-21 23:06+0300\n"
-"PO-Revision-Date: 2018-04-21 21:58+0300\n"
+"POT-Creation-Date: 2018-04-22 01:37+0300\n"
+"PO-Revision-Date: 2018-04-22 01:39+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -110,6 +110,12 @@ msgstr "חיפוש..."
 msgid "Year"
 msgstr "שנה"
 
+msgid "INACTIVE"
+msgstr "לא פעיל"
+
+msgid "Merged into"
+msgstr "מוזג לתוך"
+
 msgid "m."
 msgstr "דק'"
 
@@ -136,6 +142,12 @@ msgstr "עריכה"
 
 msgid "Logs"
 msgstr "יומן עריכות"
+
+msgid "Possible Duplicates"
+msgstr "כפילויות אפשריות"
+
+msgid "Merge"
+msgstr "מיזוג"
 
 msgid "Title"
 msgstr "סרט"
@@ -262,6 +274,15 @@ msgstr "מזהה בלבד! (אין להזין קישור מלא)"
 
 msgid "Added new wikidata entity."
 msgstr "נוצר פריט ויקינתונים חדש"
+
+msgid "Merge into another movie"
+msgstr "מיזוג אל סרט אחר"
+
+msgid "WikiData ID"
+msgstr "מזהה WikiData"
+
+msgid "Merged."
+msgstr "מוזג."
 
 msgid "Fields"
 msgstr "שדות"
