@@ -10,6 +10,11 @@ MOVIE_FIELDS = (
     'title_en',
 )
 
+MERGE_FIELDS = MOVIE_FIELDS + (
+    'summary_he',
+    'summary_en',
+)
+
 
 class MovieForm(forms.ModelForm):
     editing_comment = forms.CharField(label=_('Editing Comment'),
@@ -40,3 +45,5 @@ class PostToWikiDataForm(forms.Form):
                               initial=True)
     desc_en = forms.CharField(label=_("English description"), required=False,
                               initial=True)
+
+

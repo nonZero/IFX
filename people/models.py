@@ -60,7 +60,8 @@ class Person(Undeletable, WikiDataEntity):
 
     def movies_flat(self):
         movies = defaultdict(set)
-        for mrp in self.movies.order_by('-movie__year'):
+        for mrp in self.movies.active().filter(movie__active=True).order_by(
+                '-movie__year'):
             movies[mrp.movie].add(mrp.role)
 
         for m, roles in movies.items():
@@ -126,3 +127,11 @@ class MovieRolePerson(Undeletable):
         unique_together = (
             ('movie', 'role', 'person'),
         )
+
+    @property
+    def title_he(self):
+        return self.role.title_he
+
+    @property
+    def title_en(self):
+        return self.role.title_en

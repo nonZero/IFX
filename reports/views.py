@@ -73,7 +73,7 @@ class DuplicateTitleMovieReport(MovieReport):
     duplicate_field = 'title_he'
 
     def get_queryset(self):
-        qs0 = Movie.objects.exclude(title_he=None).values(
+        qs0 = Movie.objects.active().exclude(title_he=None).values(
             self.duplicate_field).annotate(
             x=Count('id')).filter(
             x__gt=1).order_by(self.duplicate_field)
