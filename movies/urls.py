@@ -17,7 +17,8 @@ urlpatterns = [
     url(r"^movie/(?P<pk>[0-9]+)/upload/$", views.PostToWikiDataView.as_view(),
         name='upload'),
 
-    url(r"^movie/(?P<pk>[0-9]+)/merge-into/(?P<other>[0-9]+)$", views.MergeIntoView.as_view(),
+    url(r"^movie/(?P<pk>[0-9]+)/merge-into/(?P<other>[0-9]+)$",
+        views.MergeIntoView.as_view(),
         name='merge'),
 
     url(r"^field/$", views.FieldListView.as_view(), name='field_list'),

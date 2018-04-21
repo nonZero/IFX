@@ -4,14 +4,14 @@
     <div class="display-4 text-center">{% trans "The Israeli Film Archive" %}</div>
     <br>
     <br>
-    <form id="searchform" action="{% url 'search:query' %}">
+    <form id="searchform" action="{% url 'movies:list' %}">
         <div class="row justify-content-center">
             <div class="col-10 col-sm-8 col-md-6 searchBox">
                 <div class="input-group">
                     <input type="text"
                            class="form-control"
                            id="searchbox"
-                           name="q" placeholder="{% trans 'Search...' %}">
+                           name="title" placeholder="{% trans 'Search...' %}">
                     <div class="input-group-append">
                         <button class="btn btn-outline-secondary">
                             <span class="fa fa-search"></span>

@@ -55,6 +55,8 @@ class MovieFilter(django_filters.FilterSet):
     year = django_filters.RangeFilter()
     duration = django_filters.RangeFilter()
     tags__tag = django_filters.ChoiceFilter(choices=get_tags, label=_("Genre"))
+    summary = django_filters.CharFilter(method='summary_filter',
+                                        label=_("summary"))
 
     ordering = django_filters.OrderingFilter(
 
@@ -89,6 +91,10 @@ class MovieFilter(django_filters.FilterSet):
 
     def title_filter(self, queryset, name, value):
         q = Q(title_en__icontains=value) | Q(title_he__icontains=value)
+        return queryset.filter(q)
+
+    def summary_filter(self, queryset, name, value):
+        q = Q(summary_en__icontains=value) | Q(summary_he__icontains=value)
         return queryset.filter(q)
 
 
