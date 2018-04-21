@@ -4,6 +4,9 @@
         <div class="card-body">
             <p class="card-text text-light">
                 {% trans "Legacy ID" %}: {{ object.idea_bid }}
+                {% if object.idea_modified %}
+                    | <b class="text-danger">{% trans "Modified" %}</b>
+                {% endif %}
             </p>
         </div>
     </div>
