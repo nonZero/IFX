@@ -64,6 +64,7 @@ class EntityEditMixin(EntityActionMixin):
             with Recorder(user=self.request.user,
                           note=form.cleaned_data['editing_comment']) as r:
                 r.record_update_before(original)
+                o.idea_modified = True
                 form.save()
                 r.record_update_after(o)
             messages.success(self.request, _("Updated successfully"))
