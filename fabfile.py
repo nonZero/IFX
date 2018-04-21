@@ -164,10 +164,36 @@ def create_uwsgi_conf():
     sudo("service uwsgi start")
 
 NGINX_CONF = """
+ssl_ciphers         AES128-SHA:AES256-SHA:RC4-SHA:DES-CBC3-SHA:RC4-MD5;
+ssl_session_cache   shared:SSL:10m;
+ssl_session_timeout 10m;
+ssl_certificate    /home/certbot/conf/live/{host}/fullchain.pem;
+ssl_certificate_key /home/certbot/conf/live/{host}/privkey.pem;
+
 server {{
-    listen      80;
+   listen 80 default_server;
+   return 404;
+}}
+
+server {{
+    listen 80;
+    server_name {host};
+    return 301 https://{host}$request_uri;
+}}
+
+server {{
+   listen 443 ssl default_server;
+   return 404;
+}}
+
+server {{
+    listen 443 ssl;
     server_name {host};
     charset     utf-8;
+
+    location /.well-known/ {{
+        root /home/certbot/webroot/;
+    }}
 
     location /static/ {{
         alias {env.static_path};
@@ -207,8 +233,8 @@ def nginx_log():
 
 
 @task
-def uwsgi_log():
-    sudo("tail /var/log/uwsgi/app/ifx.log")
+def uwsgi_log(n=50):
+    sudo(f"tail -n {n} /var/log/uwsgi/app/ifx.log")
 
 @task
 def git_pull():
