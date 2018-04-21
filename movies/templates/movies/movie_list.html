@@ -1,21 +1,26 @@
 {% extends 'base.html' %}
-{% load static i18n humanize %}
+{% load static i18n humanize bootstrap4 %}
 
-{% block main %}
-    <main>
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col col-lg-10">
-                    <h1>
-                        {% trans "Movies" %}
-                    </h1>
+{% block content %}
+    <div class="row">
 
-                    {% include 'movies/_movies.html' with count=paginator.count %}
+        <div class="col-sm-3 col-md-2 col-lg-2">
+            <h5 class="totals">
+                {% trans "Filter" %}
+            </h5>
 
-                </div>
-            </div>
+            <form>
+                {% bootstrap_form filter.form %}
+                <button class="btn btn-primary">{% trans "Filter" %}</button>
+            </form>
         </div>
-    </main>
+
+        <div class="col-sm-9 col-md-10 col-lg-10">
+
+            {% include 'movies/_movies.html' with count=paginator.count %}
+
+        </div>
+    </div>
 
 {% endblock %}
 

@@ -2,14 +2,16 @@ import json
 import logging
 from builtins import super
 
+import django_filters
 from django.contrib import messages
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView, TemplateView, DetailView, \
     UpdateView, FormView
 from django.views.generic.detail import BaseDetailView
+from django_filters.views import FilterView
 
 from general.templatetags.ifx import bdtitle
 from ifx.base_views import IFXMixin, EntityEditMixin, EntityActionMixin
@@ -41,23 +43,63 @@ class AboutView(IFXMixin, TemplateView):
     title = _("About")
 
 
-class MovieListView(IFXMixin, ListView):
+def get_tags():
+    return ((t.id, f"{bdtitle(t)} ({t.movie_count})") for t in
+            Field.objects.get(idea_fid='AJAN').tags.annotate(
+                movie_count=Count('movies')).order_by('title_he'))
+
+
+class MovieFilter(django_filters.FilterSet):
+    title = django_filters.CharFilter(method='title_filter', label=_("title"))
+    year = django_filters.RangeFilter()
+    duration = django_filters.RangeFilter()
+    tags__tag = django_filters.ChoiceFilter(choices=get_tags, label=_("Genre"))
+
+    ordering = django_filters.OrderingFilter(
+
+        label=_("ordering"),
+        fields=(
+            ('title_he', 'title_he'),
+            ('title_en', 'title_en'),
+            ('year', 'year'),
+            ('duration', 'duration'),
+        ),
+
+        field_labels={
+            'title_he': _('Hebrew Title (A -> Z)'),
+            'title_en': _('English Title (A -> Z)'),
+            'year': _('Year (Old -> New)'),
+            'duration': _('Duration (Short -> long)'),
+            '-title_he': _('Hebrew title (Z -> A)'),
+            '-title_en': _('English title (Z -> A)'),
+            '-year': _('Year (New -> Old)'),
+            '-duration': _('Duration (Long -> Short)'),
+        }
+    )
+
+    class Meta:
+        model = Movie
+        fields = (
+            'title',
+            'year',
+            'duration',
+            'tags__tag',
+        )
+
+    def title_filter(self, queryset, name, value):
+        q = Q(title_en__icontains=value) | Q(title_he__icontains=value)
+        return queryset.filter(q)
+
+
+print(MovieFilter.base_filters)
+
+
+class MovieListView(IFXMixin, FilterView):
+    filterset_class = MovieFilter
+    template_name = "movies/movie_list.html"
     model = Movie
     paginate_by = 25
-
-    ORDER_FIELDS = {
-        'title_he',
-        'title_en',
-        'year',
-    }
-
-    DEFAULT_ORDER_FIELD = "title_he"
-
-    def get_ordering(self):
-        k = self.request.GET.get('order', None)
-        if k not in self.ORDER_FIELDS:
-            k = self.DEFAULT_ORDER_FIELD
-        return k
+    ordering = "title_he"
 
 
 class MovieDetailView(IFXMixin, DetailView):

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-21 17:32+0300\n"
-"PO-Revision-Date: 2018-04-21 00:20+0300\n"
+"POT-Creation-Date: 2018-04-21 21:58+0300\n"
+"PO-Revision-Date: 2018-04-21 21:58+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -176,8 +176,8 @@ msgstr "שמירה"
 msgid "Add"
 msgstr "הוספה"
 
-msgid "Movies"
-msgstr "סרטים"
+msgid "Filter"
+msgstr "סינון"
 
 msgid "Upload"
 msgstr "העלאה"
@@ -212,6 +212,9 @@ msgstr "שנים - מהחדש לישן"
 msgid "Director A-Z"
 msgstr "במאי/ת - א-ת"
 
+msgid "Movies"
+msgstr "סרטים"
+
 msgid "Tags"
 msgstr "תגים"
 
@@ -220,6 +223,39 @@ msgstr "בית"
 
 msgid "About"
 msgstr "על אודות"
+
+msgid "title"
+msgstr "כותרת"
+
+msgid "Genre"
+msgstr "ז'אנר"
+
+msgid "ordering"
+msgstr "מיון תוצאות"
+
+msgid "Hebrew Title (A -> Z)"
+msgstr "כותרת בעברית (א -> ת)"
+
+msgid "English Title (A -> Z)"
+msgstr "כותרת באנגלית (A -> Z)"
+
+msgid "Year (Old -> New)"
+msgstr "שנה (ישן -> חדש)"
+
+msgid "Duration (Short -> long)"
+msgstr "משך הסרט ( קצר -> ארוך)"
+
+msgid "Hebrew title (Z -> A)"
+msgstr "כותרת בעברית (ת -> א)"
+
+msgid "English title (Z -> A)"
+msgstr "כותרת באנגלית (Z -> A)"
+
+msgid "Year (New -> Old)"
+msgstr "שנה (חדש -> ישן)"
+
+msgid "Duration (Long -> Short)"
+msgstr "משך הסרט (ארוך -> קצר)"
 
 msgid "ID only! (do not enter full URL)"
 msgstr "מזהה בלבד! (אין להזין קישור מלא)"
@@ -250,9 +286,6 @@ msgstr "שדות"
 
 #~ msgid "English"
 #~ msgstr "אנגלית"
-
-#~ msgid "title"
-#~ msgstr "כותרת"
 
 #~ msgid "min."
 #~ msgstr "דק'"
