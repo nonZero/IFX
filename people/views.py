@@ -52,9 +52,9 @@ class PersonDetailView(IFXMixin, DetailView):
 
     def possible_duplicates(self):
         q = Q()
-        if self.object.title_he:
+        if self.object.name_he:
             q |= Q(name_he=self.object.name_he)
-        if self.object.title_en:
+        if self.object.name_en:
             q |= Q(name_en=self.object.name_en)
         if not q:
             return None
