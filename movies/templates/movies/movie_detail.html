@@ -70,7 +70,7 @@
                     {% trans "Personalities" %}
                 </h4>
                 <ul>
-                    {% for role in movie.people.all %}
+                    {% for role in movie.people.active %}
                         <li>
                             <b>{{ role.role|bdtitle }}:</b> {{ role.person|ut_plus }}
                         </li>

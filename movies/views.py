@@ -292,6 +292,11 @@ class MergeIntoView(EntityActionMixin, BaseDetailView, FormView):
                     )
                     if created:
                         r.record_addition(mrp)
+                if ro.active:
+                    r.record_update_before(ro)
+                    ro.active = False
+                    ro.save()
+                    r.record_update_after(ro)
 
             for l in o.links.all():
                 r.record_update_before(l)

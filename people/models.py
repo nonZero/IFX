@@ -28,6 +28,8 @@ class Person(Undeletable, WikiDataEntity):
                                     db_index=True)
     idea_tid = models.IntegerField(unique=True, null=True, blank=True)
     idea_modified = models.BooleanField(default=False)
+    merged_into = models.ForeignKey('self', null=True, blank=True,
+                                    on_delete=models.PROTECT)
 
     links = GenericRelation('links.Link')
     suggestions = GenericRelation('enrich.Suggestion')
@@ -43,6 +45,7 @@ class Person(Undeletable, WikiDataEntity):
         'idea_modified',
         'wikidata_status',
         'wikidata_id',
+        'merged_into_id',
     )
 
     class Meta:

@@ -8,6 +8,13 @@ PERSON_FIELDS = (
     'name_en',
 )
 
+MERGE_FIELDS = PERSON_FIELDS + (
+    'first_name_he',
+    'first_name_en',
+    'last_name_he',
+    'last_name_en',
+)
+
 
 class PersonForm(forms.ModelForm):
     editing_comment = forms.CharField(label=_('Editing Comment'),
