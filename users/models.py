@@ -1,6 +1,10 @@
 from authtools.models import AbstractEmailUser
+from django.conf import settings
+from django.contrib.postgres.fields import JSONField
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from mwoauth import AccessToken
+from requests_oauthlib import OAuth1
 
 
 class User(AbstractEmailUser):
@@ -24,3 +28,20 @@ class User(AbstractEmailUser):
 
     is_team_member = models.BooleanField(_('team member'), default=False)
     is_data_volunteer = models.BooleanField(_('data volunteer'), default=False)
+
+    wikidata_access_token_created_at = models.DateTimeField(null=True)
+    wikidata_access_token = JSONField(null=True)
+
+    def get_access_token(self):
+        if self.wikidata_access_token is None:
+            return None
+        return AccessToken(self.wikidata_access_token['key'].encode(),
+                           self.wikidata_access_token['secret'].encode())
+
+    def get_wikidata_oauth1(self):
+        auth1 = OAuth1(settings.OAUTH_CONSUMER_KEY,
+                       settings.OAUTH_CONSUMER_SECRET,
+                       resource_owner_key=self.wikidata_access_token['key'],
+                       resource_owner_secret=self.wikidata_access_token[
+                           'secret'])
+        return auth1

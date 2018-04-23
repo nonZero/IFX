@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static i18n humanize bootstrap4 ifx %}
+
+{% block content %}
+
+    {% if user.wikidata_access_token %}
+
+        <form method="post" novalidate>
+            {% csrf_token %}
+
+            {% bootstrap_form form %}
+
+            <button class="btn btn-primary">
+                <span class="fa fa-save"></span>
+                {% trans "Upload" %}
+            </button>
+        </form>
+    {% else %}
+        <p>{% trans "Please authenticate your account" %}</p>
+        <a href="{% url "users:oauth" %}" class="btn btn-primary">{% trans "Authenticate" %}</a>
+    {% endif %}
+
+{% endblock %}

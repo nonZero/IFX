@@ -22,6 +22,17 @@
             </div>
         </div>
     </h1>
+    {% if not object.active %}
+        <p class="display-1 bg-danger text-center">
+            {% trans "INACTIVE" %}
+        </p>
+        {% if object.merged_into %}
+            <p class="display-3 bg-danger text-center">
+                {% trans "Merged into" %}
+                {{ object.merged_into|ut_plus }}
+            </p>
+        {% endif %}
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -59,7 +70,7 @@
                     {% trans "Personalities" %}
                 </h4>
                 <ul>
-                    {% for role in movie.people.all %}
+                    {% for role in movie.people.active %}
                         <li>
                             <b>{{ role.role|bdtitle }}:</b> {{ role.person|ut_plus }}
                         </li>
@@ -70,7 +81,9 @@
 
         <div class="col-md-6 col-lg-4">
             {% include "enrich/_suggestions.html" %}
+
             {% include "links/_links.html" with create_url="links:create_movie" edit_url="links:update_movie" %}
+
             <div class="card bg-warning mb-2">
                 <div class="card-header">
                     {% trans "Search the web" %}
@@ -100,7 +113,66 @@
                 </ul>
 
             </div>
+
+            {% if not object.wikidata_id %}
+                <div class="card mb-2">
+                    <h4 class="card-header">
+                        <a
+                                href="{% url "movies:upload" object.id %}">
+                            <span class="fa fa-upload"></span> {% trans "Upload to WikiData" %}
+                        </a>
+                    </h4>
+                </div>
+            {% endif %}
+
             {% include "_idea_bid.html" %}
+
+            <div class="card bg-success mb-1">
+                <div class="card-body">
+                    <p class="card-text text-light">
+                        <a class="text-light"
+                           href="{% url "movies:edit" object.id %}">
+                            <span class="fa fa-edit"></span> {% trans "Edit" %}
+                        </a>
+                        |
+                        <a class="text-light"
+                           href="{% url "editing_logs:movie" object.id %}">
+                            <span class="fa fa-list"></span> {% trans "Logs" %}
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            {% if view.possible_duplicates.count %}
+
+                <div class="card bg-warning mb-1">
+                    <div class="card-header">
+                        {% trans "Possible Duplicates" %}
+                    </div>
+                    <ul class="list-group">
+                        {% for m in view.possible_duplicates %}
+                            <a href="{{ m.get_absolute_url }}"
+                               class="list-group-item  list-group-item-action">
+                                <span class="badge badge-primary">#{{ m.id }}</span>
+                                {{ m|bdtitle_plus }}
+                                {% if m.year != none %}
+                                    <span dir="ltr"
+                                          class="year">({{ m.year }})</span>
+                                {% endif %}
+                                {% if m.duration %}
+                                    <span class="badge badge-light p-0"><span
+                                            class="fa fa-clock"></span> {{ m.duration|duration }} </span>
+                                {% endif %}
+                            </a>
+                            <a href="{% url "movies:merge" object.id m.id %}"
+                               class="list-group-item  list-group-item-action">
+                                <span class="fa fa-code-branch"></span> {% trans "Merge" %}
+                            </a>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
         </div>
     </div>
 

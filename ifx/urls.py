@@ -22,4 +22,6 @@ urlpatterns = i18n_patterns(
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^admin/', admin.site.urls),
-)
+) + [
+                  url(r'', include("users.urls")),
+              ]

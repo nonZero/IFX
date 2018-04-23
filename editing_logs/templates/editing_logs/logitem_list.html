@@ -29,10 +29,10 @@
             <ul class="list-group">
                 {% for object in object_list %}
                     <li class="list-group-item">
-                        [#{{ object.id }}]
-                        <span title="{{ object.created_at }}">{{ object.created_at|naturaltime }}</span>
-                        {{ object.user|default:'-' }}
-                        {{ object.note|default:'' }}
+                        <b>[#{{ object.id }}]
+                            <span title="{{ object.created_at }}">{{ object.created_at|naturaltime }}</span>
+                            {{ object.user|default:'-' }}</b> <br/>
+                        {{ object.note|default:''|linebreaks }}
                         <ul>
                             {% for row in object.rows.all %}
                                 <li>

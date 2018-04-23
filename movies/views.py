@@ -1,13 +1,29 @@
+import json
+import logging
 from builtins import super
 
-from django.db.models import Count
+import django_filters
+from django.contrib import messages
+from django.db.models import Count, Q
+from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import ListView, TemplateView, DetailView
+from django.views.generic import ListView, TemplateView, DetailView, \
+    UpdateView, FormView
+from django.views.generic.detail import BaseDetailView
+from django_filters.views import FilterView
 
-from ifx.base_views import IFXMixin
+from editing_logs.api import Recorder
+from general.templatetags.ifx import bdtitle
+from ifx.base_views import IFXMixin, EntityEditMixin, EntityActionMixin
+from links.models import LinkType
+from links.tasks import add_links_by_movie_id
+from movies import forms
 from movies.models import Movie, Tag, Field
 from people.models import Person
+from wikidata_edit.upload import upload_movie
+
+logger = logging.getLogger(__name__)
 
 
 class HomePage(IFXMixin, TemplateView):
@@ -16,10 +32,10 @@ class HomePage(IFXMixin, TemplateView):
     title = _("Home")
 
     def random_movies(self, n=3):
-        return Movie.objects.order_by("?")[:n]
+        return Movie.objects.active().order_by("?")[:n]
 
     def random_people(self, n=8):
-        return Person.objects.exclude(movies=None).order_by("?")[:n]
+        return Person.objects.active().exclude(movies=None).order_by("?")[:n]
 
 
 class AboutView(IFXMixin, TemplateView):
@@ -28,24 +44,67 @@ class AboutView(IFXMixin, TemplateView):
     title = _("About")
 
 
-class MovieListView(IFXMixin, ListView):
-    # jumbotron = 'movies/searchresult_jumbotron.html'
+def get_tags():
+    return ((t.id, f"{bdtitle(t)} ({t.movie_count})") for t in
+            Field.objects.get(idea_fid='AJAN').tags.annotate(
+                movie_count=Count('movies')).order_by('title_he'))
+
+
+class MovieFilter(django_filters.FilterSet):
+    title = django_filters.CharFilter(method='title_filter', label=_("title"))
+    year = django_filters.RangeFilter()
+    duration = django_filters.RangeFilter()
+    tags__tag = django_filters.ChoiceFilter(choices=get_tags, label=_("Genre"))
+    summary = django_filters.CharFilter(method='summary_filter',
+                                        label=_("summary"))
+
+    ordering = django_filters.OrderingFilter(
+
+        label=_("ordering"),
+        fields=(
+            ('title_he', 'title_he'),
+            ('title_en', 'title_en'),
+            ('year', 'year'),
+            ('duration', 'duration'),
+        ),
+
+        field_labels={
+            'title_he': _('Hebrew Title (A -> Z)'),
+            'title_en': _('English Title (A -> Z)'),
+            'year': _('Year (Old -> New)'),
+            'duration': _('Duration (Short -> long)'),
+            '-title_he': _('Hebrew title (Z -> A)'),
+            '-title_en': _('English title (Z -> A)'),
+            '-year': _('Year (New -> Old)'),
+            '-duration': _('Duration (Long -> Short)'),
+        }
+    )
+
+    class Meta:
+        model = Movie
+        fields = (
+            'title',
+            'year',
+            'duration',
+            'tags__tag',
+        )
+
+    def title_filter(self, queryset, name, value):
+        q = Q(title_en__icontains=value) | Q(title_he__icontains=value)
+        return queryset.filter(q)
+
+    def summary_filter(self, queryset, name, value):
+        q = Q(summary_en__icontains=value) | Q(summary_he__icontains=value)
+        return queryset.filter(q)
+
+
+class MovieListView(IFXMixin, FilterView):
+    filterset_class = MovieFilter
+    template_name = "movies/movie_list.html"
     model = Movie
     paginate_by = 25
-
-    ORDER_FIELDS = {
-        'title_he',
-        'title_en',
-        'year',
-    }
-
-    DEFAULT_ORDER_FIELD = "title_he"
-
-    def get_ordering(self):
-        k = self.request.GET.get('order', None)
-        if k not in self.ORDER_FIELDS:
-            k = self.DEFAULT_ORDER_FIELD
-        return k
+    ordering = "title_he"
+    queryset = Movie.objects.active()
 
 
 class MovieDetailView(IFXMixin, DetailView):
@@ -55,10 +114,199 @@ class MovieDetailView(IFXMixin, DetailView):
         (_("Movies"), reverse_lazy("movies:list")),
     )
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['set_jumbotron'] = 3
-        return context
+    def possible_duplicates(self):
+        q = Q()
+        if self.object.title_he:
+            q |= Q(title_he=self.object.title_he)
+        if self.object.title_en:
+            q |= Q(title_en=self.object.title_en)
+        if not q:
+            return None
+        return Movie.objects.filter(q, active=True).exclude(id=self.object.id)
+
+
+class MovieUpdateView(EntityEditMixin, UpdateView):
+    model = Movie
+    breadcrumbs = MovieDetailView.breadcrumbs
+    form_class = forms.MovieForm
+
+
+class PostToWikiDataView(EntityActionMixin, BaseDetailView, FormView):
+    model = Movie
+    breadcrumbs = MovieDetailView.breadcrumbs
+    action_name = _("Upload to WikiData")
+    form_class = forms.PostToWikiDataForm
+    template_name = "movies/movie_upload.html"
+
+    def get_initial(self):
+        o = self.get_object()
+        d = super().get_initial()
+        d['desc_en'] = f"{o.year} Israeli film" if o.year else "Israeli film"
+        d['desc_he'] = f"סרט ישראלי משנת {o.year}" if o.year else "סרט ישראלי"
+        return d
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        for fld in forms.MOVIE_FIELDS:
+            form.fields[fld].help_text = getattr(self.object, fld)
+        for lt in LinkType.objects.filter(for_movies=True,
+                                          wikidata_id__isnull=False):
+            k = f'ext_{lt.wikidata_id}'
+            form.fields[k] = forms.forms.CharField(label=bdtitle(lt),
+                                                   required=False, help_text=_(
+                    "ID only! (do not enter full URL)"))
+        return form
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super().post(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        o = self.object  # type: Movie
+        d = form.cleaned_data
+
+        labels = {}
+        if d['title_he']:
+            labels['he'] = o.title_he
+        if d['title_en']:
+            labels['en'] = o.title_en
+
+        descs = {}
+        if d['desc_he']:
+            descs['he'] = d['desc_he']
+        if d['desc_en']:
+            descs['en'] = d['desc_en']
+
+        duration = o.duration if d['duration'] else None
+        year = o.year if d['year'] else None
+
+        ids = {}
+        qs = LinkType.objects.filter(for_movies=True,
+                                     wikidata_id__isnull=False)
+        for lt in qs:
+            k = f'ext_{lt.wikidata_id}'
+            if d[k]:
+                ids[lt.wikidata_id] = d[k]
+
+        resp = upload_movie(self.request.user.get_wikidata_oauth1(),
+                            labels, descs, ids, year,
+                            duration)
+        if resp.get('success') != 1:
+            msg = "Error uploading data to wikidata\n"
+            logger.error(msg + json.dumps(resp, indent=2))
+            messages.error(self.request, msg)
+        else:
+            o.wikidata_id = resp['entity']['id']
+            o.wikidata_status = o.Status.ASSIGNED
+            o.save()
+            messages.success(self.request, _("Added new wikidata entity."))
+            add_links_by_movie_id(o.id)
+        return redirect(o)
+
+
+class MergeIntoView(EntityActionMixin, BaseDetailView, FormView):
+    model = Movie
+    breadcrumbs = MovieDetailView.breadcrumbs
+    action_name = _("Merge into another movie")
+    form_class = forms.forms.Form
+    template_name = "movies/movie_merge.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.other = get_object_or_404(Movie, pk=self.kwargs['other'])
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        o = self.object  # type: Movie
+        if o.wikidata_id and not self.other.wikidata_id:
+            form.fields['wikidata_id'] = forms.forms.BooleanField(
+                required=False, initial=True,
+                label=_("WikiData ID"))
+
+        for fld in forms.MERGE_FIELDS:
+            v = getattr(o, fld)
+            old = getattr(self.other, fld)
+            if v and v != old:
+                form.fields[fld] = forms.forms.BooleanField(
+                    required=False, help_text=v, initial=not old,
+                    label=o._meta.get_field(fld).verbose_name)
+
+        for t in o.tags.all():
+            k = f"t_{t.id}"
+            form.fields[k] = forms.forms.BooleanField(
+                required=False, initial=True,
+                label=f"{bdtitle(t.tag.field)} > {bdtitle(t.tag)}")
+
+        for r in o.people.all():
+            k = f"r_{r.id}"
+            form.fields[k] = forms.forms.BooleanField(
+                required=False, initial=True,
+                label=f"{bdtitle(r.role)} > {bdtitle(r.person)}")
+
+        return form
+
+    def form_valid(self, form):
+        o = self.object  # type: Movie
+        d = form.cleaned_data
+
+        with Recorder(user=self.request.user, note="merge") as r:
+            r.record_update_before(o)
+
+            if o.wikidata_id and not self.other.wikidata_id and d[
+                'wikidata_id']:
+                self.other.wikidata_id = o.wikidata_id
+                o.wikidata_id = None
+                self.other.wikidata_status = o.wikidata_status
+                o.wikidata_status = o.Status.NOT_APPLICABLE
+
+            o.active = False
+            o.merged_into = self.other
+            o.save()
+            r.record_update_after(o)
+
+            for fld in forms.MERGE_FIELDS:
+                v = getattr(o, fld)
+                old = getattr(self.other, fld)
+                if v and v != old and d[fld]:
+                    setattr(self.other, fld, v)
+                    self.other.idea_modified = True
+
+            r.record_update_before(o.__class__.objects.get(pk=self.other.pk))
+            self.other.save()
+            r.record_update_after(self.other)
+
+            for t in o.tags.all():
+                k = f"t_{t.id}"
+                if d[k]:
+                    tag, created = self.other.tags.get_or_create(tag=t.tag)
+                    if created:
+                        r.record_addition(tag)
+
+            for ro in o.people.all():
+                k = f"r_{ro.id}"
+                if d[k]:
+                    mrp, created = self.other.people.get_or_create(
+                        role=ro.role, person=ro.person,
+                        defaults={'priority': ro.priority, 'note': ro.note}
+                    )
+                    if created:
+                        r.record_addition(mrp)
+                if ro.active:
+                    r.record_update_before(ro)
+                    ro.active = False
+                    ro.save()
+                    r.record_update_after(ro)
+
+            for l in o.links.all():
+                r.record_update_before(l)
+                l.entity = self.other
+                l.save()
+                r.record_update_after(l)
+
+        messages.success(self.request, _("Merged."))
+
+        return redirect(o)
 
 
 class FieldListView(IFXMixin, ListView):

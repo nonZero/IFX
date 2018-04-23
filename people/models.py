@@ -14,10 +14,10 @@ class Person(Undeletable, WikiDataEntity):
     ENTITY_CODE = 'person'
     WIKIDATA_CLASSIFIER_PID = HUMAN
 
-    name_he = models.CharField(max_length=300, null=True, blank=True,
-                               db_index=True)
-    name_en = models.CharField(max_length=300, null=True, blank=True,
-                               db_index=True)
+    name_he = models.CharField(_('Hebrew name'), max_length=300, null=True,
+                               blank=True, db_index=True)
+    name_en = models.CharField(_('English name'), max_length=300, null=True,
+                               blank=True, db_index=True)
     first_name_he = models.CharField(max_length=300, null=True, blank=True,
                                      db_index=True)
     first_name_en = models.CharField(max_length=300, null=True, blank=True,
@@ -28,6 +28,8 @@ class Person(Undeletable, WikiDataEntity):
                                     db_index=True)
     idea_tid = models.IntegerField(unique=True, null=True, blank=True)
     idea_modified = models.BooleanField(default=False)
+    merged_into = models.ForeignKey('self', null=True, blank=True,
+                                    on_delete=models.PROTECT)
 
     links = GenericRelation('links.Link')
     suggestions = GenericRelation('enrich.Suggestion')
@@ -43,6 +45,7 @@ class Person(Undeletable, WikiDataEntity):
         'idea_modified',
         'wikidata_status',
         'wikidata_id',
+        'merged_into_id',
     )
 
     class Meta:
@@ -60,7 +63,8 @@ class Person(Undeletable, WikiDataEntity):
 
     def movies_flat(self):
         movies = defaultdict(set)
-        for mrp in self.movies.order_by('-movie__year'):
+        for mrp in self.movies.active().filter(movie__active=True).order_by(
+                '-movie__year'):
             movies[mrp.movie].add(mrp.role)
 
         for m, roles in movies.items():
@@ -126,3 +130,11 @@ class MovieRolePerson(Undeletable):
         unique_together = (
             ('movie', 'role', 'person'),
         )
+
+    @property
+    def title_he(self):
+        return self.role.title_he
+
+    @property
+    def title_en(self):
+        return self.role.title_en

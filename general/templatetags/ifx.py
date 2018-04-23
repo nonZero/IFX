@@ -1,8 +1,10 @@
 from urllib.parse import urlencode
 
 from django import template
+from django.template.loader import render_to_string
 from django.utils import translation
 from django.utils.html import conditional_escape
+from django.utils.http import urlquote
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
@@ -151,3 +153,9 @@ def search_links(q, lang='he'):
 @register.filter
 def tolist(x):
     return list(x)
+
+
+@register.filter
+def wikidata_query_link(id, template_name="backlinks"):
+    s = render_to_string(template_name + ".sparql", {"id": id})
+    return "https://query.wikidata.org/#" + urlquote(s)

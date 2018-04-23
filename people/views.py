@@ -1,12 +1,35 @@
+import django_filters
+from django.contrib import messages
+from django.db.models import Q
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import ListView, DetailView
+from django.views.generic import DetailView, UpdateView, FormView
+from django.views.generic.detail import BaseDetailView
+from django_filters.views import FilterView
 
-from ifx.base_views import IFXMixin
+from editing_logs.api import Recorder
+from general.templatetags.ifx import bdtitle
+from ifx.base_views import IFXMixin, EntityEditMixin, EntityActionMixin
 from people.models import Person
+from . import forms
 
 
-class PersonListView(IFXMixin, ListView):
+class PersonFilter(django_filters.FilterSet):
+    name = django_filters.CharFilter(method='name_filter', label=_("name"))
+
+    class Meta:
+        model = Person
+        fields = ()
+
+    def name_filter(self, queryset, name, value):
+        q = Q(name_en__icontains=value) | Q(name_he__icontains=value)
+        return queryset.filter(q)
+
+
+class PersonListView(IFXMixin, FilterView):
+    template_name = "people/person_list.html"
+    filterset_class = PersonFilter
     model = Person
     paginate_by = 50
 
@@ -27,6 +50,17 @@ class PersonDetailView(IFXMixin, DetailView):
         (_("People"), reverse_lazy("people:list")),
     )
 
+    def possible_duplicates(self):
+        q = Q()
+        if self.object.title_he:
+            q |= Q(name_he=self.object.name_he)
+        if self.object.title_en:
+            q |= Q(name_en=self.object.name_en)
+        if not q:
+            return None
+        return self.model.objects.filter(q, active=True).exclude(
+            id=self.object.id)
+
 
 PERSON_ORDER_FIELDS = {
     'name_he',
@@ -36,3 +70,102 @@ PERSON_ORDER_FIELDS = {
     'last_name_he',
     'last_name_en',
 }
+
+
+class PersonUpdateView(EntityEditMixin, UpdateView):
+    model = Person
+    breadcrumbs = PersonDetailView.breadcrumbs
+    form_class = forms.PersonForm
+    template_name = "generic_form.html"
+
+
+class MergeIntoView(EntityActionMixin, BaseDetailView, FormView):
+    model = Person
+    breadcrumbs = PersonDetailView.breadcrumbs
+    action_name = _("Merge into another person")
+    form_class = forms.forms.Form
+    template_name = "movies/movie_merge.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.other = get_object_or_404(Person, pk=self.kwargs['other'])
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        o = self.object  # type: Person
+        if o.wikidata_id and not self.other.wikidata_id:
+            form.fields['wikidata_id'] = forms.forms.BooleanField(
+                required=False, initial=True,
+                label=_("WikiData ID"))
+
+        for fld in forms.MERGE_FIELDS:
+            v = getattr(o, fld)
+            old = getattr(self.other, fld)
+            if v and v != old:
+                form.fields[fld] = forms.forms.BooleanField(
+                    required=False, help_text=v, initial=not old,
+                    label=o._meta.get_field(fld).verbose_name)
+
+        for r in o.movies.all():
+            k = f"r_{r.id}"
+            form.fields[k] = forms.forms.BooleanField(
+                required=False, initial=True,
+                label=f"{bdtitle(r.role)} > {bdtitle(r.movie)}")
+
+        return form
+
+    def form_valid(self, form):
+        o = self.object  # type: Person
+        d = form.cleaned_data
+
+        with Recorder(user=self.request.user, note="merge") as r:
+            r.record_update_before(o)
+
+            if o.wikidata_id and not self.other.wikidata_id and d[
+                'wikidata_id']:
+                self.other.wikidata_id = o.wikidata_id
+                o.wikidata_id = None
+                self.other.wikidata_status = o.wikidata_status
+                o.wikidata_status = o.Status.NOT_APPLICABLE
+
+            o.active = False
+            o.merged_into = self.other
+            o.save()
+            r.record_update_after(o)
+
+            for fld in forms.MERGE_FIELDS:
+                v = getattr(o, fld)
+                old = getattr(self.other, fld)
+                if v and v != old and d[fld]:
+                    setattr(self.other, fld, v)
+                    self.other.idea_modified = True
+
+            r.record_update_before(o.__class__.objects.get(pk=self.other.pk))
+            self.other.save()
+            r.record_update_after(self.other)
+
+            for ro in o.movies.all():
+                k = f"r_{ro.id}"
+                if d[k]:
+                    mrp, created = self.other.movies.get_or_create(
+                        role=ro.role, movie=ro.movie,
+                        defaults={'priority': ro.priority, 'note': ro.note}
+                    )
+                    if created:
+                        r.record_addition(mrp)
+                if ro.active:
+                    r.record_update_before(ro)
+                    ro.active = False
+                    ro.save()
+                    r.record_update_after(ro)
+
+            for l in o.links.all():
+                r.record_update_before(l)
+                l.entity = self.other
+                l.save()
+                r.record_update_after(l)
+
+        messages.success(self.request, _("Merged."))
+
+        return redirect(o)

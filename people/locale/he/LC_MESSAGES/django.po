@@ -6,17 +6,27 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"MovieReport-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-14 23:21+0200\n"
-"PO-Revision-Date: 2018-02-14 23:21+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-04-21 23:08+0300\n"
+"PO-Revision-Date: 2018-04-21 23:08+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"MovieReport-Msgid-Bugs-To: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.6\n"
+
+msgid "Editing Comment"
+msgstr ""
+
+msgid "Hebrew name"
+msgstr "שם עברי"
+
+msgid "English name"
+msgstr "שם אנגלי"
 
 msgid "person"
 msgstr "אישיות"
@@ -24,11 +34,44 @@ msgstr "אישיות"
 msgid "people"
 msgstr "אישים"
 
-msgid "Hebrew name"
-msgstr "שם עברי"
+msgid "Search the web"
+msgstr ""
 
-msgid "English name"
-msgstr "שם אנגלי"
+msgid "Hebrew Title"
+msgstr "כותרת בעברית"
+
+msgid "English Title"
+msgstr "כותרת באנגלית"
+
+msgid "Legacy ID"
+msgstr ""
+
+msgid "Modified"
+msgstr "עבר שינוי"
+
+msgid "Edit"
+msgstr ""
+
+msgid "Logs"
+msgstr ""
+
+msgid "Filter"
+msgstr ""
+
+msgid "No items found"
+msgstr ""
+
+msgid "One item found"
+msgstr ""
+
+msgid "Found"
+msgstr ""
+
+msgid "items"
+msgstr ""
+
+msgid "name"
+msgstr ""
 
 msgid "People"
 msgstr "אישים"

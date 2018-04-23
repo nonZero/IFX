@@ -38,7 +38,7 @@
                                class="list-group-item list-group-item-action">
                                 {% trans "Editing Logs" %}
                             </a>
-                            <a href="#"
+                            <a href="{% url "users:my_profile" %}"
                                class="list-group-item list-group-item-action">{{ user }}</a>
                             {% if user.is_staff %}
                                 <a href="{% url "admin:index" %}"
@@ -88,11 +88,11 @@
         <a id="searchShowHide" class="btnSearchIcon glyphicon glyphicon-search"
            href="#"></a>
 
-        <form id="searchform" action="{% url 'search:query' %}">
+        <form id="searchform" action="{% url 'movies:list' %}">
             {% csrf_token %}
             <div id="searchBarUp">
                 <div>
-                    <input type="text" class="upperSearchInput sInput" name="q"
+                    <input type="text" class="upperSearchInput sInput" name="title"
                            placeholder="{% trans 'Search...' %}">
                 </div>
                 <div>

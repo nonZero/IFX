@@ -71,25 +71,34 @@ class Tag(Undeletable, WikiDataEntity):
     def get_absolute_url(self):
         return reverse('movies:tag_detail', args=(self.pk,))
 
+    def active_movies(self):
+        return self.movies.active().filter(movie__active=True)
+
 
 class Movie(Undeletable, WikiDataEntity):
     ENTITY_CODE = 'movie'
     WIKIDATA_CLASSIFIER_PID = FILM
 
-    year = models.IntegerField(null=True, blank=True)
-    duration = models.IntegerField(null=True, blank=True)
-    title_he = models.CharField(max_length=300, null=True, blank=True)
-    title_en = models.CharField(max_length=300, null=True, blank=True)
-    summary_he = models.TextField(null=True, blank=True)
-    summary_en = models.TextField(null=True, blank=True)
+    year = models.IntegerField(_("year"), null=True, blank=True)
+    duration = models.IntegerField(_("duration"), null=True, blank=True)
+    title_he = models.CharField(_("Hebrew title"), max_length=300, null=True,
+                                blank=True)
+    title_en = models.CharField(_("English title"), max_length=300, null=True,
+                                blank=True)
+    summary_he = models.TextField(_("Hebrew summary"), null=True, blank=True)
+    summary_en = models.TextField(_("English summary"), null=True, blank=True)
 
     idea_bid = models.IntegerField(unique=True, null=True, blank=True)
     idea_modified = models.BooleanField(default=False)
+    merged_into = models.ForeignKey('self', null=True, blank=True,
+                                    on_delete=models.PROTECT)
 
     links = GenericRelation('links.Link')
     suggestions = GenericRelation('enrich.Suggestion')
+    log_rows = GenericRelation('editing_logs.LogItemRow')
 
     FIELDS_TO_LOG = (
+        'active',
         'year',
         'duration',
         'title_he',
@@ -100,6 +109,7 @@ class Movie(Undeletable, WikiDataEntity):
         'idea_modified',
         'wikidata_status',
         'wikidata_id',
+        'merged_into_id',
     )
 
     class Meta:
@@ -169,3 +179,11 @@ class MovieTag(Undeletable):
 
     def __str__(self):
         return f'Movie={self.movie}, Tag={self.tag}'
+
+    @property
+    def title_he(self):
+        return self.tag.title_he
+
+    @property
+    def title_en(self):
+        return self.tag.title_en

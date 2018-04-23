@@ -6,23 +6,39 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"MovieReport-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-24 16:59+0200\n"
-"PO-Revision-Date: 2018-02-24 17:00+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-04-22 02:03+0300\n"
+"PO-Revision-Date: 2018-04-22 02:03+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"MovieReport-Msgid-Bugs-To: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.6\n"
+
+msgid "Editing Comment"
+msgstr "הערת עריכה"
+
+msgid "year"
+msgstr "שנה"
+
+msgid "duration"
+msgstr "משך הסרט (בדקות)"
 
 msgid "Hebrew title"
 msgstr "כותרת בעברית"
 
 msgid "English title"
 msgstr "כותרת באנגלית"
+
+msgid "Hebrew description"
+msgstr "תיאור בעברית"
+
+msgid "English description"
+msgstr "תיאור באנגלית"
 
 msgid "appears in short version"
 msgstr "מופיע בתצוגה מקוצרת"
@@ -36,6 +52,12 @@ msgstr "שדה"
 msgid "fields"
 msgstr "שדות"
 
+msgid "Hebrew summary"
+msgstr "תקציר בעברית"
+
+msgid "English summary"
+msgstr "תקציר באנגלית"
+
 msgid "movie"
 msgstr "סרט"
 
@@ -48,9 +70,6 @@ msgstr "404 הדף לא קיים"
 msgid "IFX"
 msgstr ""
 
-msgid "Watch Collection"
-msgstr "לעיון באוסף"
-
 msgid "No items found"
 msgstr "לא נמצאו פריטים"
 
@@ -62,6 +81,9 @@ msgstr "נמצאו"
 
 msgid "items"
 msgstr "פריטים"
+
+msgid "Watch Collection"
+msgstr "לעיון באוסף"
 
 msgctxt "movie"
 msgid "Summary"
@@ -88,6 +110,12 @@ msgstr "חיפוש..."
 msgid "Year"
 msgstr "שנה"
 
+msgid "INACTIVE"
+msgstr "לא פעיל"
+
+msgid "Merged into"
+msgstr "מוזג לתוך"
+
 msgid "m."
 msgstr "דק'"
 
@@ -106,8 +134,20 @@ msgstr "כותרת בעברית"
 msgid "English Title"
 msgstr "כותרת באנגלית"
 
-msgid "Legacy ID"
-msgstr "מזהה מערכת אידאה"
+msgid "Upload to WikiData"
+msgstr "העלאה לויקינתונים"
+
+msgid "Edit"
+msgstr "עריכה"
+
+msgid "Logs"
+msgstr "יומן עריכות"
+
+msgid "Possible Duplicates"
+msgstr "כפילויות אפשריות"
+
+msgid "Merge"
+msgstr "מיזוג"
 
 msgid "Title"
 msgstr "סרט"
@@ -142,8 +182,23 @@ msgstr "צבעוניות"
 msgid "Summery"
 msgstr "תקציר"
 
-msgid "Movies"
-msgstr "סרטים"
+msgid "Save"
+msgstr "שמירה"
+
+msgid "Add"
+msgstr "הוספה"
+
+msgid "Filter"
+msgstr "סינון"
+
+msgid "Upload"
+msgstr "העלאה"
+
+msgid "Please authenticate your account"
+msgstr "להמשך יש לאשר את השימוש ביישום זה בויקינתונים"
+
+msgid "Authenticate"
+msgstr "הזדהות"
 
 msgid "Search results for:"
 msgstr "תוצאות עבור:"
@@ -169,6 +224,9 @@ msgstr "שנים - מהחדש לישן"
 msgid "Director A-Z"
 msgstr "במאי/ת - א-ת"
 
+msgid "Movies"
+msgstr "סרטים"
+
 msgid "Tags"
 msgstr "תגים"
 
@@ -178,8 +236,68 @@ msgstr "בית"
 msgid "About"
 msgstr "על אודות"
 
+msgid "title"
+msgstr "כותרת"
+
+msgid "Genre"
+msgstr "ז'אנר"
+
+msgid "summary"
+msgstr "תקציר"
+
+msgid "ordering"
+msgstr "מיון תוצאות"
+
+msgid "Hebrew Title (A -> Z)"
+msgstr "כותרת בעברית (א -> ת)"
+
+msgid "English Title (A -> Z)"
+msgstr "כותרת באנגלית (A -> Z)"
+
+msgid "Year (Old -> New)"
+msgstr "שנה (ישן -> חדש)"
+
+msgid "Duration (Short -> long)"
+msgstr "משך הסרט ( קצר -> ארוך)"
+
+msgid "Hebrew title (Z -> A)"
+msgstr "כותרת בעברית (ת -> א)"
+
+msgid "English title (Z -> A)"
+msgstr "כותרת באנגלית (Z -> A)"
+
+msgid "Year (New -> Old)"
+msgstr "שנה (חדש -> ישן)"
+
+msgid "Duration (Long -> Short)"
+msgstr "משך הסרט (ארוך -> קצר)"
+
+msgid "ID only! (do not enter full URL)"
+msgstr "מזהה בלבד! (אין להזין קישור מלא)"
+
+msgid "Added new wikidata entity."
+msgstr "נוצר פריט ויקינתונים חדש"
+
+msgid "Merge into another movie"
+msgstr "מיזוג אל סרט אחר"
+
+msgid "WikiData ID"
+msgstr "מזהה WikiData"
+
+msgid "Merged."
+msgstr "מוזג."
+
 msgid "Fields"
 msgstr "שדות"
+
+#~ msgid "Movie updated successfully"
+#~ msgstr "הסרט עודכן בהצלחה"
+
+#~ msgid "Imported from the Israeli Film Archive catalog"
+#~ msgstr "יובא מאתר הארכיון הישראלי לסרטים"
+
+#~ msgid "Legacy ID"
+#~ msgstr "מזהה מערכת אידאה"
 
 #~ msgid "Links"
 #~ msgstr "קישורים"
@@ -192,9 +310,6 @@ msgstr "שדות"
 
 #~ msgid "English"
 #~ msgstr "אנגלית"
-
-#~ msgid "title"
-#~ msgstr "כותרת"
 
 #~ msgid "min."
 #~ msgstr "דק'"
@@ -213,9 +328,6 @@ msgstr "שדות"
 
 #~ msgid "Email: rusom@jer-cin.org.il"
 #~ msgstr "דוא\"ל : rusom@jer-cin.org.il"
-
-#~ msgid "Address"
-#~ msgstr "מיקום"
 
 #~ msgid "11 Hebron rd. POB 8651 <br> Jerusalem, 9108402"
 #~ msgstr ""
@@ -263,9 +375,6 @@ msgstr "שדות"
 
 #~ msgid "Year/s"
 #~ msgstr "שנה/ים"
-
-#~ msgid "Hebrew Summary"
-#~ msgstr "עברית"
 
 #~ msgid "Jerusalem Cinematheque Site"
 #~ msgstr "לאתר סינמטק ירושלים"

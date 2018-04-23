@@ -6,15 +6,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"MovieReport-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-23 10:22+0200\n"
-"PO-Revision-Date: 2018-02-23 10:23+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-04-21 00:20+0300\n"
+"PO-Revision-Date: 2018-04-20 22:31+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"MovieReport-Msgid-Bugs-To: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.6\n"
 
@@ -53,3 +54,42 @@ msgstr "לצפיה בדף יש להכנס לאתר באמצעות חשבון ב�
 
 msgid "Please login to see this page."
 msgstr "לצפיה בדף יש להכנס למערכת."
+
+msgid "email"
+msgstr "דואל"
+
+msgid "Hebrew display name (public)"
+msgstr "שם בעברית (יוצג לציבור)"
+
+msgid "English display name (public)"
+msgstr "שם באנגלית (יוצג לציבור)"
+
+msgid "Hebrew full name (for internal use)"
+msgstr "שם מלא בעברית (לשימוש פנימי)"
+
+msgid "English full name (for internal use)"
+msgstr "שם מלא באנגלית (לשימוש פנימי)"
+
+msgid "WikiData Authentication"
+msgstr "אימות משתמש ויקינתונים"
+
+msgid "yes,no"
+msgstr "כן,לא"
+
+msgid "Delete"
+msgstr "מחיקה"
+
+msgid "Authenticate"
+msgstr "הזדהות"
+
+msgid "My Profile"
+msgstr "הפרופיל שלי"
+
+msgid "Something went wrong. Please try again."
+msgstr "משהו לא עבד כמו שצריך.  אנא נסו שוב."
+
+msgid "Authenticated successfully."
+msgstr "ההזדהות עברה בהצלחה."
+
+msgid "Wikidata auth token deleted."
+msgstr "החיבור לויקינתונים נמחק."

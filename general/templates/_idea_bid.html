@@ -1,9 +1,12 @@
 {% load i18n %}
 {% if object.idea_bid %}
-    <div class="card bg-dark">
+    <div class="card bg-dark mb-1">
         <div class="card-body">
             <p class="card-text text-light">
                 {% trans "Legacy ID" %}: {{ object.idea_bid }}
+                {% if object.idea_modified %}
+                    | <b class="text-danger">{% trans "Modified" %}</b>
+                {% endif %}
             </p>
         </div>
     </div>

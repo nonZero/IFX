@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static i18n ifx humanize %}
+
+{% block content %}
+    <ul class="list-group">
+        <li class="list-group-item">
+            <b>{% trans "email" %}:</b> {{ user.email }}
+        </li>
+        <li class="list-group-item">
+            <b>{% trans "Hebrew display name (public)" %}:</b> {{ user.name_he }}
+        </li>
+        <li class="list-group-item">
+            <b>{% trans "English display name (public)" %}:</b> {{ user.name_en }}
+        </li>
+        <li class="list-group-item">
+            <b>{% trans "Hebrew full name (for internal use)" %}:</b> {{ user.full_name_he }}
+        </li>
+        <li class="list-group-item">
+            <b>{% trans "English full name (for internal use)" %}:</b> {{ user.full_name_en }}
+        </li>
+        <li class="list-group-item">
+            <b>{% trans "WikiData Authentication" %}</b>:
+            {{ user.wikidata_access_token|yesno:_("yes,no") }}
+            {% if user.wikidata_access_token %}
+                <span title="{{ user.wikidata_access_token_created_at }}">
+                    ({{ user.wikidata_access_token_created_at|naturaltime }})
+                </span>
+                <form class="form-inline" style="display: inline;"
+                      action="{% url "users:oauth_logout" %}" method="post">
+                    {% csrf_token %}
+                    <button class="btn btn-danger">{% trans "Delete" %}</button>
+                </form>
+            {% endif %}
+            <a href="{% url "users:oauth" %}" class="btn btn-primary"">{% trans "Authenticate" %}</a>
+        </li>
+    </ul>
+{% endblock %}
+
+
+
+
+
+
