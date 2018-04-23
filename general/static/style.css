@@ -177,3 +177,13 @@ footer {
     margin-top: 30px;
 }
 
+@media (max-width: 700px){
+    input.upperSearchInput {
+        top: 58px !important;
+        width: -webkit-fill-available !important;
+        margin-left: 126px !important;
+    }
+    .header {
+        height: 101px !important;
+    }
+}

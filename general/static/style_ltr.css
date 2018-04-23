@@ -287,7 +287,7 @@ input.upperSearchInput {
     color: #5a5e61;
     font-size: 16pt;
     border: none;
-    top: 5px;
+    top: 6px;
     right: 158px;
     background-color: white;
     text-decoration: none;
@@ -512,3 +512,12 @@ input.addToChart {
     right: 38px;
 }
 
+@media (max-width: 700px){
+    input.upperSearchInput {
+        right: 56px !important;
+    }
+    .searchIcon {
+        right: 18px !important;
+        top: 59px !important;
+    }
+}

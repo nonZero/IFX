@@ -514,3 +514,12 @@ input.addToChart {
     left: 38px;
 }
 
+@media (max-width: 700px){
+    input.upperSearchInput {
+        right: 67px !important;
+    }
+    .searchIcon {
+        left: 20px !important;
+        top: 58px !important;
+    }
+}
