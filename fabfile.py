@@ -493,10 +493,9 @@ CERTBOT_CRON = """MAILTO={email}
 """
 
 
-from local_fabfile import ADMIN_EMAIL
 @task
 def setup_certbot_crontab():
-
+    from local_fabfile import ADMIN_EMAIL
     s = CERTBOT_CRON.format(AUTO_RENEW_SCRIPT, email=ADMIN_EMAIL)
     put(StringIO(s), '/tmp/crontab')
     run('sudo -iu certbot crontab < /tmp/crontab')
