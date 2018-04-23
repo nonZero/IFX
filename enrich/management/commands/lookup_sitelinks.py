@@ -5,20 +5,20 @@ from random import shuffle
 import tqdm
 from django.core.management.base import BaseCommand
 
-from enrich.lookup import create_missing_links
+from enrich.lookup import create_sitelinks
 from ifx.quirks import patch_dns
 from movies.models import Movie
 from people.models import Person
+import logging
 
 MAX_WORKERS = 5
 
-import logging
 
 logger = logging.getLogger(__name__)
 
 
 class Command(BaseCommand):
-    help = "Create links based on WikiData"
+    help = "Create wikipedia articals links based on WikiData"
 
     def add_arguments(self, parser):
         parser.add_argument('--workers', '-w', type=int, default=MAX_WORKERS)
@@ -31,7 +31,7 @@ class Command(BaseCommand):
         shuffle(objs)
         try:
             with ThreadPoolExecutor(max_workers=workers) as ex:
-                futs = {ex.submit(create_missing_links, o): o for o in objs}
+                futs = {ex.submit(create_sitelinks, o): o for o in objs}
                 for fut in tqdm.tqdm(as_completed(futs), total=len(futs)):
                     o = futs[fut]
                     try:

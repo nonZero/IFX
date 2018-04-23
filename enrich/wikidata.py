@@ -63,3 +63,18 @@ def get_props_by_pids(qid: str, pids: list) -> typing.Dict[str, str]:
             d[pid] = entity[prop]
 
     return d
+
+
+def get_sitelinks_by_linktype(qid: str, linktypes: list) -> typing.Dict[str, str]:
+    cl = Client()
+    entity = cl.get(qid)
+
+    entity.load()
+    entity_data = entity.data
+    d = dict()
+    if 'sitelinks' in entity_data:
+        for linktype in linktypes:
+            if linktype in entity_data['sitelinks']:
+                d[linktype] = entity_data['sitelinks'][linktype]['url']
+
+    return d

@@ -6,7 +6,7 @@ from SPARQLWrapper import SPARQLWrapper, JSON
 from editing_logs.api import Recorder
 from enrich.models import Suggestion, Source
 from enrich.wikidata import get_wikidata_result, TooManyResults, NoResults, \
-    get_props_by_pids
+    get_props_by_pids, get_sitelinks_by_linktype
 from ifx.base_models import WikiDataEntity
 from links.models import LinkType, Link
 
@@ -110,3 +110,36 @@ def get_movies_for_person(wikidata_id: str) -> Iterator[SparqlMovie]:
             he=result.get("movieLabelHe", {}).get("value"),
             en=result.get("movieLabelEn", {}).get("value"),
         )
+
+
+def create_sitelinks(obj: WikiDataEntity):
+    lt = {item.slug.split('_')[1]: item for item in LinkType.objects.filter(slug__startswith='sitelinks_')}
+
+    props = get_sitelinks_by_linktype(obj.wikidata_id, list(lt.keys()))
+
+    created = 0
+    updated = 0
+    note = f"Auto updating links for {obj.__class__.__name__} #{obj.id}"
+    try:
+        with Recorder(note=note) as r:
+            for key, value in props.items():
+                try:
+                    link = obj.links.get(type=lt[key])
+                    if link.value != value:
+                        r.record_update_before(link)
+                        link.value = value
+                        link.save()
+                        r.record_update_after(link)
+                        updated += 1
+                except Link.DoesNotExist:
+                    link = obj.links.create(
+                        type=lt[key],
+                        value=value,
+                    )
+                    r.record_addition(link)
+                    created += 1
+            if not created and not updated:
+                raise Undo()
+    except Undo:
+        pass
+    return Counter(updated=updated, created=created)
