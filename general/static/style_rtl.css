@@ -380,7 +380,7 @@ button.btnRegular {
 /*------------------------------------------------*/
 
 div#aboutJumb {
-    background-image: url(../static/images/archivelia.jpg) !important;
+    background-image: url(./images/archivelia.jpg) !important;
     height: 240px;
     background-size: cover;
     background-position-y: 25%;
