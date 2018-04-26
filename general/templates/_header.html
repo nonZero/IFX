@@ -79,7 +79,6 @@
             <a href="{% url "movies:home" %}">{% trans "Israeli Film Archive Catalog" %}</a>
         </div>
 
-
         <form id="searchform" action="{% url 'movies:list' %}">
             {% csrf_token %}
             <div id="searchBarUp">

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-26 11:52+0300\n"
-"PO-Revision-Date: 2018-04-26 11:52+0300\n"
+"POT-Creation-Date: 2018-04-26 13:33+0300\n"
+"PO-Revision-Date: 2018-04-26 13:33+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -25,28 +25,23 @@ msgstr "אתר זה נמצא בתהליך פיתוח, בדיקות ובקרת א
 msgid "More information"
 msgstr "מידע נוסף"
 
-msgid "Contact"
+msgid "About"
+msgstr "על אודות"
+
+msgid "Contact Us"
 msgstr "צרו קשר"
 
-msgid "Pel: 02-5654332"
-msgstr "טלפון : 02-5654332"
-
-msgid "Email: rusom@jer-cin.org.il"
-msgstr "דוא\"ל : rusom@jer-cin.org.il"
-
-msgid "Address"
-msgstr "כתובת"
-
-msgid "11 Hebron rd. POB 8651 <br> Jerusalem, 9108402"
-msgstr ""
-"דרך חברון 11, ת.ד. 8561\n"
-"ירושלים, 9108402"
-
-msgid "Enter Site"
-msgstr "לאתר"
+msgid "License Terms"
+msgstr "רשיון שימוש"
 
 msgid "Jerusalem Cinematheque"
 msgstr "סינמטק ירושלים"
+
+msgid "OpenGLAM Accelerator"
+msgstr "מיזם תרבות פתוחה"
+
+msgid "Open Knowledge Workshop"
+msgstr "הסדנא לידע ציבורי"
 
 msgid "Movies"
 msgstr "סרטים"
@@ -54,14 +49,14 @@ msgstr "סרטים"
 msgid "Personalities"
 msgstr "אישים"
 
-msgid "Collections"
-msgstr "אוספים"
-
 msgid "Fields"
 msgstr "שדות"
 
 msgid "About Archive"
 msgstr "על אודות הארכיון"
+
+msgid "Collections"
+msgstr "אוספים"
 
 msgid "Edit Suggestions"
 msgstr "הצעות עריכה"
@@ -144,8 +139,22 @@ msgstr "חיפוש בויקיפדיה"
 msgid "Home"
 msgstr "בית"
 
-msgid "About"
-msgstr "על אודות"
+#~ msgid "Pel: 02-5654332"
+#~ msgstr "טלפון : 02-5654332"
+
+#~ msgid "Email: rusom@jer-cin.org.il"
+#~ msgstr "דוא\"ל : rusom@jer-cin.org.il"
+
+#~ msgid "Address"
+#~ msgstr "כתובת"
+
+#~ msgid "11 Hebron rd. POB 8651 <br> Jerusalem, 9108402"
+#~ msgstr ""
+#~ "דרך חברון 11, ת.ד. 8561\n"
+#~ "ירושלים, 9108402"
+
+#~ msgid "Enter Site"
+#~ msgstr "לאתר"
 
 #~ msgid "(Items #%(a)s - #%(b)s)"
 #~ msgstr "(פריטים #%(a)s - #%(b)s)"

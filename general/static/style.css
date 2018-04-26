@@ -33,8 +33,20 @@ main {
     height: 45px;
     padding: 20px;
     color: white;
-    background-color: black;
+    background-color: #4A97E6;
     position: relative;
+}
+
+.btnMenu {
+    height: 45px;
+    width: 50px;
+    background-color: #d8d8d8 !important;
+    color: #7b7b7b;
+    font-size: x-large;
+    position: absolute;
+    top: -45px;
+    border: none;
+    border-radius: 0;
 }
 
 h1 {
@@ -48,13 +60,14 @@ h1 {
 }
 
 .lang-switcher {
-    top:0;
+    top: 0;
     position: absolute;
     padding: 0.25rem 1rem;
     color: white;
     font-style: italic;
     font-size: 1.4em;
 }
+
 .lang-switcher:hover {
     color: white;
 }
@@ -183,16 +196,22 @@ h5.totals {
 }
 
 footer {
-    background-color: #D8D8D8;
-    margin-top: 30px;
+    background-color: #4A97E6;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    color: white;
 }
 
-@media (max-width: 700px){
-    input.upperSearchInput {
+footer a {
+    color: white;
+}
+
+@media (max-width: 750px) {
+    #searchform {
         top: 58px !important;
-        width: -webkit-fill-available !important;
         margin-left: 126px !important;
     }
+
     .header {
         height: 101px !important;
     }

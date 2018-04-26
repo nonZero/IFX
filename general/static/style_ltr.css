@@ -69,7 +69,6 @@
 }
 
 .dropBtnSearch {
-    width: -webkit-fill-available;
     height: 50px;
     color: black;
     background-color: #FFFFFF;
@@ -86,15 +85,7 @@ button#dropdownMenu1 {
 }
 
 .btnMenu {
-    height: 45px;
-    width: 50px;
-    background-color: #d8d8d8 !important;
-    color: #7b7b7b;
-    font-size: x-large;
-    position: absolute;
     left: 0;
-    top: -45px;
-    border: none;
 }
 
 .btnMenu:hover {
@@ -262,7 +253,7 @@ select.dropdown.dropBtnSearchUp {
 
 input.upperSearchInput {
     position: absolute;
-    right: 197px;
+    right: 140px;
     top: 5px;
     height: 35px;
     width: 230px;
@@ -279,7 +270,7 @@ input.upperSearchInput {
     font-size: 16pt;
     border: none;
     top: 6px;
-    right: 158px;
+    right: 100px;
     background-color: white;
     text-decoration: none;
 }
@@ -506,6 +497,7 @@ input.addToChart {
 @media (max-width: 700px){
     input.upperSearchInput {
         right: 56px !important;
+        top: 59px !important;
     }
     .searchIcon {
         right: 18px !important;

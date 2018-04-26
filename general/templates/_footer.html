@@ -19,27 +19,41 @@
 </div>
 
 <footer>
-    <div class="row container pt-2">
-        <div class="col-lg-3 col-sm-4 pt-2">
-            <img class="footer-logo img-fluid"
-                 src="/static/images/Jerusalem_Cinematheque_LogoBlack.png"
-                 alt="Jerusalem Cinematheque Logo"/>
-        </div>
-        <div class="col-lg-9 col-sm-8">
-            <div class="row">
-                <div class="col-lg-4 pt-2">
-                    <h4>{% trans "Contact" %}</h4>
-                    <span>{% trans "Pel: 02-5654332" %}</span><br>
-                    <span>{% trans "Email: rusom@jer-cin.org.il" %}</span>
-                </div>
-                <div class="col-lg-4 pt-2">
-                    <h4>{% trans "Address" %}</h4>
-                    <span>{% trans "11 Hebron rd. POB 8651 <br> Jerusalem, 9108402" %}</span>
-                </div>
-                <div class="col-lg-4 pt-2">
-                    <h4>{% trans "Enter Site" %}</h4>
-                    <a href="https://www.jer-cin.org.il/en">{% trans "Jerusalem Cinematheque" %}</a>
-                </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2 col-md-5">
+                <ul class="list-unstyled">
+                    <li><a href="{% url "movies:about" %}">{% trans "About" %}</a></li>
+                    <li><a href="{% url "movies:about" %}">{% trans "Contact Us" %}</a></li>
+                    <li><a href="{% url "movies:about" %}">{% trans "License Terms" %}</a></li>
+                </ul>
+
+            </div>
+            <div class="offset-lg-1 col-lg-3 col-md-5">
+                <a title="{% trans "Jerusalem Cinematheque" %}"
+                   href="https://www.jer-cin.org.il/he/lobby/%D7%90%D7%A8%D7%9B%D7%99%D7%95%D7%9F-%D7%99%D7%A9%D7%A8%D7%90%D7%9C%D7%99-%D7%9C%D7%A1%D7%A8%D7%98%D7%99%D7%9D/">
+                    <img class="footer-logo img-fluid"
+                         src="{% static "images/Jerusalem_Cinematheque_LogoBlack.png" %}"
+
+                         alt="{% trans "Jerusalem Cinematheque" %}"/>
+                </a>
+            </div>
+            <div class="offset-lg-2 col-lg-3 col-md-4 text-left">
+                <a title="{% trans "OpenGLAM Accelerator" %}"
+                        href="https://oglam.hasadna.org.il/">
+                    <img class="footer-logo img-fluid"
+                         src="{% static "images/openglam-logo.png" %}"
+                         alt="{% trans "Jerusalem Cinematheque" %}"/>
+                </a>
+            </div>
+            <div class="col-lg-1 col-md-1 pl-2 pr-2">
+                <a title="{% trans "Open Knowledge Workshop" %}"
+                   href="http://www.hasadna.org.il/">
+                    <img class="footer-logo img-fluid"
+                         src="{% static "images/hasadna-logo.png" %}"
+                         alt="{% trans "Jerusalem Cinematheque" %}"/>
+                </a>
             </div>
         </div>
+    </div>
 </footer>
