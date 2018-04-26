@@ -1,0 +1,6 @@
+# Get movie by IMDB ID
+
+SELECT ?item ?itemLabel WHERE {
+  ?item wdt:P345 'tt0076525'.
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "he,en". }
+}

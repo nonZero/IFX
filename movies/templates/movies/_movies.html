@@ -65,7 +65,7 @@
                     {% endif %}
 
                 </ul>
-                {% if m|get_description %}
+                {% if user.is_editor and m|get_description %}
                     <p class="summary ellipsis multiline">
                         <strong>{% trans "Summary" context "movie" %}:</strong>
                         {{ m|get_description }}
