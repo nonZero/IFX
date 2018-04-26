@@ -1,11 +1,11 @@
 from django.views import generic
 
 import curation.models
-from ifx.base_views import IFXMixin
 from curation.forms import CollectionForm
+from ifx.base_views import DataContributorOnlyMixin
 
 
-class CollectionMixin(IFXMixin):
+class CollectionMixin(DataContributorOnlyMixin):
     model = curation.models.Collection
 
 

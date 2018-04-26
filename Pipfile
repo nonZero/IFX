@@ -22,6 +22,7 @@ django-authtools = "*"
 "psycopg2-binary" = "*"
 SPARQLWrapper = "*"
 mwoauth = "*"
+markdown = "*"
 
 [dev-packages]
 notebook = "*"

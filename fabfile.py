@@ -280,6 +280,10 @@ def collect_static():
 def reload_app():
     sudo('systemctl reload uwsgi.service')
 
+@task
+def lock_requirements():
+    local("pipenv lock -r > requirements.txt")
+
 
 @task
 def upgrade():

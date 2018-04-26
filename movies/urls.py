@@ -1,13 +1,14 @@
 from django.conf.urls import url
 
+import general.views
 from . import views
 
 app_name = "movies"
 urlpatterns = [
 
-    url(r"^$", views.HomePage.as_view(), name='home'),
+    url(r"^$", general.views.HomePage.as_view(), name='home'),
 
-    url(r"^about/$", views.AboutView.as_view(), name='about'),
+    url(r"^about/$", general.views.AboutView.as_view(), name='about'),
 
     url(r"^movie/$", views.MovieListView.as_view(), name='list'),
     url(r"^movie/(?P<pk>[0-9]+)/$", views.MovieDetailView.as_view(),

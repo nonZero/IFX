@@ -1,5 +1,23 @@
 {% load i18n static %}
 
+<div class="bg-white pb-2">
+    <div class="container">
+        <div class="alert alert-warning">
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="lead mt-2">
+                        <b>{% trans "This website is in active development and may contain errors and inaccuracies" %}</b>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <a class="btn btn-warning btn-block btn-lg"
+                       href="{% url "movies:about" %}">{% trans "More information" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <footer>
     <div class="row container pt-2">
         <div class="col-lg-3 col-sm-4 pt-2">

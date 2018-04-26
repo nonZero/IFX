@@ -9,41 +9,22 @@ from django.db.models import Count, Q
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import ListView, TemplateView, DetailView, \
+from django.views.generic import ListView, DetailView, \
     UpdateView, FormView
 from django.views.generic.detail import BaseDetailView
 from django_filters.views import FilterView
 
 from editing_logs.api import Recorder
 from general.templatetags.ifx import bdtitle
-from ifx.base_views import IFXMixin, EntityEditMixin, EntityActionMixin, \
+from ifx.base_views import IFXMixin, EntityActionMixin, \
     DataContributorOnlyMixin
 from links.models import LinkType
 from links.tasks import add_links_by_movie_id
 from movies import forms
 from movies.models import Movie, Tag, Field
-from people.models import Person
 from wikidata_edit.upload import upload_movie
 
 logger = logging.getLogger(__name__)
-
-
-class HomePage(IFXMixin, TemplateView):
-    template_name = 'home.html'
-    jumbotron = 'movies/main_jumbotron.html'
-    title = _("Home")
-
-    def random_movies(self, n=3):
-        return Movie.objects.active().order_by("?")[:n]
-
-    def random_people(self, n=8):
-        return Person.objects.active().exclude(movies=None).order_by("?")[:n]
-
-
-class AboutView(IFXMixin, TemplateView):
-    template_name = "movies/about.html"
-    jumbotron = "movies/about_jumbotron.html"
-    title = _("About")
 
 
 def get_tags():

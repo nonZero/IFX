@@ -11,8 +11,6 @@
                            class="list-group-item list-group-item-action">{% trans "Movies" %}</a>
                         <a href="{% url 'people:list' %}"
                            class="list-group-item list-group-item-action">{% trans "Personalities" %}</a>
-                        <a href="{% url 'curation:list' %}"
-                           class="list-group-item list-group-item-action">{% trans "Collections" %}</a>
                         <a href="{% url 'movies:field_list' %}"
                            class="list-group-item list-group-item-action">{% trans "Fields" %}</a>
                         <a href="{% url 'movies:about' %}"
@@ -25,7 +23,9 @@
                         {#                           class="list-group-item list-group-item-action">{% trans "Contact" %}</a>#}
                         {#                        <a href="#"#}
                         {#                           class="list-group-item list-group-item-action">{% trans "Jerusalem Cinematheque Site" %}</a>#}
-                        {% if user.is_authenticated %}
+                        {% if user.is_editor %}
+                            <a href="{% url 'curation:list' %}"
+                               class="list-group-item list-group-item-action">{% trans "Collections" %}</a>
                             <a href="{% url "enrich:list" %}"
                                class="list-group-item list-group-item-action">
                                 {% trans "Edit Suggestions" %}
@@ -38,17 +38,25 @@
                                class="list-group-item list-group-item-action">
                                 {% trans "Editing Logs" %}
                             </a>
-                            <a href="{% url "users:my_profile" %}"
-                               class="list-group-item list-group-item-action">{{ user }}</a>
-                            {% if user.is_staff %}
-                                <a href="{% url "admin:index" %}"
-                                   class="list-group-item list-group-item-action">{% trans "Admin" %}</a>
-                            {% endif %}
+                        {% endif %}
+                        {% if user.is_staff %}
+                            <a href="{% url "admin:index" %}"
+                               class="list-group-item list-group-item-action">{% trans "Admin" %}</a>
+                        {% endif %}
+                        {% if user.is_authenticated %}
+                            <a href="{% url "user_profiles:my_profile" %}"
+                               class="list-group-item list-group-item-action">
+                            <span class="fa fa-user"></span>
+                                {{ user }}
+                            </a>
                             <a href="{% url "logout" %}"
                                class="list-group-item list-group-item-action">{% trans "Logout" %}</a>
                         {% else %}
                             <a href="{% url "login" %}"
-                               class="list-group-item list-group-item-action">{% trans "Login" %}</a>
+                               class="list-group-item list-group-item-action">
+                                <span class="fa fa-user"></span>
+                                {% trans "Login" %}
+                            </a>
                         {% endif %}
                     </div>
 
@@ -65,7 +73,8 @@
             </nav>
         </div>
         <a class="lang-switcher pull-right"
-                href="{{ request.path|switch_lang }}">{% if LANGUAGE_CODE == 'he' %}ENG{% else %}עבר{% endif %}</a>
+           href="{{ request.path|switch_lang }}">{% if LANGUAGE_CODE == 'he' %}
+            ENG{% else %}עבר{% endif %}</a>
         <div class="logo">
             <a href="{% url "movies:home" %}">{% trans "Israeli Film Archive Catalog" %}</a>
         </div>
@@ -75,7 +84,8 @@
             {% csrf_token %}
             <div id="searchBarUp">
                 <div>
-                    <input type="text" class="upperSearchInput sInput" name="title"
+                    <input type="text" class="upperSearchInput sInput"
+                           name="title"
                            placeholder="{% trans 'Search...' %}">
                 </div>
                 <div>

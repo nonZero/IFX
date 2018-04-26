@@ -19,9 +19,10 @@ urlpatterns = i18n_patterns(
     url(r'^logs/', include("editing_logs.urls")),
     url(r'^reports/', include("reports.urls")),
 
+    url(r'', include("users.urls")),
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^admin/', admin.site.urls),
 ) + [
-                  url(r'', include("users.urls")),
+                  url(r'', include("users.oauth_urls")),
               ]

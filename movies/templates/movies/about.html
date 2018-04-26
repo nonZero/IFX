@@ -3,44 +3,11 @@
 
 {% block content %}
     <div class="container innerpages">
-
         <article>
-            {% if LANGUAGE_CODE == 'en-us' %}
-            <h1 id="innerTitle">{% trans "About The Israeli Film Archive" %}</h1>
             <section>
-                <p>The Israel Film Archive is the official institute responsible for the collection and preservation of tens of thousands of Israeli and international films. The largest film archive in the Middle East, the place holds over 30,000 screening prints, 20,000 video cassettes, and thousands of negatives of Israeli films.</p>
-                <p>The archive holds treasures that cannot be described such as rare footage by the Lumière brothers depicting vistas of Jerusalem, Jaffa, and Bethlehem. This footage, captured by these cinematic pioneers 120 years ago, is considered to be the first film to be produced in pre-State Israel.</p>
-                <p>One can see the archive's collections as parts of a mosaic, portraying the visual history of 20th century Israel. It is difficult to underestimate the importance of these collections, not only to the State of Israel, but the whole Jewish world. </p>
-                <p>As a member of FIAF - The International Federation of Film Archives - the archive cooperates with other archives around the world for the purpose of research, film exchange, acquisitions, and more. Through this productive dialogue films concerned with Jewish heritage are located and great effort is made to bring a copy of them to the archive.</p>
-                <p>Likewise, most of the feature and documentary films are deposited in the archive for preservation. Different copies of these films are used to ship to International screenings. The other Cinematheques working in Israel also use the rich collection of the archive to build their monthly programs.</p>
-                <p>The 1999 Cinema Law states that every film supported by an Israeli fund must deposit a copy of the film in the Israel Film Archive.</p>
+                {{ view.x }}
             </section>
-            {% else %}
-            <section>
-                <p>ארכיון ישראלי לסרטים הוא ארכיב הקולנוע הגדול ביותר במזרח התיכון והמרכזי בישראל אשר אחראי על איסופם ושימורם של עשרות אלפי סרטים, ישראליים ובינלאומיים. בין היתר, מצויים בו כ-32,000 עותקי הקרנה לסרטים, 12,000 נגטיבים 20,000 קלטות וידאו ו-2,000 עותקים דיגיטליים של יצירות הקולנוע הישראלי.</p>
-                <p>הארכיון מחזיק גם באוצרות שערכם לא יסולא בפז כמו קטעי הצילום הנדירים של חלוצי הקולנוע האחים לומייר המתעדים את נופי ירושלים, יפו ובית לחם בשנת 1896. סרטים אלה שלכדו האחים לומייר במצלמתם נחשבים לסרט הראשון שנעשה בפלשתינה.</p>
-                <p>אוספי הארכיון השונים מרכיבים תמונת תצרף שלמה המתארת את ההיסטוריה הוויזואלית של ישראל ולכן חשיבותו הגדולה של אוסף זה ניכרת לא רק למדינת ישראל אלא גם למורשת יהודי התפוצות.</p>
-                <p>כחבר בארגון הארכיונים הבינלאומי (FIAF) ארכיון ישראלי לסרטים משתף פעולה עם ארכיונים אחרים בעולם למטרות מחקר, חילופי סרטים, רכישות ועוד. במסגרת דיאלוג זה מאותרים סרטים הנוגעים לחיי יהודים ותרבותם במדינות שונות ונעשה מאמץ להביא עותק שלהם לארכיון.</p>
-                <p>כמו כן מופקדים בארכיון רובם של הסרטים העלילתיים והתיעודיים הישראלים שנוצרו אי פעם בישראל למטרות שימור ומחקר. עותקים שונים של סרטים אלה מיועדים להקרנה בפסטיבלי סרטים בינלאומיים, פסטיבלים של קולנוע יהודי או מחוות הנערכות לקולנוע הישראלי ברחבי העולם. הסינמטקים השונים בארץ מבססים את עיקר תוכניית ההקרנה שלהם על מצאי הסרטים הקיימים בארכיון.</p>
-                <p>חוק הקולנוע שנחקק בכנסת בשנת 1999 קובע כי כל סרט הנתמך על ידי אחת מקרנות הקולנוע בישראל מחייב את מפיקיו להפקיד עותק אחד בארכיון סרטים ישראלי.</p>
-            </section>
-            {% endif %}
         </article>
 
-        <div class="row">
-
-            <a href="#" class="col-4">
-                <h4>{% trans "Conservation and Restoration" %}</h4>
-                <img src="{% static 'images/avanti_popolo1-cat BW.jpg' %}"/></a>
-
-            <a href="#" class="col-4">
-                <h4>{% trans "Collections" %}</h4>
-                <img src="{% static 'images/defaultImg.jpg' %}"/></a>
-
-            <a href="#" class="col-4">
-                <h4>{% trans "Depositing Materials" %}</h4>
-                <img src="{% static 'images/film-reel.jpg' %}" /></a>
-        </div>
-    
      </div>
 {% endblock %}
