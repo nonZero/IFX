@@ -91,5 +91,27 @@
 
 <script src="{% static 'allScripts.js' %}"></script>
 
+{% if analytics_id %}
+
+    <script async
+            src="https://www.googletagmanager.com/gtag/js?id={{ analytics_id }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+
+        gtag('js', new Date());
+
+        gtag('config', '{{ analytics_id }}', {
+          'custom_map': {'dimension1': 'user_type'}
+        });
+        gtag('set', 'user_type', '{% if user.is_authenticated %}{% if user.is_editor %}editor{% else %}regular{% endif %}{% else %}anon{% endif %}');
+
+    </script>
+
+{% endif %}
 
 </html>

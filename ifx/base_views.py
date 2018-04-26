@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, AccessMixin
 from django.core.exceptions import PermissionDenied
@@ -51,6 +52,13 @@ class IFXMixin(AccessMixin):
             return self.breadcrumbs
 
         return None
+
+    def get_context_data(self, **kwargs):
+        d = super().get_context_data(**kwargs)
+        if not self.request.user.is_superuser and not settings.DEBUG:
+            if hasattr(settings, "GOOGLE_ANALYTICS_ID"):
+                d['analytics_id'] = settings.GOOGLE_ANALYTICS_ID
+        return d
 
 
 class DataContributorOnlyMixin(IFXMixin):
