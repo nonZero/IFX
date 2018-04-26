@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load i18n ifx staticfiles %}
 {% get_current_language as LANGUAGE_CODE %}
 <header>
     <div class="header">
@@ -60,33 +60,16 @@
                         data-target="#navbarToggleExternalContent"
                         aria-controls="navbarToggleExternalContent"
                         aria-expanded="false" aria-label="Toggle navigation">
-                    <img src="/static/images/Menu.svg"/>
+                    <img src="{% static "images/Menu.svg" %}"/>
                 </button>
             </nav>
         </div>
+        <a class="lang-switcher pull-right"
+                href="{{ request.path|switch_lang }}">{% if LANGUAGE_CODE == 'he' %}ENG{% else %}עבר{% endif %}</a>
         <div class="logo">
-            <a href="{% url 'movies:home' %}"><img
-                    src="/static/images/Jerusalem_Cinematheque_Logo.png"
-                    alt="Jerusalem Cinematheque Logo"></a>
-            <span>{% trans "Israeli Film <br> Arcive" %}</span>
+            <a href="{% url "movies:home" %}">{% trans "Israeli Film Archive Catalog" %}</a>
         </div>
 
-        <form id="lang-form" action="{% url 'set_language' %}"
-              method="post">{% csrf_token %}
-            <input id="redirectLang" name="next" type="hidden"
-                   value="{{ redirect_to }}"/>
-            {% get_current_language as LANGUAGE_CODE %}
-            {% get_available_languages as LANGUAGES %}
-            {% get_language_info_list for LANGUAGES as languages %}
-
-            <input type="hidden" name="language"
-                   value="{% if LANGUAGE_CODE == 'he' %}en{% else %}he{% endif %}">
-            <input id="lang-switcher" type="submit" class="langHebEng"
-                   value="{% if LANGUAGE_CODE == 'he' %}English⏵{% else %}⏴עברית{% endif %}"/>
-        </form>
-        {#        <a class="btnBag" href="#"><img src="/static/images/Shopping-bag.svg"/></a>#}
-        <a id="searchShowHide" class="btnSearchIcon glyphicon glyphicon-search"
-           href="#"></a>
 
         <form id="searchform" action="{% url 'movies:list' %}">
             {% csrf_token %}

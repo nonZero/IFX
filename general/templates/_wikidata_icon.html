@@ -1,0 +1,5 @@
+{% load staticfiles %}
+{% if o.wikidata_id %}
+    <img src="{% static "images/wikidata-logo.svg" %}" height="20"
+         alt="{{ o.wikidata_id }}" class="pb-1">
+{% endif %}

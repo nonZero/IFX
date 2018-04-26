@@ -1,5 +1,6 @@
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, AccessMixin
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView
@@ -12,7 +13,16 @@ from enrich.tasks import lookup_suggestion_by_id
 from general.templatetags.ifx import bdtitle, bdtitle_plus
 
 
-class IFXMixin(LoginRequiredMixin):
+class IFXMixin(AccessMixin):
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return self.handle_no_permission()
+        self.predispatch()
+        return super().dispatch(request, *args, **kwargs)
+
+    def predispatch(self):
+        pass
+
     def get_model_plural_name(self):
         return self.model._meta.verbose_name_plural.title()
 
@@ -43,7 +53,15 @@ class IFXMixin(LoginRequiredMixin):
         return None
 
 
-class EntityActionMixin(IFXMixin):
+class DataContributorOnlyMixin(IFXMixin):
+    def predispatch(self):
+        if not self.request.user.is_editor():
+            raise PermissionDenied()
+
+        super().predispatch()
+
+
+class EntityActionMixin(DataContributorOnlyMixin):
     def get_title(self):
         return "{}: {}".format(self.action_name, bdtitle(self.object))
 

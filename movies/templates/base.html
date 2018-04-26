@@ -37,45 +37,47 @@
     </title>
 </head>
 <body>
+<div id="page-container">
 
-{% include '_header.html' %}
+    {% include '_header.html' %}
 
-{% block main %}
-    <main>
-        <div class="container">
-            {% with view.get_breadcrumbs as bread %}
-                {% if bread %}
-                    <ol class="breadcrumb">
-                        {% for bc in bread %}
-                            <li class="breadcrumb-item">
-                                <a href="{{ bc.1 }}">
-                                    {{ bc.0 }}
-                                </a>
-                            </li>
-                        {% endfor %}
-                    </ol>
-                {% endif %}
-            {% endwith %}
+    {% block main %}
+        <main>
+            <div class="container">
+                {% with view.get_breadcrumbs as bread %}
+                    {% if bread %}
+                        <ol class="breadcrumb">
+                            {% for bc in bread %}
+                                <li class="breadcrumb-item">
+                                    <a href="{{ bc.1 }}">
+                                        {{ bc.0 }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ol>
+                    {% endif %}
+                {% endwith %}
 
-            {% block header_container %}
-                <h1>
-                    {% block header %}
-                        {{ view.get_header }}
-                    {% endblock %}
-                </h1>
-            {% endblock %}
+                {% block header_container %}
+                    <h1>
+                        {% block header %}
+                            {{ view.get_header }}
+                        {% endblock %}
+                    </h1>
+                {% endblock %}
 
-            {% bootstrap_messages %}
+                {% bootstrap_messages %}
 
-            {% block content %}
-                CONTENT
-            {% endblock %}
-        </div>
-    </main>
-{% endblock %}
+                {% block content %}
+                    CONTENT
+                {% endblock %}
+            </div>
+        </main>
+    {% endblock %}
 
-{% include '_footer.html' %}
+    {% include '_footer.html' %}
 
+</div>
 </body>
 
 <script src="{% static "vendor/jquery-3.2.1.js" %}"></script>
@@ -86,7 +88,6 @@
 {% endblock %}
 
 <script src="{% static 'allScripts.js' %}"></script>
-
 
 
 </html>

@@ -34,6 +34,8 @@
                 {% for object in object_list %}
                     <li class="list-group-item">
                         {{ object|un }}
+                        {% wikidata_icon object %}
+
                         <span dir="ltr">({{ object.movies.count }})</span>
 
                         ({% for mrp in object.distinct_roles %}

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-22 02:03+0300\n"
-"PO-Revision-Date: 2018-04-22 02:03+0300\n"
+"POT-Creation-Date: 2018-04-23 23:10+0300\n"
+"PO-Revision-Date: 2018-04-23 23:10+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -63,6 +63,12 @@ msgstr "סרט"
 
 msgid "movies"
 msgstr "סרטים"
+
+msgid "Permission Denied"
+msgstr "הגישה חסומה"
+
+msgid "Page access restricted to editors."
+msgstr "אינך מורשה לצפות בדף זה."
 
 msgid "404 Not Found"
 msgstr "404 הדף לא קיים"

@@ -4,7 +4,7 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView, TemplateView
 
-from ifx.base_views import IFXMixin
+from ifx.base_views import DataContributorOnlyMixin
 from movies.models import Movie
 from people.models import Person
 
@@ -19,7 +19,7 @@ def add_report(key):
     return df
 
 
-class BaseReport(IFXMixin, ListView):
+class BaseReport(DataContributorOnlyMixin, ListView):
     breadcrumbs = (
         (_("Reports"), reverse_lazy("reports:list")),
     )
@@ -115,7 +115,7 @@ class NoNamePersonReport(PersonReport):
         ).prefetch_related('movies')
 
 
-class ReportList(IFXMixin, TemplateView):
+class ReportList(DataContributorOnlyMixin, TemplateView):
     title = _("Reports")
     template_name = "reports/reports.html"
     reports = [(f"reports:{k}", v) for k, v in REPORTS]

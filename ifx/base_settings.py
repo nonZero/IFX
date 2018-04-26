@@ -168,3 +168,11 @@ LOGGING = {
         },
     }
 }
+
+# Create via https://meta.wikimedia.org/wiki/Special:OAuthConsumerRegistration/propose
+# - Applicable project: 'wikidatawiki'
+# - Applicable grants: "Create, edit, and move pages"
+# - OAuth "callback" URL: "http://locahost:8000/oauth-callback/"
+# And override in local_settings.py (do not modify values here)
+OAUTH_CONSUMER_KEY = ""
+OAUTH_CONSUMER_SECRET = ""

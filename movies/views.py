@@ -4,6 +4,7 @@ from builtins import super
 
 import django_filters
 from django.contrib import messages
+from django.core.exceptions import PermissionDenied
 from django.db.models import Count, Q
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
@@ -15,7 +16,8 @@ from django_filters.views import FilterView
 
 from editing_logs.api import Recorder
 from general.templatetags.ifx import bdtitle
-from ifx.base_views import IFXMixin, EntityEditMixin, EntityActionMixin
+from ifx.base_views import IFXMixin, EntityEditMixin, EntityActionMixin, \
+    DataContributorOnlyMixin
 from links.models import LinkType
 from links.tasks import add_links_by_movie_id
 from movies import forms
@@ -114,6 +116,11 @@ class MovieDetailView(IFXMixin, DetailView):
         (_("Movies"), reverse_lazy("movies:list")),
     )
 
+    def predispatch(self):
+        if not self.get_object().active and not self.request.user.is_editor():
+            raise PermissionDenied()
+        super().predispatch()
+
     def possible_duplicates(self):
         q = Q()
         if self.object.title_he:
@@ -125,7 +132,7 @@ class MovieDetailView(IFXMixin, DetailView):
         return Movie.objects.filter(q, active=True).exclude(id=self.object.id)
 
 
-class MovieUpdateView(EntityEditMixin, UpdateView):
+class MovieUpdateView(DataContributorOnlyMixin, UpdateView):
     model = Movie
     breadcrumbs = MovieDetailView.breadcrumbs
     form_class = forms.MovieForm

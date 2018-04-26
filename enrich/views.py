@@ -11,7 +11,7 @@ from editing_logs.api import Recorder
 from enrich.models import Suggestion
 from enrich.tasks import lookup_suggestion_by_id
 from ifx.base_models import WikiDataEntity
-from ifx.base_views import IFXMixin
+from ifx.base_views import IFXMixin, DataContributorOnlyMixin
 from links import tasks
 from movies.models import Movie
 from people.models import Person
@@ -31,14 +31,14 @@ class SuggestionFilter(django_filters.FilterSet):
         )
 
 
-class SuggestionListView(IFXMixin, FilterView):
+class SuggestionListView(DataContributorOnlyMixin, FilterView):
     template_name = "enrich/suggestion_list.html"
     filterset_class = SuggestionFilter
     model = Suggestion
     paginate_by = 100
 
 
-class SuggestionForceLookupView(IFXMixin, SingleObjectMixin, View):
+class SuggestionForceLookupView(DataContributorOnlyMixin, SingleObjectMixin, View):
     model = Suggestion
 
     def post(self, request, *args, **kwargs):
@@ -54,7 +54,7 @@ class SuggestionForceLookupView(IFXMixin, SingleObjectMixin, View):
         return redirect(o.entity)
 
 
-class SetWikiDataIDView(IFXMixin, SingleObjectMixin, View):
+class SetWikiDataIDView(DataContributorOnlyMixin, SingleObjectMixin, View):
     model = Suggestion
 
     def post(self, request, *args, **kwargs):

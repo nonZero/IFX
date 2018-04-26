@@ -8,7 +8,7 @@ import movies.models
 import people.models
 from editing_logs.api import Recorder
 from general.templatetags.ifx import bdtitle
-from ifx.base_views import IFXMixin
+from ifx.base_views import DataContributorOnlyMixin
 from links import forms
 from links.models import LinkType, Link
 
@@ -18,7 +18,7 @@ ENTITY_MODELS = {
 }
 
 
-class LinkMixin(IFXMixin):
+class LinkMixin(DataContributorOnlyMixin):
     model = Link
     form_class = forms.LinkForm
     template_name = 'links/link_form.html'

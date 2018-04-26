@@ -5,8 +5,7 @@ from django_filters.views import FilterView
 
 from editing_logs.models import LogItem
 from general.templatetags.ifx import bdtitle
-from ifx.base_views import IFXMixin
-from movies.models import Movie
+from ifx.base_views import IFXMixin, DataContributorOnlyMixin
 
 
 class LogItemFilter(django_filters.FilterSet):
@@ -17,7 +16,7 @@ class LogItemFilter(django_filters.FilterSet):
         )
 
 
-class LogItemListView(IFXMixin, FilterView):
+class LogItemListView(DataContributorOnlyMixin, FilterView):
     template_name = "editing_logs/logitem_list.html"
     filterset_class = LogItemFilter
     model = LogItem

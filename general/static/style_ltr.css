@@ -80,14 +80,6 @@ button#dropdownMenu1 {
     /* margin-right: 20px; */
 }
 
-.logo a img {
-    height: 32px;
-    width: auto;
-    position: absolute;
-    left: 70px;
-    top: 8px;
-}
-
 .btnMenu {
     height: 45px;
     width: 50px;
@@ -108,11 +100,8 @@ button#dropdownMenu1 {
     margin-top: -4px;
 }
 
-.logo span {
-    position: absolute;
-    left: 189px;
-    top: 3px;
-    font-size: 10pt;
+.logo a {
+    left: 60px;
 }
 
 a.langHebEng {
@@ -197,11 +186,8 @@ select {
     color: black;
 }
 
-form#lang-form {
-    position: absolute;
-    right: 10px;
-    top: 7px;
-    font-size: 16pt;
+.lang-switcher {
+    right:0;
 }
 
 ul {

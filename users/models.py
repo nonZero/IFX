@@ -45,3 +45,7 @@ class User(AbstractEmailUser):
                        resource_owner_secret=self.wikidata_access_token[
                            'secret'])
         return auth1
+
+
+    def is_editor(self):
+        return self.is_superuser or self.is_data_volunteer

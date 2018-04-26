@@ -1,5 +1,6 @@
 import django_filters
 from django.contrib import messages
+from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
@@ -34,7 +35,8 @@ class PersonListView(IFXMixin, FilterView):
     paginate_by = 50
 
     def get_queryset(self):
-        return super().get_queryset().filter(movies__isnull=False).distinct()
+        return super().get_queryset().active().filter(
+            movies__isnull=False).distinct()
 
     def get_ordering(self):
         k = self.request.GET.get('order', None)
@@ -49,6 +51,11 @@ class PersonDetailView(IFXMixin, DetailView):
     breadcrumbs = (
         (_("People"), reverse_lazy("people:list")),
     )
+
+    def predispatch(self):
+        if not self.get_object().active and not self.request.user.is_editor():
+            raise PermissionDenied()
+        super().predispatch()
 
     def possible_duplicates(self):
         q = Q()

@@ -2,13 +2,22 @@ from urllib.parse import urlencode
 
 from django import template
 from django.template.loader import render_to_string
+from django.urls import translate_url
 from django.utils import translation
 from django.utils.html import conditional_escape
 from django.utils.http import urlquote
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
+FLIP = {'en': 'he', 'he': 'en'}
+
 register = template.Library()
+
+
+@register.filter
+def switch_lang(url):
+    lang = FLIP[translation.get_language()[:2]]
+    return translate_url(url, lang)
 
 
 @register.inclusion_tag("_pagination.html", takes_context=True)
@@ -61,9 +70,6 @@ def un(instance):
 def bdtitle(instance):
     lang = translation.get_language()[:2]
     return getattr(instance, "title_" + lang)
-
-
-FLIP = {'en': 'he', 'he': 'en'}
 
 
 @register.filter
@@ -159,3 +165,10 @@ def tolist(x):
 def wikidata_query_link(id, template_name="backlinks"):
     s = render_to_string(template_name + ".sparql", {"id": id})
     return "https://query.wikidata.org/#" + urlquote(s)
+
+
+@register.inclusion_tag("_wikidata_icon.html")
+def wikidata_icon(instance):
+    return {
+        'o': instance,
+    }
