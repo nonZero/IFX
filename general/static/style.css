@@ -199,3 +199,11 @@ footer {
         height: 101px !important;
     }
 }
+
+.bg-editor {
+    background: #feffa2;
+}
+
+.auto-dir p {
+    direction: inherit;
+}

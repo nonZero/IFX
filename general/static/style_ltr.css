@@ -1,3 +1,8 @@
+.hebrew {
+    direction: rtl;
+    text-align: start;
+}
+
 .flex-rtl {
     flex-direction: row-reverse;
 }
@@ -507,3 +512,4 @@ input.addToChart {
         top: 59px !important;
     }
 }
+

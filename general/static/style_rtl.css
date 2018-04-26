@@ -1,3 +1,8 @@
+.english {
+    direction: ltr;
+    text-align: start;
+}
+
 body {
     direction: rtl;
 }
@@ -507,3 +512,4 @@ input.addToChart {
         top: 58px !important;
     }
 }
+
