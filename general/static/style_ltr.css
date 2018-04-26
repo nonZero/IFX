@@ -9,7 +9,7 @@
 
 .jumbotron {
     height: 400px;
-    background-image: url(../static/images/film-movie-motion-picture-darker.jpg);
+    background-image: url(./images/film-movie-motion-picture-darker.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     color: white;
