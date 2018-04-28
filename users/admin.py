@@ -34,6 +34,37 @@ class UserAdmin(authtools.admin.UserAdmin):
         authtools.admin.ADVANCED_PERMISSION_FIELDS,
         authtools.admin.DATE_FIELDS,
     )
+    list_display = (
+        'email',
+        'name_he',
+        'name_en',
+        'full_name_he',
+        'full_name_en',
+        'is_active',
+        'is_data_volunteer',
+        'is_team_member',
+        'is_staff',
+        'is_superuser',
+        'date_joined',
+        'last_login',
+        'wikidata_access_token_created_at',
+    )
+    list_filter = (
+        'is_superuser',
+        'is_staff',
+        'is_team_member',
+        'is_data_volunteer',
+        'is_active',
+    )
+    search_fields = (
+        'id',
+        'email',
+        'name_he',
+        'name_en',
+        'full_name_he',
+        'full_name_en',
+
+    )
 
 
 admin.site.register(models.User, UserAdmin)
