@@ -29,7 +29,7 @@ class AboutView(IFXMixin, TemplateView):
     jumbotron = "movies/about_jumbotron.html"
     title = _("About")
 
-    def x(self):
+    def get_html_content(self):
         lang = translation.get_language()[:2]
         with (Path(settings.BASE_DIR) / f"about_{lang}.md").open() as f:
             return mark_safe(markdown.markdown(f.read()))
