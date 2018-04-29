@@ -15,6 +15,7 @@ from django_filters.views import FilterView
 
 from editing_logs.api import Recorder
 from general.templatetags.ifx import bdtitle
+from ifx.base_filters import WikidataEntityFilter
 from ifx.base_views import IFXMixin, EntityActionMixin, \
     DataContributorOnlyMixin, PostToWikiDataView
 from movies import forms
@@ -30,7 +31,7 @@ def get_tags():
                 movie_count=Count('movies')).order_by('title_he'))
 
 
-class MovieFilter(django_filters.FilterSet):
+class MovieFilter(WikidataEntityFilter):
     title = django_filters.CharFilter(method='title_filter', label=_("title"))
     year = django_filters.RangeFilter()
     duration = django_filters.RangeFilter()

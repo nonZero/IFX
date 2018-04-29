@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-21 17:33+0300\n"
-"PO-Revision-Date: 2018-04-21 17:33+0300\n"
+"POT-Creation-Date: 2018-04-29 11:04+0300\n"
+"PO-Revision-Date: 2018-04-29 11:05+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -18,6 +18,9 @@ msgstr ""
 "MovieReport-Msgid-Bugs-To: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.6\n"
+
+msgid "has wikidata id"
+msgstr "מזהה ויקינתונים קיים"
 
 msgid "active"
 msgstr "פעיל"
@@ -45,3 +48,21 @@ msgstr "עריכה"
 
 msgid "Updated successfully"
 msgstr "עודכן בהצלחה"
+
+msgid "ID only! (do not enter full URL)"
+msgstr ""
+
+msgid "Added new wikidata entity."
+msgstr ""
+
+msgid "Hebrew name"
+msgstr "שם עברי"
+
+msgid "English name"
+msgstr "שם אנגלי"
+
+msgid "Hebrew description"
+msgstr ""
+
+msgid "English description"
+msgstr ""
