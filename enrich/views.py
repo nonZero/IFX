@@ -11,10 +11,8 @@ from editing_logs.api import Recorder
 from enrich.models import Suggestion
 from enrich.tasks import lookup_suggestion_by_id
 from ifx.base_models import WikiDataEntity
-from ifx.base_views import IFXMixin, DataContributorOnlyMixin
-from links import tasks
-from movies.models import Movie
-from people.models import Person
+from ifx.base_views import DataContributorOnlyMixin
+from links.tasks import add_links
 from . import forms
 
 
@@ -38,7 +36,8 @@ class SuggestionListView(DataContributorOnlyMixin, FilterView):
     paginate_by = 100
 
 
-class SuggestionForceLookupView(DataContributorOnlyMixin, SingleObjectMixin, View):
+class SuggestionForceLookupView(DataContributorOnlyMixin, SingleObjectMixin,
+                                View):
     model = Suggestion
 
     def post(self, request, *args, **kwargs):
@@ -74,10 +73,7 @@ class SetWikiDataIDView(DataContributorOnlyMixin, SingleObjectMixin, View):
                         s.status = s.Status.VERIFIED
                         s.save()
 
-                    if isinstance(o, Movie):
-                        tasks.add_links_by_movie_id.delay(o.id)
-                    elif isinstance(o, Person):
-                        tasks.add_links_by_person_id.delay(o.id)
+                    add_links(o)
                     messages.success(request, _("Wikidata ID assigned."))
                 except IntegrityError:
                     messages.error(request, _("Wikidata ID already exists!"))

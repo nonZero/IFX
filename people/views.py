@@ -9,10 +9,13 @@ from django.views.generic import DetailView, UpdateView, FormView
 from django.views.generic.detail import BaseDetailView
 from django_filters.views import FilterView
 
+import ifx.forms
 from editing_logs.api import Recorder
 from general.templatetags.ifx import bdtitle
-from ifx.base_views import IFXMixin, EntityEditMixin, EntityActionMixin
+from ifx.base_views import IFXMixin, EntityEditMixin, EntityActionMixin, \
+    PostToWikiDataView
 from people.models import Person
+from wikidata_edit.upload import upload_person
 from . import forms
 
 
@@ -176,3 +179,34 @@ class MergeIntoView(EntityActionMixin, BaseDetailView, FormView):
         messages.success(self.request, _("Merged."))
 
         return redirect(o)
+
+
+class PostPersonToWikiDataView(PostToWikiDataView):
+    form_class = ifx.forms.PostToWikiDataForm
+    model = Person
+    breadcrumbs = PersonDetailView.breadcrumbs
+    action_name = _("Upload to WikiData")
+    fields = forms.PERSON_FIELDS
+    link_type_key = 'for_people'
+
+    # def get_initial(self):
+    #     o = self.get_object()
+    #     d = super().get_initial()
+    #     d['desc_en'] = f"{o.year} Israeli film" if o.year else "Israeli film"
+    #     d['desc_he'] = f"סרט ישראלי משנת {o.year}" if o.year else "סרט ישראלי"
+    #     return d
+
+    def upload(self, d, ids, o):
+        labels = {}
+        if d['name_he']:
+            labels['he'] = o.name_he
+        if d['name_en']:
+            labels['en'] = o.name_en
+        descs = {}
+        if d['desc_he']:
+            descs['he'] = d['desc_he']
+        if d['desc_en']:
+            descs['en'] = d['desc_en']
+        resp = upload_person(self.request.user.get_wikidata_oauth1(),
+                             labels, descs, ids)
+        return resp

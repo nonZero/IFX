@@ -5,17 +5,12 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView, UpdateView
 
 import movies.models
-import people.models
 from editing_logs.api import Recorder
 from general.templatetags.ifx import bdtitle
 from ifx.base_views import DataContributorOnlyMixin
 from links import forms
+from links.consts import ENTITY_MODELS
 from links.models import LinkType, Link
-
-ENTITY_MODELS = {
-    'movie': movies.models.Movie,
-    'person': people.models.Person,
-}
 
 
 class LinkMixin(DataContributorOnlyMixin):

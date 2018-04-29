@@ -1,17 +1,25 @@
+import json
+import logging
+
+from django import forms
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin, AccessMixin
+from django.contrib.auth.mixins import AccessMixin
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import CreateView
-from django.views.generic.detail import SingleObjectMixin
+from django.views.generic import CreateView, FormView
+from django.views.generic.detail import SingleObjectMixin, BaseDetailView
 from django.views.generic.list import MultipleObjectMixin
 
 from editing_logs.api import Recorder
 from enrich.lookup import create_suggestion
 from enrich.tasks import lookup_suggestion_by_id
 from general.templatetags.ifx import bdtitle, bdtitle_plus
+from links.models import LinkType
+from links.tasks import add_links
+
+logger = logging.getLogger(__name__)
 
 
 class IFXMixin(AccessMixin):
@@ -97,4 +105,52 @@ class EntityEditMixin(EntityActionMixin):
             if o.title_he:
                 s, created = create_suggestion(o)
                 lookup_suggestion_by_id.delay(s.id)
+        return redirect(o)
+
+
+class PostToWikiDataView(EntityActionMixin, BaseDetailView, FormView):
+    template_name = "post_to_wikidata_form.html"
+
+    def get_link_types(self):
+        lq = {self.link_type_key: True}
+        qs = LinkType.objects.filter(wikidata_id__isnull=False, **lq)
+        return qs
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        for fld in self.fields:
+            form.fields[fld].help_text = getattr(self.object, fld)
+        for lt in self.get_link_types():
+            k = f'ext_{lt.wikidata_id}'
+            form.fields[k] = forms.CharField(
+                label=bdtitle(lt), required=False,
+                help_text=_("ID only! (do not enter full URL)"))
+        return form
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super().post(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        o = self.object
+        d = form.cleaned_data
+
+        ids = {}
+        for lt in self.get_link_types():
+            k = f'ext_{lt.wikidata_id}'
+            if d[k]:
+                ids[lt.wikidata_id] = d[k]
+
+        resp = self.upload(d, ids, o)
+
+        if resp.get('success') != 1:
+            msg = "Error uploading data to wikidata\n"
+            logger.error(msg + json.dumps(resp, indent=2))
+            messages.error(self.request, msg)
+        else:
+            o.wikidata_id = resp['entity']['id']
+            o.wikidata_status = o.Status.ASSIGNED
+            o.save()
+            messages.success(self.request, _("Added new wikidata entity."))
+            add_links(o)
         return redirect(o)

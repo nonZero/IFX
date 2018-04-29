@@ -4,7 +4,7 @@ from typing import Dict
 import requests
 from requests_oauthlib import OAuth1
 
-from .build import build_movie_entity
+from .build import build_movie_entity, build_person_entity
 
 WIKIDATA_API_URL = "https://www.wikidata.org/w/api.php"
 
@@ -41,4 +41,14 @@ def upload_movie(auth: OAuth1,
     """A high level interface for adding movies to wikidata"""
 
     entity = build_movie_entity(descs, duration, ext_ids, labels, year)
+    return upload_entity(auth, entity)
+
+
+def upload_person(auth: OAuth1,
+                  labels: Dict[str, str],
+                  descs: Dict[str, str],
+                  ext_ids: Dict[str, str] = None):
+    """A high level interface for adding movies to wikidata"""
+
+    entity = build_person_entity(descs, ext_ids, labels)
     return upload_entity(auth, entity)

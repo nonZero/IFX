@@ -116,12 +116,10 @@
 
         {% if user.is_editor %}
 
-
             {% if not object.wikidata_id %}
                 <div class="card mb-2">
                     <h4 class="card-header">
-                        <a
-                                href="{% url "movies:upload" object.id %}">
+                        <a href="{% url "movies:upload" object.id %}">
                             <span class="fa fa-upload"></span> {% trans "Upload to WikiData" %}
                         </a>
                     </h4>

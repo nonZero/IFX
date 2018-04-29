@@ -65,6 +65,15 @@
 
             {% if user.is_editor %}
 
+                {% if not object.wikidata_id %}
+                    <div class="card mb-2">
+                        <h4 class="card-header">
+                            <a href="{% url "people:upload" object.id %}">
+                                <span class="fa fa-upload"></span> {% trans "Upload to WikiData" %}
+                            </a>
+                        </h4>
+                    </div>
+                {% endif %}
 
                 {% if object.idea_tid %}
                     <div class="card bg-dark mb-1">
