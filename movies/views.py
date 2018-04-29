@@ -210,6 +210,7 @@ class MergeIntoView(EntityActionMixin, BaseDetailView, FormView):
             o.merged_into = self.other
             o.save()
             r.record_update_after(o)
+            o.suggestions.all().delete()
 
             for fld in forms.MERGE_FIELDS:
                 v = getattr(o, fld)

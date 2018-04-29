@@ -121,6 +121,14 @@ class Suggestion(models.Model):
             (REJECTED, 'warning'),
         ))
 
+        INCOMPLETE = (
+            PENDING,
+            ERROR,
+            NO_RESULTS,
+            MANY_RESULTS,
+            FOUND_UNVERIFIED,
+        )
+
     status = models.IntegerField(_('status'), choices=Status.CHOICES)
 
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE,
