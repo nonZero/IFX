@@ -28,6 +28,21 @@ class PersonFilter(WikidataEntityFilter):
     movies__role = django_filters.ChoiceFilter(choices=get_roles,
                                                label=_("role"))
 
+    ordering = django_filters.OrderingFilter(
+        label=_("ordering"),
+        fields=(
+            ('name_he', 'name_he'),
+            ('name_en', 'name_en'),
+        ),
+
+        field_labels={
+            'name_he': _('Hebrew Name (A -> Z)'),
+            '-name_he': _('Hebrew name (Z -> A)'),
+            'name_en': _('English Name (A -> Z)'),
+            '-name_en': _('English name (Z -> A)'),
+        }
+    )
+
     class Meta:
         model = Person
         fields = (

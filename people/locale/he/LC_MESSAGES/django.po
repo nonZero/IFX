@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-29 10:45+0300\n"
-"PO-Revision-Date: 2018-04-29 10:46+0300\n"
+"POT-Creation-Date: 2018-04-29 16:06+0300\n"
+"PO-Revision-Date: 2018-04-29 16:07+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -111,6 +111,21 @@ msgstr ""
 
 msgid "name"
 msgstr ""
+
+msgid "ordering"
+msgstr ""
+
+msgid "Hebrew Name (A -> Z)"
+msgstr "שם בעברית (א -> ת)"
+
+msgid "Hebrew name (Z -> A)"
+msgstr "שם בעברית (ת -> א)"
+
+msgid "English Name (A -> Z)"
+msgstr "שם באנגלית (A -> Z)"
+
+msgid "English name (Z -> A)"
+msgstr "שם באנגלית (Z -> A)"
 
 msgid "People"
 msgstr "אישים"
