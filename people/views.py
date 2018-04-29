@@ -182,7 +182,7 @@ class MergeIntoView(EntityActionMixin, BaseDetailView, FormView):
 
 
 class PostPersonToWikiDataView(PostToWikiDataView):
-    form_class = ifx.forms.PostToWikiDataForm
+    form_class = forms.PostPersonToWikiDataForm
     model = Person
     breadcrumbs = PersonDetailView.breadcrumbs
     action_name = _("Upload to WikiData")
@@ -208,5 +208,5 @@ class PostPersonToWikiDataView(PostToWikiDataView):
         if d['desc_en']:
             descs['en'] = d['desc_en']
         resp = upload_person(self.request.user.get_wikidata_oauth1(),
-                             labels, descs, ids)
+                             labels, descs, ids, d['gender'])
         return resp

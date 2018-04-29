@@ -47,8 +47,8 @@ def upload_movie(auth: OAuth1,
 def upload_person(auth: OAuth1,
                   labels: Dict[str, str],
                   descs: Dict[str, str],
-                  ext_ids: Dict[str, str] = None):
+                  ext_ids: Dict[str, str] = None,
+                  gender: int = None):
     """A high level interface for adding movies to wikidata"""
-
-    entity = build_person_entity(descs, ext_ids, labels)
+    entity = build_person_entity(descs, ext_ids, labels, gender)
     return upload_entity(auth, entity)

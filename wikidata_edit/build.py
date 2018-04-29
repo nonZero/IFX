@@ -8,6 +8,7 @@ INSTANCE_OF = "P31"
 FILM = 11424
 HUMAN = 5
 
+GENDER = "P21"
 
 def build_claims(claims: List[dict]) -> Dict[str, List[dict]]:
     d = collections.defaultdict(list)
@@ -101,7 +102,9 @@ def build_movie_entity(descs, duration, ext_ids, labels, year):
     return build_entity(claims, descs, ext_ids, labels)
 
 
-def build_person_entity(descs, ext_ids, labels):
+def build_person_entity(descs, ext_ids, labels, gender):
     claims = [create_instance_of_claim(HUMAN)]
+    if gender:
+        claims.append(create_item_claim(GENDER, gender))
 
     return build_entity(claims, descs, ext_ids, labels)

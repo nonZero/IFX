@@ -1,6 +1,7 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
+from ifx.forms import PostToWikiDataForm
 from .models import Person
 
 PERSON_FIELDS = (
@@ -25,3 +26,18 @@ class PersonForm(forms.ModelForm):
         fields = PERSON_FIELDS
 
 
+GENDER_CHOICES = (
+    (None, '---------'),
+    (6581097, _("Female")),
+    (6581072, _("Male")),
+    (1097630, _("Intersex")),
+    (1052281, _("Transgender Female")),
+    (2449503, _("Transgender Male")),
+)
+
+
+class PostPersonToWikiDataForm(PostToWikiDataForm):
+    gender = forms.TypedChoiceField(choices=GENDER_CHOICES,
+                                    coerce=int,
+                                    empty_value=None,
+                                    label=_("gender"), required=False)

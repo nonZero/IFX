@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-21 23:08+0300\n"
-"PO-Revision-Date: 2018-04-21 23:08+0300\n"
+"POT-Creation-Date: 2018-04-29 10:23+0300\n"
+"PO-Revision-Date: 2018-04-29 10:23+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -20,7 +20,25 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 
 msgid "Editing Comment"
-msgstr ""
+msgstr "הערת עריכה"
+
+msgid "Female"
+msgstr "נקבה"
+
+msgid "Male"
+msgstr "זכר"
+
+msgid "Intersex"
+msgstr "אינטרסקס"
+
+msgid "Transgender Female"
+msgstr "נקבה טרנסג'נדרית"
+
+msgid "Transgender Male"
+msgstr "זכר טרנסג'נדר"
+
+msgid "gender"
+msgstr "מגדר"
 
 msgid "Hebrew name"
 msgstr "שם עברי"
@@ -34,6 +52,12 @@ msgstr "אישיות"
 msgid "people"
 msgstr "אישים"
 
+msgid "INACTIVE"
+msgstr "לא פעיל"
+
+msgid "Merged into"
+msgstr ""
+
 msgid "Search the web"
 msgstr ""
 
@@ -43,6 +67,9 @@ msgstr "כותרת בעברית"
 msgid "English Title"
 msgstr "כותרת באנגלית"
 
+msgid "Upload to WikiData"
+msgstr ""
+
 msgid "Legacy ID"
 msgstr ""
 
@@ -50,13 +77,19 @@ msgid "Modified"
 msgstr "עבר שינוי"
 
 msgid "Edit"
-msgstr ""
+msgstr "עריכה"
 
 msgid "Logs"
 msgstr ""
 
-msgid "Filter"
+msgid "Possible Duplicates"
 msgstr ""
+
+msgid "Merge"
+msgstr ""
+
+msgid "Filter"
+msgstr "סינון"
 
 msgid "No items found"
 msgstr ""
@@ -65,7 +98,7 @@ msgid "One item found"
 msgstr ""
 
 msgid "Found"
-msgstr ""
+msgstr "נמצאו"
 
 msgid "items"
 msgstr ""
@@ -75,6 +108,15 @@ msgstr ""
 
 msgid "People"
 msgstr "אישים"
+
+msgid "Merge into another person"
+msgstr ""
+
+msgid "WikiData ID"
+msgstr ""
+
+msgid "Merged."
+msgstr ""
 
 #~ msgid "Personalities"
 #~ msgstr "אישים"
