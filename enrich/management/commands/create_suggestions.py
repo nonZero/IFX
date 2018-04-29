@@ -35,8 +35,10 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         for model in (Movie, Person):
-            done = model.objects.filter(Q(wikidata_id__isnull=False) | Q(
-                wikidata_status=model.Status.NOT_APPLICABLE))
+            done = model.objects.filter(
+                Q(wikidata_id__isnull=False) |
+                Q(wikidata_status=model.Status.NOT_APPLICABLE) |
+                Q(active=False))
             qs = Suggestion.objects.filter(
                 status__in=Suggestion.Status.INCOMPLETE,
                 content_type=ContentType.objects.get_for_model(model),
@@ -44,8 +46,10 @@ class Command(BaseCommand):
             print(f"Deleting {qs.count()} old {model.__name__} suggestions.")
             qs.delete()
 
-        create_suggestions(Movie.objects.filter(wikidata_id__isnull=True),
-                           'title_he')
-        create_suggestions(
-            Person.objects.exclude(movies=None, wikidata_id__isnull=True),
-            'name_he')
+        qs = Movie.objects.filter(active=True,
+                                  wikidata_id__isnull=True)
+        create_suggestions(qs, 'title_he')
+
+        qs = Person.objects.filter(
+            active=True, wikidata_id__isnull=True).exclude(movies=None)
+        create_suggestions(qs, 'name_he')

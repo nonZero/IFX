@@ -126,6 +126,10 @@ def verify_suggestion(s: Suggestion):
     assert s.status == s.Status.FOUND_UNVERIFIED
 
     with transaction.atomic():
+        if not s.entity.active:
+            return False, 0
+        if s.entity.wikidata_id is not None:
+            return False, 0
         n, facts = verify_and_update_entity(s.entity, s.source_key)
         if s.entity in facts:
             s.status = Suggestion.Status.VERIFIED
