@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 set -ex
 python manage.py create_suggestions
 python manage.py lookup_suggestions
