@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-29 10:23+0300\n"
-"PO-Revision-Date: 2018-04-29 10:23+0300\n"
+"POT-Creation-Date: 2018-04-29 10:45+0300\n"
+"PO-Revision-Date: 2018-04-29 10:46+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -51,6 +51,12 @@ msgstr "אישיות"
 
 msgid "people"
 msgstr "אישים"
+
+msgid "role"
+msgstr "תפקיד"
+
+msgid "roles"
+msgstr "תפקידים"
 
 msgid "INACTIVE"
 msgstr "לא פעיל"

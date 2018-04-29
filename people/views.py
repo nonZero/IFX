@@ -9,22 +9,30 @@ from django.views.generic import DetailView, UpdateView, FormView
 from django.views.generic.detail import BaseDetailView
 from django_filters.views import FilterView
 
-import ifx.forms
 from editing_logs.api import Recorder
 from general.templatetags.ifx import bdtitle
 from ifx.base_views import IFXMixin, EntityEditMixin, EntityActionMixin, \
     PostToWikiDataView
-from people.models import Person
+from people.models import Person, Role
 from wikidata_edit.upload import upload_person
 from . import forms
 
 
+def get_roles():
+    return ((t.id, bdtitle(t)) for t in Role.objects.order_by('title_he'))
+
+
 class PersonFilter(django_filters.FilterSet):
     name = django_filters.CharFilter(method='name_filter', label=_("name"))
+    movies__role = django_filters.ChoiceFilter(choices=get_roles,
+                                               label=_("role"))
 
     class Meta:
         model = Person
-        fields = ()
+        fields = (
+            'name',
+            'movies__role',
+        )
 
     def name_filter(self, queryset, name, value):
         q = Q(name_en__icontains=value) | Q(name_he__icontains=value)

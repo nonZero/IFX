@@ -100,6 +100,10 @@ class Role(Undeletable, WikiDataEntity):
         'idea_modified',
     )
 
+    class Meta:
+        verbose_name = _("role")
+        verbose_name_plural = _("roles")
+
     def __str__(self):
         return self.title_en or self.title_he or "???"
 
