@@ -79,11 +79,11 @@ class DataContributorOnlyMixin(IFXMixin):
 
 class EntityActionMixin(DataContributorOnlyMixin):
     def get_title(self):
-        return "{}: {}".format(self.action_name, bdtitle(self.object))
+        return "{}: {}".format(self.action_name, bdtitle_plus(self.object))
 
     def get_breadcrumbs(self):
         return self.breadcrumbs + (
-            (bdtitle(self.object), self.object.get_absolute_url()),
+            (bdtitle_plus(self.object), self.object.get_absolute_url()),
         )
 
 

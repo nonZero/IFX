@@ -118,6 +118,7 @@ class MovieUpdateView(DataContributorOnlyMixin, UpdateView):
 
 
 class PostMovieToWikiDataView(PostToWikiDataView):
+    form_class = forms.PostMovieToWikiDataForm
     model = Movie
     breadcrumbs = MovieDetailView.breadcrumbs
     action_name = _("Upload to WikiData")

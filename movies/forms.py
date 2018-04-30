@@ -35,6 +35,10 @@ class SearchByYearForm(forms.ModelForm):
 
 
 class PostMovieToWikiDataForm(PostToWikiDataForm):
+    title_he = forms.BooleanField(label=_("Hebrew title"), required=False,
+                                  initial=True)
+    title_en = forms.BooleanField(label=_("English title"), required=False,
+                                  initial=True)
     year = forms.BooleanField(label=_("year"), required=False, initial=True)
     duration = forms.BooleanField(label=_("duration"), required=False,
                                   initial=True)

@@ -37,6 +37,10 @@ GENDER_CHOICES = (
 
 
 class PostPersonToWikiDataForm(PostToWikiDataForm):
+    name_he = forms.BooleanField(label=_("Hebrew name"), required=False,
+                                  initial=True)
+    name_en = forms.BooleanField(label=_("English name"), required=False,
+                                  initial=True)
     gender = forms.TypedChoiceField(choices=GENDER_CHOICES,
                                     coerce=int,
                                     empty_value=None,
