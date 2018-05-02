@@ -28,8 +28,8 @@ class PersonForm(forms.ModelForm):
 
 GENDER_CHOICES = (
     (None, '---------'),
-    (6581097, _("Female")),
-    (6581072, _("Male")),
+    (6581097, _("Male")),
+    (6581072, _("Female")),
     (1097630, _("Intersex")),
     (1052281, _("Transgender Female")),
     (2449503, _("Transgender Male")),
