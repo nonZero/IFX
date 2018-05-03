@@ -1,7 +1,7 @@
 import django_filters
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
@@ -33,6 +33,7 @@ class PersonFilter(WikidataEntityFilter):
         fields=(
             ('name_he', 'name_he'),
             ('name_en', 'name_en'),
+            ('role_count', 'role_count'),
         ),
 
         field_labels={
@@ -40,6 +41,8 @@ class PersonFilter(WikidataEntityFilter):
             '-name_he': _('Hebrew name (Z -> A)'),
             'name_en': _('English Name (A -> Z)'),
             '-name_en': _('English name (Z -> A)'),
+            '-role_count': _('Number of roles (Descending)'),
+            'role_count': _('Number of roles (Ascending)'),
         }
     )
 
@@ -59,6 +62,7 @@ class PersonListView(IFXMixin, FilterView):
     template_name = "people/person_list.html"
     filterset_class = PersonFilter
     model = Person
+    queryset = Person.objects.annotate(role_count=Count('movies'))
     paginate_by = 50
 
     def get_queryset(self):

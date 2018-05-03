@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-29 16:06+0300\n"
-"PO-Revision-Date: 2018-04-29 16:07+0300\n"
+"POT-Creation-Date: 2018-05-03 22:37+0300\n"
+"PO-Revision-Date: 2018-05-03 22:37+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -22,11 +22,11 @@ msgstr ""
 msgid "Editing Comment"
 msgstr "הערת עריכה"
 
-msgid "Female"
-msgstr "נקבה"
-
 msgid "Male"
 msgstr "זכר"
+
+msgid "Female"
+msgstr "נקבה"
 
 msgid "Intersex"
 msgstr "אינטרסקס"
@@ -37,14 +37,14 @@ msgstr "נקבה טרנסג'נדרית"
 msgid "Transgender Male"
 msgstr "זכר טרנסג'נדר"
 
-msgid "gender"
-msgstr "מגדר"
-
 msgid "Hebrew name"
 msgstr "שם עברי"
 
 msgid "English name"
 msgstr "שם אנגלי"
+
+msgid "gender"
+msgstr "מגדר"
 
 msgid "person"
 msgstr "אישיות"
@@ -126,6 +126,12 @@ msgstr "שם באנגלית (A -> Z)"
 
 msgid "English name (Z -> A)"
 msgstr "שם באנגלית (Z -> A)"
+
+msgid "Number of roles (Descending)"
+msgstr "מספר התפקידים בסרטים (סדר יורד)"
+
+msgid "Number of roles (Ascending)"
+msgstr "מספר התפקידים בסרטים (סדר עולה)"
 
 msgid "People"
 msgstr "אישים"
