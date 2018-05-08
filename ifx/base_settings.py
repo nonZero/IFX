@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'search',
     'enrich',
     'reports',
+    'vendor_data',
 ]
 
 MIDDLEWARE = [
