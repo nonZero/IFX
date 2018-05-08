@@ -10,6 +10,7 @@ HUMAN = 5
 
 GENDER = "P21"
 
+
 def build_claims(claims: List[dict]) -> Dict[str, List[dict]]:
     d = collections.defaultdict(list)
     for c in claims:
@@ -77,7 +78,7 @@ def create_duration_claim(duration: int):
     })
 
 
-def build_entity(claims, descs, ext_ids, labels):
+def build_entity(claims, descs, ext_ids, labels, aliases=None):
     if ext_ids:
         for k, v in ext_ids.items():
             claims.append(create_external_id_claim(k, v))
@@ -88,10 +89,13 @@ def build_entity(claims, descs, ext_ids, labels):
                          descs.items()},
         'claims': build_claims(claims),
     }
+    if aliases:
+        data['aliases'] = {lang: {'language': lang, 'value': v} for lang, v in
+                           aliases}
     return data
 
 
-def build_movie_entity(descs, duration, ext_ids, labels, year):
+def build_movie_entity(descs, duration, ext_ids, labels, year, aliases=None):
     claims = [create_instance_of_claim(FILM)]
 
     if year:
@@ -99,7 +103,7 @@ def build_movie_entity(descs, duration, ext_ids, labels, year):
     if duration:
         claims.append(create_duration_claim(duration))
 
-    return build_entity(claims, descs, ext_ids, labels)
+    return build_entity(claims, descs, ext_ids, labels, aliases)
 
 
 def build_person_entity(descs, ext_ids, labels, gender):

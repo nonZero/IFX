@@ -1,3 +1,4 @@
+import time
 from collections import Counter
 
 import json
@@ -75,11 +76,6 @@ class Command(BaseCommand):
                         o.set_wikidata_id(wikidata_id)
                         continue
 
-                if o.title_he != o.entity.title_he:
-                    logger.info(f"NEED ALIAS: {wikidata_id}")
-                    c['need alias'] += 1
-                    continue
-
                 logger.info("Uploading...")
 
                 labels = {}
@@ -87,6 +83,8 @@ class Command(BaseCommand):
                     labels['he'] = o.title_he
                 if o.title_en:
                     labels['en'] = o.title_en
+                elif o.entity.title_en:
+                    labels['en'] = o.entity.title_en
                 descs = {}
                 descs[
                     'en'] = f"{o.year} Israeli film" if o.year else "Israeli film"
@@ -97,17 +95,25 @@ class Command(BaseCommand):
                 if o.imdb_id:
                     ids['P345'] = o.imdb_id
 
+                aliases = None
+                if o.title_he != o.entity.title_he:
+                    aliases = [['he', o.entity.title_he]]
+                    logger.info(f"NEED ALIAS: {wikidata_id}")
+                    c['need alias'] += 1
+
                 resp = upload_movie(oauth1, labels, descs, ids, o.year,
-                                    o.duration)
+                                    o.duration, aliases)
                 if resp.get('success') != 1:
                     msg = "Error uploading data to wikidata\n"
                     logger.error(msg + json.dumps(resp, indent=2))
                     c['error'] += 1
+                    time.sleep(1)
                 else:
                     id = resp['entity']['id']
                     print(f"New Wikidata ID {id} for movie #{o.entity.id}.")
                     o.set_wikidata_id(id)
                     c['added'] += 1
+                    time.sleep(0.1)
 
         finally:
             for k, v in sorted(c.items()):
