@@ -27,7 +27,7 @@ def simple_query(query):
 def lookup_wikidata_id_by_prop(pid, value):
     q = SPARQL.format(pid=pid, value=value.replace("'", "\\'"))
     resp = simple_query(q)
-    return resp[0]['item']['value'] if resp else None
+    return resp[0]['item']['value'].split("/")[-1] if resp else None
 
 
 def lookup_wikidata_id_by_imdb_id(imdb_id):
