@@ -20,7 +20,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
 
         titles = sorted(
-            {m.title_he for m in Movie.objects.filter(title_he__isnull=False)})
+            {m.title_he for m in Movie.objects.active().filter(title_he__isnull=False)})
 
         c = Counter()
 
@@ -49,11 +49,11 @@ class Command(BaseCommand):
                     o.save()
                     continue
 
-            mqs = Movie.objects.filter(title_he=o.title_he)
+            mqs = Movie.objects.active().filter(title_he=o.title_he)
             if mqs.count() > 1:
-                mqs = Movie.objects.filter(title_he=o.title_he, year=o.year)
+                mqs = Movie.objects.active().filter(title_he=o.title_he, year=o.year)
             if mqs.count() == 0 and o.title_en:
-                mqs = Movie.objects.filter(title_en=o.title_en)
+                mqs = Movie.objects.active().filter(title_en=o.title_en)
             if mqs.count() > 1:
                 print(o.title_he, mqs.count())
                 c['too-many'] += 1
@@ -72,10 +72,10 @@ class Command(BaseCommand):
                 ratio = difflib.SequenceMatcher(a=o.title_he, b=w).ratio()
                 print(f"--> {w} {ratio:0.3f}")
                 try:
-                    m = Movie.objects.get(title_he=w)
+                    m = Movie.objects.active().get(title_he=w)
                 except Movie.MultipleObjectsReturned:
                     try:
-                        m = Movie.objects.get(title_he=w, year=o.year)
+                        m = Movie.objects.active().get(title_he=w, year=o.year)
                     except Movie.DoesNotExist:
                         print("***", w)
                         c['miss????'] += 1

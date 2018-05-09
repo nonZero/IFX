@@ -46,7 +46,7 @@ def get_my_close_matches(words, possibilities, cutoff=0.75):
 def find_candidates(titles, v):
     words = filter(None, (v.title_he, v.title_en))
     near = sorted(get_my_close_matches(words, titles), reverse=True)[:8]
-    return [(n, t, Movie.objects.filter(Q(title_he=t) | Q(title_en=t))) for
+    return [(n, t, Movie.objects.active().filter(Q(title_he=t) | Q(title_en=t))) for
             n, t in near]
 
 
