@@ -1,0 +1,67 @@
+{% extends "base_datatable.html" %}
+{% load staticfiles i18n humanize bootstrap4 ifx movies %}
+
+{% block row %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+{#        <td>{{ object.vendor.title }}</td>#}
+        <td data-search="{{ object.vid }}"><a
+                href="{{ object.url }}">{{ object.vid }}</a></td>
+{#        <td>{{ object.get_type_display }}</td>#}
+        <td>{{ object.get_status_display }}</td>
+        <td>{{ object.title_he }}</td>
+        <td>{{ object.title_en|default:'' }}</td>
+        <td>{{ object.year|default:'' }}</td>
+        <td>
+            {% if object.duration %}
+                {{ object.duration|duration }}
+            {% endif %}
+        </td>
+        <td>
+            {% if object.entity %}
+                {{ object.entity|ut_plus }}
+                {% if object.entity.wikidata_id %}
+                    <a href="{{ object.entity.wikidata_url }}"
+                       title="{{ object.entity.wikidata_id }}"><span
+                            class="fa fa-barcode"></span></a>
+                {% endif %}
+            {% else %}
+                <ul class="list-unstyled">
+                    {% for score, title, items in object.candidates %}
+                        <li>
+                            {{ score|floatformat:3 }}: {{ title }}
+                            <br/>
+                            {% for item in items %}
+                                <span class="badge badge-{% if score >= 0.9 %}success{% elif score >= 0.8 %}info{% else %}warning{% endif %}">
+                                    {{ item|ut_plus }}
+                                    {% if item.year %}
+                                        ({{ item.year }})
+                                    {% endif %}
+                                    {% if item.wikidata_id %}
+                                        {% include "_wikidata_icon.html" with o=item %}
+                                    {% endif %}
+                                    &nbsp;
+                                    <span data-url="{% url "vendor_data:set-movie" object.id item.id %}"
+                                          class="set-movie active fa fa-save"></span>
+                                </span>
+
+                            {% endfor %}
+                        </li>
+                    {% endfor %}
+                </ul>
+
+            {% endif %}
+        </td>
+{#        {% for g in v.genre.all %}#}
+{#            <span class="badge badge-pill badge-primary">{{ g.value }}</span>#}
+{#        {% endfor %}#}
+    </tr>
+{% endblock %}
+
+{% block js %}
+    {{ block.super }}
+    <script src="{% static "js/csrf.js" %}"></script>
+    <script src="{% static "js/report_utils.js" %}"></script>
+    <script src="{% static "js/vendoritem_list.js" %}"></script>
+{% endblock %}
+

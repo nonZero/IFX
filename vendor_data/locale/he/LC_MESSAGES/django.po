@@ -1,0 +1,97 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-09 22:51+0300\n"
+"PO-Revision-Date: 2018-05-09 22:52+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.0.6\n"
+
+msgid "movie"
+msgstr "סרט"
+
+msgid "person"
+msgstr "אישיות"
+
+msgid "New"
+msgstr "חדש"
+
+msgid "Pending creation of a new Wikidata ID"
+msgstr "ממתין ליצירה של מזהה ויקינתונים"
+
+msgid "Assigned"
+msgstr "קיים"
+
+msgid "N/A"
+msgstr "לא רלוונטי"
+
+msgid "created at"
+msgstr "נוצר בתאריך"
+
+msgid "vendor_id"
+msgstr "מזהה חיצוני"
+
+msgid "year"
+msgstr "שנה"
+
+msgid "duration"
+msgstr "משך הסרט (בדקות)"
+
+msgid "Hebrew title"
+msgstr "כותרת בעברית"
+
+msgid "English title"
+msgstr "כותרת באנגלית"
+
+msgid "summary in Hebrew"
+msgstr "תקציר בעברית"
+
+msgid "summary in English"
+msgstr "תקציר באנגלית"
+
+msgid "editing comment"
+msgstr "הערת עריכה"
+
+msgid "Vendor"
+msgstr "מקור מידע"
+
+msgid "Vendor ID"
+msgstr "מזהה חיצוני"
+
+msgid "Type"
+msgstr "סוג"
+
+msgid "Status"
+msgstr "סטטוס"
+
+msgid "Hebrew Title"
+msgstr "כותרת בעברית"
+
+msgid "English Title"
+msgstr "כותרת באנגלית"
+
+msgid "Year"
+msgstr "שנה"
+
+msgid "Duration"
+msgstr "משך הסרט (בדקות)"
+
+msgid "Entity / Candidates"
+msgstr "יישות / מועמדים"
+
+msgid "Already assigned"
+msgstr "פריט זה כבר שויך בעבר"
+
+#~ msgid "N/A (should not hava a wikidata ID)"
+#~ msgstr "לא מתאים (לפריט זה לא צריך להיות מזהה ויקינתונים)"

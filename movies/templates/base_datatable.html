@@ -57,11 +57,9 @@
     <script>
         $(function () {
             const options = {};
-            console.log($('body').attr('lang'));
             if ($('html').attr('lang') === 'he') {
                 options.language = {url: '{% static "vendor/datatables/js/dataTables.hebrew.js" %}'};
             }
-            console.log(options);
             $('#main-dt').DataTable(options);
         });
     </script>

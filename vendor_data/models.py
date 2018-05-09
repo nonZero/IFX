@@ -1,7 +1,7 @@
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.fields import JSONField
-from django.db import models, transaction
+from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from general.entities import ENTITY_CONTENT_TYPES
@@ -51,10 +51,10 @@ class VendorItem(models.Model):
         NOT_APPLICABLE = 999
 
         choices = (
-            (NEW, _('new')),
+            (NEW, _('New')),
             (TO_BE_CREATED, _('Pending creation of a new Wikidata ID')),
-            (ASSIGNED, _('assigned')),
-            (NOT_APPLICABLE, _('N/A (should not hava a wikidata ID)')),
+            (ASSIGNED, _('Assigned')),
+            (NOT_APPLICABLE, _('N/A')),
         )
 
     created_at = models.DateTimeField(_('created at'), auto_now_add=True,
@@ -113,6 +113,7 @@ class VendorItem(models.Model):
 
     def set_wikidata_id(self, id):
         assert self.entity.wikidata_id is None, self.entity
+        self.entity.wikidata_status = self.entity.Status.ASSIGNED
         self.entity.wikidata_id = id
         self.entity.save()
         add_links(self.entity)

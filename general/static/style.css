@@ -224,3 +224,7 @@ footer a {
 .auto-dir p {
     direction: inherit;
 }
+
+.set-movie {
+    cursor: pointer;
+}

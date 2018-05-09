@@ -18,6 +18,7 @@ urlpatterns = i18n_patterns(
 
     url(r'^logs/', include("editing_logs.urls")),
     url(r'^reports/', include("reports.urls")),
+    url(r'^vendor-data/', include("vendor_data.urls")),
 
     url(r'', include("users.urls")),
     url(r'^accounts/', include('django.contrib.auth.urls')),
