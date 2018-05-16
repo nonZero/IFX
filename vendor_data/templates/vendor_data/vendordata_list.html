@@ -3,8 +3,9 @@
 
 {% block row %}
     <tr>
-        <td>{{ forloop.counter }}</td>
-{#        <td>{{ object.vendor.title }}</td>#}
+        {% if not view.vendor %}
+            <td>{{ object.vendor.title }}</td>
+        {% endif %}
         <td data-search="{{ object.vid }}"><a
                 href="{{ object.url }}">{{ object.vid }}</a></td>
 {#        <td>{{ object.get_type_display }}</td>#}

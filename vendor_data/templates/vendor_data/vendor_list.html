@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static i18n humanize ifx %}
+
+{% block content %}
+
+    <ul class="list-group">
+        <li class="list-group-item">
+            <a href="{% url "vendor_data:item_list" %}">
+                {% trans "All" %}
+            </a>
+            ({{ view.all_items.count|intcomma }})
+            {% for stat in view.all_items.stats %}
+                <span class="badge badge-{{ stat.badge }}">{{ stat.label }}: {{ stat.value|intcomma }}</span>
+            {% endfor %}
+        </li>
+        {% for object in object_list %}
+            <li class="list-group-item">
+                {{ object|u:'title' }}
+                ({{ object.items.count|intcomma }})
+                {% for stat in object.items.stats %}
+                    <span class="badge badge-{{ stat.badge }}">{{ stat.label }}: {{ stat.value|intcomma }}</span>
+                {% endfor %}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <br/>
+
+    <a href="{% url "curation:create" %}" class="btn btn-primary">
+        {% trans "Add collection" %}...
+    </a>
+
+{% endblock %}

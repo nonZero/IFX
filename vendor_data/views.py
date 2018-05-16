@@ -3,8 +3,10 @@ import logging
 from django.db.models import Q
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views import View
+from django.views.generic import ListView
 from django.views.generic.detail import SingleObjectMixin
 from typing import Iterable
 
@@ -15,6 +17,11 @@ from reports.views import BaseReport
 from . import models
 
 logger = logging.getLogger(__name__)
+
+
+class VendorListView(DataContributorOnlyMixin, ListView):
+    model = models.Vendor
+    all_items = models.VendorItem.objects.all()
 
 
 def get_titles():
@@ -46,8 +53,10 @@ def get_my_close_matches(words, possibilities, cutoff=0.75):
 def find_candidates(titles, v):
     words = filter(None, (v.title_he, v.title_en))
     near = sorted(get_my_close_matches(words, titles), reverse=True)[:8]
-    return [(n, t, Movie.objects.active().filter(Q(title_he=t) | Q(title_en=t))) for
-            n, t in near]
+    return [
+        (n, t, Movie.objects.active().filter(Q(title_he=t) | Q(title_en=t)))
+        for
+        n, t in near]
 
 
 def add_candidates(qs: Iterable[models.VendorItem]):
@@ -60,11 +69,14 @@ def add_candidates(qs: Iterable[models.VendorItem]):
 
 
 class VendorDataListView(BaseReport):
+    breadcrumbs = (
+        (_("Vendors"), reverse_lazy("vendor_data:list")),
+    )
+
     template_name = "vendor_data/vendordata_list.html"
 
-    cols = (
-        '#',
-        # _("Vendor"),
+    COLS = (
+        _("Vendor"),
         _("Vendor ID"),
         # _("Type"),
         _("Status"),
@@ -76,9 +88,28 @@ class VendorDataListView(BaseReport):
     )
     model = models.VendorItem
 
+    def get_breadcrumbs(self):
+        return super().get_breadcrumbs()
+
+    def limit_to_vendor(self):
+        return 'pk' in self.kwargs
+
+    def get_title(self):
+        if self.limit_to_vendor():
+            return self.vendor.title
+        return super().get_title()
+
     def get_queryset(self):
         qs = super().get_queryset()
+        if self.limit_to_vendor():
+            self.vendor = get_object_or_404(models.Vendor,
+                                            pk=self.kwargs['pk'])
+            qs = qs.filter(vendor=self.vendor)
         return list(add_candidates(qs))
+
+    def cols(self):
+        start = 1 if self.limit_to_vendor() else 0
+        return self.COLS[start:]
 
 
 class SetVendorItemEntityView(DataContributorOnlyMixin, SingleObjectMixin,

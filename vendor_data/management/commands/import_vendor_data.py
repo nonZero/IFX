@@ -29,17 +29,17 @@ class Command(BaseCommand):
                         title_he=row['title_he'],
                         title_en=row.get('title_en'),
                         year=row['year'],
-                        duration=row['duration'],
+                        duration=row.get('duration'),
                         summary_he=row['summary_he'],
                         imdb_id=row.get('imdb'),
-                        editing_comment=row['extra'],
+                        editing_comment=row.get('extra'),
                         extra_data={
                             'director': row.get('director'),
                         }
                     ),
                 )
                 c['created' if created else 'updated'] += 1
-                for t in row['tags']:
+                for t in row.get('tags', []):
                     g, created = v.genre.get_or_create(value=t)
                     if created:
                         c['g_created'] += 1

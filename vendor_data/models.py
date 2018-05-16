@@ -2,6 +2,8 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.fields import JSONField
 from django.db import models
+from django.db.models import Count
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 
 from general.entities import ENTITY_CONTENT_TYPES
@@ -16,6 +18,9 @@ class Vendor(models.Model):
 
     def __str__(self):
         return self.key
+
+    def get_absolute_url(self):
+        return reverse("vendor_data:vendor_item_list", args=(self.pk,))
 
 
 class VendorGenre(models.Model):
@@ -33,6 +38,19 @@ class VendorGenre(models.Model):
 
     def __str__(self):
         return f"{self.vendor}: {self.value}"
+
+
+class VendorItemQuerySet(models.QuerySet):
+    def stats(self):
+        qs = self.values('status').order_by('status').annotate(
+            count=Count('status'))
+
+        return [{
+            'key': d['status'],
+            'label': VendorItem.Status.to_label[d['status']],
+            'value': d['count'],
+            'badge': VendorItem.Status.badges[d['status']],
+        } for d in qs]
 
 
 class VendorItem(models.Model):
@@ -56,6 +74,15 @@ class VendorItem(models.Model):
             (ASSIGNED, _('Assigned')),
             (NOT_APPLICABLE, _('N/A')),
         )
+
+        to_label = dict(choices)
+
+        badges = {
+            NEW: 'danger',
+            TO_BE_CREATED: 'warning',
+            ASSIGNED: 'success',
+            NOT_APPLICABLE: 'info',
+        }
 
     created_at = models.DateTimeField(_('created at'), auto_now_add=True,
                                       db_index=True)
@@ -94,6 +121,8 @@ class VendorItem(models.Model):
 
     genre = models.ManyToManyField(VendorGenre, related_name="items",
                                    blank=True)
+
+    objects = VendorItemQuerySet.as_manager()
 
     class Meta:
         unique_together = (
