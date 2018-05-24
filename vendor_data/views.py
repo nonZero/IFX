@@ -84,6 +84,7 @@ class VendorDataListView(BaseReport):
         _("English Title"),
         _("Year"),
         _("Duration"),
+        _("IMDB"),
         _("Entity / Candidates"),
     )
     model = models.VendorItem

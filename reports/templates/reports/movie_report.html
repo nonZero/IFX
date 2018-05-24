@@ -14,6 +14,8 @@
                         class="fa fa-barcode"></span></a>
             {% endif %}
         </td>
-        <td>{{ object.idea_bid }}</td>
+        {% block more_cols %}
+            <td>{{ object.idea_bid }}</td>
+        {% endblock %}
     </tr>
 {% endblock %}

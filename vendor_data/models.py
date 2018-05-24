@@ -140,6 +140,11 @@ class VendorItem(models.Model):
             return self.vendor.template.replace("$1", self.vid)
         return self.vid
 
+    def get_better_status_display(self):
+        if self.entity:
+            return _("Linked") if self.entity.wikidata_id else _("Unlinked")
+        return self.get_status_display()
+
     def set_wikidata_id(self, id):
         assert self.entity.wikidata_id is None, self.entity
         self.entity.wikidata_status = self.entity.Status.ASSIGNED

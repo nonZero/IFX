@@ -173,6 +173,40 @@
                     </ul>
                 </div>
             {% endif %}
+
+            {% if object.vendor_items.count %}
+
+                <div class="card bg-warning mb-1">
+                    <div class="card-header">
+                        {% trans "Vendor Items" %}
+                    </div>
+                    <ul class="list-group">
+                        {% for vi in object.vendor_items.all %}
+                            <a href="{{ vi.url }}"
+                               title="{{ vi.vid }}"
+                               class="list-group-item  list-group-item-action">
+                                <b>{{ vi.vendor.title }}</b>
+                                {% if vi.year and vi.year != object.year  %}
+                                    <span class="badge badge-danger" dir="ltr"
+                                          class="year">{{ vi.year }}</span>
+                                {% endif %}
+                                {% if vi.duration and vi.duration != object.duration  %}
+                                    <span class="badge badge-danger"><span
+                                            class="fa fa-clock"></span> {{ vi.duration|duration }} </span>
+                                {% endif %}
+                                {% if vi.title_he and vi.title_he != object.title_he %}
+                                    <span class="badge badge-danger" dir="rtl"><span
+                                            class="fa fa-exclamation-triangle"></span> {{ vi.title_he }} </span>
+                                {% endif %}
+                                {% if vi.title_en and vi.title_en != object.title_en %}
+                                    <span class="badge badge-danger" dir="ltr"><span
+                                            class="fa fa-exclamation-triangle"></span> {{ vi.title_en }} </span>
+                                {% endif %}
+                            </a>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
         {% endif %}
 
 

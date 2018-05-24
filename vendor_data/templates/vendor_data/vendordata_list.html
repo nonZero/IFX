@@ -1,6 +1,8 @@
 {% extends "base_datatable.html" %}
 {% load staticfiles i18n humanize bootstrap4 ifx movies %}
 
+{% block container_class%}container-fluid{% endblock %}
+
 {% block row %}
     <tr>
         {% if not view.vendor %}
@@ -8,8 +10,8 @@
         {% endif %}
         <td data-search="{{ object.vid }}"><a
                 href="{{ object.url }}">{{ object.vid }}</a></td>
-{#        <td>{{ object.get_type_display }}</td>#}
-        <td>{{ object.get_status_display }}</td>
+        {#        <td>{{ object.get_type_display }}</td>#}
+        <td>{{ object.get_better_status_display }}</td>
         <td>{{ object.title_he }}</td>
         <td>{{ object.title_en|default:'' }}</td>
         <td>{{ object.year|default:'' }}</td>
@@ -19,12 +21,27 @@
             {% endif %}
         </td>
         <td>
+            {% if object.imdb_id %}
+                <a href="https://www.imdb.com/title/{{ object.imdb_id }}/">
+                    <span class="fab fa-imdb"></span>
+                </a>
+            {% endif %}
+        </td>
+        <td>
             {% if object.entity %}
                 {{ object.entity|ut_plus }}
                 {% if object.entity.wikidata_id %}
                     <a href="{{ object.entity.wikidata_url }}"
                        title="{{ object.entity.wikidata_id }}"><span
                             class="fa fa-barcode"></span></a>
+                {% endif %}
+                {% if object.entity.year %}
+                    ({{ object.entity.year }})
+                {% endif %}
+                {% if object.entity.duration %}
+                    <span class="badge badge-light p-0"><span
+                            class="fa fa-clock"></span> {{ object.entity.duration|duration }} </span>
+
                 {% endif %}
             {% else %}
                 <ul class="list-unstyled">
@@ -53,9 +70,9 @@
 
             {% endif %}
         </td>
-{#        {% for g in v.genre.all %}#}
-{#            <span class="badge badge-pill badge-primary">{{ g.value }}</span>#}
-{#        {% endfor %}#}
+        {#        {% for g in v.genre.all %}#}
+        {#            <span class="badge badge-pill badge-primary">{{ g.value }}</span>#}
+        {#        {% endfor %}#}
     </tr>
 {% endblock %}
 

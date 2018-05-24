@@ -90,6 +90,24 @@ class DuplicateMovieEnglishTitleReport(DuplicateTitleMovieReport):
     duplicate_field = 'title_en'
 
 
+@add_report('vendor-items-no-wikidata')
+class VendorItemsUnlinkedMovieReport(MovieReport):
+    title = _("Unlinked movies with vendor items")
+    template_name = "reports/movie_vendoritems_report.html"
+    cols = (
+        '#',
+        _("Hebrew Title"),
+        _("English Title"),
+        _("Year"),
+        mark_safe('<span class="fa fa-barcode"></span>'),
+        _("Vendor Items"),
+    )
+
+    def get_queryset(self):
+        return Movie.objects.active().filter(wikidata_id=None).annotate(
+            count=Count('vendor_items')).filter(count__gt=0).order_by('-count')
+
+
 class PersonReport(BaseReport):
     template_name = "reports/person_report.html"
     cols = (

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-09 22:51+0300\n"
-"PO-Revision-Date: 2018-05-09 22:52+0300\n"
+"POT-Creation-Date: 2018-05-24 13:15+0300\n"
+"PO-Revision-Date: 2018-05-17 11:41+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -63,14 +63,23 @@ msgstr "תקציר באנגלית"
 msgid "editing comment"
 msgstr "הערת עריכה"
 
+msgid "Linked"
+msgstr "מקושר"
+
+msgid "Unlinked"
+msgstr "לא מקושר"
+
+msgid "All"
+msgstr ""
+
+msgid "Vendors"
+msgstr "מקורות מידע"
+
 msgid "Vendor"
 msgstr "מקור מידע"
 
 msgid "Vendor ID"
 msgstr "מזהה חיצוני"
-
-msgid "Type"
-msgstr "סוג"
 
 msgid "Status"
 msgstr "סטטוס"
@@ -87,11 +96,17 @@ msgstr "שנה"
 msgid "Duration"
 msgstr "משך הסרט (בדקות)"
 
+msgid "IMDB"
+msgstr ""
+
 msgid "Entity / Candidates"
 msgstr "יישות / מועמדים"
 
-msgid "Already assigned"
-msgstr "פריט זה כבר שויך בעבר"
+#~ msgid "Type"
+#~ msgstr "סוג"
+
+#~ msgid "Already assigned"
+#~ msgstr "פריט זה כבר שויך בעבר"
 
 #~ msgid "N/A (should not hava a wikidata ID)"
 #~ msgstr "לא מתאים (לפריט זה לא צריך להיות מזהה ויקינתונים)"

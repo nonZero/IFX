@@ -252,6 +252,10 @@ class MergeIntoView(EntityActionMixin, BaseDetailView, FormView):
                 l.save()
                 r.record_update_after(l)
 
+            for vi in o.vendor_items.all():
+                vi.entity = self.other
+                vi.save()
+
         messages.success(self.request, _("Merged."))
 
         return redirect(o)

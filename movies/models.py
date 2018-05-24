@@ -96,6 +96,7 @@ class Movie(Undeletable, WikiDataEntity):
     links = GenericRelation('links.Link')
     suggestions = GenericRelation('enrich.Suggestion')
     log_rows = GenericRelation('editing_logs.LogItemRow')
+    vendor_items = GenericRelation('vendor_data.VendorItem')
 
     FIELDS_TO_LOG = (
         'active',

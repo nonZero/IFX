@@ -2,12 +2,18 @@ from django.conf.urls import include, url
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.urls import register_converter
+from django.views.generic import RedirectView
 
 from ifx.converters import IFXEntityConverter
 
 register_converter(IFXEntityConverter, 'ifx_entity')
 
-urlpatterns = i18n_patterns(
+urlpatterns = [
+    url(r'^$', RedirectView.as_view(url="/he/")),
+    url(r'', include("users.oauth_urls")),
+]
+
+urlpatterns += i18n_patterns(
     url(r'', include("movies.urls")),
     url(r'^people/', include("people.urls")),
     url(r'^search/', include("search.urls")),
@@ -24,6 +30,4 @@ urlpatterns = i18n_patterns(
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^admin/', admin.site.urls),
-) + [
-                  url(r'', include("users.oauth_urls")),
-              ]
+)

@@ -26,11 +26,11 @@ class Command(BaseCommand):
                     vid=row['id'],
                     defaults=dict(
                         type=models.VendorItem.Type.MOVIE,
-                        title_he=row['title_he'],
+                        title_he=row.get('title_he'),
                         title_en=row.get('title_en'),
-                        year=row['year'],
+                        year=row.get('year'),
                         duration=row.get('duration'),
-                        summary_he=row['summary_he'],
+                        summary_he=row.get('summary_he'),
                         imdb_id=row.get('imdb'),
                         editing_comment=row.get('extra'),
                         extra_data={
