@@ -35,7 +35,7 @@ class Command(BaseCommand):
         c = Counter()
         try:
             for v in models.Vendor.objects.all():
-                qs = v.items.exclude(wikidata_id=None)
+                qs = v.items.filter(wikidata_id=None)
                 vids = qs.values_list('vid', flat=True).order_by('vid')
                 d = dict(vids_query(v.pid, vids))
                 print(v, len(d), '/', len(vids))
@@ -43,14 +43,19 @@ class Command(BaseCommand):
                     o = v.items.get(vid=vid)  # type: models.VendorItem
                     o.wikidata_id = wdid
                     o.save()
-                    # if o.entity:
-                    #     self.entity.wikidata_id is None or self.entity.wikidata_id == id
-                    #     self.entity.wikidata_status = self.entity.Status.ASSIGNED
-                    #     self.entity.wikidata_id = id
-                    #     self.entity.save()
-                    # else:
+                    if o.entity:
+                        if o.entity.wikidata_id is None:
+                            o.entity.wikidata_id = wdid
+                            o.entity.wikidata_status = o.entity.Status.ASSIGNED
+                            o.entity.save()
+                            c['movies!'] += 1
+                        else:
+                            if o.entity.wikidata_id != wdid:
+                                logger.error(f"Wikidata ID mismatch! vid={vid}:{wdid} movie={o.entity}:{o.entity.wikidata_id}")
+                                c['mismatch!!'] += 1
                     c[v.key] += 1
                     c['total'] += 1
         finally:
+            print("-" * 20)
             for k, v in c.most_common():
                 print(k, v)
