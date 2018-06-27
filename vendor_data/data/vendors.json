@@ -1,0 +1,65 @@
+[
+{
+  "model": "vendor_data.vendor",
+  "fields": {
+    "key": "cinemaofisrael",
+    "title": "\u05e1\u05e4\u05e8 \u05d4\u05e7\u05d5\u05dc\u05e0\u05d5\u05e2 \u05d4\u05d9\u05e9\u05e8\u05d0\u05dc\u05d9",
+    "pid": "P3445",
+    "template": "http://www.cinemaofisrael.co.il/?p=$1"
+  }
+},
+{
+  "model": "vendor_data.vendor",
+  "fields": {
+    "key": "filmfund",
+    "title": "\u05e7\u05e8\u05df \u05d4\u05e7\u05d5\u05dc\u05e0\u05d5\u05e2 \u05d4\u05d9\u05e9\u05e8\u05d0\u05dc\u05d9",
+    "pid": "P5151",
+    "template": "http://www.filmfund.org.il/films/?nom=$1"
+  }
+},
+{
+  "model": "vendor_data.vendor",
+  "fields": {
+    "key": "sratim",
+    "title": "\u05de\u05d6\u05d4\u05d4 \u05d1\u05d0\u05ea\u05e8 \u05e1\u05e8\u05d8\u05d9\u05dd",
+    "pid": "P3145",
+    "template": "https://www.sratim.co.il/$1/"
+  }
+},
+{
+  "model": "vendor_data.vendor",
+  "fields": {
+    "key": "imdb",
+    "title": "\u05de\u05d6\u05d4\u05d4 IMDb",
+    "pid": "P345",
+    "template": "https://tools.wmflabs.org/wikidata-externalid-url/?p=345&url_prefix=http://www.imdb.com/&id=$1"
+  }
+},
+{
+  "model": "vendor_data.vendor",
+  "fields": {
+    "key": "edb",
+    "title": "\u05de\u05d6\u05d4\u05d4 \u05e1\u05e8\u05d8\u05d9\u05dd \u05d1\u05d0\u05d9\u05d3\u05d9\u05d1\u05d9",
+    "pid": "P3141",
+    "template": "http://www.edb.co.il/title/$1/"
+  }
+},
+{
+  "model": "vendor_data.vendor",
+  "fields": {
+    "key": "nfct",
+    "title": "\u05de\u05d6\u05d4\u05d4 \u05e7\u05e8\u05df \u05d4\u05d7\u05d3\u05e9\u05d4 \u05dc\u05e7\u05d5\u05dc\u05e0\u05d5\u05e2 \u05d5\u05d8\u05dc\u05d5\u05d5\u05d9\u05d6\u05d9\u05d4",
+    "pid": "P5159",
+    "template": "http://nfct.org.il/?p=$1"
+  }
+},
+{
+  "model": "vendor_data.vendor",
+  "fields": {
+    "key": "cinemaproject",
+    "title": "\u05de\u05d6\u05d4\u05d4 \u05e4\u05e8\u05d5\u05d9\u05e7\u05d8 \u05e7\u05d5\u05dc\u05e0\u05d5\u05e2",
+    "pid": "P5146",
+    "template": "http://www.cinemaproject.org.il/ns/index.php?option=com_k2&view=item&id=$1"
+  }
+}
+]

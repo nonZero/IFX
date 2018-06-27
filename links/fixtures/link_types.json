@@ -3,6 +3,23 @@
   "model": "links.linktype",
   "fields": {
     "active": true,
+    "title_he": "\u05de\u05d6\u05d4\u05d4 VIAF",
+    "title_en": "VIAF Identifier",
+    "slug": "viaf",
+    "description_he": "",
+    "description_en": "",
+    "priority": 30,
+    "title_required": false,
+    "for_movies": true,
+    "for_people": true,
+    "wikidata_id": "P214",
+    "template": "https://viaf.org/viaf/{}"
+  }
+},
+{
+  "model": "links.linktype",
+  "fields": {
+    "active": true,
     "title_he": "\u05e6\u05e4\u05d9\u05d4 \u05d9\u05e9\u05d9\u05e8\u05d4",
     "title_en": "Watch online",
     "slug": "watch-online",
@@ -13,6 +30,40 @@
     "for_movies": true,
     "for_people": false,
     "wikidata_id": null,
+    "template": null
+  }
+},
+{
+  "model": "links.linktype",
+  "fields": {
+    "active": true,
+    "title_he": "\u05de\u05d0\u05de\u05e8",
+    "title_en": "Article",
+    "slug": "article",
+    "description_he": "",
+    "description_en": "",
+    "priority": 150,
+    "title_required": false,
+    "for_movies": false,
+    "for_people": false,
+    "wikidata_id": null,
+    "template": null
+  }
+},
+{
+  "model": "links.linktype",
+  "fields": {
+    "active": true,
+    "title_he": "\u05d8\u05e8\u05d9\u05d9\u05dc\u05e8",
+    "title_en": "Trailer",
+    "slug": "trailer",
+    "description_he": "",
+    "description_en": "",
+    "priority": 50,
+    "title_required": false,
+    "for_movies": true,
+    "for_people": false,
+    "wikidata_id": "Q622550",
     "template": null
   }
 },
@@ -31,23 +82,6 @@
     "for_people": true,
     "wikidata_id": "P345",
     "template": "https://tools.wmflabs.org/wikidata-externalid-url/?p=345&url_prefix=http://www.imdb.com/&id={}"
-  }
-},
-{
-  "model": "links.linktype",
-  "fields": {
-    "active": true,
-    "title_he": "\u05de\u05d6\u05d4\u05d4 VIAF",
-    "title_en": "VIAF Identifier",
-    "slug": "viaf",
-    "description_he": "",
-    "description_en": "",
-    "priority": 30,
-    "title_required": false,
-    "for_movies": true,
-    "for_people": true,
-    "wikidata_id": "P214",
-    "template": "https://viaf.org/viaf/{}"
   }
 },
 {
@@ -133,6 +167,142 @@
     "for_people": true,
     "wikidata_id": "P3906",
     "template": "http://www.ishim.co.il/m.php?s={}"
+  }
+},
+{
+  "model": "links.linktype",
+  "fields": {
+    "active": true,
+    "title_he": "\u05de\u05d0\u05de\u05e8 \u05d5\u05d9\u05e7\u05d9\u05e4\u05d3\u05d9\u05d4 \u05d1\u05e2\u05d1\u05e8\u05d9\u05ea",
+    "title_en": "Hebrew wikipedia article",
+    "slug": "sitelinks_hewiki",
+    "description_he": "",
+    "description_en": "",
+    "priority": 100,
+    "title_required": false,
+    "for_movies": true,
+    "for_people": true,
+    "wikidata_id": null,
+    "template": null
+  }
+},
+{
+  "model": "links.linktype",
+  "fields": {
+    "active": true,
+    "title_he": "\u05de\u05d0\u05de\u05e8 \u05d5\u05d9\u05e7\u05d9\u05e4\u05d3\u05d9\u05d4 \u05d1\u05d0\u05e0\u05d2\u05dc\u05d9\u05ea",
+    "title_en": "English wikipedia article",
+    "slug": "sitelinks_enwiki",
+    "description_he": "",
+    "description_en": "",
+    "priority": 100,
+    "title_required": false,
+    "for_movies": true,
+    "for_people": true,
+    "wikidata_id": null,
+    "template": null
+  }
+},
+{
+  "model": "links.linktype",
+  "fields": {
+    "active": true,
+    "title_he": "\u05d3\u05e3 \u05d1\u05e1\u05e4\u05e8 \u05d4\u05e7\u05d5\u05dc\u05e0\u05d5\u05e2 \u05d4\u05d9\u05e9\u05e8\u05d0\u05dc\u05d9",
+    "title_en": "Cinema of Israel Page",
+    "slug": "cinemaofisrael",
+    "description_he": "",
+    "description_en": "",
+    "priority": 20,
+    "title_required": false,
+    "for_movies": true,
+    "for_people": true,
+    "wikidata_id": "P3445",
+    "template": "http://www.cinemaofisrael.co.il/?p={}"
+  }
+},
+{
+  "model": "links.linktype",
+  "fields": {
+    "active": true,
+    "title_he": "\u05e2\u05de\u05d5\u05d3 \u05e8\u05e9\u05de\u05d9",
+    "title_en": "Official Page",
+    "slug": "official",
+    "description_he": "",
+    "description_en": "",
+    "priority": 40,
+    "title_required": false,
+    "for_movies": true,
+    "for_people": true,
+    "wikidata_id": null,
+    "template": null
+  }
+},
+{
+  "model": "links.linktype",
+  "fields": {
+    "active": true,
+    "title_he": "\u05de\u05d6\u05d4\u05d4 \u05d4\u05e1\u05e4\u05e8\u05d9\u05d9\u05d4 \u05d4\u05dc\u05d0\u05d5\u05de\u05d9\u05ea",
+    "title_en": "National Library of Israel ID",
+    "slug": "nli",
+    "description_he": "\u05de\u05d6\u05d4\u05d4 \u05d1\u05e7\u05d8\u05dc\u05d5\u05d2 \u05d4\u05e1\u05e4\u05e8\u05d9\u05d9\u05d4 \u05d4\u05dc\u05d0\u05d5\u05de\u05d9\u05ea \u05e9\u05dc \u05d9\u05e9\u05e8\u05d0\u05dc \u05e2\u05d1\u05d5\u05e8 \u05d0\u05e0\u05e9\u05d9\u05dd, \u05ea\u05d0\u05d2\u05d9\u05d3\u05d9\u05dd, \u05e0\u05d5\u05e9\u05d0\u05d9\u05dd \u05d5\u05d9\u05e6\u05d9\u05e8\u05d5\u05ea",
+    "description_en": "identifier for authority control used at the National Library of Israel",
+    "priority": 85,
+    "title_required": false,
+    "for_movies": true,
+    "for_people": true,
+    "wikidata_id": "P949",
+    "template": "http://aleph.nli.org.il/F/?func=find-b&local_base=NNL10&find_code=SYS&con_lng=heb&request={}"
+  }
+},
+{
+  "model": "links.linktype",
+  "fields": {
+    "active": true,
+    "title_he": "\u05de\u05d6\u05d4\u05d4 \u05e7\u05e8\u05df \u05d4\u05e7\u05d5\u05dc\u05e0\u05d5\u05e2 \u05d4\u05d9\u05e9\u05e8\u05d0\u05dc\u05d9",
+    "title_en": "Israeli Film Fund ID",
+    "slug": "filmfund",
+    "description_he": "",
+    "description_en": "",
+    "priority": 100,
+    "title_required": false,
+    "for_movies": true,
+    "for_people": false,
+    "wikidata_id": "P5151",
+    "template": "http://www.filmfund.org.il/films/?nom={}"
+  }
+},
+{
+  "model": "links.linktype",
+  "fields": {
+    "active": true,
+    "title_he": "\u05de\u05d6\u05d4\u05d4 \u05d4\u05e7\u05e8\u05df \u05d4\u05d7\u05d3\u05e9\u05d4 \u05dc\u05e7\u05d5\u05dc\u05e0\u05d5\u05e2 \u05d5\u05d8\u05dc\u05d5\u05d5\u05d9\u05d6\u05d9\u05d4",
+    "title_en": "The New Fund for Cinema and TV ID",
+    "slug": "nfct",
+    "description_he": "",
+    "description_en": "",
+    "priority": 100,
+    "title_required": false,
+    "for_movies": true,
+    "for_people": false,
+    "wikidata_id": "P5159",
+    "template": "http://nfct.org.il/?p={}"
+  }
+},
+{
+  "model": "links.linktype",
+  "fields": {
+    "active": true,
+    "title_he": "\u05de\u05d6\u05d4\u05d4 \u05e4\u05e8\u05d5\u05d9\u05e7\u05d8 \u05e7\u05d5\u05dc\u05e0\u05d5\u05e2",
+    "title_en": "Cinema Project ID",
+    "slug": "cinemaproject",
+    "description_he": "",
+    "description_en": "",
+    "priority": 100,
+    "title_required": false,
+    "for_movies": true,
+    "for_people": false,
+    "wikidata_id": "P5146",
+    "template": "http://www.cinemaproject.org.il/ns/index.php?option=com_k2&view=item&id={}"
   }
 }
 ]

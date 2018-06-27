@@ -1,35 +1,74 @@
 import json
-from typing import Dict
-
 import requests
 from requests_oauthlib import OAuth1
+from typing import Dict
 
 from .build import build_movie_entity, build_person_entity
 
 WIKIDATA_API_URL = "https://www.wikidata.org/w/api.php"
 
+SUMMARY = "Imported from the Israeli Film Archive catalog"
 
-def upload_entity(auth: OAuth1, entity):
-    """Upload a new entity to wikipedia"""
 
-    summary = "Imported from the Israeli Film Archive catalog"
+def get_token(auth):
     r = requests.get(WIKIDATA_API_URL, params={
         'format': 'json',
         'action': 'query',
         'meta': 'tokens',
     }, auth=auth)
     r.raise_for_status()
-    token = r.json()['query']['tokens']['csrftoken']
-    r = requests.post(WIKIDATA_API_URL, data={
-        'token': token,
+    resp = r.json()
+    if 'error' in resp:
+        raise Exception(f"Error: {json.dumps(resp, indent=2)}")
+
+    token = resp['query']['tokens']['csrftoken']
+    return token
+
+
+def api_call(auth, action, payload):
+    token = get_token(auth)
+    data = {
+        'action': action,
         'format': 'json',
-        'action': 'wbeditentity',
-        'summary': str(summary),
+        'token': token,
+        'summary': SUMMARY,
+        **payload,
+    }
+    r = requests.post(WIKIDATA_API_URL, data=data, auth=auth)
+    r.raise_for_status()
+    resp = r.json()
+    if 'error' in resp:
+        raise Exception(
+            f"API Error in: {json.dumps(resp, indent=2)}\nrequest: {data}")
+    return resp
+
+
+def create_claim(auth: OAuth1, entity, property, value):
+    """Upload a new entity to wikipedia"""
+    return api_call(auth, 'wbcreateclaim', {
+        'entity': entity,
+        'snaktype': 'value',
+        'property': property,
+        'value': json.dumps(value),
+    })
+
+
+# def create_external_id_claim(auth: OAuth1, entity, property, value):
+#     """Upload a new entity to wikipedia"""
+#     return create_claim(auth, entity, property, 'value', json.dumps({
+#         {
+#             "value": id,
+#             "type": "string"
+#         }
+#     }))
+
+
+def upload_entity(auth: OAuth1, entity):
+    """Upload a new entity to wikipedia"""
+    return api_call(auth, 'wbeditentity', {
         'new': 'item',
         'data': json.dumps(entity),
-    }, auth=auth)
-    r.raise_for_status()
-    return r.json()
+    })
 
 
 def upload_movie(auth: OAuth1,

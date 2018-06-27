@@ -20,9 +20,9 @@
                 {% for stat in object.items.stats %}
                     <span class="badge badge-{{ stat.badge }}">{{ stat.label }}: {{ stat.value|intcomma }}</span>
                 {% endfor %}
+                <span class="badge badge-info">With wikidata ID: {{ object.items.with_wikidata_id.count|intcomma }}</span>
             </li>
         {% endfor %}
     </ul>
-
 
 {% endblock %}

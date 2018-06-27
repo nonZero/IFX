@@ -1,7 +1,7 @@
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.fields import JSONField
-from django.db import models
+from django.db import models, transaction
 from django.db.models import Count
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
@@ -10,14 +10,24 @@ from general.entities import ENTITY_CONTENT_TYPES
 from links.tasks import add_links
 
 
+class VendorManager(models.Manager):
+    def get_by_natural_key(self, key):
+        return self.get(key=key)
+
+
 class Vendor(models.Model):
     key = models.CharField(max_length=50, unique=True)
     title = models.CharField(max_length=500, null=True, blank=True)
     pid = models.CharField(max_length=50, unique=True, null=True, blank=True)
     template = models.CharField(max_length=500, null=True, blank=True)
 
+    objects = VendorManager()
+
     def __str__(self):
         return self.key
+
+    def natural_key(self):
+        return (self.key,)
 
     def get_absolute_url(self):
         return reverse("vendor_data:vendor_item_list", args=(self.pk,))
@@ -51,6 +61,9 @@ class VendorItemQuerySet(models.QuerySet):
             'value': d['count'],
             'badge': VendorItem.Status.badges[d['status']],
         } for d in qs]
+
+    def with_wikidata_id(self):
+        return self.exclude(wikidata_id=None)
 
 
 class VendorItem(models.Model):
@@ -95,6 +108,8 @@ class VendorItem(models.Model):
     vid = models.CharField(_('vendor_id'), max_length=400)
 
     type = models.IntegerField(choices=Type.choices)
+
+    wikidata_id = models.CharField(max_length=50, null=True, blank=True)
 
     content_type = models.ForeignKey(ContentType, on_delete=models.PROTECT,
                                      limit_choices_to=ENTITY_CONTENT_TYPES,
@@ -146,8 +161,11 @@ class VendorItem(models.Model):
         return self.get_status_display()
 
     def set_wikidata_id(self, id):
-        assert self.entity.wikidata_id is None, self.entity
-        self.entity.wikidata_status = self.entity.Status.ASSIGNED
-        self.entity.wikidata_id = id
-        self.entity.save()
+        assert self.entity.wikidata_id is None or self.entity.wikidata_id == id, self.entity
+        with transaction.atomic():
+            self.wikidata_id = id
+            self.save()
+            self.entity.wikidata_status = self.entity.Status.ASSIGNED
+            self.entity.wikidata_id = id
+            self.entity.save()
         add_links(self.entity)
