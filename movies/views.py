@@ -1,6 +1,3 @@
-import logging
-from builtins import super
-
 import django_filters
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
@@ -8,8 +5,7 @@ from django.db.models import Count, Q
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import ListView, DetailView, \
-    UpdateView, FormView
+from django.views.generic import ListView, DetailView, UpdateView, FormView
 from django.views.generic.detail import BaseDetailView
 from django_filters.views import FilterView
 
@@ -21,8 +17,6 @@ from ifx.base_views import IFXMixin, EntityActionMixin, \
 from movies import forms
 from movies.models import Movie, Tag, Field
 from wikidata_edit.upload import upload_movie
-
-logger = logging.getLogger(__name__)
 
 
 def get_tags():
@@ -126,10 +120,16 @@ class PostMovieToWikiDataView(PostToWikiDataView):
     link_type_key = 'for_movies'
 
     def get_initial(self):
-        o = self.get_object()
+        o = self.get_object()  # type: Movie
         d = super().get_initial()
         d['desc_en'] = f"{o.year} Israeli film" if o.year else "Israeli film"
         d['desc_he'] = f"סרט ישראלי משנת {o.year}" if o.year else "סרט ישראלי"
+        for lt in self.get_link_types():
+            vi = o.vendor_items.filter(vendor__pid=lt.wikidata_id).first()
+            if vi:
+                k = f'ext_{lt.wikidata_id}'
+                d[k] = vi.vid
+
         return d
 
     def upload(self, d, ids, o):
